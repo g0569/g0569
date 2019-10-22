@@ -37,6 +37,7 @@ public class MainActivity extends Activity {
   }
 
   private void toLoginView() {
+    setContentView(R.layout.page_login);
   }
 
   @Override
@@ -48,5 +49,9 @@ public class MainActivity extends Activity {
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     MainMenuView mainMenuView = new MainMenuView(this);
     setContentView(mainMenuView);
+  }
+
+  public Handler getHandler() {
+    return handler;
   }
 }

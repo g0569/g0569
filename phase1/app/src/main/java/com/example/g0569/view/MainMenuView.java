@@ -10,6 +10,7 @@ import android.view.SurfaceHolder;
 import android.widget.Toast;
 
 import com.example.g0569.R;
+import com.example.g0569.utils.Constants;
 
 public class MainMenuView extends BaseView {
 
@@ -85,6 +86,7 @@ public class MainMenuView extends BaseView {
           && y > button_y
           && y < button_y + button.getHeight()) {
         Toast.makeText(mainActivity, "Button was pressed", Toast.LENGTH_SHORT).show();
+        mainActivity.getHandler().sendEmptyMessage(Constants.TO_LOGIN_VIEW);
       }
       return true;
     }
