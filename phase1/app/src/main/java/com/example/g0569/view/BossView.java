@@ -8,11 +8,15 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.widget.Toast;
 
-import com.example.g0569.view.Level_3.Aim;
-import com.example.g0569.view.Level_3.Button;
-import com.example.g0569.view.Level_3.Enemy;
-import com.example.g0569.view.Level_3.ThrownItem;
-import com.example.g0569.view.Level_3.Star;
+import com.example.g0569.module.component.Boss.Star;
+import com.example.g0569.module.component.Boss.ThrownItems;
+import com.example.g0569.module.component.Boss.BossPlayer;
+import com.example.g0569.module.component.Boss.Button;
+import com.example.g0569.module.component.Boss.Enemy;
+
+
+
+
 
 
 
@@ -24,9 +28,9 @@ public class BossView extends BaseView {
 
     private Bitmap background;
     private Button button;
-    private Aim aim;
+    private BossPlayer aim;
     private Enemy enemy;
-    private ThrownItem item;
+    private ThrownItems item;
 
     public BossView(Context context) {
         super(context);
@@ -41,7 +45,7 @@ public class BossView extends BaseView {
         scalex = screen_width / background.getWidth();
         scaley = screen_height / background.getHeight();
         button = new Button(screen_width, screen_height);
-        aim = new Aim(screen_width, screen_height);
+        aim = new BossPlayer(screen_width, screen_height);
         enemy = new Enemy(screen_width, screen_height, getResources());
         // needs modification so that itemlist is applied.
         item = new Star(screen_width, screen_height, getResources());
@@ -80,10 +84,10 @@ public class BossView extends BaseView {
             canvas.drawBitmap(background, 0, 0, paint);
             canvas.restore();
             button.draw(canvas, paint);
-            enemy.move(screen_width);
+            enemy.action(screen_width);
             enemy.draw(canvas, paint);
             // needs modification
-            item.move(canvas, paint);
+            item.action(canvas, paint);
             item.draw(canvas, paint);
             aim.draw(canvas, paint);
             if(!item.inTheScreen(screen_height)){item = null;}

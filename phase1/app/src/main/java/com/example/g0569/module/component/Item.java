@@ -22,4 +22,12 @@ public abstract class Item {
      * Update
      */
     public abstract void action();
+
+    public float getX(){
+        return coordinate.getX();
+    }
+
+    public float getY(){
+        return coordinate.getY();
+    }
 }

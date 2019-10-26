@@ -1,5 +1,6 @@
 package com.example.g0569.module.component.Boss;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -7,12 +8,15 @@ import android.graphics.Paint;
 import com.example.g0569.module.component.Item;
 import com.example.g0569.module.component.Player;
 import com.example.g0569.module.utils.Coordinate;
-import com.example.g0569.view.Level_3.ThrownItem;
+
+
+import java.util.ArrayList;
 
 public class BossPlayer extends Player {
     private float r1;
     private float r2;
-    private ThrownItem[] items;
+    private Bitmap appearance;
+    private ArrayList<ThrownItems> inventory = new ArrayList<>();
 
     public BossPlayer(float screen_width, float screen_height){
         r1 = screen_width / 36;
