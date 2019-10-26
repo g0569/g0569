@@ -1,20 +1,10 @@
 package com.example.g0569.view.Level_3;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.widget.Toast;
-import android.graphics.Canvas;
 import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
 import com.example.g0569.R;
-import com.example.g0569.model.Boss;
-import com.example.g0569.view.BaseView;
 
 public class Enemy extends BitmapItem{
 
