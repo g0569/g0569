@@ -1,0 +1,4 @@
+#########
+# Step 1
+Code affected: Aim.java, BitmapItem.java, BossView.java, Button.java, IteminPlatform.java, Star.java, ThrownItem.java
+Created them. Now Boss does simple movement and you can throw a star.
