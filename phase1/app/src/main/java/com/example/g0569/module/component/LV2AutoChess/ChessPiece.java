@@ -31,7 +31,7 @@ public class ChessPiece extends NonPlayerItem {
     }
 
     @Override
-    public void action() {
-
+    public boolean action(ChessPiece NPCchess) {
+        return this.power >= NPCchess.power;// compare the power of two chesspieces. return win(true)/lose(false).
     }
 }
