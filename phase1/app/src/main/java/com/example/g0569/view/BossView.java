@@ -67,6 +67,15 @@ public class BossView extends BaseView {
         super.surfaceDestroyed(holder);
     }
 
+    /**
+     * Checks if the item is in range, inserting coordinates
+     * @param item_x
+     * @param item_y
+     * @param range_x
+     * @param range_y
+     * @param range_r
+     * @return
+     */
     private boolean inRange(float item_x, float item_y, float range_x, float range_y, float range_r) {
         return item_x > range_x - range_r
                 && item_x < range_x + range_r
@@ -84,7 +93,7 @@ public class BossView extends BaseView {
             canvas.drawBitmap(background, 0, 0, paint);
             canvas.restore();
             button.draw(canvas, paint);
-            enemy.action(screen_width);
+            enemy.action();
             enemy.draw(canvas, paint);
             // needs modification
             item.action(canvas, paint);
