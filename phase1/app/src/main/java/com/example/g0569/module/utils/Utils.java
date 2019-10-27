@@ -12,7 +12,7 @@ public class Utils {
             md.update(origin.getBytes());
             byte[] digest = md.digest();
 
-            return new String(digest).substring(0, 16);
+            return new String(digest).substring(0, 5);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             return null;

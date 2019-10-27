@@ -40,8 +40,9 @@ public class GameManager {
         SQLiteDatabase db = sqLitehelper.getReadableDatabase();
         boolean f = false;
         try {
-            Cursor cursor = db.query("users", new String[]{"uid", "username"}, "email=?&password=?", new String[]{email, password}, null, null, null);
+            Cursor cursor = db.query("users", new String[]{"uid", "username"}, "email=? and password=?", new String[]{email, password}, null, null, null);
             if (cursor.getCount() > 0) {
+                cursor.moveToNext();
                 user = new User(this, cursor.getInt(cursor.getColumnIndex("uid")));
                 Toast.makeText(mainActivity, "Welcome Back, " + user.getUsername(), Toast.LENGTH_SHORT).show();
                 f = true;
@@ -67,6 +68,7 @@ public class GameManager {
             contentValues.put("username", username);
             contentValues.put("email", email);
             contentValues.put("password", password);
+            contentValues.put("created_time", System.currentTimeMillis());
             db.insert("users", null, contentValues);
             Toast.makeText(mainActivity, "Sign up Successfully", Toast.LENGTH_SHORT).show();
             f = true;

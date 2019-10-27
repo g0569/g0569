@@ -10,7 +10,9 @@ import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.g0569.module.game.GameManager;
 import com.example.g0569.utils.Constants;
@@ -39,6 +41,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void toSignUpView() {
         mainMenuView = null;
         setContentView(R.layout.page_signup);
+        ((Button) findViewById(R.id.signup_button)).setOnClickListener(this);
+        ((TextView) findViewById(R.id.to_login)).setOnClickListener(this);
     }
 
     private void toMenuView() {
@@ -51,6 +55,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void toLoginView() {
         mainMenuView = null;
         setContentView(R.layout.page_login);
+        ((Button) findViewById(R.id.login_button)).setOnClickListener(this);
+        ((TextView) findViewById(R.id.to_signup)).setOnClickListener(this);
     }
 
     @Override
@@ -86,7 +92,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case (R.id.signup_button):
                 gameManager.signUp(((EditText) findViewById(R.id.signup_input_email)).getText().toString(),
                         ((EditText) findViewById(R.id.signup_input_name)).getText().toString(),
-                        ((EditText) findViewById(R.id.passsword)).getText().toString());
+                        ((EditText) findViewById(R.id.signup_input_password)).getText().toString());
 
         }
     }

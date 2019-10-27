@@ -16,6 +16,7 @@ public class User {
         this.gameManager = gameManager;
         SQLiteDatabase db = gameManager.getSqLitehelper().getReadableDatabase();
         Cursor cursor = db.query("users", new String[]{"username"}, "uid=?", new String[]{String.valueOf(uid)}, null, null, null);
+        cursor.moveToNext();
         this.username = cursor.getString(cursor.getColumnIndex("username"));
         db.close();
     }

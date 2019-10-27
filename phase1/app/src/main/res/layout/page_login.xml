@@ -31,7 +31,7 @@
         android:background="#fff"
         android:hint="@string/password"
         android:importantForAutofill="no"
-        android:inputType="textVisiblePassword"
+        android:inputType="textPassword"
         android:padding="8dp" />
 
     <Button
