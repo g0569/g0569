@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.g0569.module.game.GameManager;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.view.BossView;
+import com.example.g0569.view.ChessView;
 import com.example.g0569.view.MainMenuView;
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -66,8 +67,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         this.getWindow()
                 .setFlags(
                         WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        gameManager = new GameManager(this);
-
+//        gameManager = new GameManager(this);
+setContentView(new ChessView(this));
     }
 
 
@@ -97,5 +98,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-
+    public GameManager getGameManager() {
+        return gameManager;
+    }
 }

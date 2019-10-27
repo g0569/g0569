@@ -93,4 +93,8 @@ public class GameManager {
     public SQLiteHelper getSqLitehelper() {
         return sqLitehelper;
     }
+
+    public Game getCurrentGame() {
+        return currentGame;
+    }
 }
