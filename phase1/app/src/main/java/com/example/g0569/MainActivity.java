@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.g0569.utils.Constants;
+import com.example.g0569.view.BossView;
 import com.example.g0569.view.MainMenuView;
 
 public class MainActivity extends Activity {
@@ -49,6 +50,8 @@ public class MainActivity extends Activity {
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     MainMenuView mainMenuView = new MainMenuView(this);
     setContentView(mainMenuView);
+//    BossView bossView = new BossView(this);
+//    setContentView(bossView);
   }
 
   public Handler getHandler() {

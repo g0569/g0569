@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract class Player extends Item{
 
-    private Coordinate coordinate;
+    protected Coordinate coordinate;
     private List<NonPlayerItem> inventory;
 
     public Player() {
