@@ -36,4 +36,20 @@ public abstract class Item {
     public float getY(){
         return coordinate.getY();
     }
+
+    public Game getGama() {
+        return gama;
+    }
+
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public Bitmap getAppearance() {
+        return appearance;
+    }
+
+    public int getSize() {
+        return size;
+    }
 }
