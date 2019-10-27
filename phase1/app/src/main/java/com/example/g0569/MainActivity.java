@@ -48,10 +48,10 @@ public class MainActivity extends Activity {
     this.getWindow()
         .setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    MainMenuView mainMenuView = new MainMenuView(this);
-    setContentView(mainMenuView);
-//    BossView bossView = new BossView(this);
-//    setContentView(bossView);
+//    MainMenuView mainMenuView = new MainMenuView(this);
+//    setContentView(mainMenuView);
+    BossView bossView = new BossView(this);
+    setContentView(bossView);
   }
 
   public Handler getHandler() {
