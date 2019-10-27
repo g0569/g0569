@@ -9,7 +9,7 @@ import com.example.g0569.module.utils.Coordinate;
 
 public abstract class Item {
     // Coordinate of the Item
-    private Game gama;
+    private Game game;
     public Coordinate coordinate;
 
     // Appearance of the Item
@@ -18,8 +18,8 @@ public abstract class Item {
     //Size of the Item
     public int size;
 
-    public Item(Game gama) {
-        this.gama = gama;
+    public Item(Game game) {
+        this.game = game;
     }
 
     public abstract void draw(Canvas canvas, Paint paint);
@@ -37,8 +37,8 @@ public abstract class Item {
         return coordinate.getY();
     }
 
-    public Game getGama() {
-        return gama;
+    public Game getGame() {
+        return game;
     }
 
     public Coordinate getCoordinate() {
