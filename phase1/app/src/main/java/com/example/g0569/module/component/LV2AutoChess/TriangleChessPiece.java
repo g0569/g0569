@@ -5,3 +5,6 @@ package com.example.g0569.module.component.LV2AutoChess;
  */
 public class TriangleChessPiece {
 }
+
+
+

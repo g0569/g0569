@@ -18,6 +18,8 @@ public class ChessPiece extends NonPlayerItem {
         this.health = health;
     }
 
+
+
 //    private void set_location(float x, float y){
 //        this.coordinate.setXY(x,y);
 //    } This method should be implemented in the LevelTwoPlayer.
