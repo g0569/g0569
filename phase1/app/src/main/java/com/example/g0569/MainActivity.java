@@ -68,7 +68,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 .setFlags(
                         WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        gameManager = new GameManager(this);
-setContentView(new ChessView(this));
+        gameManager = new GameManager(this);
     }
 
 
@@ -100,5 +100,9 @@ setContentView(new ChessView(this));
 
     public GameManager getGameManager() {
         return gameManager;
+    }
+
+    public MainMenuView getMainMenuView() {
+        return mainMenuView;
     }
 }
