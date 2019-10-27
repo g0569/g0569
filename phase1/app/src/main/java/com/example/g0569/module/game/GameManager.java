@@ -14,6 +14,8 @@ import com.example.g0569.utils.Constants;
 
 public class GameManager {
 
+    private float screen_width;
+    private float screen_height;
     private MainActivity mainActivity;
     private Game currentGame;
     private User user;
@@ -28,6 +30,8 @@ public class GameManager {
     public void onStart() {
         sqLitehelper = new SQLiteHelper(mainActivity, "users");
         mainActivity.getHandler().sendEmptyMessage(Constants.TO_MENU_VIEW);
+        this.screen_width = mainActivity.getMainMenuView().getWidth();
+        this.screen_height = mainActivity.getMainMenuView().getHeight();
     }
 
     public void changeGame(int nextGame) {
@@ -92,5 +96,13 @@ public class GameManager {
 
     public SQLiteHelper getSqLitehelper() {
         return sqLitehelper;
+    }
+
+    public float getScreen_width() {
+        return screen_width;
+    }
+
+    public float getScreen_height() {
+        return screen_height;
     }
 }

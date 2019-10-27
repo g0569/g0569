@@ -67,7 +67,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 .setFlags(
                         WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         gameManager = new GameManager(this);
-
     }
 
 
@@ -97,5 +96,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-
+    public MainMenuView getMainMenuView() {
+        return mainMenuView;
+    }
 }
