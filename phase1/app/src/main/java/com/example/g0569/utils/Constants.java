@@ -4,6 +4,7 @@ public interface Constants {
     int TO_MENU_VIEW = 0;
     int TO_LOGIN_VIEW = 1;
     int TO_END_VIEW = 2;
+    int TO_SIGNUP_VIEW = 3;
     int END_GAME = 9;
 
     int MazeGame = 10;
