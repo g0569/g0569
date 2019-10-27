@@ -1,5 +1,6 @@
-package com.example.g0569.module.component;
+package com.example.g0569.module.component.LV2AutoChess;
 
+import com.example.g0569.module.component.Player;
 import com.example.g0569.module.utils.Coordinate;
 
 public class LevelTwoPlayer extends Player {

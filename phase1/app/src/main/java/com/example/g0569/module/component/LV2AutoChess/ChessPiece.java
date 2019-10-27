@@ -1,9 +1,10 @@
-package com.example.g0569.module.component;
+package com.example.g0569.module.component.LV2AutoChess;
 
+import com.example.g0569.module.component.NonPlayerItem;
 import com.example.g0569.module.utils.Coordinate;
 
 
-public class ChessPiece extends NonPlayerItem{
+public class ChessPiece extends NonPlayerItem {
     //    should we implement classes for chess pieces?
 //    These classes to be the type of this instance variable?
 //    private Coordinate coordinate;
