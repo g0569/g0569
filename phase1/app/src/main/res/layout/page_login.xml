@@ -35,7 +35,7 @@
         android:padding="8dp" />
 
     <Button
-        android:id="@+id/b1"
+        android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passsword"
@@ -46,10 +46,10 @@
         android:textColor="#009688" />
 
     <TextView
-        android:id="@+id/text3"
+        android:id="@+id/to_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/b1"
+        android:layout_below="@+id/login_button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
         android:text="@string/not_a_member_sign_up_now"
