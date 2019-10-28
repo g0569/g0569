@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.example.g0569.module.component.NonPlayerItem;
+import com.example.g0569.module.game.Game;
 
 public class UpButton extends NonPlayerItem {
     @Override
@@ -16,7 +17,8 @@ public class UpButton extends NonPlayerItem {
 
     }
 
-    public UpButton() {
+    public UpButton(Game game) {
+        super(game);
     }
 
     public void move(MazePlayer player){

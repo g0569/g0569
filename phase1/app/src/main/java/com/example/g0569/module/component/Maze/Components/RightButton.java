@@ -5,6 +5,7 @@ import android.graphics.Paint;
 
 import com.example.g0569.module.component.NonPlayerItem;
 import com.example.g0569.module.component.Player;
+import com.example.g0569.module.game.Game;
 
 public class RightButton extends NonPlayerItem {
     @Override
@@ -17,7 +18,8 @@ public class RightButton extends NonPlayerItem {
 
     }
 
-    public RightButton() {
+    public RightButton(Game game) {
+        super(game);
     }
 
     public void move(MazePlayer player){

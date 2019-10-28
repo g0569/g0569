@@ -7,17 +7,18 @@ import android.widget.Toast;
 import com.example.g0569.module.component.Item;
 import com.example.g0569.module.component.Maze.MazeItem.Wall;
 import com.example.g0569.module.component.Player;
+import com.example.g0569.module.game.Game;
 import com.example.g0569.module.game.MazeGame;
 import com.example.g0569.utils.Constants;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MazePlayer extends Player {
 
     private int[] direction = new int[2];
 
-    public MazePlayer() {
+    public MazePlayer(Game game) {
+        super(game);
         float x = ((MazeGame)this.getGame()).getStartpoint().getX();
         float y = ((MazeGame)this.getGame()).getStartpoint().getY();
         this.coordinate.setXY(x, y);
@@ -59,7 +60,7 @@ public class MazePlayer extends Player {
     public void move(){
         float targetX = this.coordinate.getX() + (direction[0] + this.atBoundary()[0]);
         float targetY = this.coordinate.getY() + (direction[1] + this.atBoundary()[1]);
-        if (!(((MazeGame)this.getGame()).MyMazeItem[(int)targetX][(int)targetY] instanceof Wall)){
+        if (!(((MazeGame)this.getGame()).getMyMazeItem()[(int)targetX][(int)targetY] instanceof Wall)){
         this.coordinate.setX(targetX);
         this.coordinate.setY(targetY);
         }
@@ -72,25 +73,25 @@ public class MazePlayer extends Player {
         Item currItem;
         ArrayList<NPC> NPCAround = new ArrayList<>();
         if (direction[0] != 1){
-            currItem = ((MazeGame)this.getGame()).MyMazeItem[currX + 1][currY];
+            currItem = ((MazeGame)this.getGame()).getMyMazeItem()[currX + 1][currY];
             if(currItem instanceof NPC){
                 NPCAround.add((NPC)currItem);
             }
         }
         if (direction[0] != -1){
-            currItem = ((MazeGame)this.getGame()).MyMazeItem[currX - 1][currY];
+            currItem = ((MazeGame)this.getGame()).getMyMazeItem()[currX - 1][currY];
             if(currItem instanceof NPC){
                 NPCAround.add((NPC)currItem);
             }
         }
         if (direction[1] != 1){
-            currItem = ((MazeGame)this.getGame()).MyMazeItem[currX][currY + 1];
+            currItem = ((MazeGame)this.getGame()).getMyMazeItem()[currX][currY + 1];
             if(currItem instanceof NPC){
                 NPCAround.add((NPC)currItem);
             }
         }
         if (direction[1] != -1){
-            currItem = ((MazeGame)this.getGame()).MyMazeItem[currX][currY - 1];
+            currItem = ((MazeGame)this.getGame()).getMyMazeItem()[currX][currY - 1];
             if(currItem instanceof NPC){
                 NPCAround.add((NPC)currItem);
             }
