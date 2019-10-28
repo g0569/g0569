@@ -1,22 +1,39 @@
 package com.example.g0569.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
+import com.example.g0569.R;
 import com.example.g0569.module.game.MazeGame;
 
 public class MazeView extends BaseView {
 
+  private Bitmap background;
     private MazeGame mazeGame;
 
   public MazeView(Context context) {
     super(context);
+    paint.setTextSize(40);
+    thread = new Thread(this);
   }
 
   @Override
   public void surfaceCreated(SurfaceHolder holder) {
     super.surfaceCreated(holder);
+    background = BitmapFactory.decodeResource(getResources(), R.drawable.bg);
+    scalex = screen_width / background.getWidth();
+    scaley = screen_height / background.getHeight();
+    mazeGame = (MazeGame) mainActivity.getGameManager().getCurrentGame();
+    mazeGame.setMyMazeItem();
+    if (thread.isAlive()) {
+      thread.start();
+    } else {
+      thread = new Thread(this);
+      thread.start();
+    }
   }
 
   @Override
@@ -31,7 +48,7 @@ public class MazeView extends BaseView {
 
   @Override
   public void draw() {
-    mazeGame.draw();
+//    mazeGame.draw();
   }
 
   @Override
@@ -48,8 +65,20 @@ public class MazeView extends BaseView {
     }
   }
 
+  private boolean inRange(float item_x, float item_y, float range_x, float range_y, float range_r) {
+    return item_x > range_x - range_r
+            && item_x < range_x + range_r
+            && item_y > range_y - range_r
+            && item_y < range_y + range_r;
+  }
+
+
   @Override
   public boolean onTouchEvent(MotionEvent event) {
-    return super.onTouchEvent(event);
+    if (event.getAction() == MotionEvent.ACTION_DOWN && event.getPointerCount() == 1) {
+      float x = event.getX();
+      float y = event.getY();
+      mazeGame.move(x, y);
+      }
   }
 }

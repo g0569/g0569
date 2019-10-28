@@ -43,8 +43,10 @@ public class MazeGame extends Game {
     return this.startpoint;
   }
 
-  public void createWall(float a, float b) {}
+  public void move(float x, float y){}
 
-    public void draw() {
-    }
+//  public void createItem(float a, float b) {}
+
+  public void setMyMazeItem() {
+  }
 }
