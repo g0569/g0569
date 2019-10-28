@@ -30,12 +30,22 @@ public class GameManager {
         sqLitehelper = new SQLiteHelper(mainActivity, "users");
         this.screen_width = mainActivity.getWindowManager().getDefaultDisplay().getWidth();
         this.screen_height = mainActivity.getWindowManager().getDefaultDisplay().getHeight();
-        toMazeGame();
+        mainActivity.getHandler().sendEmptyMessage(Constants.TO_MENU_VIEW);
     }
 
     public void toMazeGame() {
         mainActivity.getHandler().sendEmptyMessage(Constants.TO_MAZE_VIEW);
         currentGame = new MazeGame(this);
+    }
+
+//    public void toBossGame() {
+//        mainActivity.getHandler().sendEmptyMessage(Constants.TO_BOSS_VIEW);
+//        currentGame = new BossGame(this);
+//    }
+
+    public void toChessGame() {
+        mainActivity.getHandler().sendEmptyMessage(Constants.TO_CHESS_VIEW);
+        currentGame = new AutoChessGame(this);
     }
 
     public void changeGame(int nextGame) {
@@ -62,6 +72,7 @@ public class GameManager {
                 user = new User(this, cursor.getInt(cursor.getColumnIndex("uid")));
                 Toast.makeText(mainActivity, "Welcome Back, " + user.getUsername(), Toast.LENGTH_SHORT)
                         .show();
+                mainActivity.getHandler().sendEmptyMessage(Constants.TO_DEMO_VIEW);
                 f = true;
             } else {
                 Toast.makeText(mainActivity, "Incorrect email or password", Toast.LENGTH_SHORT).show();
@@ -122,5 +133,9 @@ public class GameManager {
 
     public MainActivity getMainActivity() {
         return mainActivity;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

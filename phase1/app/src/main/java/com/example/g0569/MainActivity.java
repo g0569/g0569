@@ -1,12 +1,11 @@
 package com.example.g0569;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,11 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.g0569.module.component.LV2AutoChess.ChessPiece;
 import com.example.g0569.module.game.GameManager;
 import com.example.g0569.utils.Constants;
 //import com.example.g0569.view.BossView;
-import com.example.g0569.view.BossView;
 import com.example.g0569.view.ChessView;
 import com.example.g0569.view.MainMenuView;
 import com.example.g0569.view.MazeView;
@@ -28,7 +25,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private MainMenuView mainMenuView;
     private GameManager gameManager;
     private ChessView chessview;
-    private BossView bossView;
+//    private BossView bossView;
     private MazeView mazeView;
 
     @SuppressLint("HandlerLeak")
@@ -45,9 +42,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 toChessView();
             } else if (msg.what == Constants.TO_MAZE_VIEW) {
                 toMazeView();
+            } else if (msg.what == Constants.TO_DEMO_VIEW) {
+                toDemoView();
             }
         }
     };
+
+    private void toDemoView() {
+        setNull();
+        setContentView(R.layout.page_demo);
+        ((TextView) findViewById(R.id.welcome_text)).setText("Welcome Back, " + gameManager.getUser().getUsername());
+    }
 
     private void toMazeView() {
         setNull();
@@ -56,7 +61,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private void setNull() {
         mainMenuView = null;
-        bossView = null;
+//        bossView = null;
         mazeView = null;
         chessview = null;
     }
@@ -123,8 +128,34 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 gameManager.signUp(((EditText) findViewById(R.id.signup_input_email)).getText().toString(),
                         ((EditText) findViewById(R.id.signup_input_name)).getText().toString(),
                         ((EditText) findViewById(R.id.signup_input_password)).getText().toString());
-
+                break;
+            case (R.id.btn_to_boss):
+                break;
+            case (R.id.btn_to_chess):
+                gameManager.toChessGame();
+                break;
+            case (R.id.btn_to_maze):
+                gameManager.toMazeGame();
+                break;
+            case (R.id.btn_to_main):
+                toMenuView();
+                break;
+            case (R.id.btn_to_login):
+                toLoginView();
+                break;
+            case (R.id.btn_to_signup):
+                toSignUpView();
+                break;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            toDemoView();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     public GameManager getGameManager() {

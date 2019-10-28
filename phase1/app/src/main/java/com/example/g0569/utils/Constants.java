@@ -21,4 +21,6 @@ public interface Constants {
 
     int GRID_NUM = 20;
 
+    int TO_DEMO_VIEW = 999;
+
 }
