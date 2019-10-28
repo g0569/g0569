@@ -18,17 +18,17 @@ public class LevelTwoPlayer extends Player {
         // Put three chess piece into the getInventory() area.
     }
 
-    private void placeChessPieces(int x, int y){
-        // get coordinate for selected chess piece from touching screen and place the chess piece.
-        // while loop to find the index of the chess piece has been selected.
-//        getInventory().get().set_location(x,y);
-//        getInventory().get().change_selected();
-        // should throw exceptions when x, y is out of range.
-    }
-
-    private void startGame(){
-        // a button for startGame.
-    }
+//    private void placeChessPieces(int x, int y){
+//        // get coordinate for selected chess piece from touching screen and place the chess piece.
+//        // while loop to find the index of the chess piece has been selected.
+////        getInventory().get().set_location(x,y);
+////        getInventory().get().change_selected();
+//        // should throw exceptions when x, y is out of range.
+//    }
+//
+//    private void startGame(){
+//        // a button for startGame.
+//    }
 
     @Override
     public void draw(Canvas canvas, Paint paint) {

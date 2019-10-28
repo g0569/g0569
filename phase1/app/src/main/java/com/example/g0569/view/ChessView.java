@@ -9,23 +9,26 @@ import android.view.SurfaceHolder;
 import android.widget.Toast;
 
 import com.example.g0569.R;
-import com.example.g0569.module.component.LV2AutoChess.ChessPiece;
 import com.example.g0569.module.component.LV2AutoChess.LevelTwoPlayer;
-import com.example.g0569.module.component.Player;
 import com.example.g0569.module.game.AutoChessGame;
-import com.example.g0569.utils.Constants;
 
 public class ChessView extends BaseView {
   private Bitmap background;
   private Bitmap inventory;
   private Bitmap button;
-//  private ChessPiece chess;
+  //  private ChessPiece chess;
   private Bitmap l2npc;
   private float button_x;
   private float button_y;
   private float button_y2;
   private float inventory_x;
   private float inventory_y;
+  private Bitmap triangle;
+  private float triangle_x;
+  private float triangle_y;
+  private Bitmap star;
+  private float star_x;
+  private float star_y;
 
   private LevelTwoPlayer l2player;
   private AutoChessGame autoChessGame;
@@ -51,7 +54,18 @@ public class ChessView extends BaseView {
     inventory = BitmapFactory.decodeResource(getResources(), R.drawable.iteminventory);
     inventory = Bitmap.createScaledBitmap(inventory, 200, 300, false);
     inventory_x = screen_width / 30;
-    inventory_y = screen_height *0.7f;
+    inventory_y = screen_height * 0.7f;
+
+    triangle = BitmapFactory.decodeResource(getResources(),R.drawable.triangle);
+    triangle = Bitmap.createScaledBitmap(triangle, 80,80,false);
+    triangle_x = inventory_x;
+    triangle_y = inventory_y;
+
+    star = BitmapFactory.decodeResource(getResources(),R.drawable.star);
+    star = Bitmap.createScaledBitmap(star, 80,80,false);
+    star_x = inventory_x + inventory.getWidth() * 0.5f;
+    star_y = inventory_y;
+
 
     autoChessGame = (AutoChessGame) mainActivity.getGameManager().getCurrentGame();
 
@@ -62,6 +76,8 @@ public class ChessView extends BaseView {
       thread.start();
     }
   }
+
+
 
   @Override
   public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
@@ -84,6 +100,8 @@ public class ChessView extends BaseView {
       canvas.restore();
       canvas.drawBitmap(button, button_x, button_y, paint);
       canvas.drawBitmap(inventory, inventory_x, inventory_y, paint);
+      canvas.drawBitmap(star,star_x,star_y,paint);
+      canvas.drawBitmap(triangle,triangle_x,triangle_y,paint);
     } catch (Exception err) {
       err.printStackTrace();
     } finally {
@@ -120,13 +138,16 @@ public class ChessView extends BaseView {
         Toast.makeText(mainActivity, "Button was pressed", Toast.LENGTH_SHORT).show();
         // Call method to start the game.
         autoChessGame.autoFight(l2player);
-      }
-      else if(x > inventory_x
-              && x < inventory_x + inventory.getWidth()*0.5f
-              && y > inventory_x
-              && y < inventory_y + inventory.getHeight()*0.3333f)
-      {
-        autoChessGame.getPlaceLocation(x,y);
+      } else if (x > inventory_x
+          && x < inventory_x + inventory.getWidth() * 0.5f
+          && y > inventory_y
+          && y < inventory_y + inventory.getHeight() * 0.3333f) {
+        autoChessGame.place_Chess(0);
+      } else if (x > inventory_x + inventory.getWidth() * 0.5f
+          && x < inventory_x + inventory.getWidth()
+          && y > inventory_y
+          && y < inventory_y + inventory.getHeight() * 0.3333f) {
+        autoChessGame.place_Chess(1);
       }
       return true;
     }

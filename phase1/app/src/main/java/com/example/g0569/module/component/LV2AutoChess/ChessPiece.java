@@ -27,18 +27,18 @@ public class ChessPiece extends NonPlayerItem {
         this.health = health;
     }
 
-    public void change_selected(){
-        selected = ! selected;
-    }
+//    public void change_selected(){
+//        selected = ! selected;
+//    }
 
     @Override
     public Coordinate getCoordinate() {
         return coordinate;
     }
 
-    public void setCoordinate(float x, float y) {
-        this.coordinate.setXY(x , y);
-    }
+//    public void setCoordinate(float x, float y) {
+//        this.coordinate.setXY(x , y);
+//    }
 
     public int getPower() {
         return power;
@@ -46,7 +46,6 @@ public class ChessPiece extends NonPlayerItem {
 
     @Override
     public void draw(Canvas canvas, Paint paint) {
-
     }
 
     @Override
