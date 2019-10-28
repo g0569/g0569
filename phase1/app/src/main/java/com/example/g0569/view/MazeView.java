@@ -24,7 +24,7 @@ public class MazeView extends BaseView {
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         super.surfaceCreated(holder);
-        background = BitmapFactory.decodeResource(getResources(), R.drawable.bg);
+        background = BitmapFactory.decodeResource(getResources(), R.drawable.maze_background);
         scalex = screen_width / background.getWidth();
         scaley = screen_height / background.getHeight();
         mazeGame = (MazeGame) mainActivity.getGameManager().getCurrentGame();
@@ -59,6 +59,7 @@ public class MazeView extends BaseView {
             mazeGame.draw(canvas, paint);
 
         } catch (Exception err) {
+            System.out.println(err);
             err.printStackTrace();
         } finally {
             if (canvas != null) {
@@ -72,6 +73,7 @@ public class MazeView extends BaseView {
         while (threadFlag) {
             long startTime = System.currentTimeMillis();
             draw();
+            mazeGame.action();
             long endTime = System.currentTimeMillis();
             try {
                 if (endTime - startTime < 1) Thread.sleep((long) (1 - (endTime - startTime)));
@@ -96,6 +98,8 @@ public class MazeView extends BaseView {
             float y = event.getY();
             mazeGame.move(x, y);
             return true;
+        } else if (event.getAction() == MotionEvent.ACTION_UP && event.getPointerCount() == 1) {
+            mazeGame.stopMove();
         }
         return false;
     }
