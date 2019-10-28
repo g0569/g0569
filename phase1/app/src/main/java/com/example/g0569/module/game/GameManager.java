@@ -28,9 +28,9 @@ public class GameManager {
 
   public void onStart() {
     sqLitehelper = new SQLiteHelper(mainActivity, "users");
-    mainActivity.getHandler().sendEmptyMessage(Constants.TO_MENU_VIEW);
-    this.screen_width = mainActivity.getMainMenuView().getWidth();
-    this.screen_height = mainActivity.getMainMenuView().getHeight();
+    this.screen_width = mainActivity.getWindowManager().getDefaultDisplay().getWidth();
+    this.screen_height = mainActivity.getWindowManager().getDefaultDisplay().getHeight();
+    mainActivity.getHandler().sendEmptyMessage(Constants.TO_CHESS_VIEW);
   }
 
   public void changeGame(int nextGame) {

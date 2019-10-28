@@ -8,11 +8,12 @@ public abstract class Game {
         this.gameManager = gameManager;
     }
 
+    public GameManager getGameManager() {
+        return gameManager;
+    }
+
     public abstract void pause();
 
     public abstract void load();
 
-    public GameManager getGameManager() {
-        return gameManager;
-    }
 }

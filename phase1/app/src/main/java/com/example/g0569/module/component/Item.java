@@ -45,6 +45,7 @@ public abstract class Item {
         return coordinate;
     }
 
+
     public Bitmap getAppearance() {
         return appearance;
     }

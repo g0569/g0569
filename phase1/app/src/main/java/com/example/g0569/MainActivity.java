@@ -14,9 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.g0569.module.component.LV2AutoChess.ChessPiece;
 import com.example.g0569.module.game.GameManager;
 import com.example.g0569.utils.Constants;
-import com.example.g0569.view.BossView;
+//import com.example.g0569.view.BossView;
 import com.example.g0569.view.ChessView;
 import com.example.g0569.view.MainMenuView;
 
@@ -24,6 +25,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private MainMenuView mainMenuView;
     private GameManager gameManager;
+    private ChessView chessview;
 
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
@@ -35,6 +37,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 toLoginView();
             } else if (msg.what == Constants.TO_SIGNUP_VIEW) {
                 toSignUpView();
+            } else if(msg.what == Constants.TO_CHESS_VIEW){
+                toChessView();
             }
         }
     };
@@ -60,6 +64,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
         ((TextView) findViewById(R.id.to_signup)).setOnClickListener(this);
     }
 
+   private void toChessView() {
+    if (chessview == null) {
+        chessview = new ChessView(this);
+    }
+    setContentView(mainMenuView);
+}
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +79,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         this.getWindow()
                 .setFlags(
                         WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        gameManager = new GameManager(this);
+        mainMenuView = new MainMenuView(this);
         gameManager = new GameManager(this);
     }
 
@@ -78,7 +90,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
+
             case (R.id.login_button):
                 EditText email = (EditText) findViewById(R.id.email);
                 EditText password = (EditText) findViewById(R.id.passsword);
