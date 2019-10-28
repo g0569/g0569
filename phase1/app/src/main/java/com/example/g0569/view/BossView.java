@@ -38,7 +38,7 @@ public class BossView extends BaseView {
     background = BitmapFactory.decodeResource(getResources(), R.drawable.bg);
     scalex = screen_width / background.getWidth();
     scaley = screen_height / background.getHeight();
-    //    button = new Button(bossGame, screen_width, screen_height);
+//        button = new Button(bossGame, screen_width, screen_height);
     //    aim = new BossPlayer(bossGame, screen_width, screen_height);
     //    enemy = new Enemy(bossGame, screen_width, screen_height, getResources());
 
@@ -123,7 +123,7 @@ public class BossView extends BaseView {
       System.out.println(String.valueOf(x) + " " + String.valueOf(y));
       if (inRange(x, y, button.getX(), button.getY(), button.getR())) {
         Toast.makeText(mainActivity, "Throw!!!!", Toast.LENGTH_SHORT).show();
-        bossGame.hit(aim.getInventory(), enemy);
+        bossGame.hit();
         return true;
       }
       return false;

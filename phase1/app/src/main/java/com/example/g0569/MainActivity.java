@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.g0569.module.game.GameManager;
 import com.example.g0569.utils.Constants;
 //import com.example.g0569.view.BossView;
+import com.example.g0569.view.BossView;
 import com.example.g0569.view.ChessView;
 import com.example.g0569.view.MainMenuView;
 import com.example.g0569.view.MazeView;
@@ -25,7 +26,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private MainMenuView mainMenuView;
     private GameManager gameManager;
     private ChessView chessview;
-//    private BossView bossView;
+    private BossView bossView;
     private MazeView mazeView;
 
     @SuppressLint("HandlerLeak")
@@ -40,6 +41,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 toSignUpView();
             } else if (msg.what == Constants.TO_CHESS_VIEW) {
                 toChessView();
+            } else if (msg.what == Constants.TO_BOSS_VIEW) {
+                toBossView();
             } else if (msg.what == Constants.TO_MAZE_VIEW) {
                 toMazeView();
             } else if (msg.what == Constants.TO_DEMO_VIEW) {
@@ -47,6 +50,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         }
     };
+
+    private void toBossView() {
+        setNull();
+        setContentView(new BossView(this));
+    }
 
     private void toDemoView() {
         setNull();
@@ -61,7 +69,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private void setNull() {
         mainMenuView = null;
-//        bossView = null;
+        bossView = null;
         mazeView = null;
         chessview = null;
     }
@@ -130,6 +138,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         ((EditText) findViewById(R.id.signup_input_password)).getText().toString());
                 break;
             case (R.id.btn_to_boss):
+                gameManager.toBossGame();
                 break;
             case (R.id.btn_to_chess):
                 gameManager.toChessGame();

@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.g0569.MainActivity;
 import com.example.g0569.module.User;
+import com.example.g0569.module.game.Boss.BossGame;
 import com.example.g0569.module.utils.SQLiteHelper;
 import com.example.g0569.module.utils.Utils;
 import com.example.g0569.utils.Constants;
@@ -38,10 +39,10 @@ public class GameManager {
         currentGame = new MazeGame(this);
     }
 
-//    public void toBossGame() {
-//        mainActivity.getHandler().sendEmptyMessage(Constants.TO_BOSS_VIEW);
-//        currentGame = new BossGame(this);
-//    }
+    public void toBossGame() {
+        mainActivity.getHandler().sendEmptyMessage(Constants.TO_BOSS_VIEW);
+        currentGame = new BossGame(this);
+    }
 
     public void toChessGame() {
         mainActivity.getHandler().sendEmptyMessage(Constants.TO_CHESS_VIEW);
