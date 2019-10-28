@@ -1,14 +1,20 @@
 package com.example.g0569.module.component.Maze.Components;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.widget.Toast;
 
+import com.example.g0569.R;
 import com.example.g0569.module.component.Item;
 import com.example.g0569.module.component.Maze.MazeItem.Wall;
 import com.example.g0569.module.component.Player;
 import com.example.g0569.module.game.Game;
 import com.example.g0569.module.game.MazeGame;
+import com.example.g0569.module.utils.Coordinate;
 import com.example.g0569.utils.Constants;
 
 import java.util.ArrayList;
@@ -16,12 +22,18 @@ import java.util.ArrayList;
 public class MazePlayer extends Player {
 
     private int[] direction = new int[2];
+    private Bitmap appearance;
 
     public MazePlayer(Game game) {
         super(game);
         float x = ((MazeGame)this.getGame()).getStartpoint().getX();
         float y = ((MazeGame)this.getGame()).getStartpoint().getY();
-        this.coordinate.setXY(x, y);
+        this.coordinate = new Coordinate(x, y);
+
+        Resources resources = getGame().getGameManager().getMainActivity().getResources();
+        this.appearance = BitmapFactory.decodeResource(resources, R.drawable.pacman);
+        appearance = Bitmap.createScaledBitmap(appearance, (int)((MazeGame) this.getGame()).getGrid_width(),
+                (int) ((MazeGame) this.getGame()).getGrid_height(), false);
 
         direction[0] = 0;
         direction[1] = 0;
@@ -30,7 +42,13 @@ public class MazePlayer extends Player {
 
     @Override
     public void draw(Canvas canvas, Paint paint) {
+        paint.setColor(Color.WHITE);
 
+        canvas.drawBitmap(
+                appearance,
+                this.coordinate.getX() * ((MazeGame) this.getGame()).getGrid_width(),
+                this.coordinate.getY() * ((MazeGame) this.getGame()).getGrid_height(),
+                paint);
     }
 
     @Override
@@ -111,4 +129,9 @@ public class MazePlayer extends Player {
         }
     }
 
+    public void setDirection(int x, int y) {
+        this.direction[0] = x;
+        this.direction[1] = y;
+
+    }
 }
