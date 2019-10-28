@@ -18,14 +18,18 @@ import com.example.g0569.module.component.LV2AutoChess.ChessPiece;
 import com.example.g0569.module.game.GameManager;
 import com.example.g0569.utils.Constants;
 //import com.example.g0569.view.BossView;
+import com.example.g0569.view.BossView;
 import com.example.g0569.view.ChessView;
 import com.example.g0569.view.MainMenuView;
+import com.example.g0569.view.MazeView;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
     private MainMenuView mainMenuView;
     private GameManager gameManager;
     private ChessView chessview;
+    private BossView bossView;
+    private MazeView mazeView;
 
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
@@ -37,39 +41,50 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 toLoginView();
             } else if (msg.what == Constants.TO_SIGNUP_VIEW) {
                 toSignUpView();
-            } else if(msg.what == Constants.TO_CHESS_VIEW){
+            } else if (msg.what == Constants.TO_CHESS_VIEW) {
                 toChessView();
+            } else if (msg.what == Constants.TO_MAZE_VIEW) {
+                toMazeView();
             }
         }
     };
 
-    private void toSignUpView() {
+    private void toMazeView() {
+        setNull();
+        setContentView(new MazeView(this));
+    }
+
+    private void setNull() {
         mainMenuView = null;
+        bossView = null;
+        mazeView = null;
+        chessview = null;
+    }
+
+    private void toSignUpView() {
+        setNull();
         setContentView(R.layout.page_signup);
         ((Button) findViewById(R.id.signup_button)).setOnClickListener(this);
         ((TextView) findViewById(R.id.to_login)).setOnClickListener(this);
     }
 
     private void toMenuView() {
-        if (mainMenuView == null) {
-            mainMenuView = new MainMenuView(this);
-        }
+        setNull();
+        mainMenuView = new MainMenuView(this);
         setContentView(mainMenuView);
     }
 
     private void toLoginView() {
-        mainMenuView = null;
+        setNull();
         setContentView(R.layout.page_login);
         ((Button) findViewById(R.id.login_button)).setOnClickListener(this);
         ((TextView) findViewById(R.id.to_signup)).setOnClickListener(this);
     }
 
-   private void toChessView() {
-    if (chessview == null) {
-        chessview = new ChessView(this);
+    private void toChessView() {
+        setNull();
+        setContentView(new ChessView(this));
     }
-    setContentView(mainMenuView);
-}
 
 
     @Override
