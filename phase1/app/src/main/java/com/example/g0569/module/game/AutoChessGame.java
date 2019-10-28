@@ -46,7 +46,11 @@ public class AutoChessGame extends Game {
   //        return battle_setting;
   //    }
 
-  public boolean autoFight(Player player) {
+    public LevelTwoPlayer getL2player() {
+        return l2player;
+    }
+
+    public boolean autoFight(Player player) {
     // return the win or lose result in boolean expression.
     //    List<Boolean> battle_result = new ArrayList<>();
     //        for (Integer key : battle_setting.keySet()) {
@@ -76,7 +80,7 @@ public class AutoChessGame extends Game {
       // must start from 0
       //            }
 
-      for (NonPlayerItem chess : player.getInventory()) {
+      for (NonPlayerItem chess : l2player.getInventory()) {
         float row = chess.getCoordinate().getX();
         if ((int) row == 0) {
           if (NPC1_ChessPiece.get(0).getPower() <= ((ChessPiece) chess).getPower()) {
@@ -93,7 +97,7 @@ public class AutoChessGame extends Game {
           //          battle_result.add(r3);
           //        }
         }
-        NPC1_ChessPiece.clear();
+//        NPC1_ChessPiece.clear();
       }
     }
     if (round == 2) {
@@ -121,7 +125,7 @@ public class AutoChessGame extends Game {
           //          battle_result.add(r3);
           //        }
         }
-        NPC2_ChessPiece.clear();
+//        NPC2_ChessPiece.clear();
 
         //            for(NonPlayerItem chess: player.inventory){
         //                int row = chess.corrdinate.getX();
@@ -154,6 +158,7 @@ public class AutoChessGame extends Game {
     // piece.
     //    TODO
     if (number_clicked == 1) {
+      float x = getGameManager().getScreen_width() * 0.45f;
       l2player
           .getInventory()
           .get(choosen_place)
@@ -161,6 +166,7 @@ public class AutoChessGame extends Game {
           .setXY(
               getGameManager().getScreen_width() * 0.45f,
               getGameManager().getScreen_height() * 0.4f);
+      number_clicked++;
     } else if (number_clicked == 2) {
       l2player
           .getInventory()
@@ -170,6 +176,9 @@ public class AutoChessGame extends Game {
               getGameManager().getScreen_width() * 0.45f,
               getGameManager().getScreen_height() * 0.65f);
     }
+//    if (number_clicked >=2){
+//      number_clicked = 0;
+//    }
     //    l2player.getInventory().get(0).getCoordinate().setXY();
   }
 

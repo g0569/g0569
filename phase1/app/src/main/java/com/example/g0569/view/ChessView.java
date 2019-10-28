@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.widget.Toast;
@@ -26,11 +27,14 @@ public class ChessView extends BaseView {
   private Bitmap triangle;
   private float triangle_x;
   private float triangle_y;
+  private Bitmap triangle2;
+  private float triangle2_x;
+  private float triangle2_y;
   private Bitmap star;
   private float star_x;
   private float star_y;
+  private Bitmap win;
 
-  private LevelTwoPlayer l2player;
   private AutoChessGame autoChessGame;
 
   public ChessView(Context context) {
@@ -61,10 +65,17 @@ public class ChessView extends BaseView {
     triangle_x = inventory_x;
     triangle_y = inventory_y;
 
+    triangle2 = BitmapFactory.decodeResource(getResources(),R.drawable.triangle);
+    triangle2 = Bitmap.createScaledBitmap(triangle, 80,80,false);
+    triangle2_x = screen_width*0.6f;
+    triangle2_y = screen_height*0.4f;
+
     star = BitmapFactory.decodeResource(getResources(),R.drawable.star);
     star = Bitmap.createScaledBitmap(star, 80,80,false);
     star_x = inventory_x + inventory.getWidth() * 0.5f;
     star_y = inventory_y;
+
+    win = BitmapFactory.decodeResource(getResources(),R.drawable.wingame);
 
 
     autoChessGame = (AutoChessGame) mainActivity.getGameManager().getCurrentGame();
@@ -102,6 +113,7 @@ public class ChessView extends BaseView {
       canvas.drawBitmap(inventory, inventory_x, inventory_y, paint);
       canvas.drawBitmap(star,star_x,star_y,paint);
       canvas.drawBitmap(triangle,triangle_x,triangle_y,paint);
+      canvas.drawBitmap(triangle2,triangle2_x,triangle2_y,paint);
     } catch (Exception err) {
       err.printStackTrace();
     } finally {
@@ -135,19 +147,46 @@ public class ChessView extends BaseView {
           && x < button_x + button.getWidth()
           && y > button_y
           && y < button_y + button.getHeight()) {
-        Toast.makeText(mainActivity, "Button was pressed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mainActivity, "Start the game.", Toast.LENGTH_SHORT).show();
         // Call method to start the game.
-        autoChessGame.autoFight(l2player);
+        boolean restult = autoChessGame.autoFight(autoChessGame.getL2player());
+        Toast.makeText(mainActivity, "You win the game!", Toast.LENGTH_SHORT).show();
+//        canvas.drawBitmap(win,screen_width *0.5f ,screen_height * 0.5f,paint);
+//        try {
+//          Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//          e.printStackTrace();
+//        } finally{
+//
+//        }
+
+//        toast.setGravity(Gravity.CENTER, (int)(screen_width * 0.5),(int)(screen_height * 0.5));
+//        toast.show();
       } else if (x > inventory_x
           && x < inventory_x + inventory.getWidth() * 0.5f
           && y > inventory_y
           && y < inventory_y + inventory.getHeight() * 0.3333f) {
-        autoChessGame.place_Chess(0);
+        Toast.makeText(mainActivity, "Triangle chess was chosen", Toast.LENGTH_SHORT).show();
+//        triangle_x = screen_width *0.45f;
+//        triangle_y = screen_height *0.4f;
+
+//          triangle_x = autoChessGame.getL2player().getInventory().get(0).getCoordinate().getX();
+//          triangle_y = autoChessGame.getL2player().getInventory().get(0).getCoordinate().getY();
+          autoChessGame.place_Chess(0);
+          triangle_x = autoChessGame.getL2player().getInventory().get(0).getCoordinate().getX();
+          triangle_y = autoChessGame.getL2player().getInventory().get(0).getCoordinate().getY();
+
       } else if (x > inventory_x + inventory.getWidth() * 0.5f
           && x < inventory_x + inventory.getWidth()
           && y > inventory_y
           && y < inventory_y + inventory.getHeight() * 0.3333f) {
+        Toast.makeText(mainActivity, "Star chess was chosen", Toast.LENGTH_SHORT).show();
+//        autoChessGame.place_Chess(1);
+//        star_x = screen_width *0.45f;
+//        star_y = screen_height *0.65f;
         autoChessGame.place_Chess(1);
+          star_x = autoChessGame.getL2player().getInventory().get(1).getCoordinate().getX();
+          star_y = autoChessGame.getL2player().getInventory().get(1).getCoordinate().getY();
       }
       return true;
     }
