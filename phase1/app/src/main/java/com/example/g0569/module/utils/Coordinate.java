@@ -41,6 +41,12 @@ public class Coordinate {
                 Float.compare(that.y, y) == 0;
     }
 
+    public  boolean around(Object o, float unit){
+        if (this.equals(o)) return true;
+        Coordinate that = (Coordinate) o;
+        return Math.abs(that.x - x) <= unit && Math.abs(that.y - y) <= unit;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
