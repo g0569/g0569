@@ -94,4 +94,8 @@ public class Enemy extends NonPlayerItem {
   public int getSize() {
     return size;
   }
+
+  public int getHealth(){
+  return health;
   }
+}
