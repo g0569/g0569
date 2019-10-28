@@ -8,6 +8,8 @@ import android.graphics.Paint;
 
 import com.example.g0569.R;
 import com.example.g0569.module.component.NonPlayerItem;
+import com.example.g0569.module.game.Boss.BossGame;
+import com.example.g0569.module.game.GameManager;
 import com.example.g0569.module.utils.Coordinate;
 
 public class Enemy extends NonPlayerItem {
@@ -20,9 +22,10 @@ public class Enemy extends NonPlayerItem {
   private float screen_width;
   private float screen_height;
 
-  public Enemy(float screen_width, float screen_height, Resources resource) {
-    this.screen_height = screen_height;
-    this.screen_width = screen_width;
+  public Enemy(BossGame game, float screenWidth, float screenHeight, Resources resource) {
+    super(game);
+    this.screen_height = screenHeight;
+    this.screen_width = screenWidth;
 
     // Appearance of the enemy
     appearance = BitmapFactory.decodeResource(resource, R.drawable.boss);
@@ -83,5 +86,12 @@ public class Enemy extends NonPlayerItem {
   }
 
   /** Decreases the health of the enemy when Item hits it */
-  public void attacked() {}
-}
+  public void attacked(int damageTaken) {
+    health -= damageTaken;
+
+  }
+
+  public int getSize() {
+    return size;
+  }
+  }

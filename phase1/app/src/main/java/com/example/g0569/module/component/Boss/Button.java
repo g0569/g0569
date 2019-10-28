@@ -5,19 +5,22 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.g0569.module.component.Item;
+import com.example.g0569.module.game.Game;
+import com.example.g0569.module.game.GameManager;
 import com.example.g0569.module.utils.Coordinate;
 
 public class Button extends Item {
 
   private float button_r;
 
-  public Button(float screen_width, float screen_height) {
+  public Button(Game game, float screenWidth, float screenHeight) {
     // Radius of Button
-    button_r = screen_width / 16;
+    super(game);
+    button_r = screenWidth / 16;
 
     // Sets coordinates of the button
-    float x = screen_width * 5 / 6;
-    float y = screen_height - button_r * 3 / 2;
+    float x = screenWidth * 5 / 6;
+    float y = screenHeight - button_r * 3 / 2;
     coordinate = new Coordinate(x, y);
   }
 

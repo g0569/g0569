@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.g0569.module.component.Item;
+import com.example.g0569.module.game.Game;
+import com.example.g0569.module.game.GameManager;
 import com.example.g0569.module.utils.Coordinate;
 
 public class ThrownItems extends Item {
@@ -19,7 +21,8 @@ public class ThrownItems extends Item {
   public Rect dest_rect;
   public Rect src_rect;
 
-  public ThrownItems(float screen_width, float screen_height, Resources resource) {
+  public ThrownItems(Game game, float screen_width, float screen_height, Resources resource) {
+      super(game);
     size = (int) screen_width / 12;
     float x = (int) (screen_width / 2 - size / 2);
     float y = (int) (screen_height - screen_width * 3 / 32 - size / 2);
@@ -41,10 +44,10 @@ public class ThrownItems extends Item {
     return damage;
   }
 
-  public void action(Canvas canvas, Paint paint) {
+  public void action() {
     if (thrown) {
       size = (int) (size * shrink);
-      action();
+      actionHelp();
     }
   }
 
@@ -56,13 +59,19 @@ public class ThrownItems extends Item {
     thrown = true;
   }
 
-  public void action() {
-    coordinate.setX(coordinate.getX() + x_direction);
-    coordinate.setY(coordinate.getY() + y_direction - 50);
-    dest_rect.set(
-        (int) coordinate.getX(),
-        (int) coordinate.getY(),
-        (int) coordinate.getX() + size,
-        (int) coordinate.getY() + size);
+  public void actionHelp() {
+//    if (thrown) {
+//      size = (int) (size * shrink);
+      coordinate.setX(coordinate.getX() + x_direction);
+      coordinate.setY(coordinate.getY() + y_direction - 50);
+      dest_rect.set(
+          (int) coordinate.getX(),
+          (int) coordinate.getY(),
+          (int) coordinate.getX() + size,
+          (int) coordinate.getY() + size);
+  }
+
+  public float getRadius() {
+    return size;
   }
 }

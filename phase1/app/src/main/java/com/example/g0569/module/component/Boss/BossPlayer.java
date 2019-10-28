@@ -7,6 +7,8 @@ import android.graphics.Paint;
 
 import com.example.g0569.module.component.Item;
 import com.example.g0569.module.component.Player;
+import com.example.g0569.module.game.Game;
+import com.example.g0569.module.game.GameManager;
 import com.example.g0569.module.utils.Coordinate;
 
 import java.util.ArrayList;
@@ -22,11 +24,12 @@ public class BossPlayer extends Player {
   // The inventory of the items the Player can throw
   private ArrayList<ThrownItems> inventory = new ArrayList<>();
 
-  public BossPlayer(float screen_width, float screen_height) {
-    r1 = screen_width / 36;
-    r2 = screen_width / 200;
-    float x = screen_width / 2;
-    float y = screen_height / 2 - r1 * 2;
+  public BossPlayer(Game game, float screenWidth, float screenHeight) {
+      super(game);
+    r1 = screenWidth / 36;
+    r2 = screenWidth / 200;
+    float x = screenWidth / 2;
+    float y = screenHeight / 2 - r1 * 2;
     super.coordinate = new Coordinate(x, y);
   }
 
@@ -79,4 +82,8 @@ public class BossPlayer extends Player {
    */
   @Override
   public void action() {}
+
+  public ArrayList getInventory(){
+    return inventory;
+  }
 }
