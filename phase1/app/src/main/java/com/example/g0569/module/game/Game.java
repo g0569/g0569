@@ -12,4 +12,7 @@ public abstract class Game {
 
     public abstract void load();
 
+    public GameManager getGameManager() {
+        return gameManager;
+    }
 }

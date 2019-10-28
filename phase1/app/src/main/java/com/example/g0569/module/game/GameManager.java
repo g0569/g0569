@@ -114,4 +114,8 @@ public class GameManager {
   public float getScreen_height() {
     return screen_height;
   }
+
+  public MainActivity getMainActivity() {
+    return mainActivity;
+  }
 }

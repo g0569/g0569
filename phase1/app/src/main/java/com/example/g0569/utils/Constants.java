@@ -10,4 +10,11 @@ public interface Constants {
     int MazeGame = 10;
     int ChessGame = 11;
     int BossGame = 12;
+
+    int AT_LEFT_BOUNDARY = 1;
+    int AT_RIGHT_BOUNDARY = -1;
+    int AT_TOP_BOUNDARY = 1;
+    int AT_BOTTOM_BOUNDARY = -1;
+
+    int GRID_NUM = 20;
 }
