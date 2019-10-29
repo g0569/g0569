@@ -5,9 +5,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.example.g0569.module.component.Item;
+import com.example.g0569.module.component.NonPlayerItem;
 import com.example.g0569.module.game.Game;
 
-public class HealthBar extends Item {
+public class HealthBar extends NonPlayerItem {
 
     private float screenWidth;
     private float screenHeight;
