@@ -6,10 +6,11 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.g0569.module.component.Item;
+import com.example.g0569.module.component.NonPlayerItem;
 import com.example.g0569.module.game.Game;
 import com.example.g0569.module.utils.Coordinate;
 
-public class ThrownItems extends Item {
+public class ThrownItems extends NonPlayerItem {
 
     public int damage;
     public boolean thrown;
