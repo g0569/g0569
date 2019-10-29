@@ -15,14 +15,14 @@ public class ChessPiece extends NonPlayerItem {
     private Coordinate coordinate;
     private String appearance;
     private boolean selected;
-//    private Coordinate coordinate;
+    //    private Coordinate coordinate;
     private int power; // The amount for the chess piece can attack in one round.
     private int health; // The amount of the hp for the chess piece.
 
     public ChessPiece(float x, float y, int power, int health, Game game) {
         super(game);
 //        super(new Coordinate(x,y));
-        this.coordinate = new Coordinate(x,y);
+        this.coordinate = new Coordinate(x, y);
         this.power = power;
         this.health = health;
     }

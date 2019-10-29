@@ -6,13 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
-import android.widget.Toast;
-
-import com.example.g0569.MainActivity;
-import com.example.g0569.module.component.Boss.Star;
-import com.example.g0569.module.component.Boss.BossPlayer;
-import com.example.g0569.module.component.Boss.Button;
-import com.example.g0569.module.component.Boss.Enemy;
 
 import com.example.g0569.R;
 import com.example.g0569.module.game.Boss.BossGame;

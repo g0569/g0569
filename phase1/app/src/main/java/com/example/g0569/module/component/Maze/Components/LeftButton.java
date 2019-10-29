@@ -36,7 +36,7 @@ public class LeftButton extends NonPlayerItem {
         super(game);
     }
 
-    public void move(MazePlayer player){
+    public void move(MazePlayer player) {
         player.getDirection()[0] -= 1;
     }
 

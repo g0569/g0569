@@ -1,9 +1,7 @@
 package com.example.g0569.module.game.Boss;
 
 import android.content.res.Resources;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.widget.Toast;
 
@@ -15,8 +13,6 @@ import com.example.g0569.module.component.Boss.Star;
 import com.example.g0569.module.component.Boss.ThrownItems;
 import com.example.g0569.module.game.Game;
 import com.example.g0569.module.game.GameManager;
-
-import java.util.ArrayList;
 
 public class BossGame extends Game {
     BossPlayer bossPlayer;
@@ -31,7 +27,7 @@ public class BossGame extends Game {
     public void createItems(Resources resources) {
         bossPlayer = new BossPlayer(this, getGameManager().getScreen_width(), getGameManager().getScreen_height());
         enemy = new Enemy(this, getGameManager().getScreen_width(), getGameManager().getScreen_height(), resources);
-    button = new Button(this, getGameManager().getScreen_width(),getGameManager().getScreen_height());
+        button = new Button(this, getGameManager().getScreen_width(), getGameManager().getScreen_height());
         healthBar = new HealthBar(this, getGameManager().getScreen_width(), getGameManager().getScreen_height());
         Star star = new Star(this, getGameManager().getScreen_width(), getGameManager().getScreen_height(), resources);
         Star star1 = new Star(this, getGameManager().getScreen_width(), getGameManager().getScreen_height(), resources);
@@ -46,7 +42,7 @@ public class BossGame extends Game {
 //    canvas.drawCircle(20, 30, 30, paint);
         bossPlayer.draw(canvas, paint);
         enemy.draw(canvas, paint);
-    button.draw(canvas, paint);
+        button.draw(canvas, paint);
         healthBar.draw(canvas, paint, enemy.getHealth());
         for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
             Star star;

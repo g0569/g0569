@@ -27,7 +27,7 @@ public class Coordinate {
         this.y = y;
     }
 
-    public void setXY(float x, float y){
+    public void setXY(float x, float y) {
         this.x = x;
         this.y = y;
     }
@@ -41,7 +41,7 @@ public class Coordinate {
                 Float.compare(that.y, y) == 0;
     }
 
-    public  boolean around(Object o, float unit){
+    public boolean around(Object o, float unit) {
         if (this.equals(o)) return true;
         Coordinate that = (Coordinate) o;
         return Math.abs(that.x - x) <= unit && Math.abs(that.y - y) <= unit;

@@ -29,11 +29,11 @@ public abstract class Item {
      */
     public abstract void action();
 
-    public float getX(){
+    public float getX() {
         return coordinate.getX();
     }
 
-    public float getY(){
+    public float getY() {
         return coordinate.getY();
     }
 

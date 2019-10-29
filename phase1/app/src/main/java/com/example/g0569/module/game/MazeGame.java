@@ -13,9 +13,6 @@ import com.example.g0569.module.component.Maze.MazeHelper;
 import com.example.g0569.module.utils.Coordinate;
 import com.example.g0569.utils.Constants;
 
-import java.sql.Array;
-import java.util.ArrayList;
-
 public class MazeGame extends Game {
 
     private float grid_width;
@@ -69,13 +66,13 @@ public class MazeGame extends Game {
     }
 
     public void move(float x, float y) {
-        if (rightButton.isInRange(x,y)) {
+        if (rightButton.isInRange(x, y)) {
             rightButton.move(mazePlayer);
-        } else if(leftButton.isInRange(x,y)) {
+        } else if (leftButton.isInRange(x, y)) {
             leftButton.move(mazePlayer);
-        }else if(upButton.isInRange(x,y)) {
+        } else if (upButton.isInRange(x, y)) {
             upButton.move(mazePlayer);
-        }else if(downButton.isInRange(x,y)) {
+        } else if (downButton.isInRange(x, y)) {
             downButton.move(mazePlayer);
         }
     }
@@ -110,6 +107,6 @@ public class MazeGame extends Game {
     }
 
     public void stopMove() {
-        mazePlayer.setDirection(0,0);
+        mazePlayer.setDirection(0, 0);
     }
 }

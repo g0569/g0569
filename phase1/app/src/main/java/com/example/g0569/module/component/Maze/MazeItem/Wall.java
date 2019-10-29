@@ -19,10 +19,10 @@ public class Wall extends NonPlayerItem {
 
     public Wall(Game game, float x, float y) {
         super(game);
-        this.coordinate = new Coordinate(x,y);
+        this.coordinate = new Coordinate(x, y);
         Resources resources = getGame().getGameManager().getMainActivity().getResources();
         this.appearence = BitmapFactory.decodeResource(resources, R.drawable.tile);
-        appearence = Bitmap.createScaledBitmap(appearence, (int)((MazeGame) this.getGame()).getGrid_width(),
+        appearence = Bitmap.createScaledBitmap(appearence, (int) ((MazeGame) this.getGame()).getGrid_width(),
                 (int) ((MazeGame) this.getGame()).getGrid_height(), false);
     }
 

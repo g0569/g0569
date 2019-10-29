@@ -12,7 +12,7 @@ public class HealthBar extends Item {
     private float screenWidth;
     private float screenHeight;
 
-    public HealthBar(Game game, float screenWidth, float screenHeight){
+    public HealthBar(Game game, float screenWidth, float screenHeight) {
         super(game);
         screenHeight = game.getGameManager().getScreen_height();
         screenWidth = game.getGameManager().getScreen_width();
@@ -26,7 +26,8 @@ public class HealthBar extends Item {
 //        canvas.drawRect();
     }
 
-    public void draw(Canvas canvas, Paint paint){}
+    public void draw(Canvas canvas, Paint paint) {
+    }
 
     @Override
     public void action() {

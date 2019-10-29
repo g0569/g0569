@@ -5,15 +5,14 @@ import android.graphics.Paint;
 
 import com.example.g0569.module.component.Player;
 import com.example.g0569.module.game.Game;
-import com.example.g0569.module.utils.Coordinate;
 
 public class LevelTwoPlayer extends Player {
 
     public LevelTwoPlayer(Game game) {
         super(game);
 //        super(new Coordinate(0,0));
-        getInventory().add(new StarChessPiece(0,0, game));
-        getInventory().add(new TriangleChessPiece(0,0, game));
+        getInventory().add(new StarChessPiece(0, 0, game));
+        getInventory().add(new TriangleChessPiece(0, 0, game));
 //        getInventory().add(new StarChessPiece(0,0));
         // Put three chess piece into the getInventory() area.
     }

@@ -20,7 +20,8 @@ public class DownButton extends NonPlayerItem {
     }
 
     @Override
-    public void action() {}
+    public void action() {
+    }
 
     public boolean isInRange(float x, float y) {
         return (x >= 16.5 * ((MazeGame) getGame()).getGrid_width()
@@ -34,7 +35,7 @@ public class DownButton extends NonPlayerItem {
         super(game);
     }
 
-    public void move(MazePlayer player){
+    public void move(MazePlayer player) {
         player.getDirection()[1] += 1;
     }
 }

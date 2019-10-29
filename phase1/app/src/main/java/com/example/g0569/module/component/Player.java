@@ -6,7 +6,7 @@ import com.example.g0569.module.utils.Coordinate;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Player extends Item{
+public abstract class Player extends Item {
 
     protected Coordinate coordinate;
     private List<NonPlayerItem> inventory = new ArrayList<>();

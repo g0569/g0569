@@ -23,6 +23,7 @@ public class UpButton extends NonPlayerItem {
     public void action() {
 
     }
+
     public boolean isInRange(float x, float y) {
         return (x >= 16.5 * ((MazeGame) getGame()).getGrid_width()
                 && x <= 17.5f * ((MazeGame) getGame()).getGrid_width()
@@ -30,11 +31,12 @@ public class UpButton extends NonPlayerItem {
                 && y <= 17.5f * ((MazeGame) getGame()).getGrid_height()
         );
     }
+
     public UpButton(Game game) {
         super(game);
     }
 
-    public void move(MazePlayer player){
+    public void move(MazePlayer player) {
         player.getDirection()[1] -= 1;
     }
 }

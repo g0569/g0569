@@ -26,13 +26,13 @@ public class MazePlayer extends Player {
 
     public MazePlayer(Game game) {
         super(game);
-        float x = ((MazeGame)this.getGame()).getStartpoint().getX();
-        float y = ((MazeGame)this.getGame()).getStartpoint().getY();
+        float x = ((MazeGame) this.getGame()).getStartpoint().getX();
+        float y = ((MazeGame) this.getGame()).getStartpoint().getY();
         this.coordinate = new Coordinate(x, y);
 
         Resources resources = getGame().getGameManager().getMainActivity().getResources();
         this.appearance = BitmapFactory.decodeResource(resources, R.drawable.pacman);
-        appearance = Bitmap.createScaledBitmap(appearance, (int)((MazeGame) this.getGame()).getGrid_width(),
+        appearance = Bitmap.createScaledBitmap(appearance, (int) ((MazeGame) this.getGame()).getGrid_width(),
                 (int) ((MazeGame) this.getGame()).getGrid_height(), false);
 
         direction[0] = 0;
@@ -56,18 +56,18 @@ public class MazePlayer extends Player {
         this.move();
     }
 
-    public int[] atBoundary(){
+    public int[] atBoundary() {
         int[] sum = new int[2];
-        if (this.coordinate.getX() == 0){
+        if (this.coordinate.getX() == 0) {
             sum[0] = Constants.AT_LEFT_BOUNDARY;
         }
-        if (this.coordinate.getX() == Constants.GRID_NUM - 1){
+        if (this.coordinate.getX() == Constants.GRID_NUM - 1) {
             sum[0] = Constants.AT_RIGHT_BOUNDARY;
         }
-        if (this.coordinate.getY() == 0){
+        if (this.coordinate.getY() == 0) {
             sum[1] = Constants.AT_TOP_BOUNDARY;
         }
-        if (this.coordinate.getY() == Constants.GRID_NUM - 1){
+        if (this.coordinate.getY() == Constants.GRID_NUM - 1) {
             sum[1] = Constants.AT_BOTTOM_BOUNDARY;
         }
         return sum;
@@ -75,43 +75,43 @@ public class MazePlayer extends Player {
 
     }
 
-    public void move(){
+    public void move() {
         float targetX = this.coordinate.getX() + (direction[0] + this.atBoundary()[0]);
         float targetY = this.coordinate.getY() + (direction[1] + this.atBoundary()[1]);
-        if (!(((MazeGame)this.getGame()).getMyMazeItem()[(int)targetX][(int)targetY] instanceof Wall)){
-        this.coordinate.setX(targetX);
-        this.coordinate.setY(targetY);
+        if (!(((MazeGame) this.getGame()).getMyMazeItem()[(int) targetX][(int) targetY] instanceof Wall)) {
+            this.coordinate.setX(targetX);
+            this.coordinate.setY(targetY);
         }
 
     }
 
-    public ArrayList<NPC> getNPCAround(){
-        int currX = (int)this.coordinate.getX();
-        int currY = (int)this.coordinate.getY();
+    public ArrayList<NPC> getNPCAround() {
+        int currX = (int) this.coordinate.getX();
+        int currY = (int) this.coordinate.getY();
         Item currItem;
         ArrayList<NPC> NPCAround = new ArrayList<>();
-        if (direction[0] != 1){
-            currItem = ((MazeGame)this.getGame()).getMyMazeItem()[currX + 1][currY];
-            if(currItem instanceof NPC){
-                NPCAround.add((NPC)currItem);
+        if (direction[0] != 1) {
+            currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currX + 1][currY];
+            if (currItem instanceof NPC) {
+                NPCAround.add((NPC) currItem);
             }
         }
-        if (direction[0] != -1){
-            currItem = ((MazeGame)this.getGame()).getMyMazeItem()[currX - 1][currY];
-            if(currItem instanceof NPC){
-                NPCAround.add((NPC)currItem);
+        if (direction[0] != -1) {
+            currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currX - 1][currY];
+            if (currItem instanceof NPC) {
+                NPCAround.add((NPC) currItem);
             }
         }
-        if (direction[1] != 1){
-            currItem = ((MazeGame)this.getGame()).getMyMazeItem()[currX][currY + 1];
-            if(currItem instanceof NPC){
-                NPCAround.add((NPC)currItem);
+        if (direction[1] != 1) {
+            currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currX][currY + 1];
+            if (currItem instanceof NPC) {
+                NPCAround.add((NPC) currItem);
             }
         }
-        if (direction[1] != -1){
-            currItem = ((MazeGame)this.getGame()).getMyMazeItem()[currX][currY - 1];
-            if(currItem instanceof NPC){
-                NPCAround.add((NPC)currItem);
+        if (direction[1] != -1) {
+            currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currX][currY - 1];
+            if (currItem instanceof NPC) {
+                NPCAround.add((NPC) currItem);
             }
         }
         return NPCAround;
@@ -122,8 +122,8 @@ public class MazePlayer extends Player {
         return direction;
     }
 
-    public void interact(){
-        for (NPC i: this.getNPCAround()){
+    public void interact() {
+        for (NPC i : this.getNPCAround()) {
 //            i.pop();
             Toast.makeText(getGame().getGameManager().getMainActivity(), "test", Toast.LENGTH_SHORT).show();
         }

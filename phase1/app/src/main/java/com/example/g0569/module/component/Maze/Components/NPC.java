@@ -20,8 +20,8 @@ public class NPC extends NonPlayerItem {
         paint.setColor(Color.CYAN);
         paint.setTextSize(70);
         canvas.drawText("NPC",
-                coordinate.getX()*((MazeGame) getGame()).getGrid_width(),
-                coordinate.getY()*((MazeGame) getGame()).getGrid_height(),
+                coordinate.getX() * ((MazeGame) getGame()).getGrid_width(),
+                coordinate.getY() * ((MazeGame) getGame()).getGrid_height(),
                 paint);
     }
 
