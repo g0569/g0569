@@ -45,8 +45,8 @@ public class BossGame extends Game {
         button.draw(canvas, paint);
         healthBar.draw(canvas, paint, enemy.getHealth());
         for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
-            Star star;
-            star = (Star) bossPlayer.getInventory().get(i);
+            ThrownItems star;
+            star = (ThrownItems) bossPlayer.getInventory().get(i);
             star.draw(canvas, paint);
         }
 
@@ -55,10 +55,15 @@ public class BossGame extends Game {
     public void action() {
 //    bossPlayer.action();
         enemy.action();
+//        Star star = (Star) bossPlayer.getInventory().get(0);
+//        star.action();
         for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
             Star star;
             star = (Star) bossPlayer.getInventory().get(i);
             star.action();
+            if (!star.inTheScreen(getGameManager().getScreen_height())){
+                bossPlayer.getInventory().remove(star);
+            }
         }
     }
 
@@ -86,15 +91,11 @@ public class BossGame extends Game {
 
             float projectile_x = projectile.getX();
             float projectile_y = projectile.getY();
-            float projectile_radius = projectile.getRadius();
             projectile.thrown();
             if (inRange(projectile_x, projectile_y, enemy_x, enermy_y, enemy_range)) {
                 enemy.attacked(projectile.getDamage());
 
             }
-            bossPlayer.getInventory().remove(projectile);
-            // Want to remove the star after it has been thrown
-            // Problem where one star is being thrown but the next is not
         }
     }
 

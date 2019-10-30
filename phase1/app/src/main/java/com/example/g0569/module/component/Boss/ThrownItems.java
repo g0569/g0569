@@ -31,7 +31,7 @@ public class ThrownItems extends NonPlayerItem {
         y_direction = (int) (-screen_height / 100 + size * (1 - shrink));
         thrown = false;
         dest_rect = new Rect((int) x, (int) y, (int) x + size, (int) y + size);
-        super.appearance = appearance;
+//        super.appearance = appearance;
     }
 
     @Override
@@ -44,7 +44,11 @@ public class ThrownItems extends NonPlayerItem {
     }
 
     public void action() {
+        System.out.println("Action called");
+        System.out.println(thrown);
         if (thrown) {
+            System.out.println(this.coordinate.getY());
+            System.out.println("Should be moving");
             size = (int) (size * shrink);
             actionHelp();
         }
@@ -55,12 +59,12 @@ public class ThrownItems extends NonPlayerItem {
     }
 
     public void thrown() {
+        System.out.println("thrown");
         thrown = true;
+        System.out.println(thrown + " we throw now");
     }
 
     public void actionHelp() {
-//    if (thrown) {
-//      size = (int) (size * shrink);
         coordinate.setX(coordinate.getX() + x_direction);
         coordinate.setY(coordinate.getY() + y_direction - 50);
         dest_rect.set(
