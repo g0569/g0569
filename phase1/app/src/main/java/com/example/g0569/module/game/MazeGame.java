@@ -4,14 +4,14 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.example.g0569.module.component.Item;
-import com.example.g0569.module.component.Maze.Components.DownButton;
-import com.example.g0569.module.component.Maze.Components.LeftButton;
 import com.example.g0569.module.component.Maze.Components.MazePlayer;
-import com.example.g0569.module.component.Maze.Components.RightButton;
-import com.example.g0569.module.component.Maze.Components.UpButton;
+import com.example.g0569.module.component.Maze.Components.Button;
 import com.example.g0569.module.component.Maze.MazeHelper;
 import com.example.g0569.module.utils.Coordinate;
 import com.example.g0569.utils.Constants;
+
+import java.sql.Array;
+import java.util.ArrayList;
 
 public class MazeGame extends Game {
 
@@ -22,10 +22,7 @@ public class MazeGame extends Game {
 
     private Item[][] myMazeItem = new Item[Constants.GRID_NUM][Constants.GRID_NUM];
     private MazePlayer mazePlayer;
-    private DownButton downButton;
-    private RightButton rightButton;
-    private LeftButton leftButton;
-    private UpButton upButton;
+    private Button Button;
 
     public MazeGame(GameManager gameManager) {
         super(gameManager);
@@ -37,10 +34,7 @@ public class MazeGame extends Game {
 
     private void onStart() {
         mazePlayer = new MazePlayer(this);
-        downButton = new DownButton(this);
-        upButton = new UpButton(this);
-        leftButton = new LeftButton(this);
-        rightButton = new RightButton(this);
+        Button = new Button(this);
 
     }
 
@@ -66,18 +60,8 @@ public class MazeGame extends Game {
     }
 
     public void move(float x, float y) {
-        if (rightButton.isInRange(x, y)) {
-            rightButton.move(mazePlayer);
-        } else if (leftButton.isInRange(x, y)) {
-            leftButton.move(mazePlayer);
-        } else if (upButton.isInRange(x, y)) {
-            upButton.move(mazePlayer);
-        } else if (downButton.isInRange(x, y)) {
-            downButton.move(mazePlayer);
-        }
+        Button.move(mazePlayer, x, y);
     }
-
-//  public void createItem(float a, float b) {}
 
     public void setMyMazeItem() {
         MazeHelper.loadMaze(myMazeItem, this);
@@ -92,10 +76,7 @@ public class MazeGame extends Game {
             }
         }
         mazePlayer.draw(canvas, paint);
-        upButton.draw(canvas, paint);
-        downButton.draw(canvas, paint);
-        leftButton.draw(canvas, paint);
-        rightButton.draw(canvas, paint);
+        Button.draw(canvas, paint);
     }
 
     public Item[][] getMyMazeItem() {
@@ -107,6 +88,6 @@ public class MazeGame extends Game {
     }
 
     public void stopMove() {
-        mazePlayer.setDirection(0, 0);
+        mazePlayer.setDirection(0,0);
     }
 }
