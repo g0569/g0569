@@ -24,9 +24,9 @@ public class MazeHelper {
       for (int j = 0; j < 10; j++) {
         if (maze[i][j] == 0) {;
         } else if (maze[i][j] == 1) {
-          MyMazeItem[i][j] = new Wall(game, 2 * j, 2 * i);
+          MyMazeItem[i][j] = new Wall(game, j, i);
         } else if (maze[i][j] == 2) {
-          MyMazeItem[i][j] = new NPC(game, 2 * j, 2 * i);
+          MyMazeItem[i][j] = new NPC(game, j, i);
         }
       }
     }
