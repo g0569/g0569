@@ -3,8 +3,8 @@ package com.example.g0569.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.view.SurfaceView;
 import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 
 import com.example.g0569.MainActivity;
 

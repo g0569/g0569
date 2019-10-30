@@ -5,11 +5,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.g0569.module.component.Item;
+import com.example.g0569.module.component.NonPlayerItem;
 import com.example.g0569.module.game.Game;
-import com.example.g0569.module.game.GameManager;
 import com.example.g0569.module.utils.Coordinate;
 
-public class Button extends Item {
+public class Button extends NonPlayerItem {
 
   private float button_r;
 

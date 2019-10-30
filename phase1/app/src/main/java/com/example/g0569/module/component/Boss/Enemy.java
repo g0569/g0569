@@ -2,14 +2,13 @@ package com.example.g0569.module.component.Boss;
 
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
-import android.graphics.Rect;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 
 import com.example.g0569.R;
 import com.example.g0569.module.component.NonPlayerItem;
 import com.example.g0569.module.game.Boss.BossGame;
-import com.example.g0569.module.game.GameManager;
 import com.example.g0569.module.utils.Coordinate;
 
 public class Enemy extends NonPlayerItem {
@@ -88,14 +87,13 @@ public class Enemy extends NonPlayerItem {
   /** Decreases the health of the enemy when Item hits it */
   public void attacked(int damageTaken) {
     health -= damageTaken;
-
   }
 
   public int getSize() {
     return size;
   }
 
-  public int getHealth(){
-  return health;
+  public int getHealth() {
+    return health;
   }
 }

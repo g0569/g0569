@@ -5,10 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.example.g0569.module.component.Item;
 import com.example.g0569.module.component.Player;
 import com.example.g0569.module.game.Game;
-import com.example.g0569.module.game.GameManager;
 import com.example.g0569.module.utils.Coordinate;
 
 import java.util.ArrayList;
@@ -25,7 +23,7 @@ public class BossPlayer extends Player {
   private ArrayList<ThrownItems> inventory = new ArrayList<>();
 
   public BossPlayer(Game game, float screenWidth, float screenHeight) {
-      super(game);
+    super(game);
     r1 = screenWidth / 36;
     r2 = screenWidth / 200;
     float x = screenWidth / 2;
@@ -83,7 +81,7 @@ public class BossPlayer extends Player {
   @Override
   public void action() {}
 
-  public ArrayList getInventory(){
+  public ArrayList getInventory() {
     return inventory;
   }
 }

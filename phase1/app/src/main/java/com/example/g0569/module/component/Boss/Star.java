@@ -6,7 +6,6 @@ import android.graphics.Rect;
 
 import com.example.g0569.R;
 import com.example.g0569.module.game.Game;
-import com.example.g0569.module.game.GameManager;
 
 public class Star extends ThrownItems {
 

@@ -7,29 +7,37 @@ import com.example.g0569.module.game.GameManager;
 
 public class User {
 
-    private int uid;
-    private String email;
-    private String username;
-    private GameManager gameManager;
+  private int uid;
+  private String email;
+  private String username;
+  private GameManager gameManager;
 
-    public User(GameManager gameManager, int uid) {
-        this.gameManager = gameManager;
-        SQLiteDatabase db = gameManager.getSqLitehelper().getReadableDatabase();
-        Cursor cursor = db.query("users", new String[]{"username"}, "uid=?", new String[]{String.valueOf(uid)}, null, null, null);
-        cursor.moveToNext();
-        this.username = cursor.getString(cursor.getColumnIndex("username"));
-        db.close();
-    }
+  public User(GameManager gameManager, int uid) {
+    this.gameManager = gameManager;
+    SQLiteDatabase db = gameManager.getSqLitehelper().getReadableDatabase();
+    Cursor cursor =
+        db.query(
+            "users",
+            new String[] {"username"},
+            "uid=?",
+            new String[] {String.valueOf(uid)},
+            null,
+            null,
+            null);
+    cursor.moveToNext();
+    this.username = cursor.getString(cursor.getColumnIndex("username"));
+    db.close();
+  }
 
-    protected void loadSave() {
-        // TODO
-    }
+  protected void loadSave() {
+    // TODO
+  }
 
-    protected void save() {
-        // TODO
-    }
+  protected void save() {
+    // TODO
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public String getUsername() {
+    return username;
+  }
 }
