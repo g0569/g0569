@@ -32,8 +32,6 @@ public class Wall extends NonPlayerItem {
 
         canvas.drawBitmap(
                 appearence,
-//        this.getX(),
-//        this.getY(),
                 this.getX() * ((MazeGame) this.getGame()).getGrid_width(),
                 this.getY() * ((MazeGame) this.getGame()).getGrid_height(),
                 paint);
