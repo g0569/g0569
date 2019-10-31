@@ -55,8 +55,8 @@ public class BossGame extends Game {
             getGameManager().getScreen_height(),
             resources);
 
-        bossPlayer.getInventory().add(star);
-        bossPlayer.getInventory().add(star1);
+    bossPlayer.getInventory().add(star);
+    bossPlayer.getInventory().add(star1);
   }
 
   public void draw(Canvas canvas, Paint paint) {
@@ -84,6 +84,11 @@ public class BossGame extends Game {
       if (!projectile.inTheScreen(getGameManager().getScreen_height())) {
         bossPlayer.getInventory().remove(projectile);
       }
+      if (enemy.isAttacked(projectile.getX(), projectile.getY())
+          || projectile.isAttacking(enemy.getX(), enemy.getY())) {
+        enemy.attacked(projectile.getDamage());
+        healthBar.action(enemy.getHealth(), enemy.getInitialHealth());
+      }
     }
   }
 
@@ -110,8 +115,12 @@ public class BossGame extends Game {
       float projectile_x = projectile.getX();
       float projectile_y = projectile.getY();
       projectile.thrown();
-      if (inRange(projectile_x, projectile_y, enemy_x, enermy_y, enemy_range)) {
+      // Seems not to be accurate yet
+      //      inRange(projectile_x, projectile_y, enemy_x, enermy_y, enemy_range
+      if (enemy.isAttacked(projectile.getX(), projectile.getY())
+          || projectile.isAttacking(enemy.getX(), enemy.getY())) {
         enemy.attacked(projectile.getDamage());
+        healthBar.action(enemy.getHealth(), enemy.getInitialHealth());
       }
     }
   }

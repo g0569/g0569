@@ -44,11 +44,8 @@ public class ThrownItems extends NonPlayerItem {
   }
 
   public void action() {
-    System.out.println("Action called");
-    System.out.println(thrown);
+    //    System.out.println(thrown);
     if (thrown) {
-      System.out.println(this.coordinate.getY());
-      System.out.println("Should be moving");
       size = (int) (size * shrink);
       actionHelp();
     }
@@ -59,9 +56,7 @@ public class ThrownItems extends NonPlayerItem {
   }
 
   public void thrown() {
-    System.out.println("thrown");
     thrown = true;
-    System.out.println(thrown + " we throw now");
   }
 
   public void actionHelp() {
@@ -76,5 +71,15 @@ public class ThrownItems extends NonPlayerItem {
 
   public float getRadius() {
     return size;
+  }
+
+  public boolean isAttacking(float coordinateX, float coordinateY) {
+    if ((getCoordinate().getX() < coordinateX && coordinateX < dest_rect.right)
+        && (getCoordinate().getY() < coordinateY && coordinateY < dest_rect.bottom)) {
+      System.out.println("I am attacking");
+      return true;
+    }
+    System.out.println("Not attacked");
+    return false;
   }
 }

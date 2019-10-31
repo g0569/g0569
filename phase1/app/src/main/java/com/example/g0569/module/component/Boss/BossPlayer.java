@@ -5,13 +5,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.g0569.module.component.NonPlayerItem;
 import com.example.g0569.module.component.Player;
 import com.example.g0569.module.game.Game;
 import com.example.g0569.module.utils.Coordinate;
 
 import java.util.ArrayList;
 
-public class BossPlayer extends Player {
+public class BossPlayer extends NonPlayerItem {
   // Radius of the Target which represents the Player
   private float r1;
   private float r2;
