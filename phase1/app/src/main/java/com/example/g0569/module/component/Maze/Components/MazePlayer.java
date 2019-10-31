@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Looper;
 import android.widget.Toast;
 
 import com.example.g0569.R;
@@ -97,13 +98,12 @@ public class MazePlayer extends Player {
     float targetX = this.coordinate.getX() + direction[0];
     float targetY = this.coordinate.getY() + direction[1];
     try{
-    if (!(((MazeGame) this.getGame()).getMyMazeItem()[(int) targetX][(int) targetY]
+    if (!(((MazeGame) this.getGame()).getMyMazeItem()[(int) targetY][(int) targetX]
         instanceof Wall)) {
       this.coordinate.setX(targetX);
       this.coordinate.setY(targetY);
-    }}catch(Exception e){
-
-    }
+    }}catch(Exception e){}
+    this.interact();
   }
 
   public ArrayList<NPC> getNPCAround() {
@@ -112,25 +112,25 @@ public class MazePlayer extends Player {
     Item currItem;
     ArrayList<NPC> NPCAround = new ArrayList<>();
     if (direction[0] != 1) {
-      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currX + 1][currY];
+      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currY][currX + 1];
       if (currItem instanceof NPC) {
         NPCAround.add((NPC) currItem);
       }
     }
     if (direction[0] != -1) {
-      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currX - 1][currY];
+      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currY][currX - 1];
       if (currItem instanceof NPC) {
         NPCAround.add((NPC) currItem);
       }
     }
     if (direction[1] != 1) {
-      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currX][currY + 1];
+      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currY + 1][currX];
       if (currItem instanceof NPC) {
         NPCAround.add((NPC) currItem);
       }
     }
     if (direction[1] != -1) {
-      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currX][currY - 1];
+      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currY - 1][currX];
       if (currItem instanceof NPC) {
         NPCAround.add((NPC) currItem);
       }
@@ -144,9 +144,11 @@ public class MazePlayer extends Player {
 
   public void interact() {
     for (NPC i : this.getNPCAround()) {
-      //            i.pop();
-      Toast.makeText(getGame().getGameManager().getMainActivity(), "test", Toast.LENGTH_SHORT)
-          .show();
+                  i.pop();
+//      Looper.prepare();
+//      Toast.makeText(getGame().getGameManager().getMainActivity(), "test", Toast.LENGTH_SHORT)
+//          .show();
+//      Looper.loop();
     }
   }
 
