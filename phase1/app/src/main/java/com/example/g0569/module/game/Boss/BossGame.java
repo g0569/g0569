@@ -38,7 +38,7 @@ public class BossGame extends Game {
         new Button(this, getGameManager().getScreen_width(), getGameManager().getScreen_height());
     healthBar =
         new HealthBar(
-            this, getGameManager().getScreen_width(), getGameManager().getScreen_height());
+            this, getGameManager().getScreen_width(), getGameManager().getScreen_height(), resources);
     Star star =
         new Star(
             this,
@@ -57,26 +57,30 @@ public class BossGame extends Game {
   }
 
   public void draw(Canvas canvas, Paint paint) {
-    //    paint.setColor(Color.BLACK);
-    //    canvas.drawCircle(20, 30, 30, paint);
-    bossPlayer.draw(canvas, paint);
     enemy.draw(canvas, paint);
+    bossPlayer.draw(canvas, paint);
+
     button.draw(canvas, paint);
     healthBar.draw(canvas, paint, enemy.getHealth());
     for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
-      Star star;
-      star = (Star) bossPlayer.getInventory().get(i);
-      star.draw(canvas, paint);
+      ThrownItems projectile;
+      projectile = (ThrownItems) bossPlayer.getInventory().get(i);
+      projectile.draw(canvas, paint);
     }
   }
 
   public void action() {
     //    bossPlayer.action();
     enemy.action();
+    //        Star star = (Star) bossPlayer.getInventory().get(0);
+    //        star.action();
     for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
-      Star star;
-      star = (Star) bossPlayer.getInventory().get(i);
-      star.action();
+      ThrownItems projectile;
+      projectile = (ThrownItems) bossPlayer.getInventory().get(i);
+      projectile.action();
+      if (!projectile.inTheScreen(getGameManager().getScreen_height())) {
+        bossPlayer.getInventory().remove(projectile);
+      }
     }
   }
 
@@ -102,14 +106,10 @@ public class BossGame extends Game {
 
       float projectile_x = projectile.getX();
       float projectile_y = projectile.getY();
-      float projectile_radius = projectile.getRadius();
       projectile.thrown();
       if (inRange(projectile_x, projectile_y, enemy_x, enermy_y, enemy_range)) {
         enemy.attacked(projectile.getDamage());
       }
-      bossPlayer.getInventory().remove(projectile);
-      // Want to remove the star after it has been thrown
-      // Problem where one star is being thrown but the next is not
     }
   }
 
