@@ -14,6 +14,7 @@ import java.util.List;
 
 public class AutoChessGame extends Game {
 
+  // TODO still need to figure out a way to implement two different NPC's game.
   private int round = 0;
   private int number_win;
   private int number_clicked = 1;
@@ -21,14 +22,13 @@ public class AutoChessGame extends Game {
   private List<List<ChessPiece>> NPC_data = new ArrayList<>();
   // save where the NPC place the chess piece for different round.
 
-  public AutoChessGame(GameManager gameManager) {
+  AutoChessGame(GameManager gameManager) {
     super(gameManager);
+    // Add chess piece for player's inventory.
     getGameInventory().add(new StarChessPiece(0, 0, this));
     getGameInventory().add(new TriangleChessPiece(0, 0, this));
-
-    //    private HashMap<Integer, List<ChessPiece>> battle_setting = new HashMap<Integer,
-    // List<ChessPiece>>();
     List<ChessPiece> NPC1_ChessPiece = new ArrayList<>();
+    // Adding chessPiece for NPC
     NPC1_ChessPiece.add(
         new StarChessPiece(
             gameManager.getScreen_width() * 0.6f, gameManager.getScreen_height() * 0.4f, this));
@@ -48,13 +48,12 @@ public class AutoChessGame extends Game {
     NPC_data.add(NPC2_ChessPiece);
   }
 
-
-  public int fight_counter(NonPlayerItem player_chess, int round) {
+  private int fight_counter(NonPlayerItem player_chess, int round) {
     int win = 0;
     for (ChessPiece NPC_chess : NPC_data.get(round)) {
       if (NPC_chess.getCoordinate().getY() == player_chess.getCoordinate().getY()
           && NPC_chess.getPower() <= ((ChessPiece) player_chess).getPower()) {
-        win++;
+        win++; // Compared power it has.
       }
     }
     return win;
