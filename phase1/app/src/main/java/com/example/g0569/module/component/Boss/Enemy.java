@@ -12,13 +12,19 @@ import com.example.g0569.module.game.Boss.BossGame;
 import com.example.g0569.module.utils.Coordinate;
 
 public class Enemy extends NonPlayerItem {
-
+  // The health and initial health of the Enemy
   private int health;
   private int initialHealth;
+
+  // The direction it moves
   private int x_direction;
   private int y_direction;
-  public Rect src_rect;
-  public Rect dest_rect;
+
+  // The rectangles used for drawing
+  private Rect src_rect;
+  private Rect dest_rect;
+
+  // Screen Width and Height
   private float screen_width;
   private float screen_height;
 
@@ -45,7 +51,7 @@ public class Enemy extends NonPlayerItem {
     health = 100;
     initialHealth = health;
 
-    // Not sure what this does.
+    // Sets the rectangles to be drawn (size and stuff)
     src_rect = new Rect(0, 0, appearance.getWidth(), appearance.getHeight());
     dest_rect =
         new Rect(
@@ -58,7 +64,7 @@ public class Enemy extends NonPlayerItem {
   /**
    * Moves the Boss around based on its position
    *
-   * @param screen_width
+   * @param screen_width of the screen to know the limit of movement
    */
   private void action(float screen_width) {
     if (coordinate.getX() <= 0) {
@@ -69,11 +75,18 @@ public class Enemy extends NonPlayerItem {
     //        action();
   }
 
+  /**
+   * Draws the Enemy
+   *
+   * @param canvas of the Enemy being drawn on
+   * @param paint the style of the enemy
+   */
   @Override
   public void draw(Canvas canvas, Paint paint) {
     canvas.drawBitmap(appearance, src_rect, dest_rect, paint);
   }
 
+  /** Moves the Enemy around, left and right right now */
   @Override
   public void action() {
     action(screen_width);
@@ -100,14 +113,29 @@ public class Enemy extends NonPlayerItem {
     return false;
   }
 
+  /**
+   * Getter of the size
+   *
+   * @return size
+   */
   public int getSize() {
     return size;
   }
 
+  /**
+   * Getter for the health
+   *
+   * @return the current health
+   */
   public int getHealth() {
     return health;
   }
 
+  /**
+   * Returns the initalHealth
+   *
+   * @return the initial Health
+   */
   public int getInitialHealth() {
     return initialHealth;
   }

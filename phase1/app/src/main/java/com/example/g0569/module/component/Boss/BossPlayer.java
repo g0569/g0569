@@ -71,6 +71,11 @@ public class BossPlayer extends NonPlayerItem {
         paint);
   }
 
+  /**
+   * Returns the radius
+   *
+   * @return radius
+   */
   public float getR1() {
     return r1;
   }
@@ -82,6 +87,11 @@ public class BossPlayer extends NonPlayerItem {
   @Override
   public void action() {}
 
+  /**
+   * Returns the inventory of the player
+   *
+   * @return inventory
+   */
   public ArrayList getInventory() {
     return inventory;
   }
