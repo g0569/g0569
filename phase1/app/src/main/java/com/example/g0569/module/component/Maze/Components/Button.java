@@ -10,7 +10,6 @@ import android.graphics.Paint;
 import com.example.g0569.R;
 import com.example.g0569.module.component.NonPlayerItem;
 import com.example.g0569.module.game.Game;
-import com.example.g0569.module.game.MazeGame;
 import com.example.g0569.module.utils.Coordinate;
 
 public class Button extends NonPlayerItem {
@@ -22,18 +21,18 @@ public class Button extends NonPlayerItem {
 
   public Button(Game game) {
     super(game);
-    this.unitX = (int)(((MazeGame) this.getGame()).getGameManager().getScreen_width()*0.13/3);
-    this.unitY = (int)(((MazeGame) this.getGame()).getGameManager().getScreen_height()*0.13/3);
-    this.screen_width = ((MazeGame) this.getGame()).getGameManager().getScreen_width();
-    this.screen_height = ((MazeGame) this.getGame()).getGameManager().getScreen_height();
+    this.unitX = (int)(this.getGame().getGameManager().getScreen_width()*0.13/3);
+    this.unitY = (int)(this.getGame().getGameManager().getScreen_height()*0.13/3);
+    this.screen_width = this.getGame().getGameManager().getScreen_width();
+    this.screen_height = this.getGame().getGameManager().getScreen_height();
     this.coordinate = new Coordinate(16, 16);
     Resources resources = getGame().getGameManager().getMainActivity().getResources();
     this.appearence = BitmapFactory.decodeResource(resources, R.drawable.move_button);
     appearence =
         Bitmap.createScaledBitmap(
             appearence,
-            (int) (((MazeGame) this.getGame()).getGameManager().getScreen_width()*0.13),
-            (int) (((MazeGame) this.getGame()).getGameManager().getScreen_height()*0.13),
+            (int) ((this.getGame()).getGameManager().getScreen_width()*0.13),
+            (int) ((this.getGame()).getGameManager().getScreen_height()*0.13),
             false);
   }
 
