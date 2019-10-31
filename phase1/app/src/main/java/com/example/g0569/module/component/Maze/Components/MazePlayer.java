@@ -59,26 +59,27 @@ public class MazePlayer extends Player {
     this.move();
   }
 
-  public int[] atBoundary() {
-    int[] sum = new int[2];
+  public void atBoundary() {
+
     if (this.coordinate.getX() == 0) {
-      sum[0] = Constants.AT_LEFT_BOUNDARY;
+      direction[0] += Constants.AT_LEFT_BOUNDARY;
     }
     if (this.coordinate.getX() == Constants.GRID_NUM - 1) {
-      sum[0] = Constants.AT_RIGHT_BOUNDARY;
+      direction[0] += Constants.AT_RIGHT_BOUNDARY;
     }
     if (this.coordinate.getY() == 0) {
-      sum[1] = Constants.AT_TOP_BOUNDARY;
+      direction[1] += Constants.AT_TOP_BOUNDARY;
     }
     if (this.coordinate.getY() == Constants.GRID_NUM - 1) {
-      sum[1] = Constants.AT_BOTTOM_BOUNDARY;
+      direction[1] += Constants.AT_BOTTOM_BOUNDARY;
     }
-    return sum;
+//    return sum;
+
   }
 
   public void move() {
-    float targetX = this.coordinate.getX() + (direction[0] + this.atBoundary()[0]);
-    float targetY = this.coordinate.getY() + (direction[1] + this.atBoundary()[1]);
+    float targetX = this.coordinate.getX() + direction[0];
+    float targetY = this.coordinate.getY() + direction[1];
     if (!(((MazeGame) this.getGame()).getMyMazeItem()[(int) targetX][(int) targetY]
         instanceof Wall)) {
       this.coordinate.setX(targetX);
