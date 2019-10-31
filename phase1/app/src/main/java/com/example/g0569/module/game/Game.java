@@ -10,6 +10,7 @@ public abstract class Game {
 
   private GameManager gameManager;
   private List<NonPlayerItem> gameInventory = new ArrayList<>();
+  // An array list for storing the NonPlayerItem.
 
   public Game(GameManager gameManager) {
     this.gameManager = gameManager;
@@ -19,7 +20,7 @@ public abstract class Game {
     return gameManager;
   }
 
-  public List<NonPlayerItem> getGameInventory() {
+  List<NonPlayerItem> getGameInventory() {
     return gameInventory;
   }
 
