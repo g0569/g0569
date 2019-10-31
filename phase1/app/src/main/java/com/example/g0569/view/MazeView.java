@@ -76,19 +76,14 @@ public class MazeView extends BaseView {
       mazeGame.action();
       long endTime = System.currentTimeMillis();
       try {
-        if (endTime - startTime < 1) Thread.sleep((long) (1 - (endTime - startTime)));
+        if (endTime - startTime < 100) Thread.sleep( (100 - (endTime - startTime)));
       } catch (InterruptedException err) {
         err.printStackTrace();
       }
     }
   }
 
-  private boolean inRange(float item_x, float item_y, float range_x, float range_y, float range_r) {
-    return item_x > range_x - range_r
-        && item_x < range_x + range_r
-        && item_y > range_y - range_r
-        && item_y < range_y + range_r;
-  }
+//  public int[] inRange()
 
   @Override
   public boolean onTouchEvent(MotionEvent event) {

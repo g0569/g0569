@@ -50,28 +50,28 @@ public class Button extends NonPlayerItem {
   @Override
   public void action() {}
 
-  public void move(MazePlayer player, float x, float y) {
-    if (x >= screen_width - 2*unitX
-        && x <= screen_width - unitX
-        && y >= screen_height - 3*unitY
-        && y <= screen_height - 2*unitY)  {
-      player.getDirection()[0] += 1;
-    } else if (x >= screen_height - 4*unitX
-        && x <= screen_width - 3*unitX
-            && y >= screen_height - 3*unitY
-            && y <= screen_height - 2*unitY) {
-      player.getDirection()[0] -= 1;
-    } else if (x >= screen_width - 3*unitX
-        && x <= screen_width - 2 * unitX
-        && y >= screen_height - 4 * unitY
-        && y <= screen_height- 3*unitY)  {
-      player.getDirection()[1] -= 1;}
-    else if (x >= screen_width - 3 * unitX
-            && x <= screen_width - 2 * unitX
-        && y >= screen_height - 2 * unitY
-        && y <= screen_height - unitY) {
-      player.getDirection()[1] += 1;
-    } else {
-    }
-  }
+//  public void move(MazePlayer player, float x, float y) {
+//    if (x >= screen_width - 2*unitX
+//        && x <= screen_width - unitX
+//        && y >= screen_height - 3*unitY
+//        && y <= screen_height - 2*unitY)  {
+//      player.getDirection()[0] += 1;
+//    } else if (x >= screen_height - 4*unitX
+//        && x <= screen_width - 3*unitX
+//            && y >= screen_height - 3*unitY
+//            && y <= screen_height - 2*unitY) {
+//      player.getDirection()[0] -= 1;
+//    } else if (x >= screen_width - 3*unitX
+//        && x <= screen_width - 2 * unitX
+//        && y >= screen_height - 4 * unitY
+//        && y <= screen_height- 3*unitY)  {
+//      player.getDirection()[1] -= 1;}
+//    else if (x >= screen_width - 3 * unitX
+//            && x <= screen_width - 2 * unitX
+//        && y >= screen_height - 2 * unitY
+//        && y <= screen_height - unitY) {
+//      player.getDirection()[1] += 1;
+//    } else {
+//    }
+//  }
 }

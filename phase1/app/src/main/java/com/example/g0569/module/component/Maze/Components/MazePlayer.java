@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class MazePlayer extends Player {
 
-  private int[] direction = new int[2];
+  private float[] direction = new float[2];
   private Bitmap appearance;
 
   public MazePlayer(Game game) {
@@ -39,8 +39,8 @@ public class MazePlayer extends Player {
             (int) ((MazeGame) this.getGame()).getGrid_height(),
             false);
 
-    direction[0] = 0;
-    direction[1] = 0;
+    direction[0] = 0f;
+    direction[1] = 0f;
   }
 
   @Override
@@ -59,31 +59,50 @@ public class MazePlayer extends Player {
     this.move();
   }
 
-  public void atBoundary() {
-
-    if (this.coordinate.getX() == 0) {
-      direction[0] += Constants.AT_LEFT_BOUNDARY;
-    }
-    if (this.coordinate.getX() == Constants.GRID_NUM - 1) {
-      direction[0] += Constants.AT_RIGHT_BOUNDARY;
-    }
-    if (this.coordinate.getY() == 0) {
-      direction[1] += Constants.AT_TOP_BOUNDARY;
-    }
-    if (this.coordinate.getY() == Constants.GRID_NUM - 1) {
-      direction[1] += Constants.AT_BOTTOM_BOUNDARY;
-    }
-//    return sum;
-
-  }
+  //  public void atBoundary() {
+  //
+  //    if (this.coordinate.getX() == 0) {
+  //      direction[0] += Constants.AT_LEFT_BOUNDARY;
+  //    }
+  //    if (this.coordinate.getX() == Constants.GRID_NUM - 1) {
+  //      direction[0] += Constants.AT_RIGHT_BOUNDARY;
+  //    }
+  //    if (this.coordinate.getY() == 0) {
+  //      direction[1] += Constants.AT_TOP_BOUNDARY;
+  //    }
+  //    if (this.coordinate.getY() == Constants.GRID_NUM - 1) {
+  //      direction[1] += Constants.AT_BOTTOM_BOUNDARY;
+  //    }
+  //    return sum;
+  //
+  //  }//  public void atBoundary() {
+  ////
+  ////    if (this.coordinate.getX() == 0) {
+  ////      direction[0] += Constants.AT_LEFT_BOUNDARY;
+  ////    }
+  ////    if (this.coordinate.getX() == Constants.GRID_NUM - 1) {
+  ////      direction[0] += Constants.AT_RIGHT_BOUNDARY;
+  ////    }
+  ////    if (this.coordinate.getY() == 0) {
+  ////      direction[1] += Constants.AT_TOP_BOUNDARY;
+  ////    }
+  ////    if (this.coordinate.getY() == Constants.GRID_NUM - 1) {
+  ////      direction[1] += Constants.AT_BOTTOM_BOUNDARY;
+  ////    }
+  ////    return sum;
+  ////
+  ////  }
 
   public void move() {
     float targetX = this.coordinate.getX() + direction[0];
     float targetY = this.coordinate.getY() + direction[1];
+    try{
     if (!(((MazeGame) this.getGame()).getMyMazeItem()[(int) targetX][(int) targetY]
         instanceof Wall)) {
       this.coordinate.setX(targetX);
       this.coordinate.setY(targetY);
+    }}catch(Exception e){
+
     }
   }
 
@@ -119,7 +138,7 @@ public class MazePlayer extends Player {
     return NPCAround;
   }
 
-  public int[] getDirection() {
+  public float[] getDirection() {
     return direction;
   }
 
