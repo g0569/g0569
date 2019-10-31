@@ -24,6 +24,11 @@ public class Button extends NonPlayerItem {
     coordinate = new Coordinate(x, y);
   }
 
+  /**
+   * Draws the button, red and big
+   * @param canvas of the button that is being drawn on
+   * @param paint the style of the button
+   */
   @Override
   public void draw(Canvas canvas, Paint paint) {
     paint.setStyle(Paint.Style.FILL);
@@ -31,10 +36,14 @@ public class Button extends NonPlayerItem {
     canvas.drawCircle(coordinate.getX(), coordinate.getY(), button_r, paint);
   }
 
+  /**
+   * Returns the radius of the circle
+   * @return the radius
+   */
   public float getR() {
     return button_r;
   }
-
+  // Not needed right now so not sure what to do with it
   @Override
   public void action() {}
 }

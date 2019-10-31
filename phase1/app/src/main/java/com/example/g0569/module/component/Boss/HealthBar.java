@@ -4,53 +4,93 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.g0569.R;
-import com.example.g0569.module.component.Item;
 import com.example.g0569.module.component.NonPlayerItem;
 import com.example.g0569.module.game.Game;
 import com.example.g0569.module.utils.Coordinate;
 
 public class HealthBar extends NonPlayerItem {
 
+  // The screenWidth and Screen Height
   private float screenWidth;
   private float screenHeight;
-  private Rect src_rect;
+
+  // The rectangles for the bar to be drawn
   private Rect dest_rect;
+
+  // The image of the bar
   private Bitmap healthbar;
 
-  public HealthBar(Game game, float screenWidth, float screenHeight, Resources resources) {
+  // The rectangle for the red bar which represents health
+  private Rect healthRect;
+
+  public HealthBar(Game game, Resources resources) {
     super(game);
+    // Sets the height and width
     screenHeight = game.getGameManager().getScreen_height();
     screenWidth = game.getGameManager().getScreen_width();
+
+    // Sets the size of the bar
     size = (int) screenWidth / 5;
+
+    // Sets the coordinate of the bar
     float x = (int) (screenWidth / 2 - size / 2);
     float y = (int) (screenHeight - screenWidth * 3 / 32 - 2.5 * size);
     coordinate = new Coordinate(x, y);
+
+    // Sets the appearance of the empty bar
     appearance = BitmapFactory.decodeResource(resources, R.drawable.bar);
-    src_rect = new Rect(0, 0, appearance.getWidth() + size / 2, appearance.getHeight());
+
+    // Sets the rectangle of the empty bar
     dest_rect = new Rect((int) x, (int) y, (int) x + size, (int) y + size);
+
+    // Sets the rectangle of the red bar
+    healthRect = new Rect((int) x, (int) y, (int) x + size, (int) y + size);
+
+    // Sets the appearance of the red bar
     healthbar = BitmapFactory.decodeResource(resources, R.drawable.redbar);
   }
 
-  public void draw(Canvas canvas, Paint paint, int health) {
-    canvas.drawBitmap(appearance, src_rect, dest_rect, paint);
-    canvas.drawBitmap(healthbar, src_rect, dest_rect, paint);
-    //        paint.setColor();
-    //        canvas.drawRect(getCoordinate().getX(),
-    // getCoordinate().getY(),getCoordinate().getX()+size,getCoordinate().getY()+size,paint);
+  /**
+   * Draws the bar as well as the red bar
+   *
+   * @param canvas of the bar and red bar
+   * @param paint the style of them
+   */
+  public void draw(Canvas canvas, Paint paint) {
+    canvas.drawBitmap(appearance, null, dest_rect, paint);
 
+    canvas.drawBitmap(healthbar, null, healthRect, paint);
   }
 
-  public void draw(Canvas canvas, Paint paint) {}
+  /**
+   * Determines how much to change the rectangle to draw remaining health by
+   *
+   * @param healthRemaining the health left
+   * @param totalHealth the health it started off with
+   */
+  public void action(int healthRemaining, int totalHealth) {
+    int health = determineHealth(healthRemaining, totalHealth);
+    healthRect.right = healthRect.right - health;
+  }
 
-  @Override
-  public void action() {
-    //      Should use the Enemy Boss's health
-    // Should call draw to draw the new health bar
+  public void action() {}
 
+  /**
+   * Determines how much health the boss should have left based on the ratio of his health with the
+   * bar length
+   *
+   * @param health of the boss
+   * @param totalHealth of the boss
+   * @return the health we should take away
+   */
+  private int determineHealth(int health, int totalHealth) {
+    // Determine the health of the bar relative to the health and totalHealth of the Boss
+    int totalBar = dest_rect.right;
+    int healthToDraw = health * totalBar / totalHealth;
+    return totalBar - healthToDraw;
   }
 }

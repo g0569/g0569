@@ -28,6 +28,7 @@ public class GameManager {
 
   public void onStart() {
     sqLitehelper = new SQLiteHelper(mainActivity, "users");
+    // TODO Need to modify the way to get width and height since theses methods are deprecated now.
     this.screen_width = mainActivity.getWindowManager().getDefaultDisplay().getWidth();
     this.screen_height = mainActivity.getWindowManager().getDefaultDisplay().getHeight();
     mainActivity.getHandler().sendEmptyMessage(Constants.TO_MENU_VIEW);
