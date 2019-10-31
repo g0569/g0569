@@ -14,6 +14,7 @@ import com.example.g0569.module.utils.Coordinate;
 public class Enemy extends NonPlayerItem {
 
   private int health;
+  private int initialHealth;
   private int x_direction;
   private int y_direction;
   public Rect src_rect;
@@ -42,6 +43,7 @@ public class Enemy extends NonPlayerItem {
 
     // Sets the health of the boss
     health = 100;
+    initialHealth = health;
 
     // Not sure what this does.
     src_rect = new Rect(0, 0, appearance.getWidth(), appearance.getHeight());
@@ -89,11 +91,24 @@ public class Enemy extends NonPlayerItem {
     health -= damageTaken;
   }
 
+  public boolean isAttacked(float coordinateX, float coordinateY) {
+    if ((getCoordinate().getX() < coordinateX && coordinateX < dest_rect.right)
+        && (getCoordinate().getY() < coordinateY && coordinateY < dest_rect.bottom)) {
+      System.out.println("I'm hit");
+      return true;
+    }
+    return false;
+  }
+
   public int getSize() {
     return size;
   }
 
   public int getHealth() {
     return health;
+  }
+
+  public int getInitialHealth() {
+    return initialHealth;
   }
 }

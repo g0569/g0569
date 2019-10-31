@@ -38,7 +38,10 @@ public class BossGame extends Game {
         new Button(this, getGameManager().getScreen_width(), getGameManager().getScreen_height());
     healthBar =
         new HealthBar(
-            this, getGameManager().getScreen_width(), getGameManager().getScreen_height(), resources);
+            this,
+            getGameManager().getScreen_width(),
+            getGameManager().getScreen_height(),
+            resources);
     Star star =
         new Star(
             this,
@@ -61,7 +64,7 @@ public class BossGame extends Game {
     bossPlayer.draw(canvas, paint);
 
     button.draw(canvas, paint);
-    healthBar.draw(canvas, paint, enemy.getHealth());
+    healthBar.draw(canvas, paint);
     for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
       ThrownItems projectile;
       projectile = (ThrownItems) bossPlayer.getInventory().get(i);
@@ -81,6 +84,11 @@ public class BossGame extends Game {
       if (!projectile.inTheScreen(getGameManager().getScreen_height())) {
         bossPlayer.getInventory().remove(projectile);
       }
+      if (enemy.isAttacked(projectile.getX(), projectile.getY())
+          || projectile.isAttacking(enemy.getX(), enemy.getY())) {
+        enemy.attacked(projectile.getDamage());
+        healthBar.action(enemy.getHealth(), enemy.getInitialHealth());
+      }
     }
   }
 
@@ -98,7 +106,7 @@ public class BossGame extends Game {
    */
   public void hit() {
 
-    if (bossPlayer.getInventory().get(0) != null) {
+    if (!bossPlayer.getInventory().isEmpty() && bossPlayer.getInventory().get(0) != null) {
       ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
       float enemy_x = enemy.getX();
       float enermy_y = enemy.getY();
@@ -107,8 +115,12 @@ public class BossGame extends Game {
       float projectile_x = projectile.getX();
       float projectile_y = projectile.getY();
       projectile.thrown();
-      if (inRange(projectile_x, projectile_y, enemy_x, enermy_y, enemy_range)) {
+      // Seems not to be accurate yet
+      //      inRange(projectile_x, projectile_y, enemy_x, enermy_y, enemy_range
+      if (enemy.isAttacked(projectile.getX(), projectile.getY())
+          || projectile.isAttacking(enemy.getX(), enemy.getY())) {
         enemy.attacked(projectile.getDamage());
+        healthBar.action(enemy.getHealth(), enemy.getInitialHealth());
       }
     }
   }

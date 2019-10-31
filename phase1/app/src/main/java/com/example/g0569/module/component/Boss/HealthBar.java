@@ -4,12 +4,10 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.g0569.R;
-import com.example.g0569.module.component.Item;
 import com.example.g0569.module.component.NonPlayerItem;
 import com.example.g0569.module.game.Game;
 import com.example.g0569.module.utils.Coordinate;
@@ -21,6 +19,7 @@ public class HealthBar extends NonPlayerItem {
   private Rect src_rect;
   private Rect dest_rect;
   private Bitmap healthbar;
+  private Rect healthRect;
 
   public HealthBar(Game game, float screenWidth, float screenHeight, Resources resources) {
     super(game);
@@ -31,26 +30,31 @@ public class HealthBar extends NonPlayerItem {
     float y = (int) (screenHeight - screenWidth * 3 / 32 - 2.5 * size);
     coordinate = new Coordinate(x, y);
     appearance = BitmapFactory.decodeResource(resources, R.drawable.bar);
-    src_rect = new Rect(0, 0, appearance.getWidth() + size / 2, appearance.getHeight());
+    //    src_rect = new Rect(0, 0, appearance.getWidth() + size/2, appearance.getHeight());
     dest_rect = new Rect((int) x, (int) y, (int) x + size, (int) y + size);
+    healthRect = new Rect((int) x, (int) y, (int) x + size, (int) y + size);
     healthbar = BitmapFactory.decodeResource(resources, R.drawable.redbar);
   }
 
-  public void draw(Canvas canvas, Paint paint, int health) {
-    canvas.drawBitmap(appearance, src_rect, dest_rect, paint);
-    canvas.drawBitmap(healthbar, src_rect, dest_rect, paint);
-    //        paint.setColor();
-    //        canvas.drawRect(getCoordinate().getX(),
-    // getCoordinate().getY(),getCoordinate().getX()+size,getCoordinate().getY()+size,paint);
+  public void draw(Canvas canvas, Paint paint) {
+    canvas.drawBitmap(appearance, null, dest_rect, paint);
 
+    canvas.drawBitmap(healthbar, null, healthRect, paint);
   }
 
-  public void draw(Canvas canvas, Paint paint) {}
-
-  @Override
-  public void action() {
+  public void action(int healthRemaining, int totalHealth) {
+    int health = determineHealth(healthRemaining, totalHealth);
+    healthRect.right = healthRect.right - health;
     //      Should use the Enemy Boss's health
     // Should call draw to draw the new health bar
+  }
 
+  public void action() {}
+
+  private int determineHealth(int health, int totalHealth) {
+    // Determine the health of the bar relative to the health and totalHealth of the Boss
+    int totalBar = dest_rect.right;
+    int healthToDraw = health * totalBar / totalHealth;
+    return totalBar - healthToDraw;
   }
 }
