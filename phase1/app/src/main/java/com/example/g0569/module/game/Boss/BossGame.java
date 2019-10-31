@@ -38,7 +38,10 @@ public class BossGame extends Game {
         new Button(this, getGameManager().getScreen_width(), getGameManager().getScreen_height());
     healthBar =
         new HealthBar(
-            this, getGameManager().getScreen_width(), getGameManager().getScreen_height(), resources);
+            this,
+            getGameManager().getScreen_width(),
+            getGameManager().getScreen_height(),
+            resources);
     Star star =
         new Star(
             this,
@@ -52,8 +55,8 @@ public class BossGame extends Game {
             getGameManager().getScreen_height(),
             resources);
 
-    bossPlayer.getInventory().add(star);
-    bossPlayer.getInventory().add(star1);
+        bossPlayer.getInventory().add(star);
+        bossPlayer.getInventory().add(star1);
   }
 
   public void draw(Canvas canvas, Paint paint) {
@@ -61,7 +64,7 @@ public class BossGame extends Game {
     bossPlayer.draw(canvas, paint);
 
     button.draw(canvas, paint);
-    healthBar.draw(canvas, paint, enemy.getHealth());
+    healthBar.draw(canvas, paint);
     for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
       ThrownItems projectile;
       projectile = (ThrownItems) bossPlayer.getInventory().get(i);
@@ -98,7 +101,7 @@ public class BossGame extends Game {
    */
   public void hit() {
 
-    if (bossPlayer.getInventory().get(0) != null) {
+    if (!bossPlayer.getInventory().isEmpty() && bossPlayer.getInventory().get(0) != null) {
       ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
       float enemy_x = enemy.getX();
       float enermy_y = enemy.getY();
