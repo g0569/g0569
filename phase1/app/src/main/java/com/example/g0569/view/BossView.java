@@ -28,7 +28,7 @@ public class BossView extends BaseView {
   @Override
   public void surfaceCreated(SurfaceHolder holder) {
     super.surfaceCreated(holder);
-    background = BitmapFactory.decodeResource(getResources(), R.drawable.bg);
+    background = BitmapFactory.decodeResource(getResources(), R.drawable.bg_boss);
     scalex = screen_width / background.getWidth();
     scaley = screen_height / background.getHeight();
     //        button = new Button(bossGame, screen_width, screen_height);

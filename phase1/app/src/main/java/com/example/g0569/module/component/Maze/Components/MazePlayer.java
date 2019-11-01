@@ -131,6 +131,7 @@ public class MazePlayer extends Player {
   public void interact() {
     for (NPC i : this.getNPCAround()) {
                   i.pop();
+                  // it leads an error, cannot find symbol pop()
 //      Looper.prepare();
 //      Toast.makeText(getGame().getGameManager().getMainActivity(), "test", Toast.LENGTH_SHORT)
 //          .show();
