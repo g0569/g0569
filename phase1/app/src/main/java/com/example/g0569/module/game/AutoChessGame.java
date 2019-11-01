@@ -3,7 +3,7 @@ package com.example.g0569.module.game;
 // import com.example.g0569.module.component.Player;
 
 import com.example.g0569.module.component.LV2AutoChess.ChessPiece;
-
+import com.example.g0569.module.component.LV2AutoChess.LevelTwoPlayer;
 import com.example.g0569.module.component.LV2AutoChess.StarChessPiece;
 import com.example.g0569.module.component.LV2AutoChess.TriangleChessPiece;
 import com.example.g0569.module.component.NonPlayerItem;
@@ -17,6 +17,7 @@ public class AutoChessGame extends Game {
   // TODO still need to figure out a way to implement two different NPC's game.
   private int round = 0;
   private int number_win;
+  private LevelTwoPlayer l2player;
   private int number_clicked = 1;
 
   private List<List<ChessPiece>> NPC_data = new ArrayList<>();
@@ -24,11 +25,8 @@ public class AutoChessGame extends Game {
 
   AutoChessGame(GameManager gameManager) {
     super(gameManager);
-    // Add chess piece for player's inventory.
-    getGameInventory().add(new StarChessPiece(0, 0, this));
-    getGameInventory().add(new TriangleChessPiece(0, 0, this));
+    l2player = new LevelTwoPlayer(this);
     List<ChessPiece> NPC1_ChessPiece = new ArrayList<>();
-    // Adding chessPiece for NPC
     NPC1_ChessPiece.add(
         new StarChessPiece(
             gameManager.getScreen_width() * 0.6f, gameManager.getScreen_height() * 0.4f, this));
@@ -48,7 +46,11 @@ public class AutoChessGame extends Game {
     NPC_data.add(NPC2_ChessPiece);
   }
 
-  private int fight_counter(NonPlayerItem player_chess, int round) {
+  public LevelTwoPlayer getL2player() {
+    return l2player;
+  }
+
+  public int fight_counter(NonPlayerItem player_chess, int round) {
     int win = 0;
     for (ChessPiece NPC_chess : NPC_data.get(round)) {
       if (NPC_chess.getCoordinate().getY() == player_chess.getCoordinate().getY()
@@ -60,7 +62,7 @@ public class AutoChessGame extends Game {
   }
 
   public boolean autoFight() {
-    for (NonPlayerItem chess : getGameInventory()) {
+    for (NonPlayerItem chess : l2player.getInventory()) {
       number_win += fight_counter(chess, round);
     }
     return (number_win >= 2);
@@ -71,7 +73,8 @@ public class AutoChessGame extends Game {
     // Get the location where player place the chess piece and change the location of original chess
     // piece.
     if (number_clicked == 1) {
-      getGameInventory()
+      l2player
+          .getInventory()
           .get(chosen_place)
           .getCoordinate()
           .setXY(
@@ -83,7 +86,8 @@ public class AutoChessGame extends Game {
       //    } else if (number_clicked == 2) {
     } else { // For now we use else here, since there is a limit for number of chess.
       // TODO
-      getGameInventory()
+      l2player
+          .getInventory()
           .get(chosen_place)
           .getCoordinate()
           .setXY(
