@@ -1,6 +1,5 @@
 package com.example.g0569.module.game;
 
-import com.example.g0569.module.component.Item;
 import com.example.g0569.module.component.NonPlayerItem;
 
 import java.util.ArrayList;

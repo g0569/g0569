@@ -170,7 +170,6 @@ public class ChessView extends BaseView {
         Coordinate location = autoChessGame.place_Chess(x, chosen_place);
         triangle_x = location.getX();
         triangle_y = location.getY();
-
       } else if (x > inventory_x + inventory.getWidth() * 0.5f
           && x < inventory_x + inventory.getWidth()
           && y > inventory_y
