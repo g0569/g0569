@@ -90,7 +90,7 @@ public class BossGame extends Game {
         getGameManager().getScreen_height(),
         paint);
     canvas.drawText(
-        "Health Left: " + enemy.getHealth(), healthBar.getX(), getGameManager().getScreen_height()/2, paint);
+        "Health Left: " + enemy.getHealth(), healthBar.getX(), getGameManager().getScreen_height()/2 + 50, paint);
   }
 
   /** Updates all the components that are part of the lab */
@@ -110,6 +110,7 @@ public class BossGame extends Game {
           || projectile.isAttacking(enemy.getX(), enemy.getY())) {
         enemy.attacked(projectile.getDamage());
         healthBar.action(enemy.getHealth(), enemy.getInitialHealth());
+
         bossPlayer.getInventory().remove(projectile);
       }
     }

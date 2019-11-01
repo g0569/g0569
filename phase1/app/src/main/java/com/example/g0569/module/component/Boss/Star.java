@@ -16,6 +16,7 @@ public class Star extends ThrownItems {
     appearance = BitmapFactory.decodeResource(resource, R.drawable.star);
     damage = 20;
     src_rect = new Rect(0, 0, appearance.getWidth(), appearance.getHeight());
+    explodingAppearance = BitmapFactory.decodeResource(resource, R.drawable.explosion);
   }
 
   @Override

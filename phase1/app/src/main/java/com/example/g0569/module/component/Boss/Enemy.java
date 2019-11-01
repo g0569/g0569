@@ -74,10 +74,10 @@ public class Enemy extends NonPlayerItem {
     if (health > 0) {
       if (coordinate.getX() <= 0) {
         x_direction = Math.abs(x_direction);
-        appearance = BitmapFactory.decodeResource(resource, R.drawable.boss_r);
+        appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyright);
       } else if (coordinate.getX() >= screen_width - size) {
         x_direction = -Math.abs(x_direction);
-        appearance = BitmapFactory.decodeResource(resource, R.drawable.boss_l);
+        appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyleft);
       }
       //        action();
     }
@@ -123,7 +123,7 @@ public class Enemy extends NonPlayerItem {
   public boolean isAttacked(float coordinateX, float coordinateY) {
     if ((getCoordinate().getX() < coordinateX && coordinateX < dest_rect.right)
         && (getCoordinate().getY() < coordinateY && coordinateY < dest_rect.bottom)) {
-      System.out.println("I'm hit");
+//      System.out.println("I'm hit");
       return true;
     }
     return false;

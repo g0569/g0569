@@ -1,10 +1,13 @@
 package com.example.g0569.module.component.Boss;
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.example.g0569.R;
 import com.example.g0569.module.component.Item;
 import com.example.g0569.module.component.NonPlayerItem;
 import com.example.g0569.module.game.Game;
@@ -30,6 +33,7 @@ public class ThrownItems extends NonPlayerItem {
   public Rect dest_rect;
   public Rect src_rect;
 
+  public Bitmap explodingAppearance;
   public ThrownItems(Game game, float screen_width, float screen_height, Resources resource) {
     super(game);
     // Sets the size
@@ -53,6 +57,8 @@ public class ThrownItems extends NonPlayerItem {
     // Sets its rectangle
     dest_rect = new Rect((int) x, (int) y, (int) x + size, (int) y + size);
     //        super.appearance = appearance;
+
+
   }
 
   /**
@@ -130,7 +136,9 @@ public class ThrownItems extends NonPlayerItem {
   public boolean isAttacking(float coordinateX, float coordinateY) {
     if ((getCoordinate().getX() < coordinateX && coordinateX < dest_rect.right)
         && (getCoordinate().getY() < coordinateY && coordinateY < dest_rect.bottom)) {
-      //      System.out.println("I am attacking");
+//      appearance = BitmapFactory.decodeResource(resource, R.drawable.star);
+      appearance = explodingAppearance;
+
       return true;
     }
     //    System.out.println("Not attacked");
