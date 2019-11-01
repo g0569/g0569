@@ -31,8 +31,6 @@ public class ThrownItems extends NonPlayerItem {
   private int y_direction;
 
   // The rectangles to draw them
-  public Rect dest_rect;
-  public Rect src_rect;
   public Bitmap explodingAppearance;
 
   public ThrownItems(Game game, float screen_width, float screen_height, Resources resource) {
