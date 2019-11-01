@@ -2,6 +2,7 @@ package com.example.g0569.module.game.Boss;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class BossGame extends Game {
   Enemy enemy;
   Button button;
   HealthBar healthBar;
+  int items;
 
   public BossGame(GameManager gameManager) {
     super(gameManager);
@@ -30,6 +32,7 @@ public class BossGame extends Game {
    * @param resources for drawing some of the items
    */
   public void createItems(Resources resources) {
+
     bossPlayer =
         new BossPlayer(
             this, getGameManager().getScreen_width(), getGameManager().getScreen_height());
@@ -58,6 +61,7 @@ public class BossGame extends Game {
     // Adds some stars for now just to show the game works
     bossPlayer.getInventory().add(star);
     bossPlayer.getInventory().add(star1);
+    items = bossPlayer.getInventory().size();
   }
 
   /**
@@ -72,11 +76,21 @@ public class BossGame extends Game {
 
     button.draw(canvas, paint);
     healthBar.draw(canvas, paint);
+
     for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
       ThrownItems projectile;
       projectile = (ThrownItems) bossPlayer.getInventory().get(i);
       projectile.draw(canvas, paint);
     }
+    paint.setColor(Color.WHITE);
+    paint.setTextSize(50);
+    canvas.drawText(
+        "Items Left: " + items,
+        getGameManager().getScreen_width() / 2,
+        getGameManager().getScreen_height(),
+        paint);
+    canvas.drawText(
+        "Health Left: " + enemy.getHealth(), healthBar.getX(), getGameManager().getScreen_height()/2, paint);
   }
 
   /** Updates all the components that are part of the lab */
@@ -124,6 +138,7 @@ public class BossGame extends Game {
       float projectile_x = projectile.getX();
       float projectile_y = projectile.getY();
       projectile.thrown();
+      items--;
       // Seems not to be accurate yet
       //      inRange(projectile_x, projectile_y, enemy_x, enermy_y, enemy_range
       if (enemy.isAttacked(projectile.getX(), projectile.getY())
