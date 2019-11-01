@@ -28,13 +28,16 @@ public class Enemy extends NonPlayerItem {
   private float screen_width;
   private float screen_height;
 
+  private Resources resource;
+
   public Enemy(BossGame game, float screenWidth, float screenHeight, Resources resource) {
     super(game);
     this.screen_height = screenHeight;
     this.screen_width = screenWidth;
 
     // Appearance of the enemy
-    appearance = BitmapFactory.decodeResource(resource, R.drawable.boss);
+    this.resource = resource;
+    appearance = BitmapFactory.decodeResource(this.resource, R.drawable.boss_r);
 
     // Size of the Enemy
     size = (int) screen_width / 6;
@@ -69,8 +72,10 @@ public class Enemy extends NonPlayerItem {
   private void action(float screen_width) {
     if (coordinate.getX() <= 0) {
       x_direction = Math.abs(x_direction);
+      appearance = BitmapFactory.decodeResource(resource, R.drawable.boss_r);
     } else if (coordinate.getX() >= screen_width - size) {
       x_direction = -Math.abs(x_direction);
+      appearance = BitmapFactory.decodeResource(resource, R.drawable.boss_l);
     }
     //        action();
   }
