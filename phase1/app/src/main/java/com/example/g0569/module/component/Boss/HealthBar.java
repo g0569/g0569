@@ -89,7 +89,7 @@ public class HealthBar extends NonPlayerItem {
    */
   private int determineHealth(int health, int totalHealth) {
     // Determine the health of the bar relative to the health and totalHealth of the Boss
-    int totalBar = dest_rect.right;
+    int totalBar = size;
     int healthToDraw = health * totalBar / totalHealth;
     return totalBar - healthToDraw;
   }
