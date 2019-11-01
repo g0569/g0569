@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.example.g0569.module.component.Item;
 import com.example.g0569.module.component.NonPlayerItem;
 import com.example.g0569.module.game.Game;
 import com.example.g0569.module.utils.Coordinate;
@@ -31,6 +30,7 @@ public class Button extends NonPlayerItem {
 
   /**
    * Draws the button, red and big
+   *
    * @param canvas of the button that is being drawn on
    * @param paint the style of the button
    */
@@ -59,6 +59,7 @@ public class Button extends NonPlayerItem {
 
   /**
    * Returns the radius of the circle
+   *
    * @return the radius
    */
   public float getR() {

@@ -2,16 +2,25 @@ package com.example.g0569;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
+
+import androidx.core.graphics.TypefaceCompat;
 
 import com.example.g0569.module.game.GameManager;
 import com.example.g0569.utils.Constants;
@@ -20,8 +29,11 @@ import com.example.g0569.view.ChessView;
 import com.example.g0569.view.MainMenuView;
 import com.example.g0569.view.MazeView;
 
+import java.util.List;
+
 // import com.example.g0569.view.BossView;
 
+/** The Main activity. */
 public class MainActivity extends Activity implements View.OnClickListener {
 
   private MainMenuView mainMenuView;
@@ -35,23 +47,57 @@ public class MainActivity extends Activity implements View.OnClickListener {
       new Handler() {
         @Override
         public void handleMessage(Message msg) {
-          if (msg.what == Constants.TO_MENU_VIEW) {
-            toMenuView();
-          } else if (msg.what == Constants.TO_LOGIN_VIEW) {
-            toLoginView();
-          } else if (msg.what == Constants.TO_SIGNUP_VIEW) {
-            toSignUpView();
-          } else if (msg.what == Constants.TO_CHESS_VIEW) {
-            toChessView();
-          } else if (msg.what == Constants.TO_BOSS_VIEW) {
-            toBossView();
-          } else if (msg.what == Constants.TO_MAZE_VIEW) {
-            toMazeView();
-          } else if (msg.what == Constants.TO_DEMO_VIEW) {
-            toDemoView();
+          switch (msg.what) {
+            case Constants.TO_MENU_VIEW:
+              toMenuView();
+              break;
+            case Constants.TO_LOGIN_VIEW:
+              toLoginView();
+              break;
+            case Constants.TO_SIGNUP_VIEW:
+              toSignUpView();
+              break;
+            case Constants.TO_CHESS_VIEW:
+              toChessView();
+              break;
+            case Constants.TO_BOSS_VIEW:
+              toBossView();
+              break;
+            case Constants.TO_MAZE_VIEW:
+              toMazeView();
+              break;
+            case Constants.TO_DEMO_VIEW:
+              toDemoView();
+              break;
           }
         }
       };
+
+  /**
+   * Append statistic view to current view.
+   *
+   * @param statistics the list of statistic in String
+   */
+  public void appendStatisticView(List<String> statistics) {
+    FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(500, 300);
+    params1.gravity = Gravity.CENTER;
+    addContentView(LayoutInflater.from(this).inflate(R.layout.page_statistic, null), params1);
+
+    TableRow.LayoutParams params2 = new TableRow.LayoutParams(0, 100);
+    params2.weight = 1;
+    params2.gravity = Gravity.CENTER_VERTICAL;
+    params2.setMargins(2, 2, 2, 2);
+
+    TableLayout statistic_table = (TableLayout) findViewById(R.id.statistic_table);
+    for (String statistic : statistics) {
+      TableRow tr = new TableRow(this);
+      TextView t = new TextView(this);
+      t.setText(statistic);
+      t.setTextColor(Color.WHITE);
+      tr.addView(t, params2);
+      statistic_table.addView(tr);
+    }
+  }
 
   private void toBossView() {
     setNull();
@@ -113,6 +159,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
     gameManager = new GameManager(this);
   }
 
+  /**
+   * Return the handler in MainActivity
+   *
+   * @return the handler
+   */
   public Handler getHandler() {
     return handler;
   }
@@ -156,6 +207,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
       case (R.id.btn_to_signup):
         toSignUpView();
         break;
+      case (R.id.rtn_btn_statistic):
+        toDemoView();
+        break;
     }
   }
 
@@ -168,10 +222,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
     return super.onKeyDown(keyCode, event);
   }
 
+  /**
+   * return the game manager.
+   *
+   * @return the game manager
+   */
   public GameManager getGameManager() {
     return gameManager;
   }
 
+  /**
+   * return the main menu view.
+   *
+   * @return the main menu view
+   */
   public MainMenuView getMainMenuView() {
     return mainMenuView;
   }

@@ -10,6 +10,7 @@ import android.view.SurfaceHolder;
 import com.example.g0569.R;
 import com.example.g0569.module.game.Boss.BossGame;
 
+/** The Bossview for the bossgame. */
 public class BossView extends BaseView {
   private BossGame bossGame;
   private Bitmap background;
@@ -19,6 +20,11 @@ public class BossView extends BaseView {
   //    private ThrownItems item;
   //    private ThrownItems item2;
 
+  /**
+   * Instantiates a new Bossview.
+   *
+   * @param context the context
+   */
   public BossView(Context context) {
     super(context);
     paint.setTextSize(40);
@@ -31,17 +37,8 @@ public class BossView extends BaseView {
     background = BitmapFactory.decodeResource(getResources(), R.drawable.bossforest);
     scalex = screen_width / background.getWidth();
     scaley = screen_height / background.getHeight();
-    //        button = new Button(bossGame, screen_width, screen_height);
-    //    aim = new BossPlayer(bossGame, screen_width, screen_height);
-    //    enemy = new Enemy(bossGame, screen_width, screen_height, getResources());
-
     bossGame = (BossGame) mainActivity.getGameManager().getCurrentGame();
     bossGame.createItems(getResources());
-    // needs modification so that itemlist is applied.
-    //    Star item = new Star(bossGame, screen_width, screen_height, getResources());
-    //    Star item2 = new Star(bossGame, screen_width, screen_height, getResources());
-    //    aim.getInventory().add(item);
-    //    aim.getInventory().add(item2);
     if (thread.isAlive()) {
       thread.start();
     } else {
@@ -70,18 +67,6 @@ public class BossView extends BaseView {
       canvas.drawBitmap(background, 0, 0, paint);
       canvas.restore();
       bossGame.draw(canvas, paint);
-
-      //      button.draw(canvas, paint);
-      //      enemy.action();
-      //      enemy.draw(canvas, paint);
-      //      Star star = (Star) aim.getInventory().get(0);
-      //      Star star2 = (Star) aim.getInventory().get(1);
-      //      star.draw(canvas, paint);
-      //      star.action();
-      //      star2.draw(canvas, paint);
-      //      star.action();
-      //      aim.draw(canvas, paint);
-      //            if(!item.inTheScreen(screen_height)){item = null;}
     } catch (Exception err) {
       err.printStackTrace();
     } finally {

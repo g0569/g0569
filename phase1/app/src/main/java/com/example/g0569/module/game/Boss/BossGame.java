@@ -84,21 +84,27 @@ public class BossGame extends Game {
       projectile = (ThrownItems) bossPlayer.getInventory().get(i);
       projectile.draw(canvas, paint);
     }
-    paint.setColor(Color.WHITE);
-    paint.setTextSize(50);
-    canvas.drawText(
-        "Items Left: " + items,
-        getGameManager().getScreen_width() / 2,
-        getGameManager().getScreen_height(),
-        paint);
-    canvas.drawText(
-        "Health Left: " + enemy.getHealth(),
-        healthBar.getX(),
-        getGameManager().getScreen_height() / 2 + 50,
-        paint);
+    // Draws teh button to change colors
     paint.setStyle(Paint.Style.FILL);
     paint.setColor(Color.RED);
     canvas.drawCircle(50, 50, getGameManager().getScreen_width()/20, paint);
+
+    // Draws the text to display stats and messages
+
+    paint.setColor(Color.WHITE);
+    paint.setTextSize(50);
+    canvas.drawText(
+            "Items Left: " + items,
+            getGameManager().getScreen_width() / 2,
+            getGameManager().getScreen_height(),
+            paint);
+    canvas.drawText(
+            "Health Left: " + enemy.getHealth(),
+            healthBar.getX(),
+            getGameManager().getScreen_height() / 2 + 50,
+            paint);
+    paint.setColor(Color.BLACK);
+    canvas.drawText("Change Color!!", 50, 50, paint);
   }
 
   /** Updates all the components that are part of the lab */
@@ -181,6 +187,7 @@ public class BossGame extends Game {
     if (inRange(x, y, button.getX(), button.getY(), button.getR())) {
       Toast.makeText(getGameManager().getMainActivity(), "Throw!!!!", Toast.LENGTH_SHORT).show();
       this.hit();
+      // If we press the button on top is changes the color of the button
     } else if(inRange(x,y,50,50, getGameManager().getScreen_width()/20)){
       button.changeColor();
     }
