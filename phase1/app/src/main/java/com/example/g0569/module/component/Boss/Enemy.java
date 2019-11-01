@@ -1,6 +1,7 @@
 package com.example.g0569.module.component.Boss;
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -30,6 +31,8 @@ public class Enemy extends NonPlayerItem {
   private float screen_height;
 
   private Resources resource;
+  private Bitmap appearance;
+
 
   public Enemy(BossGame game, float screenWidth, float screenHeight, Resources resource) {
     super(game);
@@ -38,7 +41,8 @@ public class Enemy extends NonPlayerItem {
 
     // Appearance of the enemy
     this.resource = resource;
-    appearance = BitmapFactory.decodeResource(this.resource, R.drawable.boss_r);
+    appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyright);
+
 
     // Size of the Enemy
     size = (int) screen_width / 6;

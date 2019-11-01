@@ -21,9 +21,11 @@ public class BossGame extends Game {
   Button button;
   HealthBar healthBar;
   int items;
+  boolean paused;
 
   public BossGame(GameManager gameManager) {
     super(gameManager);
+    paused = false;
   }
 
   /**
@@ -90,33 +92,44 @@ public class BossGame extends Game {
         getGameManager().getScreen_height(),
         paint);
     canvas.drawText(
-        "Health Left: " + enemy.getHealth(), healthBar.getX(), getGameManager().getScreen_height()/2 + 50, paint);
+        "Health Left: " + enemy.getHealth(),
+        healthBar.getX(),
+        getGameManager().getScreen_height() / 2 + 50,
+        paint);
+    paint.setStyle(Paint.Style.FILL);
+    paint.setColor(Color.RED);
+    canvas.drawCircle(50, 50, getGameManager().getScreen_width()/20, paint);
   }
 
   /** Updates all the components that are part of the lab */
   public void action() {
-
-    enemy.action();
-    for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
-      ThrownItems projectile;
-      projectile = (ThrownItems) bossPlayer.getInventory().get(i);
-      projectile.action();
-      if (!projectile.inTheScreen(getGameManager().getScreen_height())) {
-        bossPlayer.getInventory().remove(projectile);
-      }
-      if (enemy.isAttacked(projectile.getX(), projectile.getY())
-          || projectile.isAttacking(enemy.getX(), enemy.getY())) {
-        enemy.attacked(projectile.getDamage());
-        healthBar.action(enemy.getHealth(), enemy.getInitialHealth());
-        // Want the explosion pic to come in to play before we get rid of the projectile
-        bossPlayer.getInventory().remove(projectile);
+    if (!paused) {
+      enemy.action();
+      for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
+        ThrownItems projectile;
+        projectile = (ThrownItems) bossPlayer.getInventory().get(i);
+        projectile.action();
+        if (!projectile.inTheScreen(getGameManager().getScreen_height())) {
+          bossPlayer.getInventory().remove(projectile);
+        }
+        if (enemy.isAttacked(projectile.getX(), projectile.getY())
+            || projectile.isAttacking(enemy.getX(), enemy.getY())) {
+          enemy.attacked(projectile.getDamage());
+          healthBar.action(enemy.getHealth(), enemy.getInitialHealth());
+          // Want the explosion pic to come in to play before we get rid of the projectile
+          bossPlayer.getInventory().remove(projectile);
+        }
       }
     }
   }
 
+  /** Pauses the game or unpauses the game depending on the state it is in */
   @Override
-  public void pause() {}
+  public void pause() {
+    paused = !paused;
+  }
 
+  /** Loads teh game after it has been saved */
   @Override
   public void load() {}
 
@@ -130,16 +143,9 @@ public class BossGame extends Game {
 
     if (!bossPlayer.getInventory().isEmpty() && bossPlayer.getInventory().get(0) != null) {
       ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
-      float enemy_x = enemy.getX();
-      float enermy_y = enemy.getY();
-      int enemy_range = enemy.getSize();
-
-      float projectile_x = projectile.getX();
-      float projectile_y = projectile.getY();
       projectile.thrown();
       items--;
       // Seems not to be accurate yet
-      //      inRange(projectile_x, projectile_y, enemy_x, enermy_y, enemy_range
       if (enemy.isAttacked(projectile.getX(), projectile.getY())
           || projectile.isAttacking(enemy.getX(), enemy.getY())) {
         enemy.attacked(projectile.getDamage());
@@ -175,6 +181,12 @@ public class BossGame extends Game {
     if (inRange(x, y, button.getX(), button.getY(), button.getR())) {
       Toast.makeText(getGameManager().getMainActivity(), "Throw!!!!", Toast.LENGTH_SHORT).show();
       this.hit();
+    } else if(inRange(x,y,50,50, getGameManager().getScreen_width()/20)){
+      button.changeColor();
+    }
+    else {
+      // Pauses the game if anywhere else is paused. Update later to include a pause button for all games
+      pause();
     }
   }
 }

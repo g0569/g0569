@@ -12,6 +12,10 @@ import com.example.g0569.module.utils.Coordinate;
 public class Button extends NonPlayerItem {
 
   private float button_r;
+  int red = Color.RED;
+  int yellow = Color.YELLOW;
+  int blue = Color.BLUE;
+  int colorChanged;
 
   public Button(Game game, float screenWidth, float screenHeight) {
     // Radius of Button
@@ -22,6 +26,7 @@ public class Button extends NonPlayerItem {
     float x = screenWidth * 5 / 6;
     float y = screenHeight - button_r * 3 / 2;
     coordinate = new Coordinate(x, y);
+
   }
 
   /**
@@ -32,8 +37,24 @@ public class Button extends NonPlayerItem {
   @Override
   public void draw(Canvas canvas, Paint paint) {
     paint.setStyle(Paint.Style.FILL);
-    paint.setColor(Color.RED);
+    if (colorChanged % 3 == 0){
+      paint.setColor(red);
+    }else if (colorChanged % 3 == 1){
+      paint.setColor(yellow);
+    }
+    else {
+      paint.setColor(blue);
+    }
+
+//    paint.setColor(Color.RED);
     canvas.drawCircle(coordinate.getX(), coordinate.getY(), button_r, paint);
+  }
+
+  /**
+   * Changes the color of the launch button
+   */
+  public void changeColor(){
+    colorChanged ++;
   }
 
   /**
