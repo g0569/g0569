@@ -37,7 +37,7 @@ public class Enemy extends NonPlayerItem {
     appearance = BitmapFactory.decodeResource(resource, R.drawable.boss);
 
     // Size of the Enemy
-    size = (int) screen_width / 8;
+    size = (int) screen_width / 6;
 
     // Sets the coordinate of the Enemy
     float y = (int) (screen_height / 2 - screen_width / 18 - size / 2);
