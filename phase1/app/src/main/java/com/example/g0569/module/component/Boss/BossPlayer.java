@@ -40,7 +40,7 @@ public class BossPlayer extends NonPlayerItem {
    */
   @Override
   public void draw(Canvas canvas, Paint paint) {
-    paint.setColor(Color.BLACK);
+    paint.setColor(Color.WHITE);
     canvas.drawCircle(coordinate.getX(), coordinate.getY(), r2, paint);
     paint.setStyle(Paint.Style.STROKE);
     paint.setStrokeWidth(r2);
