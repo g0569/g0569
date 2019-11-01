@@ -43,7 +43,11 @@ public class MazePlayer extends Player {
     direction[0] = 0f;
     direction[1] = 0f;
   }
-
+    /**
+     * Draws the button, red and big
+     * @param canvas of the button that is being drawn on
+     * @param paint the style of the button
+     */
   @Override
   public void draw(Canvas canvas, Paint paint) {
     paint.setColor(Color.WHITE);
@@ -60,40 +64,10 @@ public class MazePlayer extends Player {
     this.move();
   }
 
-  //  public void atBoundary() {
-  //
-  //    if (this.coordinate.getX() == 0) {
-  //      direction[0] += Constants.AT_LEFT_BOUNDARY;
-  //    }
-  //    if (this.coordinate.getX() == Constants.GRID_NUM - 1) {
-  //      direction[0] += Constants.AT_RIGHT_BOUNDARY;
-  //    }
-  //    if (this.coordinate.getY() == 0) {
-  //      direction[1] += Constants.AT_TOP_BOUNDARY;
-  //    }
-  //    if (this.coordinate.getY() == Constants.GRID_NUM - 1) {
-  //      direction[1] += Constants.AT_BOTTOM_BOUNDARY;
-  //    }
-  //    return sum;
-  //
-  //  }//  public void atBoundary() {
-  ////
-  ////    if (this.coordinate.getX() == 0) {
-  ////      direction[0] += Constants.AT_LEFT_BOUNDARY;
-  ////    }
-  ////    if (this.coordinate.getX() == Constants.GRID_NUM - 1) {
-  ////      direction[0] += Constants.AT_RIGHT_BOUNDARY;
-  ////    }
-  ////    if (this.coordinate.getY() == 0) {
-  ////      direction[1] += Constants.AT_TOP_BOUNDARY;
-  ////    }
-  ////    if (this.coordinate.getY() == Constants.GRID_NUM - 1) {
-  ////      direction[1] += Constants.AT_BOTTOM_BOUNDARY;
-  ////    }
-  ////    return sum;
-  ////
-  ////  }
-
+    /**
+     * Move the player around (left and right)
+     * Detect the wall and NPCs.
+     */
   public void move() {
     float targetX = this.coordinate.getX() + direction[0];
     float targetY = this.coordinate.getY() + direction[1];
@@ -106,6 +80,10 @@ public class MazePlayer extends Player {
     this.interact();
   }
 
+    /**
+     * Detect the NPCs around the player.
+     * @return an arraylist of NPC around
+     */
   public ArrayList<NPC> getNPCAround() {
     int currX = (int) this.coordinate.getX();
     int currY = (int) this.coordinate.getY();
@@ -138,10 +116,18 @@ public class MazePlayer extends Player {
     return NPCAround;
   }
 
+    /**
+     * Get the player's direction
+     * @return the array of direction
+     */
   public float[] getDirection() {
     return direction;
   }
 
+    /**
+     * Interact with the NPC around.
+     * cannot continue moving after detecting right now.
+     */
   public void interact() {
     for (NPC i : this.getNPCAround()) {
                   i.pop();
@@ -152,6 +138,11 @@ public class MazePlayer extends Player {
     }
   }
 
+    /**
+     * Set the direction of the player
+     * @param x the target x-axis of the player
+     * @param y the target y-axis of the player
+     */
   public void setDirection(int x, int y) {
     this.direction[0] = x;
     this.direction[1] = y;

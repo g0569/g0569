@@ -30,6 +30,11 @@ public class Wall extends NonPlayerItem {
             false);
   }
 
+  /**
+   * Draw the bitmap wall
+   * @param canvas of the button that is being drawn on
+   * @param paint the style of the button
+   */
   @Override
   public void draw(Canvas canvas, Paint paint) {
     paint.setColor(Color.WHITE);
