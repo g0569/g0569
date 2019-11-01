@@ -5,12 +5,17 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.g0569.module.game.GameManager;
@@ -22,6 +27,7 @@ import com.example.g0569.view.MazeView;
 
 // import com.example.g0569.view.BossView;
 
+/** The Main activity. */
 public class MainActivity extends Activity implements View.OnClickListener {
 
   private MainMenuView mainMenuView;
@@ -35,23 +41,40 @@ public class MainActivity extends Activity implements View.OnClickListener {
       new Handler() {
         @Override
         public void handleMessage(Message msg) {
-          if (msg.what == Constants.TO_MENU_VIEW) {
-            toMenuView();
-          } else if (msg.what == Constants.TO_LOGIN_VIEW) {
-            toLoginView();
-          } else if (msg.what == Constants.TO_SIGNUP_VIEW) {
-            toSignUpView();
-          } else if (msg.what == Constants.TO_CHESS_VIEW) {
-            toChessView();
-          } else if (msg.what == Constants.TO_BOSS_VIEW) {
-            toBossView();
-          } else if (msg.what == Constants.TO_MAZE_VIEW) {
-            toMazeView();
-          } else if (msg.what == Constants.TO_DEMO_VIEW) {
-            toDemoView();
+          switch (msg.what) {
+            case Constants.TO_MENU_VIEW:
+              toMenuView();
+              break;
+            case Constants.TO_LOGIN_VIEW:
+              toLoginView();
+              break;
+            case Constants.TO_SIGNUP_VIEW:
+              toSignUpView();
+              break;
+            case Constants.TO_CHESS_VIEW:
+              toChessView();
+              break;
+            case Constants.TO_BOSS_VIEW:
+              toBossView();
+              break;
+            case Constants.TO_MAZE_VIEW:
+              toMazeView();
+              break;
+            case Constants.TO_DEMO_VIEW:
+              toDemoView();
+              break;
+            case Constants.TO_STATISTIC_VIEW:
+              appendStatisticView();
+              break;
           }
         }
       };
+
+  private void appendStatisticView() {
+    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(500, 300);
+    params.gravity = Gravity.CENTER;
+    addContentView(LayoutInflater.from(this).inflate(R.layout.page_statistic, null), params);
+  }
 
   private void toBossView() {
     setNull();
@@ -113,6 +136,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
     gameManager = new GameManager(this);
   }
 
+  /**
+   * Return the handler in MainActivity
+   *
+   * @return the handler
+   */
   public Handler getHandler() {
     return handler;
   }
@@ -168,10 +196,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
     return super.onKeyDown(keyCode, event);
   }
 
+  /**
+   * return the game manager.
+   *
+   * @return the game manager
+   */
   public GameManager getGameManager() {
     return gameManager;
   }
 
+  /**
+   * return the main menu view.
+   *
+   * @return the main menu view
+   */
   public MainMenuView getMainMenuView() {
     return mainMenuView;
   }

@@ -26,6 +26,7 @@ public class Button extends NonPlayerItem {
 
   /**
    * Draws the button, red and big
+   *
    * @param canvas of the button that is being drawn on
    * @param paint the style of the button
    */
@@ -38,6 +39,7 @@ public class Button extends NonPlayerItem {
 
   /**
    * Returns the radius of the circle
+   *
    * @return the radius
    */
   public float getR() {

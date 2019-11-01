@@ -3,8 +3,15 @@ package com.example.g0569.module.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/** Utils. */
 public class Utils {
 
+  /**
+   * Encode a string using MD5 with salt
+   *
+   * @param origin the origin string
+   * @return the encoded string
+   */
   public static String encodeByMD5(String origin) {
     try {
       origin = origin + "g.0569";

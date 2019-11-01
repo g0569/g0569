@@ -4,10 +4,17 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/** The helper to operate SQLite. */
 public class SQLiteHelper extends SQLiteOpenHelper {
 
   private static int version = 1;
 
+  /**
+   * Instantiates a new SQLite helper.
+   *
+   * @param context the context
+   * @param name the name of the table
+   */
   public SQLiteHelper(Context context, String name) {
     super(context, name, null, version);
   }

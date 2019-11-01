@@ -9,6 +9,7 @@ public interface Constants {
   int TO_CHESS_VIEW = 5;
   int TO_MAZE_VIEW = 6;
   int END_GAME = 9;
+  int TO_STATISTIC_VIEW = 7;
 
   int MazeGame = 10;
   int ChessGame = 11;

@@ -11,7 +11,9 @@ import android.widget.Toast;
 import com.example.g0569.R;
 import com.example.g0569.module.game.AutoChessGame;
 import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.utils.Constants;
 
+/** The Chessview for the chessgame. */
 public class ChessView extends BaseView {
   private Bitmap background;
   private Bitmap inventory;
@@ -38,6 +40,11 @@ public class ChessView extends BaseView {
 
   private AutoChessGame autoChessGame;
 
+  /**
+   * Instantiates a new Chess view.
+   *
+   * @param context the context
+   */
   public ChessView(Context context) {
     super(context);
     paint.setTextSize(40);

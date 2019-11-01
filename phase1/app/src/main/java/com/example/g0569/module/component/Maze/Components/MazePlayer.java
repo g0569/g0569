@@ -43,11 +43,12 @@ public class MazePlayer extends Player {
     direction[0] = 0f;
     direction[1] = 0f;
   }
-    /**
-     * Draws the button, red and big
-     * @param canvas of the button that is being drawn on
-     * @param paint the style of the button
-     */
+  /**
+   * Draws the button, red and big
+   *
+   * @param canvas of the button that is being drawn on
+   * @param paint the style of the button
+   */
   @Override
   public void draw(Canvas canvas, Paint paint) {
     paint.setColor(Color.WHITE);
@@ -64,26 +65,26 @@ public class MazePlayer extends Player {
     this.move();
   }
 
-    /**
-     * Move the player around (left and right)
-     * Detect the wall and NPCs.
-     */
+  /** Move the player around (left and right) Detect the wall and NPCs. */
   public void move() {
     float targetX = this.coordinate.getX() + direction[0];
     float targetY = this.coordinate.getY() + direction[1];
-    try{
-    if (!(((MazeGame) this.getGame()).getMyMazeItem()[(int) targetY][(int) targetX]
-        instanceof Wall)) {
-      this.coordinate.setX(targetX);
-      this.coordinate.setY(targetY);
-    }}catch(Exception e){}
+    try {
+      if (!(((MazeGame) this.getGame()).getMyMazeItem()[(int) targetY][(int) targetX]
+          instanceof Wall)) {
+        this.coordinate.setX(targetX);
+        this.coordinate.setY(targetY);
+      }
+    } catch (Exception e) {
+    }
     this.interact();
   }
 
-    /**
-     * Detect the NPCs around the player.
-     * @return an arraylist of NPC around
-     */
+  /**
+   * Detect the NPCs around the player.
+   *
+   * @return an arraylist of NPC around
+   */
   public ArrayList<NPC> getNPCAround() {
     int currX = (int) this.coordinate.getX();
     int currY = (int) this.coordinate.getY();
@@ -116,34 +117,34 @@ public class MazePlayer extends Player {
     return NPCAround;
   }
 
-    /**
-     * Get the player's direction
-     * @return the array of direction
-     */
+  /**
+   * Get the player's direction
+   *
+   * @return the array of direction
+   */
   public float[] getDirection() {
     return direction;
   }
 
-    /**
-     * Interact with the NPC around.
-     * cannot continue moving after detecting right now.
-     */
+  /** Interact with the NPC around. cannot continue moving after detecting right now. */
   public void interact() {
     for (NPC i : this.getNPCAround()) {
-                  i.pop();
-                  // it leads an error, cannot find symbol pop()
-//      Looper.prepare();
-//      Toast.makeText(getGame().getGameManager().getMainActivity(), "test", Toast.LENGTH_SHORT)
-//          .show();
-//      Looper.loop();
+      i.pop();
+      // it leads an error, cannot find symbol pop()
+      //      Looper.prepare();
+      //      Toast.makeText(getGame().getGameManager().getMainActivity(), "test",
+      // Toast.LENGTH_SHORT)
+      //          .show();
+      //      Looper.loop();
     }
   }
 
-    /**
-     * Set the direction of the player
-     * @param x the target x-axis of the player
-     * @param y the target y-axis of the player
-     */
+  /**
+   * Set the direction of the player
+   *
+   * @param x the target x-axis of the player
+   * @param y the target y-axis of the player
+   */
   public void setDirection(int x, int y) {
     this.direction[0] = x;
     this.direction[1] = y;

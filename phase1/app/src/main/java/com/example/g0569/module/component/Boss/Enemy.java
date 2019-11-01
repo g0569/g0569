@@ -91,12 +91,14 @@ public class Enemy extends NonPlayerItem {
    */
   @Override
   public void draw(Canvas canvas, Paint paint) {
-    if(health > 0){canvas.drawBitmap(appearance, src_rect, dest_rect, paint);}
-    else{
+    if (health > 0) {
+      canvas.drawBitmap(appearance, src_rect, dest_rect, paint);
+    } else {
       paint.setColor(Color.RED);
       paint.setTextSize(300);
       float width = paint.measureText("You Won!!!");
-      canvas.drawText("You Won!!!", screen_width / 2 - width / 2, screen_height / 2, paint);}
+      canvas.drawText("You Won!!!", screen_width / 2 - width / 2, screen_height / 2, paint);
+    }
   }
 
   /** Moves the Enemy around, left and right right now */

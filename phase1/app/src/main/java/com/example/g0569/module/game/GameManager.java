@@ -12,6 +12,7 @@ import com.example.g0569.module.utils.SQLiteHelper;
 import com.example.g0569.module.utils.Utils;
 import com.example.g0569.utils.Constants;
 
+/** The Game manager. */
 public class GameManager {
 
   private float screen_width;
@@ -21,11 +22,17 @@ public class GameManager {
   private User user;
   private SQLiteHelper sqLitehelper;
 
+  /**
+   * Instantiates a new Game manager.
+   *
+   * @param mainActivity the main activity
+   */
   public GameManager(MainActivity mainActivity) {
     this.mainActivity = mainActivity;
     this.onStart();
   }
 
+  /** Called when the game starts */
   public void onStart() {
     sqLitehelper = new SQLiteHelper(mainActivity, "users");
     // TODO Need to modify the way to get width and height since theses methods are deprecated now.
@@ -34,26 +41,41 @@ public class GameManager {
     mainActivity.getHandler().sendEmptyMessage(Constants.TO_MENU_VIEW);
   }
 
+  /** Start the maze game */
   public void toMazeGame() {
     mainActivity.getHandler().sendEmptyMessage(Constants.TO_MAZE_VIEW);
     currentGame = new MazeGame(this);
   }
 
+  /** Start the boss game. */
   public void toBossGame() {
     mainActivity.getHandler().sendEmptyMessage(Constants.TO_BOSS_VIEW);
     currentGame = new BossGame(this);
   }
 
+  /** Start the chess game. */
   public void toChessGame() {
     mainActivity.getHandler().sendEmptyMessage(Constants.TO_CHESS_VIEW);
     currentGame = new AutoChessGame(this);
   }
 
+  /**
+   * Switch between different games and save current game TODO add new params
+   *
+   * @param nextGame the next game
+   */
   public void changeGame(int nextGame) {
     //        call this.save()
     // TODO
   }
 
+  /**
+   * Log in a user with given email and password
+   *
+   * @param email the email of the user
+   * @param password the password of the user
+   * @return true if the email matches the password
+   */
   public boolean login(String email, String password) {
     password = Utils.encodeByMD5(password);
     SQLiteDatabase db = sqLitehelper.getReadableDatabase();
@@ -86,6 +108,14 @@ public class GameManager {
     return f;
   }
 
+  /**
+   * Sign up a new user
+   *
+   * @param email the email of the user
+   * @param username the username of the user
+   * @param password the password of the user
+   * @return true if sign up successfully
+   */
   public boolean signUp(String email, String username, String password) {
     SQLiteDatabase db = sqLitehelper.getWritableDatabase();
     password = Utils.encodeByMD5(password);
@@ -108,34 +138,64 @@ public class GameManager {
     return f;
   }
 
+  /** Save the current game. */
   public void save() {
     //        call currentGame.save() and store to SQLite using user.save(arg)
   }
 
+  /** @return ture if someone has log in */
   public boolean isLogin() {
     return user != null;
   }
 
+  /**
+   * @return the SQLite Helper
+   */
   public SQLiteHelper getSqLitehelper() {
     return sqLitehelper;
   }
 
+  /**
+   * Gets the current game.
+   *
+   * @return the current game
+   */
   public Game getCurrentGame() {
     return currentGame;
   }
 
+  /**
+   * Gets the screen width.
+   *
+   * @return the screen width
+   */
   public float getScreen_width() {
     return screen_width;
   }
 
+  /**
+   * Gets the screen height.
+   *
+   * @return the screen height
+   */
   public float getScreen_height() {
     return screen_height;
   }
 
+  /**
+   * Gets the main activity.
+   *
+   * @return the main activity
+   */
   public MainActivity getMainActivity() {
     return mainActivity;
   }
 
+  /**
+   * Gets the user.
+   *
+   * @return the user
+   */
   public User getUser() {
     return user;
   }

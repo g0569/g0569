@@ -10,6 +10,7 @@ import android.view.SurfaceHolder;
 import com.example.g0569.R;
 import com.example.g0569.module.game.Boss.BossGame;
 
+/** The Bossview for the bossgame. */
 public class BossView extends BaseView {
   private BossGame bossGame;
   private Bitmap background;
@@ -19,6 +20,11 @@ public class BossView extends BaseView {
   //    private ThrownItems item;
   //    private ThrownItems item2;
 
+  /**
+   * Instantiates a new Bossview.
+   *
+   * @param context the context
+   */
   public BossView(Context context) {
     super(context);
     paint.setTextSize(40);

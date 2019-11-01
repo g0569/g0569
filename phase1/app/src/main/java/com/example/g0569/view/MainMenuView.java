@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.g0569.R;
 import com.example.g0569.utils.Constants;
 
+/** The Main menu view. */
 public class MainMenuView extends BaseView {
 
   private Bitmap background;
@@ -19,6 +20,11 @@ public class MainMenuView extends BaseView {
   private float button_y;
   private float button_y2;
 
+  /**
+   * Instantiates a new Main menu view.
+   *
+   * @param context the context
+   */
   public MainMenuView(Context context) {
     super(context);
     paint.setTextSize(40);

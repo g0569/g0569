@@ -21,10 +21,11 @@ public class ThrownItems extends NonPlayerItem {
 
   // Whether it has been thrown or not
   public boolean thrown;
-
+  // The rectangles to draw them
+  public Rect dest_rect;
+  public Rect src_rect;
   // The shrinkage level to make it seem like its moving further away
   private double shrink;
-
   // The direction it should move
   private int x_direction;
   private int y_direction;
@@ -32,8 +33,8 @@ public class ThrownItems extends NonPlayerItem {
   // The rectangles to draw them
   public Rect dest_rect;
   public Rect src_rect;
-
   public Bitmap explodingAppearance;
+
   public ThrownItems(Game game, float screen_width, float screen_height, Resources resource) {
     super(game);
     // Sets the size
