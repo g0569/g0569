@@ -3,6 +3,7 @@ package com.example.g0569.module.component.Boss;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
@@ -51,7 +52,7 @@ public class Enemy extends NonPlayerItem {
     y_direction = 0;
 
     // Sets the health of the boss
-    health = 100;
+    health = 30;
     initialHealth = health;
 
     // Sets the rectangles to be drawn (size and stuff)
@@ -70,14 +71,16 @@ public class Enemy extends NonPlayerItem {
    * @param screen_width of the screen to know the limit of movement
    */
   private void action(float screen_width) {
-    if (coordinate.getX() <= 0) {
-      x_direction = Math.abs(x_direction);
-      appearance = BitmapFactory.decodeResource(resource, R.drawable.boss_r);
-    } else if (coordinate.getX() >= screen_width - size) {
-      x_direction = -Math.abs(x_direction);
-      appearance = BitmapFactory.decodeResource(resource, R.drawable.boss_l);
+    if (health > 0) {
+      if (coordinate.getX() <= 0) {
+        x_direction = Math.abs(x_direction);
+        appearance = BitmapFactory.decodeResource(resource, R.drawable.boss_r);
+      } else if (coordinate.getX() >= screen_width - size) {
+        x_direction = -Math.abs(x_direction);
+        appearance = BitmapFactory.decodeResource(resource, R.drawable.boss_l);
+      }
+      //        action();
     }
-    //        action();
   }
 
   /**
@@ -88,7 +91,12 @@ public class Enemy extends NonPlayerItem {
    */
   @Override
   public void draw(Canvas canvas, Paint paint) {
-    canvas.drawBitmap(appearance, src_rect, dest_rect, paint);
+    if(health > 0){canvas.drawBitmap(appearance, src_rect, dest_rect, paint);}
+    else{
+      paint.setColor(Color.RED);
+      paint.setTextSize(300);
+      float width = paint.measureText("You Won!!!");
+      canvas.drawText("You Won!!!", screen_width / 2 - width / 2, screen_height / 2, paint);}
   }
 
   /** Moves the Enemy around, left and right right now */
@@ -107,6 +115,9 @@ public class Enemy extends NonPlayerItem {
   /** Decreases the health of the enemy when Item hits it */
   public void attacked(int damageTaken) {
     health -= damageTaken;
+    if (health <= 0) {
+      appearance = null;
+    }
   }
 
   public boolean isAttacked(float coordinateX, float coordinateY) {
