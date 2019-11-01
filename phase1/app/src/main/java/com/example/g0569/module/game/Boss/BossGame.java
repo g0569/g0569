@@ -95,10 +95,8 @@ public class BossGame extends Game {
 
   /** Updates all the components that are part of the lab */
   public void action() {
-    //    bossPlayer.action();
+
     enemy.action();
-    //        Star star = (Star) bossPlayer.getInventory().get(0);
-    //        star.action();
     for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
       ThrownItems projectile;
       projectile = (ThrownItems) bossPlayer.getInventory().get(i);
@@ -110,7 +108,7 @@ public class BossGame extends Game {
           || projectile.isAttacking(enemy.getX(), enemy.getY())) {
         enemy.attacked(projectile.getDamage());
         healthBar.action(enemy.getHealth(), enemy.getInitialHealth());
-
+        // Want the explosion pic to come in to play before we get rid of the projectile
         bossPlayer.getInventory().remove(projectile);
       }
     }
