@@ -12,6 +12,8 @@ import com.example.g0569.module.utils.SQLiteHelper;
 import com.example.g0569.module.utils.Utils;
 import com.example.g0569.utils.Constants;
 
+import java.util.List;
+
 /** The Game manager. */
 public class GameManager {
 
@@ -148,9 +150,7 @@ public class GameManager {
     return user != null;
   }
 
-  /**
-   * @return the SQLite Helper
-   */
+  /** @return the SQLite Helper */
   public SQLiteHelper getSqLitehelper() {
     return sqLitehelper;
   }
@@ -198,5 +198,14 @@ public class GameManager {
    */
   public User getUser() {
     return user;
+  }
+
+  /**
+   * Show statistic on the screen
+   *
+   * @param statistic the statistic to be shown in a list.
+   */
+  public void showStatistic(List<String> statistic) {
+    this.mainActivity.appendStatisticView(statistic);
   }
 }

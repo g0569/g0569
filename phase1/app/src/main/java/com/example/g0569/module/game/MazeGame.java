@@ -4,14 +4,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.example.g0569.module.component.Item;
-import com.example.g0569.module.component.Maze.Components.MazePlayer;
 import com.example.g0569.module.component.Maze.Components.Button;
+import com.example.g0569.module.component.Maze.Components.MazePlayer;
 import com.example.g0569.module.component.Maze.MazeHelper;
 import com.example.g0569.module.utils.Coordinate;
 import com.example.g0569.utils.Constants;
-
-import java.sql.Array;
-import java.util.ArrayList;
 
 public class MazeGame extends Game {
 

@@ -8,11 +8,7 @@ import com.example.g0569.module.game.Game;
 /** The Maze helper for phase 1 only. */
 public class MazeHelper {
 
-  /**
-   * 0: not set
-   * 1: wall
-   * 2: npc
-   */
+  /** 0: not set 1: wall 2: npc */
   private static int[][] maze = {
     {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 1, 1, 1, 1, 1, 1, 0, 0, 0},

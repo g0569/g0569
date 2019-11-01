@@ -44,4 +44,6 @@ public abstract class Game {
 
   /** Load. */
   public abstract void load();
+
+  public void showStatistic() {}
 }

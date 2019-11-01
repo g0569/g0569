@@ -90,7 +90,10 @@ public class BossGame extends Game {
         getGameManager().getScreen_height(),
         paint);
     canvas.drawText(
-        "Health Left: " + enemy.getHealth(), healthBar.getX(), getGameManager().getScreen_height()/2 + 50, paint);
+        "Health Left: " + enemy.getHealth(),
+        healthBar.getX(),
+        getGameManager().getScreen_height() / 2 + 50,
+        paint);
   }
 
   /** Updates all the components that are part of the lab */

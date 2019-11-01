@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.example.g0569.module.component.Item;
 import com.example.g0569.module.component.NonPlayerItem;
 import com.example.g0569.module.game.Game;
 import com.example.g0569.module.utils.Coordinate;

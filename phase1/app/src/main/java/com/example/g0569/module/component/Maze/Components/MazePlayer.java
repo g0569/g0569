@@ -6,8 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Looper;
-import android.widget.Toast;
 
 import com.example.g0569.R;
 import com.example.g0569.module.component.Item;
@@ -16,7 +14,6 @@ import com.example.g0569.module.component.Player;
 import com.example.g0569.module.game.Game;
 import com.example.g0569.module.game.MazeGame;
 import com.example.g0569.module.utils.Coordinate;
-import com.example.g0569.utils.Constants;
 
 import java.util.ArrayList;
 

@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.example.g0569.R;
 import com.example.g0569.module.game.AutoChessGame;
 import com.example.g0569.module.utils.Coordinate;
-import com.example.g0569.utils.Constants;
 
 /** The Chessview for the chessgame. */
 public class ChessView extends BaseView {
@@ -165,6 +164,7 @@ public class ChessView extends BaseView {
         boolean result = autoChessGame.autoFight();
         if (result) {
           Toast.makeText(mainActivity, "You win the game!", Toast.LENGTH_SHORT).show();
+          autoChessGame.showStatistic();
         } else {
           Toast.makeText(mainActivity, "You lose the game!", Toast.LENGTH_SHORT).show();
         }

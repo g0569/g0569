@@ -2,6 +2,8 @@ package com.example.g0569;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,14 +11,16 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
+
+import androidx.core.graphics.TypefaceCompat;
 
 import com.example.g0569.module.game.GameManager;
 import com.example.g0569.utils.Constants;
@@ -24,6 +28,8 @@ import com.example.g0569.view.BossView;
 import com.example.g0569.view.ChessView;
 import com.example.g0569.view.MainMenuView;
 import com.example.g0569.view.MazeView;
+
+import java.util.List;
 
 // import com.example.g0569.view.BossView;
 
@@ -63,17 +69,34 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case Constants.TO_DEMO_VIEW:
               toDemoView();
               break;
-            case Constants.TO_STATISTIC_VIEW:
-              appendStatisticView();
-              break;
           }
         }
       };
 
-  private void appendStatisticView() {
-    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(500, 300);
-    params.gravity = Gravity.CENTER;
-    addContentView(LayoutInflater.from(this).inflate(R.layout.page_statistic, null), params);
+  /**
+   * Append statistic view to current view.
+   *
+   * @param statistics the list of statistic in String
+   */
+  public void appendStatisticView(List<String> statistics) {
+    FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(500, 300);
+    params1.gravity = Gravity.CENTER;
+    addContentView(LayoutInflater.from(this).inflate(R.layout.page_statistic, null), params1);
+
+    TableRow.LayoutParams params2 = new TableRow.LayoutParams(0, 100);
+    params2.weight = 1;
+    params2.gravity = Gravity.CENTER_VERTICAL;
+    params2.setMargins(2, 2, 2, 2);
+
+    TableLayout statistic_table = (TableLayout) findViewById(R.id.statistic_table);
+    for (String statistic : statistics) {
+      TableRow tr = new TableRow(this);
+      TextView t = new TextView(this);
+      t.setText(statistic);
+      t.setTextColor(Color.WHITE);
+      tr.addView(t, params2);
+      statistic_table.addView(tr);
+    }
   }
 
   private void toBossView() {
@@ -183,6 +206,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         break;
       case (R.id.btn_to_signup):
         toSignUpView();
+        break;
+      case (R.id.rtn_btn_statistic):
+        toDemoView();
         break;
     }
   }

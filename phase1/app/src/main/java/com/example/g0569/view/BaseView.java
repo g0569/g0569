@@ -12,10 +12,12 @@ import com.example.g0569.MainActivity;
 public class BaseView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
   /** The Scale of the background. */
   protected float scalex;
+
   protected float scaley;
 
   /** The Screen size. */
   protected float screen_width;
+
   protected float screen_height;
 
   /** The Thread flag. */
@@ -23,7 +25,6 @@ public class BaseView extends SurfaceView implements SurfaceHolder.Callback, Run
 
   protected Paint paint;
   protected Canvas canvas;
-
 
   protected SurfaceHolder sfh;
   protected Thread thread;

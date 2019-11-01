@@ -5,7 +5,18 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_dark">
+    android:background="#004961"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/statistic_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/kenvector_future"
+        android:text="Statistics"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="25sp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -13,45 +24,24 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/kenvector_future"
-                android:text="Statistics"
-                android:textAlignment="center"
-                android:textColor="@android:color/background_light"
-                android:textSize="25sp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TableLayout
+                android:id="@+id/statistic_table"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent" />
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/kenvector_future_thin"
-                        android:text="TextView"
-                        android:textColor="@android:color/background_light" />
-
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/kenvector_future_thin"
-                        android:text="TextView"
-                        android:textColor="@android:color/background_light" />
-                </TableRow>
-
-            </TableLayout>
+            <Button
+                android:id="@+id/rtn_btn_statistic"
+                style="@android:style/Widget.Material.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="Return to Demo Menu"
+                android:textAlignment="center" />
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

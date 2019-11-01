@@ -1,7 +1,6 @@
 package com.example.g0569.module.component;
 
 import com.example.g0569.module.game.Game;
-import com.example.g0569.module.utils.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;

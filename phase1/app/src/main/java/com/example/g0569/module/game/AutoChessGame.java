@@ -13,15 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoChessGame extends Game {
-
   // TODO still need to figure out a way to implement two different NPC's game.
   private int round = 0;
   private int number_win;
   private LevelTwoPlayer l2player;
   private int number_clicked = 1;
-
   private List<List<ChessPiece>> NPC_data = new ArrayList<>();
-  // save where the NPC place the chess piece for different round.
 
   AutoChessGame(GameManager gameManager) {
     super(gameManager);
@@ -44,6 +41,15 @@ public class AutoChessGame extends Game {
 
     NPC_data.add(NPC1_ChessPiece);
     NPC_data.add(NPC2_ChessPiece);
+  }
+  // save where the NPC place the chess piece for different round.
+
+  @Override
+  public void showStatistic() {
+    // TODO
+    List<String> statistic = new ArrayList<String>();
+    statistic.add("Number of Cards You Get: 2");
+    getGameManager().showStatistic(statistic);
   }
 
   public LevelTwoPlayer getL2player() {

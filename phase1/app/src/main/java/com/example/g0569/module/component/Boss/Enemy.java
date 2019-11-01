@@ -125,7 +125,7 @@ public class Enemy extends NonPlayerItem {
   public boolean isAttacked(float coordinateX, float coordinateY) {
     if ((getCoordinate().getX() < coordinateX && coordinateX < dest_rect.right)
         && (getCoordinate().getY() < coordinateY && coordinateY < dest_rect.bottom)) {
-//      System.out.println("I'm hit");
+      //      System.out.println("I'm hit");
       return true;
     }
     return false;

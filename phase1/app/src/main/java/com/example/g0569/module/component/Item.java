@@ -15,6 +15,7 @@ public abstract class Item {
   public Bitmap appearance;
   /** The Size of this item. */
   public int size;
+
   private Game game;
 
   /**
@@ -67,7 +68,7 @@ public abstract class Item {
   /**
    * Gets coordinate of this item.
    *
-   * @return the coordinate  of this item
+   * @return the coordinate of this item
    */
   public Coordinate getCoordinate() {
     return coordinate;
