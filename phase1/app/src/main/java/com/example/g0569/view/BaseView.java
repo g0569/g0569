@@ -8,19 +8,33 @@ import android.view.SurfaceView;
 
 import com.example.g0569.MainActivity;
 
+/** The Base of other views. */
 public class BaseView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
+  /** The Scale of the background. */
   protected float scalex;
+
   protected float scaley;
+
+  /** The Screen size. */
   protected float screen_width;
+
   protected float screen_height;
+
+  /** The Thread flag. */
   protected boolean threadFlag;
+
   protected Paint paint;
   protected Canvas canvas;
+
   protected SurfaceHolder sfh;
   protected Thread thread;
-
   protected MainActivity mainActivity;
 
+  /**
+   * Instantiates a new Baseview.
+   *
+   * @param context the context
+   */
   public BaseView(Context context) {
     super(context);
     sfh = this.getHolder();
@@ -44,11 +58,17 @@ public class BaseView extends SurfaceView implements SurfaceHolder.Callback, Run
     threadFlag = false;
   }
 
+  /** Draw this view. */
   public void draw() {}
 
   @Override
   public void run() {}
 
+  /**
+   * Sets thread flag.
+   *
+   * @param threadFlag the thread flag
+   */
   public void setThreadFlag(boolean threadFlag) {
     this.threadFlag = threadFlag;
   }

@@ -10,11 +10,17 @@ import android.view.SurfaceHolder;
 import com.example.g0569.R;
 import com.example.g0569.module.game.MazeGame;
 
+/** The Maze view. */
 public class MazeView extends BaseView {
 
   private Bitmap background;
   private MazeGame mazeGame;
 
+  /**
+   * Instantiates a new Maze view.
+   *
+   * @param context the context
+   */
   public MazeView(Context context) {
     super(context);
     paint.setTextSize(40);
@@ -76,14 +82,14 @@ public class MazeView extends BaseView {
       mazeGame.action();
       long endTime = System.currentTimeMillis();
       try {
-        if (endTime - startTime < 100) Thread.sleep( (100 - (endTime - startTime)));
+        if (endTime - startTime < 100) Thread.sleep((100 - (endTime - startTime)));
       } catch (InterruptedException err) {
         err.printStackTrace();
       }
     }
   }
 
-//  public int[] inRange()
+  //  public int[] inRange()
 
   @Override
   public boolean onTouchEvent(MotionEvent event) {

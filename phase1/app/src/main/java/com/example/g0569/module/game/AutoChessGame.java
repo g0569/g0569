@@ -45,6 +45,15 @@ public class AutoChessGame extends Game {
     NPC_data.add(NPC1_ChessPiece);
     NPC_data.add(NPC2_ChessPiece);
   }
+  // save where the NPC place the chess piece for different round.
+
+  @Override
+  public void showStatistic() {
+    // TODO
+    List<String> statistic = new ArrayList<String>();
+    statistic.add("Number of Cards You Get: 2");
+    getGameManager().showStatistic(statistic);
+  }
 
   public LevelTwoPlayer getL2player() {
     return l2player;

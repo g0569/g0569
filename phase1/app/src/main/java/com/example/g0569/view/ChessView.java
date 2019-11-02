@@ -12,6 +12,7 @@ import com.example.g0569.R;
 import com.example.g0569.module.game.AutoChessGame;
 import com.example.g0569.module.utils.Coordinate;
 
+/** The Chessview for the chessgame. */
 public class ChessView extends BaseView {
   private Bitmap background;
   private Bitmap inventory;
@@ -38,6 +39,11 @@ public class ChessView extends BaseView {
 
   private AutoChessGame autoChessGame;
 
+  /**
+   * Instantiates a new Chess view.
+   *
+   * @param context the context
+   */
   public ChessView(Context context) {
     super(context);
     paint.setTextSize(40);
@@ -158,6 +164,7 @@ public class ChessView extends BaseView {
         boolean result = autoChessGame.autoFight();
         if (result) {
           Toast.makeText(mainActivity, "You win the game!", Toast.LENGTH_SHORT).show();
+          autoChessGame.showStatistic();
         } else {
           Toast.makeText(mainActivity, "You lose the game!", Toast.LENGTH_SHORT).show();
         }

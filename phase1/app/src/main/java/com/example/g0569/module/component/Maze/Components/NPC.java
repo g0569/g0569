@@ -18,7 +18,8 @@ public class NPC extends NonPlayerItem {
   }
 
   /**
-   *Draw the NPC, text for now
+   * Draw the NPC, text for now
+   *
    * @param canvas of the button that is being drawn on
    * @param paint the style of the button
    */
@@ -36,15 +37,10 @@ public class NPC extends NonPlayerItem {
   @Override
   public void action() {}
 
-  /**
-   * Pop up the text showing the NPC is detected.
-   * Text for now.
-   */
+  /** Pop up the text showing the NPC is detected. Text for now. */
   public void pop() {
     Looper.prepare();
-        Toast.makeText(getGame().getGameManager().getMainActivity(), "test", Toast.LENGTH_SHORT)
-            .show();
-  Looper.loop();
+    Toast.makeText(getGame().getGameManager().getMainActivity(), "test", Toast.LENGTH_SHORT).show();
+    Looper.loop();
   }
-
 }

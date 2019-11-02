@@ -32,6 +32,7 @@ public class Wall extends NonPlayerItem {
 
   /**
    * Draw the bitmap wall
+   *
    * @param canvas of the button that is being drawn on
    * @param paint the style of the button
    */

@@ -16,7 +16,6 @@ public class LevelTwoPlayer extends Player {
     // Put three chess piece into the getInventory() area.
   }
 
-
   @Override
   public void draw(Canvas canvas, Paint paint) {}
 

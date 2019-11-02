@@ -21,8 +21,8 @@ public class Button extends NonPlayerItem {
 
   public Button(Game game) {
     super(game);
-    this.unitX = (int)(this.getGame().getGameManager().getScreen_width()*0.13/3);
-    this.unitY = (int)(this.getGame().getGameManager().getScreen_height()*0.13/3);
+    this.unitX = (int) (this.getGame().getGameManager().getScreen_width() * 0.13 / 3);
+    this.unitY = (int) (this.getGame().getGameManager().getScreen_height() * 0.13 / 3);
     this.screen_width = this.getGame().getGameManager().getScreen_width();
     this.screen_height = this.getGame().getGameManager().getScreen_height();
     this.coordinate = new Coordinate(16, 16);
@@ -31,27 +31,23 @@ public class Button extends NonPlayerItem {
     appearence =
         Bitmap.createScaledBitmap(
             appearence,
-            (int) ((this.getGame()).getGameManager().getScreen_width()*0.13),
-            (int) ((this.getGame()).getGameManager().getScreen_height()*0.13),
+            (int) ((this.getGame()).getGameManager().getScreen_width() * 0.13),
+            (int) ((this.getGame()).getGameManager().getScreen_height() * 0.13),
             false);
   }
   /**
    * Draws the button, red and big
+   *
    * @param canvas of the button that is being drawn on
    * @param paint the style of the button
    */
   @Override
   public void draw(Canvas canvas, Paint paint) {
     paint.setColor(Color.WHITE);
-    canvas.drawBitmap(
-        appearence,
-        screen_width - 4 * unitX,
-        screen_height - 4* unitY,
-        paint);
+    canvas.drawBitmap(appearence, screen_width - 4 * unitX, screen_height - 4 * unitY, paint);
   }
 
   /** Update */
   @Override
   public void action() {}
-
 }
