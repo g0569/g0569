@@ -16,6 +16,7 @@ import com.example.g0569.module.game.MazeGame;
 import com.example.g0569.module.utils.Coordinate;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MazePlayer extends Player {
 
@@ -74,7 +75,7 @@ public class MazePlayer extends Player {
       }
     } catch (Exception e) {
     }
-    this.interact();
+    //    this.interact();
   }
 
   /**
@@ -87,26 +88,12 @@ public class MazePlayer extends Player {
     int currY = (int) this.coordinate.getY();
     Item currItem;
     ArrayList<NPC> NPCAround = new ArrayList<>();
-    if (direction[0] != 1) {
-      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currY][currX + 1];
+    for (int i = -2; i <= 2; i++) {
+      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currY][currX + i];
       if (currItem instanceof NPC) {
         NPCAround.add((NPC) currItem);
       }
-    }
-    if (direction[0] != -1) {
-      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currY][currX - 1];
-      if (currItem instanceof NPC) {
-        NPCAround.add((NPC) currItem);
-      }
-    }
-    if (direction[1] != 1) {
-      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currY + 1][currX];
-      if (currItem instanceof NPC) {
-        NPCAround.add((NPC) currItem);
-      }
-    }
-    if (direction[1] != -1) {
-      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currY - 1][currX];
+      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currY + i][currX];
       if (currItem instanceof NPC) {
         NPCAround.add((NPC) currItem);
       }
@@ -123,16 +110,24 @@ public class MazePlayer extends Player {
     return direction;
   }
 
-  /** Interact with the NPC around. cannot continue moving after detecting right now. */
-  public void interact() {
-    for (NPC i : this.getNPCAround()) {
-      i.pop();
-      // it leads an error, cannot find symbol pop()
-      //      Looper.prepare();
-      //      Toast.makeText(getGame().getGameManager().getMainActivity(), "test",
-      // Toast.LENGTH_SHORT)
-      //          .show();
-      //      Looper.loop();
+  /**
+   * Interact with the NPC around. cannot continue moving after detecting right now. Will interact
+   * with NPC (but not now...
+   */
+  public boolean interact() {
+    //    for (NPC i : this.getNPCAround()) {
+    //      i.pop();
+    // it leads an error, cannot find symbol pop()
+    //      Looper.prepare();
+    //      Toast.makeText(getGame().getGameManager().getMainActivity(), "test",
+    // Toast.LENGTH_SHORT)
+    //          .show();
+    //      Looper.loop();
+    //    }
+    if (this.getNPCAround().size() != 0) {
+      return true;
+    } else {
+      return false;
     }
   }
 

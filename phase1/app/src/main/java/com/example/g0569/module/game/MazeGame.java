@@ -10,6 +10,9 @@ import com.example.g0569.module.component.Maze.MazeHelper;
 import com.example.g0569.module.utils.Coordinate;
 import com.example.g0569.utils.Constants;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MazeGame extends Game {
 
   private float grid_width;
@@ -22,10 +25,14 @@ public class MazeGame extends Game {
 
   public MazeGame(GameManager gameManager) {
     super(gameManager);
-    startpoint = new Coordinate(10, 10);
+    startpoint = new Coordinate(2, 2);
     grid_width = gameManager.getScreen_width() / Constants.GRID_NUM;
     grid_height = gameManager.getScreen_height() / Constants.GRID_NUM;
     onStart();
+  }
+
+  public MazePlayer getMazePlayer() {
+    return mazePlayer;
   }
 
   private void onStart() {
@@ -89,8 +96,8 @@ public class MazeGame extends Game {
   }
 
   public void draw(Canvas canvas, Paint paint) {
-    for (int i = 0; i < 10; i++) {
-      for (int j = 0; j < 10; j++) {
+    for (int i = 0; i < Constants.GRID_NUM; i++) {
+      for (int j = 0; j < Constants.GRID_NUM; j++) {
         if (myMazeItem[i][j] != null) {
           myMazeItem[i][j].draw(canvas, paint);
         }
@@ -110,5 +117,12 @@ public class MazeGame extends Game {
 
   public void stopMove() {
     mazePlayer.setDirection(0, 0);
+  }
+
+  public void showStatistic() {
+    // TODO
+    List<String> statistic = new ArrayList<String>();
+    statistic.add("Number of NPCs You catch: 1");
+    getGameManager().showStatistic(statistic);
   }
 }

@@ -60,7 +60,7 @@ public class MazeView extends BaseView {
       canvas.drawColor(Color.BLACK);
       canvas.save();
       canvas.scale(scalex, scaley, 0, 0);
-      canvas.drawBitmap(background, 0, 0, paint);
+//      canvas.drawBitmap(background, 0, 0, paint);
       canvas.restore();
       mazeGame.draw(canvas, paint);
 
@@ -97,6 +97,9 @@ public class MazeView extends BaseView {
       float x = event.getX();
       float y = event.getY();
       mazeGame.move(x, y);
+      if(mazeGame.getMazePlayer().interact()){
+        mazeGame.showStatistic();
+      }
       return true;
     } else if (event.getAction() == MotionEvent.ACTION_UP && event.getPointerCount() == 1) {
       mazeGame.stopMove();

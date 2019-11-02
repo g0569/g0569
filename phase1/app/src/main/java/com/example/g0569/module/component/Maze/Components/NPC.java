@@ -25,7 +25,7 @@ public class NPC extends NonPlayerItem {
    */
   @Override
   public void draw(Canvas canvas, Paint paint) {
-    paint.setColor(Color.CYAN);
+    paint.setColor(Color.WHITE);
     paint.setTextSize(70);
     canvas.drawText(
         "NPC",
@@ -39,8 +39,10 @@ public class NPC extends NonPlayerItem {
 
   /** Pop up the text showing the NPC is detected. Text for now. */
   public void pop() {
-    Looper.prepare();
-    Toast.makeText(getGame().getGameManager().getMainActivity(), "test", Toast.LENGTH_SHORT).show();
-    Looper.loop();
+    //    Looper.prepare();
+    //    getGame().getGameManager().getMainActivity().shootToast("test");
+    //    Toast.makeText(getGame().getGameManager().getMainActivity(), "test",
+    // Toast.LENGTH_SHORT).show();
+    //    Looper.loop();
   }
 }

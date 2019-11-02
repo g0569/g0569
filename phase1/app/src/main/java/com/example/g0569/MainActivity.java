@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.graphics.TypefaceCompat;
 
@@ -79,7 +80,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
    * @param statistics the list of statistic in String
    */
   public void appendStatisticView(List<String> statistics) {
-    FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(500, 300);
+    FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(700, 400);
     params1.gravity = Gravity.CENTER;
     addContentView(LayoutInflater.from(this).inflate(R.layout.page_statistic, null), params1);
 
