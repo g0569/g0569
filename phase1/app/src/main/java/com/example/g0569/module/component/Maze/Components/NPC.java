@@ -25,7 +25,7 @@ public class NPC extends NonPlayerItem {
    */
   @Override
   public void draw(Canvas canvas, Paint paint) {
-    paint.setColor(Color.WHITE);
+    paint.setColor(Color.GRAY);
     paint.setTextSize(70);
     canvas.drawText(
         "NPC",

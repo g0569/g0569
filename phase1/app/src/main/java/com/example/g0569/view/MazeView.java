@@ -57,7 +57,7 @@ public class MazeView extends BaseView {
   public void draw() {
     try {
       canvas = sfh.lockCanvas();
-      canvas.drawColor(Color.BLACK);
+      canvas.drawColor(Color.rgb(246, 216, 115));
       canvas.save();
       canvas.scale(scalex, scaley, 0, 0);
 //      canvas.drawBitmap(background, 0, 0, paint);

@@ -30,7 +30,7 @@ public class MazePlayer extends Player {
     this.coordinate = new Coordinate(x, y);
 
     Resources resources = getGame().getGameManager().getMainActivity().getResources();
-    this.appearance = BitmapFactory.decodeResource(resources, R.drawable.pacman);
+    this.appearance = BitmapFactory.decodeResource(resources, R.drawable.pacman_2);
     appearance =
         Bitmap.createScaledBitmap(
             appearance,
