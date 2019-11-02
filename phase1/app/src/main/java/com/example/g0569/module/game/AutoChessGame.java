@@ -47,11 +47,15 @@ public class AutoChessGame extends Game {
   }
   // save where the NPC place the chess piece for different round.
 
-  @Override
-  public void showStatistic() {
+  public void showStatistic(boolean win) {
     // TODO
     List<String> statistic = new ArrayList<String>();
-    statistic.add("Number of Cards You Get: 2");
+    if (win){
+      statistic.add("Number of Cards You Get: 2");
+    }
+    else {
+          statistic.add("Number of Cards You Get: 0");
+    }
     getGameManager().showStatistic(statistic);
   }
 

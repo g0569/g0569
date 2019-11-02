@@ -164,8 +164,9 @@ public class ChessView extends BaseView {
         boolean result = autoChessGame.autoFight();
         if (result) {
           Toast.makeText(mainActivity, "You win the game!", Toast.LENGTH_SHORT).show();
-          autoChessGame.showStatistic();
+          autoChessGame.showStatistic(true); // Win and get 2 cards.
         } else {
+          autoChessGame.showStatistic(false); // Lose and get 0 cards.
           Toast.makeText(mainActivity, "You lose the game!", Toast.LENGTH_SHORT).show();
         }
       } else if (x > inventory_x
