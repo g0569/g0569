@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/LinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_2"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Demo Menu"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_light"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/welcome_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent" />
+
+            <Button
+                android:id="@+id/btn_to_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="150dp"
+                android:onClick="onClick"
+                android:text="Log In" />
+
+            <Button
+                android:id="@+id/btn_to_signup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="150dp"
+                android:onClick="onClick"
+                android:text="Sign Up" />
+
+            <Button
+                android:id="@+id/btn_to_maze"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="150dp"
+                android:onClick="onClick"
+                android:text="Maze" />
+
+            <Button
+                android:id="@+id/btn_to_chess"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="150dp"
+                android:onClick="onClick"
+                android:text="Chess" />
+
+            <Button
+                android:id="@+id/btn_to_boss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="150dp"
+                android:onClick="onClick"
+                android:text="Boss" />
+
+            <Button
+                android:id="@+id/btn_to_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="150dp"
+                android:onClick="onClick"
+                android:text="Main Menu" />
+            <Button
+                android:id="@+id/btn_to_customization"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="150dp"
+                android:onClick="onClick"
+                android:text="Customization" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
