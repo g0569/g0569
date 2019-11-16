@@ -6,8 +6,14 @@ import android.graphics.Paint;
 import com.example.g0569.module.component.Player;
 import com.example.g0569.module.game.Game;
 
+/** The player in level two. */
 public class LevelTwoPlayer extends Player {
 
+  /**
+   * Initialize a player in level two.
+   *
+   * @param game the current game.
+   */
   public LevelTwoPlayer(Game game) {
     super(game);
     getInventory().add(new StarChessPiece(0, 0, game));
