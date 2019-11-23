@@ -207,20 +207,39 @@ public class BossGame extends Game {
    * @param y of the button
    */
   public void touch(float x, float y) {
-    if (inRange(x, y, shootButton.getX(), shootButton.getY(), shootButton.getR())) {
-      Toast.makeText(getGameManager().getMainActivity(), "Throw!!!!", Toast.LENGTH_SHORT).show();
-      this.hit();
-      // If we press the button on top is changes the color of the button
-    } else if(inRange(x,y,50,50, getGameManager().getScreenWidth()/20)){
-      shootButton.changeColor();
+    if (enemy.getHealth() > 0) {
+      if (inRange(x, y, shootButton.getX(), shootButton.getY(), shootButton.getR())) {
+        Toast.makeText(getGameManager().getMainActivity(), "Throw!!!!", Toast.LENGTH_SHORT).show();
+        this.hit();
+        // If we press the button on top is changes the color of the button
+      } else if (inRange(x, y, 50, 50, getGameManager().getScreenWidth() / 20)) {
+        shootButton.changeColor();
+      } else if (inRange(
+          x,
+          y,
+          pauseButton.getX(),
+          pauseButton.getY(),
+          pauseButton.getWidth(),
+          pauseButton.getHeight())) {
+        // Pauses the game if anywhere else is paused. Update later to include a pause button for
+        // all games
+        pause();
+      } else if (inRange(
+          x,
+          y,
+          menuButton.getX(),
+          menuButton.getY(),
+          menuButton.getWidth(),
+          menuButton.getHeight())) {
+        List<String> statistic = new ArrayList<String>();
+        getGameManager().showStatistic(statistic);
+      }
     }
-    else if(inRange(x, y, pauseButton.getX(), pauseButton.getY(), pauseButton.getWidth(), pauseButton.getHeight())){
-      // Pauses the game if anywhere else is paused. Update later to include a pause button for all games
-      pause();
-    }
-    else if(inRange(x, y, menuButton.getX(), menuButton.getY(), menuButton.getWidth(), menuButton.getHeight())){
+    else{
       List<String> statistic = new ArrayList<String>();
+      statistic.add("YOU WON!!!");
       getGameManager().showStatistic(statistic);
     }
   }
+
 }
