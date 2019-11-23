@@ -17,8 +17,8 @@ import java.util.List;
 /** The Game manager. */
 public class GameManager {
 
-  private float screen_width;
-  private float screen_height;
+  private float screenWidth;
+  private float screenHeight;
   private MainActivity mainActivity;
   private Game currentGame;
   private User user;
@@ -38,8 +38,8 @@ public class GameManager {
   public void onStart() {
     sqLitehelper = new SQLiteHelper(mainActivity, "users");
     // TODO Need to modify the way to get width and height since theses methods are deprecated now.
-    this.screen_width = mainActivity.getWindowManager().getDefaultDisplay().getWidth();
-    this.screen_height = mainActivity.getWindowManager().getDefaultDisplay().getHeight();
+    this.screenWidth = mainActivity.getWindowManager().getDefaultDisplay().getWidth();
+    this.screenHeight = mainActivity.getWindowManager().getDefaultDisplay().getHeight();
     mainActivity.getHandler().sendEmptyMessage(Constants.TO_MENU_VIEW);
   }
 
@@ -169,8 +169,8 @@ public class GameManager {
    *
    * @return the screen width
    */
-  public float getScreen_width() {
-    return screen_width;
+  public float getScreenWidth() {
+    return screenWidth;
   }
 
   /**
@@ -178,8 +178,8 @@ public class GameManager {
    *
    * @return the screen height
    */
-  public float getScreen_height() {
-    return screen_height;
+  public float getScreenHeight() {
+    return screenHeight;
   }
 
   /**

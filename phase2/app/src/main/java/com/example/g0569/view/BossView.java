@@ -35,8 +35,8 @@ public class BossView extends BaseView {
   public void surfaceCreated(SurfaceHolder holder) {
     super.surfaceCreated(holder);
     background = BitmapFactory.decodeResource(getResources(), R.drawable.bossforest);
-    scalex = screen_width / background.getWidth();
-    scaley = screen_height / background.getHeight();
+    scalex = screenWidth / background.getWidth();
+    scaley = screenHeight / background.getHeight();
     bossGame = (BossGame) mainActivity.getGameManager().getCurrentGame();
     bossGame.createItems(getResources());
     if (thread.isAlive()) {

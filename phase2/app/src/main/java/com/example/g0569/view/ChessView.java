@@ -56,16 +56,16 @@ public class ChessView extends BaseView {
     background = BitmapFactory.decodeResource(getResources(), R.drawable.autochessboard);
     button = BitmapFactory.decodeResource(getResources(), R.drawable.start);
     button = Bitmap.createScaledBitmap(button, 150, 150, false);
-    scalex = screen_width / background.getWidth();
-    scaley = screen_height / background.getHeight();
+    scalex = screenWidth / background.getWidth();
+    scaley = screenHeight / background.getHeight();
 
-    buttonX = screen_width * 0.9f;
-    buttonY = screen_height * 0.7f;
+    buttonX = screenWidth * 0.9f;
+    buttonY = screenHeight * 0.7f;
     //        buttonY2 = buttonY + button.getHeight() + 40;
     inventory = BitmapFactory.decodeResource(getResources(), R.drawable.iteminventory);
     inventory = Bitmap.createScaledBitmap(inventory, 200, 300, false);
-    inventoryX = screen_width / 30;
-    inventoryY = screen_height * 0.7f;
+    inventoryX = screenWidth / 30;
+    inventoryY = screenHeight * 0.7f;
 
     triangle = BitmapFactory.decodeResource(getResources(), R.drawable.triangle);
     triangle = Bitmap.createScaledBitmap(triangle, 80, 80, false);
@@ -74,8 +74,8 @@ public class ChessView extends BaseView {
 
     triangle2 = BitmapFactory.decodeResource(getResources(), R.drawable.triangle);
     triangle2 = Bitmap.createScaledBitmap(triangle, 80, 80, false);
-    triangle2X = screen_width * 0.6f;
-    triangle2Y = screen_height * 0.4f;
+    triangle2X = screenWidth * 0.6f;
+    triangle2Y = screenHeight * 0.4f;
 
     star = BitmapFactory.decodeResource(getResources(), R.drawable.star);
     star = Bitmap.createScaledBitmap(star, 80, 80, false);
@@ -84,8 +84,8 @@ public class ChessView extends BaseView {
 
     star2 = BitmapFactory.decodeResource(getResources(), R.drawable.star);
     star2 = Bitmap.createScaledBitmap(star, 80, 80, false);
-    star2X = screen_width * 0.6f;
-    star2Y = screen_height * 0.65f;
+    star2X = screenWidth * 0.6f;
+    star2Y = screenHeight * 0.65f;
 
     autoChessGame = (AutoChessGame) mainActivity.getGameManager().getCurrentGame();
 

@@ -37,27 +37,27 @@ public class BossGame extends Game {
 
     bossPlayer =
         new BossPlayer(
-            this, getGameManager().getScreen_width(), getGameManager().getScreen_height());
+            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
     enemy =
         new Enemy(
             this,
-            getGameManager().getScreen_width(),
-            getGameManager().getScreen_height(),
+            getGameManager().getScreenWidth(),
+            getGameManager().getScreenHeight(),
             resources);
     button =
-        new Button(this, getGameManager().getScreen_width(), getGameManager().getScreen_height());
+        new Button(this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
     healthBar = new HealthBar(this, resources);
     Star star =
         new Star(
             this,
-            getGameManager().getScreen_width(),
-            getGameManager().getScreen_height(),
+            getGameManager().getScreenWidth(),
+            getGameManager().getScreenHeight(),
             resources);
     Star star1 =
         new Star(
             this,
-            getGameManager().getScreen_width(),
-            getGameManager().getScreen_height(),
+            getGameManager().getScreenWidth(),
+            getGameManager().getScreenHeight(),
             resources);
 
     // Adds some stars for now just to show the game works
@@ -87,7 +87,7 @@ public class BossGame extends Game {
     // Draws teh button to change colors
     paint.setStyle(Paint.Style.FILL);
     paint.setColor(Color.RED);
-    canvas.drawCircle(50, 50, getGameManager().getScreen_width()/20, paint);
+    canvas.drawCircle(50, 50, getGameManager().getScreenWidth()/20, paint);
 
     // Draws the text to display stats and messages
 
@@ -95,13 +95,13 @@ public class BossGame extends Game {
     paint.setTextSize(50);
     canvas.drawText(
             "Items Left: " + items,
-            getGameManager().getScreen_width() / 2,
-            getGameManager().getScreen_height(),
+            getGameManager().getScreenWidth() / 2,
+            getGameManager().getScreenHeight(),
             paint);
     canvas.drawText(
             "Health Left: " + enemy.getHealth(),
             healthBar.getX(),
-            getGameManager().getScreen_height() / 2 + 50,
+            getGameManager().getScreenHeight() / 2 + 50,
             paint);
     paint.setColor(Color.BLACK);
     canvas.drawText("Change Color!!", 50, 50, paint);
@@ -115,7 +115,7 @@ public class BossGame extends Game {
         ThrownItems projectile;
         projectile = (ThrownItems) bossPlayer.getInventory().get(i);
         projectile.action();
-        if (!projectile.inTheScreen(getGameManager().getScreen_height())) {
+        if (!projectile.inTheScreen(getGameManager().getScreenHeight())) {
           bossPlayer.getInventory().remove(projectile);
         }
         if (enemy.isAttacked(projectile.getX(), projectile.getY())
@@ -188,7 +188,7 @@ public class BossGame extends Game {
       Toast.makeText(getGameManager().getMainActivity(), "Throw!!!!", Toast.LENGTH_SHORT).show();
       this.hit();
       // If we press the button on top is changes the color of the button
-    } else if(inRange(x,y,50,50, getGameManager().getScreen_width()/20)){
+    } else if(inRange(x,y,50,50, getGameManager().getScreenWidth()/20)){
       button.changeColor();
     }
     else {
