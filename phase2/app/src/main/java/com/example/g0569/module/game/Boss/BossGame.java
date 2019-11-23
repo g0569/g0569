@@ -4,10 +4,14 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.Menu;
 import android.widget.Toast;
 
 import com.example.g0569.module.component.Boss.BossPlayer;
 import com.example.g0569.module.component.Boss.Button;
+import com.example.g0569.module.component.Boss.MenuButton;
+import com.example.g0569.module.component.Boss.PauseButton;
+import com.example.g0569.module.component.Boss.ShootButton;
 import com.example.g0569.module.component.Boss.Enemy;
 import com.example.g0569.module.component.Boss.HealthBar;
 import com.example.g0569.module.component.Boss.Star;
@@ -15,10 +19,15 @@ import com.example.g0569.module.component.Boss.ThrownItems;
 import com.example.g0569.module.game.Game;
 import com.example.g0569.module.game.GameManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BossGame extends Game {
   BossPlayer bossPlayer;
   Enemy enemy;
-  Button button;
+  MenuButton menuButton;
+  PauseButton pauseButton;
+  ShootButton shootButton;
   HealthBar healthBar;
   int items;
   boolean paused;
@@ -44,8 +53,12 @@ public class BossGame extends Game {
             getGameManager().getScreenWidth(),
             getGameManager().getScreenHeight(),
             resources);
-    button =
-        new Button(this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
+    menuButton =
+        new MenuButton(this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
+    pauseButton =
+            new PauseButton(this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
+    shootButton =
+            new ShootButton(this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
     healthBar = new HealthBar(this, resources);
     Star star =
         new Star(
@@ -76,7 +89,9 @@ public class BossGame extends Game {
     enemy.draw(canvas, paint);
     bossPlayer.draw(canvas, paint);
 
-    button.draw(canvas, paint);
+    menuButton.draw(canvas, paint);
+    pauseButton.draw(canvas, paint);
+    shootButton.draw(canvas, paint);
     healthBar.draw(canvas, paint);
 
     for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
@@ -177,6 +192,14 @@ public class BossGame extends Game {
         && item_y < range_y + range_r);
   }
 
+  private boolean inRange(float item_x, float item_y, float range_x, float range_y, float range_dx, float range_dy) {
+    return (item_x > range_x
+            && item_x < range_x + range_dx
+            && item_y > range_y
+            && item_y < range_y + range_dy);
+  }
+
+
   /**
    * To do after the button has been pressed
    *
@@ -184,16 +207,20 @@ public class BossGame extends Game {
    * @param y of the button
    */
   public void touch(float x, float y) {
-    if (inRange(x, y, button.getX(), button.getY(), button.getR())) {
+    if (inRange(x, y, shootButton.getX(), shootButton.getY(), shootButton.getR())) {
       Toast.makeText(getGameManager().getMainActivity(), "Throw!!!!", Toast.LENGTH_SHORT).show();
       this.hit();
       // If we press the button on top is changes the color of the button
     } else if(inRange(x,y,50,50, getGameManager().getScreenWidth()/20)){
-      button.changeColor();
+      shootButton.changeColor();
     }
-    else {
+    else if(inRange(x, y, pauseButton.getX(), pauseButton.getY(), pauseButton.getWidth(), pauseButton.getHeight())){
       // Pauses the game if anywhere else is paused. Update later to include a pause button for all games
       pause();
+    }
+    else if(inRange(x, y, menuButton.getX(), menuButton.getY(), menuButton.getWidth(), menuButton.getHeight())){
+      List<String> statistic = new ArrayList<String>();
+      getGameManager().showStatistic(statistic);
     }
   }
 }
