@@ -16,15 +16,11 @@ public class Button extends Item {
   private Bitmap appearence;
   private int unitX;
   private int unitY;
-  private float screenWidth;
-  private float screenHeight;
 
   public Button(Game game) {
     super(game);
     this.unitX = (int) (this.getGame().getGameManager().getScreenWidth() * 0.13 / 3);
     this.unitY = (int) (this.getGame().getGameManager().getScreenHeight() * 0.13 / 3);
-    this.screenWidth = this.getGame().getGameManager().getScreenWidth();
-    this.screenHeight = this.getGame().getGameManager().getScreenHeight();
     this.coordinate = new Coordinate(16, 16);
     Resources resources = getGame().getGameManager().getMainActivity().getResources();
     this.appearence = BitmapFactory.decodeResource(resources, R.drawable.move_button);
@@ -43,6 +39,8 @@ public class Button extends Item {
    */
   @Override
   public void draw(Canvas canvas, Paint paint) {
+    float screenWidth = this.getGame().getGameManager().getScreenWidth();
+    float screenHeight = this.getGame().getGameManager().getScreenHeight();
     paint.setColor(Color.WHITE);
     canvas.drawBitmap(appearence, screenWidth - 4 * unitX, screenHeight - 4 * unitY, paint);
   }
