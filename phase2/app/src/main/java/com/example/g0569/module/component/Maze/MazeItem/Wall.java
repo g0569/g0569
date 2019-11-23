@@ -25,8 +25,8 @@ public class Wall extends NonPlayerItem {
     appearence =
         Bitmap.createScaledBitmap(
             appearence,
-            (int) ((MazeGame) this.getGame()).getGrid_width(),
-            (int) ((MazeGame) this.getGame()).getGrid_height(),
+            (int) ((MazeGame) this.getGame()).getGridWidth(),
+            (int) ((MazeGame) this.getGame()).getGridHeight(),
             false);
   }
 
@@ -42,8 +42,8 @@ public class Wall extends NonPlayerItem {
 
     canvas.drawBitmap(
         appearence,
-        this.getX() * ((MazeGame) this.getGame()).getGrid_width(),
-        this.getY() * ((MazeGame) this.getGame()).getGrid_height(),
+        this.getX() * ((MazeGame) this.getGame()).getGridWidth(),
+        this.getY() * ((MazeGame) this.getGame()).getGridHeight(),
         paint);
   }
 

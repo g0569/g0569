@@ -3,15 +3,13 @@ package com.example.g0569.module.component.Maze.Components;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Looper;
-import android.widget.Toast;
 
-import com.example.g0569.module.component.NonPlayerItem;
+import com.example.g0569.module.component.Item;
 import com.example.g0569.module.game.Game;
 import com.example.g0569.module.game.MazeGame;
 import com.example.g0569.module.utils.Coordinate;
 
-public class NPC extends NonPlayerItem {
+public class NPC extends Item {
   public NPC(Game game, float x, float y) {
     super(game);
     this.coordinate = new Coordinate(x, y);
@@ -29,8 +27,8 @@ public class NPC extends NonPlayerItem {
     paint.setTextSize(70);
     canvas.drawText(
         "NPC",
-        coordinate.getX() * ((MazeGame) getGame()).getGrid_width(),
-        coordinate.getY() * ((MazeGame) getGame()).getGrid_height(),
+        coordinate.getX() * ((MazeGame) getGame()).getGridWidth(),
+        coordinate.getY() * ((MazeGame) getGame()).getGridHeight(),
         paint);
   }
 

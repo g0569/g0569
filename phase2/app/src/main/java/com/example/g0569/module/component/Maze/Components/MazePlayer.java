@@ -16,7 +16,6 @@ import com.example.g0569.module.game.MazeGame;
 import com.example.g0569.module.utils.Coordinate;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MazePlayer extends Player {
 
@@ -34,8 +33,8 @@ public class MazePlayer extends Player {
     appearance =
         Bitmap.createScaledBitmap(
             appearance,
-            (int) ((MazeGame) this.getGame()).getGrid_width(),
-            (int) ((MazeGame) this.getGame()).getGrid_height(),
+            (int) ((MazeGame) this.getGame()).getGridWidth(),
+            (int) ((MazeGame) this.getGame()).getGridHeight(),
             false);
 
     direction[0] = 0f;
@@ -53,8 +52,8 @@ public class MazePlayer extends Player {
 
     canvas.drawBitmap(
         appearance,
-        this.coordinate.getX() * ((MazeGame) this.getGame()).getGrid_width(),
-        this.coordinate.getY() * ((MazeGame) this.getGame()).getGrid_height(),
+        this.coordinate.getX() * ((MazeGame) this.getGame()).getGridWidth(),
+        this.coordinate.getY() * ((MazeGame) this.getGame()).getGridHeight(),
         paint);
   }
 

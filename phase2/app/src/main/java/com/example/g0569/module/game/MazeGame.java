@@ -15,8 +15,8 @@ import java.util.List;
 
 public class MazeGame extends Game {
 
-  private float grid_width;
-  private float grid_height;
+  private float gridWidth;
+  private float gridHeight;
   private Coordinate startpoint;
 
   private Item[][] myMazeItem = new Item[Constants.GRID_NUM][Constants.GRID_NUM];
@@ -26,8 +26,8 @@ public class MazeGame extends Game {
   public MazeGame(GameManager gameManager) {
     super(gameManager);
     startpoint = new Coordinate(2, 2);
-    grid_width = gameManager.getScreen_width() / Constants.GRID_NUM;
-    grid_height = gameManager.getScreen_height() / Constants.GRID_NUM;
+    gridWidth = gameManager.getScreenWidth() / Constants.GRID_NUM;
+    gridHeight = gameManager.getScreenHeight() / Constants.GRID_NUM;
     onStart();
   }
 
@@ -46,12 +46,12 @@ public class MazeGame extends Game {
   @Override
   public void load() {}
 
-  public float getGrid_width() {
-    return grid_width;
+  public float getGridWidth() {
+    return gridWidth;
   }
 
-  public float getGrid_height() {
-    return grid_height;
+  public float getGridHeight() {
+    return gridHeight;
   }
 
   public Coordinate getStartpoint() {
@@ -63,10 +63,10 @@ public class MazeGame extends Game {
   }
 
   public void inRange(float x, float y) {
-    int unitX = (int) (this.getGameManager().getScreen_width() * 0.13 / 3);
-    int unitY = (int) (this.getGameManager().getScreen_height() * 0.13 / 3);
-    float screen_width = this.getGameManager().getScreen_width();
-    float screen_height = this.getGameManager().getScreen_height();
+    int unitX = (int) (this.getGameManager().getScreenWidth() * 0.13 / 3);
+    int unitY = (int) (this.getGameManager().getScreenHeight() * 0.13 / 3);
+    float screen_width = this.getGameManager().getScreenWidth();
+    float screen_height = this.getGameManager().getScreenHeight();
     if (x >= screen_width - 2 * unitX
         && x <= screen_width - unitX
         && y >= screen_height - 3 * unitY
