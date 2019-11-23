@@ -111,6 +111,9 @@ public class BossGame extends Game {
         paint);
     paint.setColor(Color.BLACK);
     canvas.drawText("Change Color!!", 50, 50, paint);
+    // TODO
+    // When you beat the enemy with the last star, "YOU LOSE" will shown until the star hits the
+    // enemy
     if (items < 1 && enemy.getHealth() > 0) {
       paint.setColor(Color.RED);
       paint.setTextSize(300);
@@ -222,9 +225,6 @@ public class BossGame extends Game {
       if (inRange(x, y, shootButton.getX(), shootButton.getY(), shootButton.getR())) {
         Toast.makeText(getGameManager().getMainActivity(), "Throw!!!!", Toast.LENGTH_SHORT).show();
         this.hit();
-        // If we press the button on top is changes the color of the button
-      } else if (inRange(x, y, 50, 50, getGameManager().getScreenWidth() / 20)) {
-        shootButton.changeColor();
       } else if (inRange(
           x,
           y,
