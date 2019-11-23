@@ -45,33 +45,25 @@ public class BossGame extends Game {
   public void createItems(Resources resources) {
 
     bossPlayer =
-        new BossPlayer(
-            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
+        new BossPlayer(this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
     enemy =
         new Enemy(
-            this,
-            getGameManager().getScreenWidth(),
-            getGameManager().getScreenHeight(),
-            resources);
+            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(), resources);
     menuButton =
         new MenuButton(this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
     pauseButton =
-            new PauseButton(this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
+        new PauseButton(
+            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
     shootButton =
-            new ShootButton(this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
+        new ShootButton(
+            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
     healthBar = new HealthBar(this, resources);
     Star star =
         new Star(
-            this,
-            getGameManager().getScreenWidth(),
-            getGameManager().getScreenHeight(),
-            resources);
+            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(), resources);
     Star star1 =
         new Star(
-            this,
-            getGameManager().getScreenWidth(),
-            getGameManager().getScreenHeight(),
-            resources);
+            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(), resources);
 
     // Adds some stars for now just to show the game works
     bossPlayer.getInventory().add(star);
@@ -101,29 +93,43 @@ public class BossGame extends Game {
     // Draws the button to change colors
     paint.setStyle(Paint.Style.FILL);
     paint.setColor(Color.RED);
-    canvas.drawCircle(50, 50, getGameManager().getScreenWidth()/20, paint);
+    canvas.drawCircle(50, 50, getGameManager().getScreenWidth() / 20, paint);
 
     // Draws the text to display stats and messages
 
     paint.setColor(Color.WHITE);
     paint.setTextSize(50);
     canvas.drawText(
-            "Items Left: " + items,
-            getGameManager().getScreenWidth() / 2,
-            getGameManager().getScreenHeight(),
-            paint);
+        "Items Left: " + items,
+        getGameManager().getScreenWidth() / 2,
+        getGameManager().getScreenHeight(),
+        paint);
     canvas.drawText(
-            "Health Left: " + StrictMath.max(0, enemy.getHealth()),
-            healthBar.getX(),
-            getGameManager().getScreenHeight() / 2 + 50,
-            paint);
+        "Health Left: " + StrictMath.max(0, enemy.getHealth()),
+        healthBar.getX(),
+        getGameManager().getScreenHeight() / 2 + 50,
+        paint);
     paint.setColor(Color.BLACK);
     canvas.drawText("Change Color!!", 50, 50, paint);
-    if(items<1 && enemy.getHealth() > 0){
+    if (items < 1 && enemy.getHealth() > 0) {
       paint.setColor(Color.RED);
       paint.setTextSize(300);
       float width = paint.measureText("You Lose!!!");
-      canvas.drawText("You Lose!!!", getGameManager().getScreenWidth() / 2 - width / 2, getGameManager().getScreenHeight() / 2, paint);
+      canvas.drawText(
+          "You Lose!!!",
+          getGameManager().getScreenWidth() / 2 - width / 2,
+          getGameManager().getScreenHeight() / 2,
+          paint);
+    }
+    if (paused) {
+      paint.setColor(Color.RED);
+      paint.setTextSize(300);
+      float width = paint.measureText("Paused");
+      canvas.drawText(
+          "Paused",
+          getGameManager().getScreenWidth() / 2 - width / 2,
+          getGameManager().getScreenHeight() / 2,
+          paint);
     }
   }
 
@@ -197,13 +203,13 @@ public class BossGame extends Game {
         && item_y < range_y + range_r);
   }
 
-  private boolean inRange(float item_x, float item_y, float range_x, float range_y, float range_dx, float range_dy) {
+  private boolean inRange(
+      float item_x, float item_y, float range_x, float range_y, float range_dx, float range_dy) {
     return (item_x > range_x
-            && item_x < range_x + range_dx
-            && item_y > range_y
-            && item_y < range_y + range_dy);
+        && item_x < range_x + range_dx
+        && item_y > range_y
+        && item_y < range_y + range_dy);
   }
-
 
   /**
    * To do after the button has been pressed
@@ -239,17 +245,14 @@ public class BossGame extends Game {
         List<String> statistic = new ArrayList<String>();
         getGameManager().showStatistic(statistic);
       }
-    }
-    else if(enemy.getHealth() <= 0){
+    } else if (enemy.getHealth() <= 0) {
       List<String> statistic = new ArrayList<String>();
       statistic.add("YOU WON!!!");
       getGameManager().showStatistic(statistic);
-    }
-    else if(items < 1){
+    } else if (items < 1) {
       List<String> statistic = new ArrayList<String>();
       statistic.add("YOU LOSE!!!");
       getGameManager().showStatistic(statistic);
     }
   }
-
 }
