@@ -119,7 +119,7 @@ public class BossGame extends Game {
             paint);
     paint.setColor(Color.BLACK);
     canvas.drawText("Change Color!!", 50, 50, paint);
-    if(items<1){
+    if(items<1 && enemy.getHealth() > 0){
       paint.setColor(Color.RED);
       paint.setTextSize(300);
       float width = paint.measureText("You Lose!!!");
