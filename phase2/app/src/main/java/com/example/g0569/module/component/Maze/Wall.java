@@ -1,4 +1,4 @@
-package com.example.g0569.module.component.Maze.MazeItem;
+package com.example.g0569.module.component.Maze;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -17,7 +17,7 @@ public class Wall extends NonPlayerItem {
 
   private Bitmap appearence;
 
-  public Wall(Game game, float x, float y) {
+  Wall(Game game, float x, float y) {
     super(game);
     this.coordinate = new Coordinate(x, y);
     Resources resources = getGame().getGameManager().getMainActivity().getResources();
@@ -49,6 +49,5 @@ public class Wall extends NonPlayerItem {
 
   @Override
   public void action() {
-    ;
   }
 }

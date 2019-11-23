@@ -1,4 +1,4 @@
-package com.example.g0569.module.component.Maze.Components;
+package com.example.g0569.module.component.Maze;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;

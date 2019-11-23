@@ -4,8 +4,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.example.g0569.module.component.Item;
-import com.example.g0569.module.component.Maze.Components.Button;
-import com.example.g0569.module.component.Maze.Components.MazePlayer;
+import com.example.g0569.module.component.Maze.Button;
+import com.example.g0569.module.component.Maze.MazePlayer;
 import com.example.g0569.module.component.Maze.MazeHelper;
 import com.example.g0569.module.utils.Coordinate;
 import com.example.g0569.utils.Constants;

@@ -1,4 +1,4 @@
-package com.example.g0569.module.component.Maze.Components;
+package com.example.g0569.module.component.Maze;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,7 +10,7 @@ import com.example.g0569.module.game.MazeGame;
 import com.example.g0569.module.utils.Coordinate;
 
 public class NPC extends Item {
-  public NPC(Game game, float x, float y) {
+  NPC(Game game, float x, float y) {
     super(game);
     this.coordinate = new Coordinate(x, y);
   }

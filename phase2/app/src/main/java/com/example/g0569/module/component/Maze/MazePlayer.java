@@ -1,4 +1,4 @@
-package com.example.g0569.module.component.Maze.Components;
+package com.example.g0569.module.component.Maze;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -9,7 +9,6 @@ import android.graphics.Paint;
 
 import com.example.g0569.R;
 import com.example.g0569.module.component.Item;
-import com.example.g0569.module.component.Maze.MazeItem.Wall;
 import com.example.g0569.module.component.Player;
 import com.example.g0569.module.game.Game;
 import com.example.g0569.module.game.MazeGame;
@@ -63,7 +62,7 @@ public class MazePlayer extends Player {
   }
 
   /** Move the player around (left and right) Detect the wall and NPCs. */
-  public void move() {
+  private void move() {
     float targetX = this.coordinate.getX() + direction[0];
     float targetY = this.coordinate.getY() + direction[1];
     try {
@@ -82,7 +81,7 @@ public class MazePlayer extends Player {
    *
    * @return an arraylist of NPC around
    */
-  public ArrayList<NPC> getNPCAround() {
+  private ArrayList<NPC> getNPCAround() {
     int currX = (int) this.coordinate.getX();
     int currY = (int) this.coordinate.getY();
     Item currItem;
@@ -123,11 +122,7 @@ public class MazePlayer extends Player {
     //          .show();
     //      Looper.loop();
     //    }
-    if (this.getNPCAround().size() != 0) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.getNPCAround().size() != 0;
   }
 
   /**
