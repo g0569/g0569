@@ -88,7 +88,6 @@ public class BossGame extends Game {
   public void draw(Canvas canvas, Paint paint) {
     enemy.draw(canvas, paint);
     bossPlayer.draw(canvas, paint);
-
     menuButton.draw(canvas, paint);
     pauseButton.draw(canvas, paint);
     shootButton.draw(canvas, paint);
@@ -99,7 +98,7 @@ public class BossGame extends Game {
       projectile = (ThrownItems) bossPlayer.getInventory().get(i);
       projectile.draw(canvas, paint);
     }
-    // Draws teh button to change colors
+    // Draws the button to change colors
     paint.setStyle(Paint.Style.FILL);
     paint.setColor(Color.RED);
     canvas.drawCircle(50, 50, getGameManager().getScreenWidth()/20, paint);
@@ -120,6 +119,12 @@ public class BossGame extends Game {
             paint);
     paint.setColor(Color.BLACK);
     canvas.drawText("Change Color!!", 50, 50, paint);
+    if(items<1){
+      paint.setColor(Color.RED);
+      paint.setTextSize(300);
+      float width = paint.measureText("You Lose!!!");
+      canvas.drawText("You Lose!!!", getGameManager().getScreenWidth() / 2 - width / 2, getGameManager().getScreenHeight() / 2, paint);
+    }
   }
 
   /** Updates all the components that are part of the lab */
@@ -207,7 +212,7 @@ public class BossGame extends Game {
    * @param y of the button
    */
   public void touch(float x, float y) {
-    if (enemy.getHealth() > 0) {
+    if (enemy.getHealth() > 0 && items >= 1) {
       if (inRange(x, y, shootButton.getX(), shootButton.getY(), shootButton.getR())) {
         Toast.makeText(getGameManager().getMainActivity(), "Throw!!!!", Toast.LENGTH_SHORT).show();
         this.hit();
@@ -235,9 +240,14 @@ public class BossGame extends Game {
         getGameManager().showStatistic(statistic);
       }
     }
-    else{
+    else if(enemy.getHealth() <= 0){
       List<String> statistic = new ArrayList<String>();
       statistic.add("YOU WON!!!");
+      getGameManager().showStatistic(statistic);
+    }
+    else if(items < 1){
+      List<String> statistic = new ArrayList<String>();
+      statistic.add("YOU LOSE!!!");
       getGameManager().showStatistic(statistic);
     }
   }
