@@ -2,9 +2,9 @@ package com.example.g0569.utils;
 
 public interface Constants {
   int TO_MENU_VIEW = 0;
-  int TO_LOGIN_VIEW = 1;
+  String TO_LOGIN_VIEW = "1";
   int TO_END_VIEW = 2;
-  int TO_SIGNUP_VIEW = 3;
+  String TO_SIGNUP_VIEW = "3";
   int TO_BOSS_VIEW = 4;
   int TO_CHESS_VIEW = 5;
   int TO_MAZE_VIEW = 6;

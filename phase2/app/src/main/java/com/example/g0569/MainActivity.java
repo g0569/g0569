@@ -52,12 +52,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case Constants.TO_MENU_VIEW:
               toMenuView();
               break;
-            case Constants.TO_LOGIN_VIEW:
-              toLoginView();
-              break;
-            case Constants.TO_SIGNUP_VIEW:
-              toSignUpView();
-              break;
             case Constants.TO_CHESS_VIEW:
               toChessView();
               break;
@@ -124,24 +118,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     chessview = null;
   }
 
-  private void toSignUpView() {
-    setNull();
-    setContentView(R.layout.page_signup);
-    ((Button) findViewById(R.id.signup_button)).setOnClickListener(this);
-    ((TextView) findViewById(R.id.to_login)).setOnClickListener(this);
-  }
-
   private void toMenuView() {
     setNull();
     mainMenuView = new MainMenuView(this);
     setContentView(mainMenuView);
-  }
-
-  private void toLoginView() {
-    setNull();
-    setContentView(R.layout.page_login);
-    ((Button) findViewById(R.id.login_button)).setOnClickListener(this);
-    ((TextView) findViewById(R.id.to_signup)).setOnClickListener(this);
   }
 
   private void toChessView() {
@@ -178,12 +158,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         EditText password = (EditText) findViewById(R.id.passsword);
         gameManager.login(email.getText().toString(), password.getText().toString());
         break;
-      case (R.id.to_signup):
-        handler.sendEmptyMessage(Constants.TO_SIGNUP_VIEW);
-        break;
-      case (R.id.to_login):
-        handler.sendEmptyMessage(Constants.TO_LOGIN_VIEW);
-        break;
       case (R.id.signup_button):
         gameManager.signUp(
             ((EditText) findViewById(R.id.signup_input_email)).getText().toString(),
@@ -201,12 +175,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         break;
       case (R.id.btn_to_main):
         toMenuView();
-        break;
-      case (R.id.btn_to_login):
-        toLoginView();
-        break;
-      case (R.id.btn_to_signup):
-        toSignUpView();
         break;
       case (R.id.rtn_btn_statistic):
         toDemoView();

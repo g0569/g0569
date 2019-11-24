@@ -6,10 +6,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import com.example.g0569.MainActivity;
-import com.example.g0569.module.User;
+import com.example.g0569.auth.model.User;
 import com.example.g0569.module.game.Boss.BossGame;
-import com.example.g0569.module.utils.SQLiteHelper;
-import com.example.g0569.module.utils.Utils;
+import com.example.g0569.utils.SQLiteHelper;
+import com.example.g0569.utils.Utils;
 import com.example.g0569.utils.Constants;
 
 import java.util.List;
@@ -94,9 +94,9 @@ public class GameManager {
               null);
       if (cursor.getCount() > 0) {
         cursor.moveToNext();
-        user = new User(this, cursor.getInt(cursor.getColumnIndex("uid")));
-        Toast.makeText(mainActivity, "Welcome Back, " + user.getUsername(), Toast.LENGTH_SHORT)
-            .show();
+//        user = new User(this, cursor.getInt(cursor.getColumnIndex("uid")));
+//        Toast.makeText(mainActivity, "Welcome Back, " + user.getUsername(), Toast.LENGTH_SHORT)
+//            .show();
         mainActivity.getHandler().sendEmptyMessage(Constants.TO_DEMO_VIEW);
         f = true;
       } else {
@@ -131,7 +131,7 @@ public class GameManager {
       db.insert("users", null, contentValues);
       Toast.makeText(mainActivity, "Sign up Successfully", Toast.LENGTH_SHORT).show();
       f = true;
-      mainActivity.getHandler().sendEmptyMessage(Constants.TO_LOGIN_VIEW);
+//      mainActivity.getHandler().sendEmptyMessage(Constants.TO_LOGIN_VIEW);
     } catch (Exception e) {
       Toast.makeText(mainActivity, "Error occured", Toast.LENGTH_SHORT).show();
     } finally {
