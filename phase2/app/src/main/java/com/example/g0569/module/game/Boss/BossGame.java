@@ -4,10 +4,14 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.Menu;
 import android.widget.Toast;
 
 import com.example.g0569.module.component.Boss.BossPlayer;
 import com.example.g0569.module.component.Boss.Button;
+import com.example.g0569.module.component.Boss.MenuButton;
+import com.example.g0569.module.component.Boss.PauseButton;
+import com.example.g0569.module.component.Boss.ShootButton;
 import com.example.g0569.module.component.Boss.Enemy;
 import com.example.g0569.module.component.Boss.HealthBar;
 import com.example.g0569.module.component.Boss.Star;
@@ -15,10 +19,15 @@ import com.example.g0569.module.component.Boss.ThrownItems;
 import com.example.g0569.module.game.Game;
 import com.example.g0569.module.game.GameManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BossGame extends Game {
   BossPlayer bossPlayer;
   Enemy enemy;
-  Button button;
+  MenuButton menuButton;
+  PauseButton pauseButton;
+  ShootButton shootButton;
   HealthBar healthBar;
   int items;
   boolean paused;
@@ -36,29 +45,25 @@ public class BossGame extends Game {
   public void createItems(Resources resources) {
 
     bossPlayer =
-        new BossPlayer(
-            this, getGameManager().getScreen_width(), getGameManager().getScreen_height());
+        new BossPlayer(this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
     enemy =
         new Enemy(
-            this,
-            getGameManager().getScreen_width(),
-            getGameManager().getScreen_height(),
-            resources);
-    button =
-        new Button(this, getGameManager().getScreen_width(), getGameManager().getScreen_height());
+            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(), resources);
+    menuButton =
+        new MenuButton(this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
+    pauseButton =
+        new PauseButton(
+            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
+    shootButton =
+        new ShootButton(
+            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
     healthBar = new HealthBar(this, resources);
     Star star =
         new Star(
-            this,
-            getGameManager().getScreen_width(),
-            getGameManager().getScreen_height(),
-            resources);
+            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(), resources);
     Star star1 =
         new Star(
-            this,
-            getGameManager().getScreen_width(),
-            getGameManager().getScreen_height(),
-            resources);
+            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(), resources);
 
     // Adds some stars for now just to show the game works
     bossPlayer.getInventory().add(star);
@@ -75,8 +80,9 @@ public class BossGame extends Game {
   public void draw(Canvas canvas, Paint paint) {
     enemy.draw(canvas, paint);
     bossPlayer.draw(canvas, paint);
-
-    button.draw(canvas, paint);
+    menuButton.draw(canvas, paint);
+    pauseButton.draw(canvas, paint);
+    shootButton.draw(canvas, paint);
     healthBar.draw(canvas, paint);
 
     for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
@@ -84,27 +90,50 @@ public class BossGame extends Game {
       projectile = (ThrownItems) bossPlayer.getInventory().get(i);
       projectile.draw(canvas, paint);
     }
-    // Draws teh button to change colors
+    // Draws the button to change colors
     paint.setStyle(Paint.Style.FILL);
     paint.setColor(Color.RED);
-    canvas.drawCircle(50, 50, getGameManager().getScreen_width()/20, paint);
+    canvas.drawCircle(50, 50, getGameManager().getScreenWidth() / 20, paint);
 
     // Draws the text to display stats and messages
 
     paint.setColor(Color.WHITE);
     paint.setTextSize(50);
     canvas.drawText(
-            "Items Left: " + items,
-            getGameManager().getScreen_width() / 2,
-            getGameManager().getScreen_height(),
-            paint);
+        "Items Left: " + items,
+        getGameManager().getScreenWidth() / 2,
+        getGameManager().getScreenHeight(),
+        paint);
     canvas.drawText(
-            "Health Left: " + enemy.getHealth(),
-            healthBar.getX(),
-            getGameManager().getScreen_height() / 2 + 50,
-            paint);
+        "Health Left: " + StrictMath.max(0, enemy.getHealth()),
+        healthBar.getX(),
+        getGameManager().getScreenHeight() / 2 + 50,
+        paint);
     paint.setColor(Color.BLACK);
     canvas.drawText("Change Color!!", 50, 50, paint);
+    // TODO
+    // When you beat the enemy with the last star, "YOU LOSE" will shown until the star hits the
+    // enemy
+    if (items < 1 && enemy.getHealth() > 0) {
+      paint.setColor(Color.RED);
+      paint.setTextSize(300);
+      float width = paint.measureText("You Lose!!!");
+      canvas.drawText(
+          "You Lose!!!",
+          getGameManager().getScreenWidth() / 2 - width / 2,
+          getGameManager().getScreenHeight() / 2,
+          paint);
+    }
+    if (paused) {
+      paint.setColor(Color.RED);
+      paint.setTextSize(300);
+      float width = paint.measureText("Paused");
+      canvas.drawText(
+          "Paused",
+          getGameManager().getScreenWidth() / 2 - width / 2,
+          getGameManager().getScreenHeight() / 2,
+          paint);
+    }
   }
 
   /** Updates all the components that are part of the lab */
@@ -115,7 +144,7 @@ public class BossGame extends Game {
         ThrownItems projectile;
         projectile = (ThrownItems) bossPlayer.getInventory().get(i);
         projectile.action();
-        if (!projectile.inTheScreen(getGameManager().getScreen_height())) {
+        if (!projectile.inTheScreen(getGameManager().getScreenHeight())) {
           bossPlayer.getInventory().remove(projectile);
         }
         if (enemy.isAttacked(projectile.getX(), projectile.getY())
@@ -177,6 +206,14 @@ public class BossGame extends Game {
         && item_y < range_y + range_r);
   }
 
+  private boolean inRange(
+      float item_x, float item_y, float range_x, float range_y, float range_dx, float range_dy) {
+    return (item_x > range_x
+        && item_x < range_x + range_dx
+        && item_y > range_y
+        && item_y < range_y + range_dy);
+  }
+
   /**
    * To do after the button has been pressed
    *
@@ -184,16 +221,38 @@ public class BossGame extends Game {
    * @param y of the button
    */
   public void touch(float x, float y) {
-    if (inRange(x, y, button.getX(), button.getY(), button.getR())) {
-      Toast.makeText(getGameManager().getMainActivity(), "Throw!!!!", Toast.LENGTH_SHORT).show();
-      this.hit();
-      // If we press the button on top is changes the color of the button
-    } else if(inRange(x,y,50,50, getGameManager().getScreen_width()/20)){
-      button.changeColor();
-    }
-    else {
-      // Pauses the game if anywhere else is paused. Update later to include a pause button for all games
-      pause();
+    if (enemy.getHealth() > 0 && items >= 1) {
+      if (inRange(x, y, shootButton.getX(), shootButton.getY(), shootButton.getR())) {
+        Toast.makeText(getGameManager().getMainActivity(), "Throw!!!!", Toast.LENGTH_SHORT).show();
+        this.hit();
+      } else if (inRange(
+          x,
+          y,
+          pauseButton.getX(),
+          pauseButton.getY(),
+          pauseButton.getWidth(),
+          pauseButton.getHeight())) {
+        // Pauses the game if anywhere else is paused. Update later to include a pause button for
+        // all games
+        pause();
+      } else if (inRange(
+          x,
+          y,
+          menuButton.getX(),
+          menuButton.getY(),
+          menuButton.getWidth(),
+          menuButton.getHeight())) {
+        List<String> statistic = new ArrayList<String>();
+        getGameManager().showStatistic(statistic);
+      }
+    } else if (enemy.getHealth() <= 0) {
+      List<String> statistic = new ArrayList<String>();
+      statistic.add("YOU WON!!!");
+      getGameManager().showStatistic(statistic);
+    } else if (items < 1) {
+      List<String> statistic = new ArrayList<String>();
+      statistic.add("YOU LOSE!!!");
+      getGameManager().showStatistic(statistic);
     }
   }
 }

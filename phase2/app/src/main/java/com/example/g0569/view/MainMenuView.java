@@ -36,11 +36,11 @@ public class MainMenuView extends BaseView {
     super.surfaceCreated(holder);
     background = BitmapFactory.decodeResource(getResources(), R.drawable.bg);
     button = BitmapFactory.decodeResource(getResources(), R.drawable.bt_new);
-    scalex = screen_width / background.getWidth();
-    scaley = screen_height / background.getHeight();
+    scalex = screenWidth / background.getWidth();
+    scaley = screenHeight / background.getHeight();
 
-    button_x = screen_width / 2 - button.getWidth() / 2;
-    button_y = screen_height / 2 + button.getHeight();
+    button_x = screenWidth / 2 - button.getWidth() / 2;
+    button_y = screenHeight / 2 + button.getHeight();
     button_y2 = button_y + button.getHeight() + 40;
     if (thread.isAlive()) {
       thread.start();

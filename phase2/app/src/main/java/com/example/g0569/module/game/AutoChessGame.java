@@ -47,18 +47,18 @@ public class AutoChessGame extends Game {
     List<ChessPiece> NPC1ChessPiece = new ArrayList<>();
     NPC1ChessPiece.add(
         new StarChessPiece(
-            gameManager.getScreen_width() * 0.6f, gameManager.getScreen_height() * 0.4f, this));
+            gameManager.getScreenWidth() * 0.6f, gameManager.getScreenHeight() * 0.4f, this));
     NPC1ChessPiece.add(
         new TriangleChessPiece(
-            gameManager.getScreen_width() * 0.6f, gameManager.getScreen_height() * 0.65f, this));
+            gameManager.getScreenWidth() * 0.6f, gameManager.getScreenHeight() * 0.65f, this));
     //    NPC1ChessPiece.add(new StarChessPiece(1, 2));
     List<ChessPiece> NPC2ChessPiece = new ArrayList<>();
     NPC2ChessPiece.add(
         new TriangleChessPiece(
-            gameManager.getScreen_width() * 0.6f, gameManager.getScreen_height() * 0.4f, this));
+            gameManager.getScreenWidth() * 0.6f, gameManager.getScreenHeight() * 0.4f, this));
     NPC2ChessPiece.add(
         new StarChessPiece(
-            gameManager.getScreen_width() * 0.6f, gameManager.getScreen_height() * 0.65f, this));
+            gameManager.getScreenWidth() * 0.6f, gameManager.getScreenHeight() * 0.65f, this));
 
     NPCData.add(NPC1ChessPiece);
     NPCData.add(NPC2ChessPiece);
@@ -137,11 +137,11 @@ public class AutoChessGame extends Game {
           .get(chosenPlace)
           .getCoordinate()
           .setXY(
-              getGameManager().getScreen_width() * 0.45f,
-              getGameManager().getScreen_height() * 0.4f);
+              getGameManager().getScreenWidth() * 0.45f,
+              getGameManager().getScreenHeight() * 0.4f);
       clickNumbers++;
       return new Coordinate(
-          getGameManager().getScreen_width() * 0.45f, getGameManager().getScreen_height() * 0.4f);
+          getGameManager().getScreenWidth() * 0.45f, getGameManager().getScreenHeight() * 0.4f);
       //    } else if (clickNumbers == 2) {
     } else { // For now we use else here, since there is a limit for number of chess.
       // TODO
@@ -150,10 +150,10 @@ public class AutoChessGame extends Game {
           .get(chosenPlace)
           .getCoordinate()
           .setXY(
-              getGameManager().getScreen_width() * 0.45f,
-              getGameManager().getScreen_height() * 0.65f);
+              getGameManager().getScreenWidth() * 0.45f,
+              getGameManager().getScreenHeight() * 0.65f);
       return new Coordinate(
-          getGameManager().getScreen_width() * 0.45f, getGameManager().getScreen_height() * 0.65f);
+          getGameManager().getScreenWidth() * 0.45f, getGameManager().getScreenHeight() * 0.65f);
     }
   }
 

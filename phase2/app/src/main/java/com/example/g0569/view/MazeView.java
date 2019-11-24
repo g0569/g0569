@@ -31,8 +31,8 @@ public class MazeView extends BaseView {
   public void surfaceCreated(SurfaceHolder holder) {
     super.surfaceCreated(holder);
     background = BitmapFactory.decodeResource(getResources(), R.drawable.maze_background);
-    scalex = screen_width / background.getWidth();
-    scaley = screen_height / background.getHeight();
+    scalex = screenWidth / background.getWidth();
+    scaley = screenHeight / background.getHeight();
     mazeGame = (MazeGame) mainActivity.getGameManager().getCurrentGame();
     mazeGame.setMyMazeItem();
     if (thread.isAlive()) {

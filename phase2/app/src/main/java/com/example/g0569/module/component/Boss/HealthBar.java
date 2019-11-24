@@ -30,8 +30,8 @@ public class HealthBar extends NonPlayerItem {
   public HealthBar(Game game, Resources resources) {
     super(game);
     // Sets the height and width
-    screenHeight = game.getGameManager().getScreen_height();
-    screenWidth = game.getGameManager().getScreen_width();
+    screenHeight = game.getGameManager().getScreenHeight();
+    screenWidth = game.getGameManager().getScreenWidth();
 
     // Sets the size of the bar
     size = (int) screenWidth / 5;

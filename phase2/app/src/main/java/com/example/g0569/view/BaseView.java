@@ -16,9 +16,9 @@ public class BaseView extends SurfaceView implements SurfaceHolder.Callback, Run
   protected float scaley;
 
   /** The Screen size. */
-  protected float screen_width;
+  protected float screenWidth;
 
-  protected float screen_height;
+  protected float screenHeight;
 
   /** The Thread flag. */
   protected boolean threadFlag;
@@ -45,8 +45,8 @@ public class BaseView extends SurfaceView implements SurfaceHolder.Callback, Run
 
   @Override
   public void surfaceCreated(SurfaceHolder holder) {
-    screen_width = this.getWidth();
-    screen_height = this.getHeight();
+    screenWidth = this.getWidth();
+    screenHeight = this.getHeight();
     threadFlag = true;
   }
 

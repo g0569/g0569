@@ -1,8 +1,6 @@
 package com.example.g0569.module.component.Maze;
 
 import com.example.g0569.module.component.Item;
-import com.example.g0569.module.component.Maze.Components.NPC;
-import com.example.g0569.module.component.Maze.MazeItem.Wall;
 import com.example.g0569.module.game.Game;
 
 /** The Maze helper for phase 1 only. */
