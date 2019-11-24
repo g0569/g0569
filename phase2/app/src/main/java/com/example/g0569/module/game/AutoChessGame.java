@@ -20,9 +20,21 @@ public class AutoChessGame extends Game {
   private int winNumbers;
   private LevelTwoPlayer l2player;
   private int clickNumbers = 1;
+  private iData BoardData;
+
+  public void setBoardData(iData boardData) {
+    BoardData = boardData;
+  }
 
   private List<List<ChessPiece>> NPCData = new ArrayList<>();
   // save where the NPC place the chess piece for different round.
+
+
+  public void setNPCData(List<List<ChessPiece>> NPCData) {
+    String s = BoardData.getData();
+    // TODO Decoder for string. Add objects to NPCDATA.
+    this.NPCData = NPCData;
+  }
 
   /**
    * Initialize a game manager for AutoChessGame.
