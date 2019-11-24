@@ -91,7 +91,7 @@ public class MainMenuView extends BaseView {
           && y > button_y
           && y < button_y + button.getHeight()) {
         Toast.makeText(mainActivity, "Button was pressed", Toast.LENGTH_SHORT).show();
-        mainActivity.getHandler().sendEmptyMessage(Constants.TO_LOGIN_VIEW);
+//        mainActivity.getHandler().sendEmptyMessage(Constants.TO_LOGIN_VIEW);
       }
       return true;
     }
