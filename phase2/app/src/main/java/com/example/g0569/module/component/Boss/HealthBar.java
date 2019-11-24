@@ -8,9 +8,9 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.g0569.R;
-import com.example.g0569.module.component.NonPlayerItem;
-import com.example.g0569.module.game.Game;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.base.model.NonPlayerItem;
+import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.utils.Coordinate;
 
 public class HealthBar extends NonPlayerItem {
 
@@ -27,7 +27,7 @@ public class HealthBar extends NonPlayerItem {
   // The rectangle for the red bar which represents health
   private Rect healthRect;
 
-  public HealthBar(Game game, Resources resources) {
+  public HealthBar(BaseGame game, Resources resources) {
     super(game);
     // Sets the height and width
     screenHeight = game.getGameManager().getScreenHeight();

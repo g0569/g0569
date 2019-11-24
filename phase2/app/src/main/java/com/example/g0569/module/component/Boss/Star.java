@@ -7,11 +7,11 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.g0569.R;
-import com.example.g0569.module.game.Game;
+import com.example.g0569.base.model.BaseGame;
 
 public class Star extends ThrownItems {
 
-  public Star(Game game, float screen_width, float screen_height, Resources resource) {
+  public Star(BaseGame game, float screen_width, float screen_height, Resources resource) {
     super(game, screen_width, screen_height, resource);
     appearance = BitmapFactory.decodeResource(resource, R.drawable.star);
     damage = 20;

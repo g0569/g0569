@@ -1,4 +1,4 @@
-package com.example.g0569.module.utils;
+package com.example.g0569.utils;
 
 import java.util.Objects;
 

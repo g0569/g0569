@@ -1,11 +1,10 @@
-package com.example.g0569.module.component;
+package com.example.g0569.base.model;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import com.example.g0569.module.game.Game;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.utils.Coordinate;
 
 /** The smallest component in each game. */
 public abstract class Item {
@@ -16,14 +15,14 @@ public abstract class Item {
   /** The Size of this item. */
   public int size;
 
-  private Game game;
+  private BaseGame game;
 
   /**
    * Instantiates a new Item.
    *
    * @param game the game it corresponding to
    */
-  public Item(Game game) {
+  public Item(BaseGame game) {
     this.game = game;
   }
 
@@ -61,7 +60,7 @@ public abstract class Item {
    *
    * @return the game it corresponding to
    */
-  public Game getGame() {
+  public BaseGame getGame() {
     return game;
   }
 

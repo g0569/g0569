@@ -1,7 +1,8 @@
 package com.example.g0569.base;
 
-public interface BaseView<T> {
+import androidx.fragment.app.Fragment;
 
-    void setPresenter(T presenter);
+public abstract class BaseView<T> extends Fragment {
 
+  void setPresenter(T presenter) {}
 }

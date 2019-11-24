@@ -1,4 +1,4 @@
-package com.example.g0569.module.component.Maze;
+package com.example.g0569.base;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -8,16 +8,17 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.g0569.R;
-import com.example.g0569.module.component.Item;
-import com.example.g0569.module.game.Game;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.base.model.Item;
+import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.utils.Coordinate;
 
-public class Button extends Item {
+public class BaseButton extends Item {
   private Bitmap appearence;
   private int unitX;
   private int unitY;
 
-  public Button(Game game) {
+//  TODO
+  public BaseButton(BaseGame game) {
     super(game);
     this.unitX = (int) (this.getGame().getGameManager().getScreenWidth() * 0.13 / 3);
     this.unitY = (int) (this.getGame().getGameManager().getScreenHeight() * 0.13 / 3);

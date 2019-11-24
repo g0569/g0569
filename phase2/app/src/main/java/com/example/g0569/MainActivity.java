@@ -3,7 +3,6 @@ package com.example.g0569;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,22 +12,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.core.graphics.TypefaceCompat;
 
 import com.example.g0569.module.game.GameManager;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.view.BossView;
 import com.example.g0569.view.ChessView;
 import com.example.g0569.view.MainMenuView;
-import com.example.g0569.view.MazeView;
+import com.example.g0569.mazegame.MazeView;
 
 import java.util.List;
 

@@ -14,7 +14,7 @@ import com.example.g0569.module.game.Boss.BossGame;
 public class BossView extends BaseView {
   private BossGame bossGame;
   private Bitmap background;
-  //  private Button button;
+  //  private BaseButton button;
   //  private BossPlayer aim;
   //  private Enemy enemy;
   //    private ThrownItems item;

@@ -5,9 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.example.g0569.module.component.NonPlayerItem;
-import com.example.g0569.module.game.Game;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.base.model.NonPlayerItem;
+import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.utils.Coordinate;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class BossPlayer extends NonPlayerItem {
   // The inventory of the items the Player can throw
   private ArrayList<ThrownItems> inventory = new ArrayList<>();
 
-  public BossPlayer(Game game, float screenWidth, float screenHeight) {
+  public BossPlayer(BaseGame game, float screenWidth, float screenHeight) {
     super(game);
     r1 = screenWidth / 36;
     r2 = screenWidth / 200;

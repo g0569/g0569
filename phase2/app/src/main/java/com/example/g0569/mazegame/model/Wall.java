@@ -1,4 +1,4 @@
-package com.example.g0569.module.component.Maze;
+package com.example.g0569.mazegame.model;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -8,16 +8,15 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.g0569.R;
-import com.example.g0569.module.component.NonPlayerItem;
-import com.example.g0569.module.game.Game;
-import com.example.g0569.module.game.MazeGame;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.base.model.NonPlayerItem;
+import com.example.g0569.utils.Coordinate;
 
 public class Wall extends NonPlayerItem {
 
   private Bitmap appearence;
 
-  Wall(Game game, float x, float y) {
+  Wall(BaseGame game, float x, float y) {
     super(game);
     this.coordinate = new Coordinate(x, y);
     Resources resources = getGame().getGameManager().getMainActivity().getResources();

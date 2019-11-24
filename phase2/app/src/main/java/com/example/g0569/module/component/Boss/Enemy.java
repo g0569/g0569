@@ -9,9 +9,9 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.g0569.R;
-import com.example.g0569.module.component.NonPlayerItem;
+import com.example.g0569.base.model.NonPlayerItem;
 import com.example.g0569.module.game.Boss.BossGame;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.utils.Coordinate;
 
 public class Enemy extends NonPlayerItem {
   // The health and initial health of the Enemy

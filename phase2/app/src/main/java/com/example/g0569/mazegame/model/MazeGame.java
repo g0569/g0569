@@ -1,19 +1,19 @@
-package com.example.g0569.module.game;
+package com.example.g0569.mazegame.model;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import com.example.g0569.module.component.Item;
-import com.example.g0569.module.component.Maze.Button;
-import com.example.g0569.module.component.Maze.MazePlayer;
-import com.example.g0569.module.component.Maze.MazeHelper;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.base.BaseButton;
+import com.example.g0569.base.model.Item;
+import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.module.game.GameManager;
+import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MazeGame extends Game {
+public class MazeGame extends BaseGame {
 
   private float gridWidth;
   private float gridHeight;
@@ -21,7 +21,7 @@ public class MazeGame extends Game {
 
   private Item[][] myMazeItem = new Item[Constants.GRID_NUM][Constants.GRID_NUM];
   private MazePlayer mazePlayer;
-  private Button Button;
+  private BaseButton Button;
 
   public MazeGame(GameManager gameManager) {
     super(gameManager);
@@ -37,7 +37,7 @@ public class MazeGame extends Game {
 
   private void onStart() {
     mazePlayer = new MazePlayer(this);
-    Button = new Button(this);
+    Button = new BaseButton(this);
   }
 
   @Override

@@ -1,7 +1,7 @@
-package com.example.g0569.module.component.Maze;
+package com.example.g0569.mazegame.model;
 
-import com.example.g0569.module.component.Item;
-import com.example.g0569.module.game.Game;
+import com.example.g0569.base.model.Item;
+import com.example.g0569.base.model.BaseGame;
 
 /** The Maze helper for phase 1 only. */
 public class MazeHelper {
@@ -36,7 +36,7 @@ public class MazeHelper {
    * @param MyMazeItem the my maze item
    * @param game the game
    */
-  public static void loadMaze(Item[][] MyMazeItem, Game game) {
+  public static void loadMaze(Item[][] MyMazeItem, BaseGame game) {
     for (int i = 0; i < 20; i++) {
       for (int j = 0; j < 20; j++) {
         if (maze[i][j] == 0) {;

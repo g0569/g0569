@@ -4,9 +4,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.example.g0569.module.component.NonPlayerItem;
-import com.example.g0569.module.game.Game;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.base.model.NonPlayerItem;
 
 public class Button extends NonPlayerItem {
 
@@ -19,8 +18,8 @@ public class Button extends NonPlayerItem {
   float x;
   float y;
 
-  public Button(Game game, float screenWidth, float screenHeight) {
-    // Radius of Button
+  public Button(BaseGame game, float screenWidth, float screenHeight) {
+    // Radius of BaseButton
     super(game);
   }
 

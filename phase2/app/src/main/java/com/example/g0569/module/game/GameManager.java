@@ -7,6 +7,8 @@ import android.widget.Toast;
 
 import com.example.g0569.MainActivity;
 import com.example.g0569.auth.model.User;
+import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.mazegame.model.MazeGame;
 import com.example.g0569.module.game.Boss.BossGame;
 import com.example.g0569.utils.SQLiteHelper;
 import com.example.g0569.utils.Utils;
@@ -14,18 +16,18 @@ import com.example.g0569.utils.Constants;
 
 import java.util.List;
 
-/** The Game manager. */
+/** The BaseGame manager. */
 public class GameManager {
 
   private float screenWidth;
   private float screenHeight;
   private MainActivity mainActivity;
-  private Game currentGame;
+  private BaseGame currentGame;
   private User user;
   private SQLiteHelper sqLitehelper;
 
   /**
-   * Instantiates a new Game manager.
+   * Instantiates a new BaseGame manager.
    *
    * @param mainActivity the main activity
    */
@@ -160,7 +162,7 @@ public class GameManager {
    *
    * @return the current game
    */
-  public Game getCurrentGame() {
+  public BaseGame getCurrentGame() {
     return currentGame;
   }
 

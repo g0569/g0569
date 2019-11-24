@@ -1,6 +1,4 @@
-package com.example.g0569.module.component;
-
-import com.example.g0569.module.game.Game;
+package com.example.g0569.base.model;
 
 /** The item that is not controlled by the User. */
 public abstract class NonPlayerItem extends Item {
@@ -10,7 +8,7 @@ public abstract class NonPlayerItem extends Item {
    *
    * @param game the game it corresponding to
    */
-  public NonPlayerItem(Game game) {
+  public NonPlayerItem(BaseGame game) {
     super(game);
   }
 }

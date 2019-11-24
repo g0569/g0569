@@ -1,6 +1,4 @@
-package com.example.g0569.module.component;
-
-import com.example.g0569.module.game.Game;
+package com.example.g0569.base.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,7 @@ public abstract class Player extends Item {
    *
    * @param game the game
    */
-  public Player(Game game) {
+  public Player(BaseGame game) {
     super(game);
   }
 

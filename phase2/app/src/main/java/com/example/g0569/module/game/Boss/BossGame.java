@@ -4,11 +4,10 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.view.Menu;
 import android.widget.Toast;
 
+import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.module.component.Boss.BossPlayer;
-import com.example.g0569.module.component.Boss.Button;
 import com.example.g0569.module.component.Boss.MenuButton;
 import com.example.g0569.module.component.Boss.PauseButton;
 import com.example.g0569.module.component.Boss.ShootButton;
@@ -16,13 +15,12 @@ import com.example.g0569.module.component.Boss.Enemy;
 import com.example.g0569.module.component.Boss.HealthBar;
 import com.example.g0569.module.component.Boss.Star;
 import com.example.g0569.module.component.Boss.ThrownItems;
-import com.example.g0569.module.game.Game;
 import com.example.g0569.module.game.GameManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BossGame extends Game {
+public class BossGame extends BaseGame {
   BossPlayer bossPlayer;
   Enemy enemy;
   MenuButton menuButton;

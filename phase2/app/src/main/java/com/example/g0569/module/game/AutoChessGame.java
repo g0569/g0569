@@ -1,19 +1,20 @@
 package com.example.g0569.module.game;
 
-// import com.example.g0569.module.component.Player;
+// import com.example.g0569.base.model.Player;
 
+import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.module.component.LV2AutoChess.ChessPiece;
 import com.example.g0569.module.component.LV2AutoChess.LevelTwoPlayer;
 import com.example.g0569.module.component.LV2AutoChess.StarChessPiece;
 import com.example.g0569.module.component.LV2AutoChess.TriangleChessPiece;
-import com.example.g0569.module.component.NonPlayerItem;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.base.model.NonPlayerItem;
+import com.example.g0569.utils.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** A game manager for AutoChessGame. */
-public class AutoChessGame extends Game {
+public class AutoChessGame extends BaseGame {
 
   // TODO still need to figure out a way to implement two different NPC's game.
   private int round = 0;

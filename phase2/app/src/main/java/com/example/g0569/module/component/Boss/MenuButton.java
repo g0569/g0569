@@ -4,15 +4,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.example.g0569.module.game.Game;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.utils.Coordinate;
 
 public class MenuButton extends Button {
 
   private float width;
   private float height;
 
-  public MenuButton(Game game, float screenWidth, float screenHeight) {
+  public MenuButton(BaseGame game, float screenWidth, float screenHeight) {
     super(game, screenWidth, screenHeight);
     x = screenWidth / 12;
     y = screenHeight - screenWidth / 16;

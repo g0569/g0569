@@ -1,16 +1,15 @@
-package com.example.g0569.module.component.Maze;
+package com.example.g0569.mazegame.model;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.example.g0569.module.component.Item;
-import com.example.g0569.module.game.Game;
-import com.example.g0569.module.game.MazeGame;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.base.model.Item;
+import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.utils.Coordinate;
 
 public class NPC extends Item {
-  NPC(Game game, float x, float y) {
+  NPC(BaseGame game, float x, float y) {
     super(game);
     this.coordinate = new Coordinate(x, y);
   }

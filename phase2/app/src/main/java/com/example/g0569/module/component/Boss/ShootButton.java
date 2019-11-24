@@ -3,12 +3,12 @@ package com.example.g0569.module.component.Boss;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import com.example.g0569.module.game.Game;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.utils.Coordinate;
 
 public class ShootButton extends Button {
 
-    public ShootButton(Game game, float screenWidth, float screenHeight) {
+    public ShootButton(BaseGame game, float screenWidth, float screenHeight) {
         super(game, screenWidth, screenHeight);
         button_r = screenWidth / 16;
 

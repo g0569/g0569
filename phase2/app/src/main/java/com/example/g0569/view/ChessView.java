@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.g0569.R;
 import com.example.g0569.module.game.AutoChessGame;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.utils.Coordinate;
 
 /** The ChessView for the autoChessGame. */
 public class ChessView extends BaseView {

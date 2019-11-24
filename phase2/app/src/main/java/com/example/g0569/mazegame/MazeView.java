@@ -1,4 +1,4 @@
-package com.example.g0569.view;
+package com.example.g0569.mazegame;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,13 +8,15 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
 import com.example.g0569.R;
-import com.example.g0569.module.game.MazeGame;
+import com.example.g0569.mazegame.model.MazeGame;
+import com.example.g0569.view.BaseView;
 
 /** The Maze view. */
-public class MazeView extends BaseView {
+public class MazeView extends BaseView implements MazeContract.View{
 
   private Bitmap background;
   private MazeGame mazeGame;
+  private MazeContract.Presenter presenter;
 
   /**
    * Instantiates a new Maze view.
@@ -105,5 +107,10 @@ public class MazeView extends BaseView {
       mazeGame.stopMove();
     }
     return false;
+  }
+
+  @Override
+  public void setPresenter(MazeContract.Presenter presenter) {
+    this.presenter = presenter;
   }
 }

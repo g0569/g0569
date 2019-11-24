@@ -6,9 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
-import com.example.g0569.module.component.NonPlayerItem;
-import com.example.g0569.module.game.Game;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.base.model.NonPlayerItem;
+import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.utils.Coordinate;
 
 public class ThrownItems extends NonPlayerItem {
   // Some should be set outside the initalizer instead.
@@ -29,7 +29,7 @@ public class ThrownItems extends NonPlayerItem {
   private int x_direction;
   private int y_direction;
 
-  public ThrownItems(Game game, float screen_width, float screen_height, Resources resource) {
+  public ThrownItems(BaseGame game, float screen_width, float screen_height, Resources resource) {
     super(game);
     // Sets the size
     size = (int) screen_width / 12;

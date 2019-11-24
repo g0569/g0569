@@ -1,4 +1,4 @@
-package com.example.g0569.module.component.Maze;
+package com.example.g0569.mazegame.model;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -8,21 +8,19 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.g0569.R;
-import com.example.g0569.module.component.Item;
-import com.example.g0569.module.component.Player;
-import com.example.g0569.module.game.Game;
-import com.example.g0569.module.game.MazeGame;
-import com.example.g0569.module.utils.Coordinate;
+import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.base.model.Item;
+import com.example.g0569.base.model.Player;
+import com.example.g0569.utils.Coordinate;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MazePlayer extends Player {
 
   private float[] direction = new float[2];
   private Bitmap appearance;
 
-  public MazePlayer(Game game) {
+  public MazePlayer(BaseGame game) {
     super(game);
     float x = ((MazeGame) this.getGame()).getStartpoint().getX();
     float y = ((MazeGame) this.getGame()).getStartpoint().getY();
