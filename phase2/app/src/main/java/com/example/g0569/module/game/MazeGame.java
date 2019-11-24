@@ -62,6 +62,9 @@ public class MazeGame extends Game {
     this.inRange(x, y);
   }
 
+  /*
+  detecting the moving direction (sth for button to do.)
+   */
   public void inRange(float x, float y) {
     int unitX = (int) (this.getGameManager().getScreenWidth() * 0.13 / 3);
     int unitY = (int) (this.getGameManager().getScreenHeight() * 0.13 / 3);
