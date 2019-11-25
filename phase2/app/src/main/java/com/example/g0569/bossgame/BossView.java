@@ -102,7 +102,7 @@ public class BossView extends GameView implements BossContract.View {
     while (threadFlag) {
       long startTime = System.currentTimeMillis();
       draw();
-      //      bossGame.action();
+      //      bossGame.update();
       long endTime = System.currentTimeMillis();
       try {
         if (endTime - startTime < 1) Thread.sleep((long) (1 - (endTime - startTime)));
@@ -114,7 +114,7 @@ public class BossView extends GameView implements BossContract.View {
 private void initBitmaps(){
   background = BitmapFactory.decodeResource(getResources(), R.drawable.bossforest);
   bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.aim);
-  healthbar = BitmapFactory.decodeResource(resources, R.drawable.redbar);
+  healthBar = BitmapFactory.decodeResource(getResources(), R.drawable.redbar);
 
 }
   @Override
