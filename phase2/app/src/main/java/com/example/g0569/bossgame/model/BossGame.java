@@ -25,8 +25,8 @@ public class BossGame extends BaseGame {
   int items;
   boolean paused;
 
-  public BossGame(GameManager gameManager) {
-    super(gameManager);
+  public BossGame() {
+    super();
     paused = false;
   }
 

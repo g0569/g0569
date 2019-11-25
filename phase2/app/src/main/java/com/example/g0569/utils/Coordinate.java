@@ -18,6 +18,9 @@ public class Coordinate {
     this.y = y;
   }
 
+  public static Coordinate create(float x, float y){
+    return new Coordinate(x, y);
+  }
   /**
    * Gets x.
    *

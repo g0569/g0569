@@ -9,7 +9,6 @@ import com.example.g0569.MainActivity;
 import com.example.g0569.auth.model.User;
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.mazegame.model.MazeGame;
-import com.example.g0569.module.game.Boss.BossGame;
 import com.example.g0569.utils.SQLiteHelper;
 import com.example.g0569.utils.Utils;
 import com.example.g0569.utils.Constants;
@@ -43,24 +42,6 @@ public class GameManager {
     this.screenWidth = mainActivity.getWindowManager().getDefaultDisplay().getWidth();
     this.screenHeight = mainActivity.getWindowManager().getDefaultDisplay().getHeight();
     mainActivity.getHandler().sendEmptyMessage(Constants.TO_MENU_VIEW);
-  }
-
-  /** Start the maze game */
-  public void toMazeGame() {
-    mainActivity.getHandler().sendEmptyMessage(Constants.TO_MAZE_VIEW);
-    currentGame = new MazeGame(this);
-  }
-
-  /** Start the boss game. */
-  public void toBossGame() {
-    mainActivity.getHandler().sendEmptyMessage(Constants.TO_BOSS_VIEW);
-    currentGame = new BossGame(this);
-  }
-
-  /** Start the chess game. */
-  public void toChessGame() {
-    mainActivity.getHandler().sendEmptyMessage(Constants.TO_CHESS_VIEW);
-    currentGame = new AutoChessGame(this);
   }
 
   /**
