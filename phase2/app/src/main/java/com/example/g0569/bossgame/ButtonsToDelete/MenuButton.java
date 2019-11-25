@@ -1,4 +1,4 @@
-package com.example.g0569.bossgame;
+package com.example.g0569.bossgame.ButtonsToDelete;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,15 +7,15 @@ import android.graphics.Paint;
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.utils.Coordinate;
 
-public class PauseButton extends Button {
+public class MenuButton extends Button {
 
   private float width;
   private float height;
 
-  public PauseButton(BaseGame game, float screenWidth, float screenHeight) {
+  public MenuButton(BaseGame game, float screenWidth, float screenHeight) {
     super(game, screenWidth, screenHeight);
     x = screenWidth / 12;
-    y = screenHeight - screenWidth / 8;
+    y = screenHeight - screenWidth / 16;
     coordinate = new Coordinate(x, y);
     width = screenWidth / 8;
     height = screenWidth / 32;
@@ -35,14 +35,14 @@ public class PauseButton extends Button {
         height / 4,
         height / 4,
         paint);
-      paint.setColor(Color.BLACK);
-      paint.setTextSize(50);
-      float textWidth = paint.measureText("Pause");
-      canvas.drawText(
-              "Pause",
-              coordinate.getX() + (width - textWidth) / 2,
-              coordinate.getY() + (height + 50) / 2,
-              paint);
+    paint.setColor(Color.BLACK);
+    paint.setTextSize(50);
+    float textWidth = paint.measureText("Menu");
+    canvas.drawText(
+        "Menu",
+        coordinate.getX() + (width - textWidth) / 2,
+        coordinate.getY() + (height + 50) / 2,
+        paint);
   }
 
   public float getWidth() {

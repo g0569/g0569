@@ -12,9 +12,11 @@ import com.example.g0569.bossgame.model.BossGame;
 import com.example.g0569.view.BaseView;
 
 /** The Bossview for the bossgame. */
-public class BossView extends BaseView {
-  private BossGame bossGame;
+public class BossView extends BaseView implements BossContract.View{
+  private BossPresenter bossPresenter;
   private Bitmap background;
+  private Bitmap bossPlayer;
+
   //  private BaseButton button;
   //  private BossPlayer aim;
   //  private Enemy enemy;
@@ -35,11 +37,14 @@ public class BossView extends BaseView {
   @Override
   public void surfaceCreated(SurfaceHolder holder) {
     super.surfaceCreated(holder);
+
     background = BitmapFactory.decodeResource(getResources(), R.drawable.bossforest);
+    bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.aim);
+
     scalex = screenWidth / background.getWidth();
     scaley = screenHeight / background.getHeight();
-    bossGame = (BossGame) mainActivity.getGameManager().getCurrentGame();
-    bossGame.createItems(getResources());
+//    bossGame = (BossGame) mainActivity.getGameManager().getCurrentGame();
+//    bossGame.createItems(getResources());
     if (thread.isAlive()) {
       thread.start();
     } else {
@@ -67,7 +72,7 @@ public class BossView extends BaseView {
       canvas.scale(scalex, scaley, 0, 0);
       canvas.drawBitmap(background, 0, 0, paint);
       canvas.restore();
-      bossGame.draw(canvas, paint);
+//      bossGame.draw(canvas, paint);
     } catch (Exception err) {
       err.printStackTrace();
     } finally {
@@ -83,7 +88,7 @@ public class BossView extends BaseView {
       float x = event.getX();
       float y = event.getY();
       System.out.println(String.valueOf(x) + " " + String.valueOf(y));
-      bossGame.touch(x, y);
+//      bossGame.touch(x, y);
     }
     return false;
   }
@@ -93,7 +98,7 @@ public class BossView extends BaseView {
     while (threadFlag) {
       long startTime = System.currentTimeMillis();
       draw();
-      bossGame.action();
+//      bossGame.action();
       long endTime = System.currentTimeMillis();
       try {
         if (endTime - startTime < 1) Thread.sleep((long) (1 - (endTime - startTime)));
@@ -101,5 +106,10 @@ public class BossView extends BaseView {
         err.printStackTrace();
       }
     }
+  }
+
+  @Override
+  public void setPresenter(BossContract.Presenter presenter) {
+
   }
 }

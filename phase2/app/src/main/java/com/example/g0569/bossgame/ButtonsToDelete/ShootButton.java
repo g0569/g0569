@@ -1,4 +1,4 @@
-package com.example.g0569.bossgame;
+package com.example.g0569.bossgame.ButtonsToDelete;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

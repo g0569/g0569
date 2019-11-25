@@ -12,22 +12,26 @@ import com.example.g0569.R;
 import com.example.g0569.base.model.NonPlayerItem;
 import com.example.g0569.utils.Coordinate;
 
-public class Enemy extends NonPlayerItem {
+import java.util.List;
+
+public class Enemy extends NonPlayerItem implements Observable {
+
+  private List<Observer> observers;
   // The health and initial health of the Enemy
   private int health;
   private int initialHealth;
 
   // The direction it moves
-  private int x_direction;
-  private int y_direction;
+  private int xDirection;
+  private int yDirection;
 
   // The rectangles used for drawing
-  private Rect src_rect;
-  private Rect dest_rect;
+  private Rect srcRect;
+  private Rect destRect;
 
   // Screen Width and Height
-  private float screen_width;
-  private float screen_height;
+  private float screenWidth;
+  private float screenHeight;
 
   private Resources resource;
   private Bitmap appearance;
@@ -35,8 +39,8 @@ public class Enemy extends NonPlayerItem {
 
   public Enemy(BossGame game, float screenWidth, float screenHeight, Resources resource) {
     super(game);
-    this.screen_height = screenHeight;
-    this.screen_width = screenWidth;
+    this.screenHeight = screenHeight;
+    this.screenWidth = screenWidth;
 
     // Appearance of the enemy
     this.resource = resource;
@@ -44,23 +48,23 @@ public class Enemy extends NonPlayerItem {
 
 
     // Size of the Enemy
-    size = (int) screen_width / 6;
+    size = (int) this.screenWidth / 6;
 
     // Sets the coordinate of the Enemy
-    float y = (int) (screen_height / 2 - screen_width / 18 - size / 2);
+    float y = (int) (this.screenHeight / 2 - this.screenWidth / 18 - size / 2);
     coordinate = new Coordinate(0, y);
 
     // Sets the direction of the Enemy
-    x_direction = (int) screen_width / 100;
-    y_direction = 0;
+    xDirection = (int) this.screenWidth / 100;
+    yDirection = 0;
 
     // Sets the health of the boss
     health = 30;
     initialHealth = health;
 
     // Sets the rectangles to be drawn (size and stuff)
-    src_rect = new Rect(0, 0, appearance.getWidth(), appearance.getHeight());
-    dest_rect =
+    srcRect = new Rect(0, 0, appearance.getWidth(), appearance.getHeight());
+    destRect =
         new Rect(
             (int) coordinate.getX(),
             (int) coordinate.getY(),
@@ -76,10 +80,10 @@ public class Enemy extends NonPlayerItem {
   private void action(float screen_width) {
     if (health > 0) {
       if (coordinate.getX() <= 0) {
-        x_direction = Math.abs(x_direction);
+        xDirection = Math.abs(xDirection);
         appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyright);
       } else if (coordinate.getX() >= screen_width - size) {
-        x_direction = -Math.abs(x_direction);
+        xDirection = -Math.abs(xDirection);
         appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyleft);
       }
       //        action();
@@ -95,22 +99,22 @@ public class Enemy extends NonPlayerItem {
   @Override
   public void draw(Canvas canvas, Paint paint) {
     if (health > 0) {
-      canvas.drawBitmap(appearance, src_rect, dest_rect, paint);
+      canvas.drawBitmap(appearance, srcRect, destRect, paint);
     } else {
       paint.setColor(Color.RED);
       paint.setTextSize(300);
       float width = paint.measureText("You Won!!!");
-      canvas.drawText("You Won!!!", screen_width / 2 - width / 2, screen_height / 2, paint);
+      canvas.drawText("You Won!!!", screenWidth / 2 - width / 2, screenHeight / 2, paint);
     }
   }
 
   /** Moves the Enemy around, left and right right now */
   @Override
   public void action() {
-    action(screen_width);
-    coordinate.setX(coordinate.getX() + x_direction);
-    coordinate.setY(coordinate.getY() + y_direction);
-    dest_rect.set(
+    action(screenWidth);
+    coordinate.setX(coordinate.getX() + xDirection);
+    coordinate.setY(coordinate.getY() + yDirection);
+    destRect.set(
         (int) coordinate.getX(),
         (int) coordinate.getY(),
         (int) coordinate.getX() + size,
@@ -126,8 +130,8 @@ public class Enemy extends NonPlayerItem {
   }
 
   public boolean isAttacked(float coordinateX, float coordinateY) {
-    if ((getCoordinate().getX() < coordinateX && coordinateX < dest_rect.right)
-        && (getCoordinate().getY() < coordinateY && coordinateY < dest_rect.bottom)) {
+    if ((getCoordinate().getX() < coordinateX && coordinateX < destRect.right)
+        && (getCoordinate().getY() < coordinateY && coordinateY < destRect.bottom)) {
       //      System.out.println("I'm hit");
       return true;
     }
@@ -159,5 +163,31 @@ public class Enemy extends NonPlayerItem {
    */
   public int getInitialHealth() {
     return initialHealth;
+  }
+
+  @Override
+  public int getState() {
+    return getHealth();
+  }
+
+  @Override
+  public void setState(int state) {
+    health = state;
+  }
+
+  @Override
+  public void attach(Observer observer) {
+    this.observers.add(observer);
+  }
+
+  public int getInitialState(){
+    return getInitialHealth();
+  }
+
+  @Override
+  public void notifyAllObservers() {
+    for (Observer observer: observers){
+      observer.update();
+    }
   }
 }

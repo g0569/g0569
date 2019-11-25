@@ -12,8 +12,9 @@ import com.example.g0569.base.model.NonPlayerItem;
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.utils.Coordinate;
 
-public class HealthBar extends NonPlayerItem {
+public class HealthBar extends NonPlayerItem implements Observer{
 
+  private Observable observable;
   // The screenWidth and Screen Height
   private float screenWidth;
   private float screenHeight;
@@ -92,5 +93,10 @@ public class HealthBar extends NonPlayerItem {
     int totalBar = getSize();
     int healthToDraw = health * totalBar / totalHealth;
     return totalBar - healthToDraw;
+  }
+
+  @Override
+  public void update() {
+    action(observable.getState(), observable.getInitialState());
   }
 }

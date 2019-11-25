@@ -7,9 +7,9 @@ import android.graphics.Paint;
 import android.widget.Toast;
 
 import com.example.g0569.base.model.BaseGame;
-import com.example.g0569.bossgame.MenuButton;
-import com.example.g0569.bossgame.PauseButton;
-import com.example.g0569.bossgame.ShootButton;
+import com.example.g0569.bossgame.ButtonsToDelete.MenuButton;
+import com.example.g0569.bossgame.ButtonsToDelete.PauseButton;
+import com.example.g0569.bossgame.ButtonsToDelete.ShootButton;
 import com.example.g0569.module.game.GameManager;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class BossGame extends BaseGame {
   public void createItems(Resources resources) {
 
     bossPlayer =
-        new BossPlayer(this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
+        new BossPlayer(this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(), resources);
     enemy =
         new Enemy(
             this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(), resources);

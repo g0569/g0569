@@ -22,7 +22,7 @@ public class BossActivity extends AppCompatActivity {
 
             }
         };
-//        bossView.setPresenter(presenter);
+        bossView.setPresenter(presenter);
         setContentView(bossView);
     }
 }

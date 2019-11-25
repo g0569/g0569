@@ -10,7 +10,7 @@ import com.example.g0569.base.model.NonPlayerItem;
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.utils.Coordinate;
 
-public class ThrownItems extends NonPlayerItem {
+public class ThrownItems extends NonPlayerItem implements Observer {
   // Some should be set outside the initalizer instead.
 
   // How much damange the item has
@@ -137,5 +137,10 @@ public class ThrownItems extends NonPlayerItem {
     }
     //    System.out.println("Not attacked");
     return false;
+  }
+
+  @Override
+  public void update() {
+    // Could have experience section that updates
   }
 }
