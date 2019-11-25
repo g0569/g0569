@@ -12,13 +12,14 @@ public class MazePlayer extends Player {
   Coordinate direction;
   private Coordinate appearenceSize;
   private Coordinate coordinate;
+  private MazeGame game;
 
   public MazePlayer(MazeGame game) {
     super(game);
+    this.game = game;
     float x = ((MazeGame) this.getGame()).getStartpoint().getX();
     float y = ((MazeGame) this.getGame()).getStartpoint().getY();
     this.coordinate = new Coordinate(x, y);
-    appearenceSize = game.getPlayerDimensions();
   direction = Coordinate.create(0,0);
   }
 
@@ -27,6 +28,7 @@ public class MazePlayer extends Player {
   }
 
   public void update() {
+    appearenceSize = game.getPlayerDimensions();
     this.move();
   }
 

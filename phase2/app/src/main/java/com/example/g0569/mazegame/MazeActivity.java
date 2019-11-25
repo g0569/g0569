@@ -20,4 +20,10 @@ public class MazeActivity extends AppCompatActivity {
         presenter = new MazePresenter(mazeView);
         setContentView(mazeView);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.start();
+    }
 }

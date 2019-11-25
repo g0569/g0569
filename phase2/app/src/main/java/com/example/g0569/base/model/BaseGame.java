@@ -1,8 +1,5 @@
 package com.example.g0569.base.model;
 
-import com.example.g0569.base.model.NonPlayerItem;
-import com.example.g0569.module.game.GameManager;
-
 import java.util.ArrayList;
 import java.util.List;
 

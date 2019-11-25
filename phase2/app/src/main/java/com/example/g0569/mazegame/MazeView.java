@@ -9,7 +9,6 @@ import android.view.SurfaceHolder;
 
 import com.example.g0569.R;
 import com.example.g0569.base.GameView;
-import com.example.g0569.mazegame.model.MazeGame;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
 
@@ -41,6 +40,8 @@ public class MazeView extends GameView implements MazeContract.View {
   @Override
   public void surfaceCreated(SurfaceHolder holder) {
     super.surfaceCreated(holder);
+    gridHeight = getHeight() / Constants.GRID_HEIGHT;
+    gridWidth = getWidth() / Constants.GRID_WIDTH;
     initBitmaps();
 
     if (thread.isAlive()) {
@@ -122,18 +123,18 @@ public class MazeView extends GameView implements MazeContract.View {
     scaley = screenHeight / background.getHeight();
 
     wall = BitmapFactory.decodeResource(getResources(), R.drawable.tile);
-    wall = Bitmap.createScaledBitmap(wall, getWidth(), getHeight(), false);
+    wall = Bitmap.createScaledBitmap(wall, getWidth()/Constants.GRID_WIDTH, getHeight()/Constants.GRID_HEIGHT, false);
     player = BitmapFactory.decodeResource(getResources(), R.drawable.pacman_2);
-    player = Bitmap.createScaledBitmap(player, getWidth(), getHeight(), false);
+    player = Bitmap.createScaledBitmap(player, getWidth()/Constants.GRID_WIDTH, getHeight()/Constants.GRID_HEIGHT, false);
     moveButtons = BitmapFactory.decodeResource(getResources(), R.drawable.move_button);
-    moveButtons = Bitmap.createScaledBitmap(moveButtons, getWidth(), getHeight(), false);
+    moveButtons = Bitmap.createScaledBitmap(moveButtons, (int) (getWidth() * 0.13f), (int) (getHeight() * 0.13f), false);
   }
 
   @Override
   public void initView() {
     drawMaze(presenter.getMazeGrid());
     drawButton();
-    drawPlayer(presenter.getPlayCoor());
+    drawPlayer(presenter.getPlayerCoor());
   }
 
   private void drawButton() {
@@ -157,13 +158,16 @@ public class MazeView extends GameView implements MazeContract.View {
 
   @Override
   public void drawMaze(int[][] mazeGrid) {
-    for (int i = 0; i < Constants.GRID_WIDTH; i++) {
-      for (int j = 0; j < Constants.GRID_HEIGHT; j++) {
-        if (mazeGrid[i][j] == 0) {;
-        } else if (mazeGrid[i][j] == 1) {
-          drawWall(gridNum2Coor(j, i));
-        } else if (mazeGrid[i][j] == 2) {
-          drawNPC(gridNum2Coor(j, i));
+    if (mazeGrid == null) {
+    } else {
+      for (int i = 0; i < Constants.GRID_WIDTH; i++) {
+        for (int j = 0; j < Constants.GRID_HEIGHT; j++) {
+          if (mazeGrid[i][j] == 0) {;
+          } else if (mazeGrid[i][j] == 1) {
+            drawWall(gridNum2Coor(j, i));
+          } else if (mazeGrid[i][j] == 2) {
+            drawNPC(gridNum2Coor(j, i));
+          }
         }
       }
     }
@@ -177,6 +181,7 @@ public class MazeView extends GameView implements MazeContract.View {
   @Override
   public void drawPlayer(Coordinate coor) {
     paint.setColor(Color.WHITE);
+    coor = gridNum2Coor((int)coor.getX(), (int)coor.getY());
     canvas.drawBitmap(player, coor.getX(), coor.getY(), paint);
   }
 

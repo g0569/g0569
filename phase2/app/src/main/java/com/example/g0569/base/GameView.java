@@ -1,12 +1,11 @@
 package com.example.g0569.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
-import com.example.g0569.MainActivity;
 
 public abstract class GameView extends SurfaceView implements SurfaceHolder.Callback, Runnable  {
 
@@ -28,7 +27,7 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
 
     protected SurfaceHolder sfh;
     protected Thread thread;
-    protected MainActivity mainActivity;
+    protected Activity activity;
 
     /**
      * Instantiates a new Baseview.
@@ -40,7 +39,7 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
         sfh = this.getHolder();
         sfh.addCallback(this);
         paint = new Paint();
-        mainActivity = (MainActivity) context;
+        activity = (Activity) context;
     }
 
     @Override

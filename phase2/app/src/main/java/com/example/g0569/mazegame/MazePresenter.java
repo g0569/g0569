@@ -14,9 +14,8 @@ public class MazePresenter implements MazeContract.Presenter {
 
   @Override
   public void start() {
-    mazeView.initView();
-    mazeGame.onStart();
     mazeView.drawMaze(mazeGame.getMazeGrid());
+    mazeGame.onStart();
   }
 
   public void toChessGame(String args) {}
@@ -42,8 +41,16 @@ public class MazePresenter implements MazeContract.Presenter {
   }
 
   @Override
-  public Coordinate getPlayCoor() {
-    return mazeGame.getMazePlayer().getCoordinate();
+  public Coordinate getPlayerCoor() {
+    Coordinate playerCoor = Coordinate.create(0,0);;
+    try{
+      playerCoor = mazeGame.getMazePlayer().getCoordinate();
+    }
+    catch (NullPointerException e) {
+    }
+    finally{
+      return playerCoor;
+    }
   }
 
   @Override

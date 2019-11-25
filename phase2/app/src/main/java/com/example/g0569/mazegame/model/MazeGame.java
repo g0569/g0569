@@ -28,6 +28,7 @@ public class MazeGame extends BaseGame {
   public MazeGame(MazeContract.Presenter presenter) {
     super();
     this.presenter = presenter;
+
   }
 
   public MazePlayer getMazePlayer() {
@@ -54,7 +55,7 @@ public class MazeGame extends BaseGame {
   }
 
   public void setMyMazeItem() {
-    MazeHelper.loadMaze(myMazeItem, this);
+//    MazeHelper.loadMaze(myMazeItem, this);
   }
 
   public Item[][] getMyMazeItem() {

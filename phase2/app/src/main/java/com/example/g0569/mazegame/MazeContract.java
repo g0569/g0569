@@ -23,7 +23,7 @@ public interface MazeContract {
 
     void update();
 
-    Coordinate getPlayCoor();
+    Coordinate getPlayerCoor();
 
     Coordinate getPlayerDimensions();
   }
