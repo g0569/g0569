@@ -10,22 +10,23 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.g0569.R;
+import com.example.g0569.utils.Constants;
 
-public class SignupFragment extends Fragment implements AuthContract.View {
+public class SignUpFragment extends Fragment implements AuthContract.View {
 
   private AuthContract.Presenter authPresenter;
 
-  public SignupFragment() {
+  public SignUpFragment() {
     // Required empty public constructor
   }
 
   /**
    * Use this factory method to create a new instance of this fragment
    *
-   * @return A new instance of fragment SignupFragment.
+   * @return A new instance of fragment SignUpFragment.
    */
-  public static SignupFragment newInstance() {
-    SignupFragment fragment = new SignupFragment();
+  public static SignUpFragment newInstance() {
+    SignUpFragment fragment = new SignUpFragment();
     return fragment;
   }
 
@@ -59,5 +60,13 @@ public class SignupFragment extends Fragment implements AuthContract.View {
   @Override
   public void ShowToast(String text) {
     Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+  }
+
+  @Override
+  public void toSignUp() {}
+
+  @Override
+  public void toLogin() {
+    ((AuthActivity) getActivity()).replaceFragment(Constants.TO_LOGIN_VIEW);
   }
 }
