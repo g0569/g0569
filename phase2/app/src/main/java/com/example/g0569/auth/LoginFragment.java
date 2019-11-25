@@ -56,7 +56,7 @@ public class LoginFragment extends Fragment implements AuthContract.View {
         view.findViewById(R.id.to_signup).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                authPresenter.toSignUpPage();
+                authPresenter.toSignupPage();
             }
         });
         return view;

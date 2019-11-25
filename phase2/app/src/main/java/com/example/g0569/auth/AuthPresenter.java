@@ -78,6 +78,5 @@ public class AuthPresenter implements AuthContract.Presenter, AuthInteractor.OnA
 
   @Override
   public void toLoginPage() {
-    v 
   }
 }
