@@ -50,7 +50,7 @@ public class BossGame extends BaseGame {
     shootButton =
         new ShootButton(
             this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
-    healthBar = new HealthBar(this, resources);
+    healthBar = new HealthBar(this, resources, enemy);
     Star star =
         new Star(
             this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(), resources);
@@ -248,4 +248,14 @@ public class BossGame extends BaseGame {
       getGameManager().showStatistic(statistic);
     }
   }
+
+    public void attackBoss() {
+      ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
+      enemy.attacked(projectile.getDamage());
+    }
+
+    public void throwProjectile(){
+      ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
+      projectile.thrown();
+    }
 }

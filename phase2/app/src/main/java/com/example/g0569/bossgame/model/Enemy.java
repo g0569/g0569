@@ -123,7 +123,8 @@ public class Enemy extends NonPlayerItem implements Observable {
 
   /** Decreases the health of the enemy when Item hits it */
   public void attacked(int damageTaken) {
-    health -= damageTaken;
+//    health -= damageTaken;
+    setState(health-damageTaken);
     if (health <= 0) {
       appearance = null;
     }
@@ -172,7 +173,9 @@ public class Enemy extends NonPlayerItem implements Observable {
 
   @Override
   public void setState(int state) {
+
     health = state;
+    notifyAllObservers();
   }
 
   @Override

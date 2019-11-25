@@ -87,8 +87,7 @@ public class BossView extends BaseView implements BossContract.View{
     if (event.getAction() == MotionEvent.ACTION_DOWN && event.getPointerCount() == 1) {
       float x = event.getX();
       float y = event.getY();
-      System.out.println(String.valueOf(x) + " " + String.valueOf(y));
-//      bossGame.touch(x, y);
+
     }
     return false;
   }
@@ -112,4 +111,6 @@ public class BossView extends BaseView implements BossContract.View{
   public void setPresenter(BossContract.Presenter presenter) {
 
   }
+
+  public void drawHealthBar(){}
 }
