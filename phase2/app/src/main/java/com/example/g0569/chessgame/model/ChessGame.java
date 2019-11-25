@@ -1,20 +1,21 @@
-package com.example.g0569.module.game;
+package com.example.g0569.chessgame.model;
 
 // import com.example.g0569.base.model.Player;
 
 import com.example.g0569.base.model.BaseGame;
-import com.example.g0569.module.component.LV2AutoChess.ChessPiece;
-import com.example.g0569.module.component.LV2AutoChess.LevelTwoPlayer;
-import com.example.g0569.module.component.LV2AutoChess.StarChessPiece;
-import com.example.g0569.module.component.LV2AutoChess.TriangleChessPiece;
+import com.example.g0569.chessgame.model.ChessPiece;
+import com.example.g0569.chessgame.model.LevelTwoPlayer;
+import com.example.g0569.chessgame.model.StarChessPiece;
+import com.example.g0569.chessgame.model.TriangleChessPiece;
 import com.example.g0569.base.model.NonPlayerItem;
+import com.example.g0569.module.game.GameManager;
 import com.example.g0569.utils.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/** A game manager for AutoChessGame. */
-public class AutoChessGame extends BaseGame {
+/** A game manager for ChessGame. */
+public class ChessGame extends BaseGame {
 
   // TODO still need to figure out a way to implement two different NPC's game.
   private int round = 0;
@@ -25,13 +26,9 @@ public class AutoChessGame extends BaseGame {
   private List<List<ChessPiece>> NPCData = new ArrayList<>();
   // save where the NPC place the chess piece for different round.
 
-  /**
-   * Initialize a game manager for AutoChessGame.
-   *
-   * @param gameManager the game manager.
-   */
-  AutoChessGame(GameManager gameManager) {
-    super(gameManager);
+  /** Initialize a game manager for ChessGame. */
+  ChessGame() {
+    super();
     l2player = new LevelTwoPlayer(this);
     List<ChessPiece> NPC1ChessPiece = new ArrayList<>();
     NPC1ChessPiece.add(
@@ -126,8 +123,7 @@ public class AutoChessGame extends BaseGame {
           .get(chosenPlace)
           .getCoordinate()
           .setXY(
-              getGameManager().getScreenWidth() * 0.45f,
-              getGameManager().getScreenHeight() * 0.4f);
+              getGameManager().getScreenWidth() * 0.45f, getGameManager().getScreenHeight() * 0.4f);
       clickNumbers++;
       return new Coordinate(
           getGameManager().getScreenWidth() * 0.45f, getGameManager().getScreenHeight() * 0.4f);

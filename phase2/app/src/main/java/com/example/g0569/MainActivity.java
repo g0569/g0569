@@ -21,7 +21,7 @@ import android.widget.TextView;
 import com.example.g0569.module.game.GameManager;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.view.BossView;
-import com.example.g0569.view.ChessView;
+import com.example.g0569.chessgame.ChessView;
 import com.example.g0569.view.MainMenuView;
 import com.example.g0569.mazegame.MazeView;
 

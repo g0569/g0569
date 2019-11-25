@@ -1,4 +1,4 @@
-package com.example.g0569.module.component.LV2AutoChess;
+package com.example.g0569.chessgame.model;
 
 import com.example.g0569.base.model.BaseGame;
 

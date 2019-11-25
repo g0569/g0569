@@ -1,4 +1,4 @@
-package com.example.g0569.view;
+package com.example.g0569.chessgame;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,11 +9,13 @@ import android.view.SurfaceHolder;
 import android.widget.Toast;
 
 import com.example.g0569.R;
-import com.example.g0569.module.game.AutoChessGame;
+import com.example.g0569.base.GameView;
+import com.example.g0569.chessgame.model.ChessGame;
 import com.example.g0569.utils.Coordinate;
+import com.example.g0569.view.BaseView;
 
 /** The ChessView for the autoChessGame. */
-public class ChessView extends BaseView {
+public class ChessView extends GameView {
   private Bitmap background;
   private Bitmap inventory;
   private Bitmap button;
@@ -37,7 +39,7 @@ public class ChessView extends BaseView {
   private float star2X;
   private float star2Y;
 
-  private AutoChessGame autoChessGame;
+  private ChessGame autoChessGame;
 
   /**
    * Instantiates a new Chess view.
@@ -87,7 +89,8 @@ public class ChessView extends BaseView {
     star2X = screenWidth * 0.6f;
     star2Y = screenHeight * 0.65f;
 
-    autoChessGame = (AutoChessGame) mainActivity.getGameManager().getCurrentGame();
+    autoChessGame = (ChessGame) activity.getGameManager().getCurrentGame();
+    // TODO store the presenter rather than the game
 
     if (thread.isAlive()) {
       thread.start();
@@ -159,21 +162,21 @@ public class ChessView extends BaseView {
           && x < buttonX + button.getWidth()
           && y > buttonY
           && y < buttonY + button.getHeight()) {
-        Toast.makeText(mainActivity, "Start the game.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "Start the game.", Toast.LENGTH_SHORT).show();
         // Call method to start the game.
         boolean result = autoChessGame.autoFight();
         if (result) {
-          Toast.makeText(mainActivity, "You win the game!", Toast.LENGTH_SHORT).show();
+          Toast.makeText(activity, "You win the game!", Toast.LENGTH_SHORT).show();
           autoChessGame.showStatistic(true); // Win and get 2 cards.
         } else {
           autoChessGame.showStatistic(false); // Lose and get 0 cards.
-          Toast.makeText(mainActivity, "You lose the game!", Toast.LENGTH_SHORT).show();
+          Toast.makeText(activity, "You lose the game!", Toast.LENGTH_SHORT).show();
         }
       } else if (x > inventoryX
           && x < inventoryX + inventory.getWidth() * 0.5f
           && y > inventoryY
           && y < inventoryY + inventory.getHeight() * 0.3333f) {
-        Toast.makeText(mainActivity, "Triangle chess was chosen", Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "Triangle chess was chosen", Toast.LENGTH_SHORT).show();
         int chosenPlace = 0;
         Coordinate location = autoChessGame.placeChess(chosenPlace);
         triangleX = location.getX();
@@ -182,7 +185,7 @@ public class ChessView extends BaseView {
           && x < inventoryX + inventory.getWidth()
           && y > inventoryY
           && y < inventoryY + inventory.getHeight() * 0.3333f) {
-        Toast.makeText(mainActivity, "Star chess was chosen", Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "Star chess was chosen", Toast.LENGTH_SHORT).show();
         int chosenPlace = 1;
         Coordinate location = autoChessGame.placeChess(chosenPlace);
         starX = location.getX();

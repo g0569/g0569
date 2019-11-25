@@ -1,4 +1,4 @@
-package com.example.g0569.module.component.LV2AutoChess;
+package com.example.g0569.chessgame.model;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
