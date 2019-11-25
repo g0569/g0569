@@ -15,7 +15,7 @@ import com.example.g0569.utils.Coordinate;
 import com.example.g0569.view.BaseView;
 
 /** The ChessView for the autoChessGame. */
-public class ChessView extends GameView {
+public class ChessView extends GameView implements ChessContract.View{
   private Bitmap background;
   private Bitmap inventory;
   private Bitmap button;
@@ -40,6 +40,7 @@ public class ChessView extends GameView {
   private float star2Y;
 
   private ChessGame autoChessGame;
+  private ChessContract.Presenter presenter;
 
   /**
    * Instantiates a new Chess view.
@@ -89,7 +90,7 @@ public class ChessView extends GameView {
     star2X = screenWidth * 0.6f;
     star2Y = screenHeight * 0.65f;
 
-    autoChessGame = (ChessGame) activity.getGameManager().getCurrentGame();
+    autoChessGame = activity.getGameManager().getCurrentGame();
     // TODO store the presenter rather than the game
 
     if (thread.isAlive()) {
@@ -194,5 +195,10 @@ public class ChessView extends GameView {
       return true;
     }
     return false;
+  }
+
+  @Override
+  public void setPresenter(ChessContract.Presenter presenter) {
+    this.presenter = presenter;
   }
 }

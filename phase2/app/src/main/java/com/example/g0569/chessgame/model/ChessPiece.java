@@ -28,15 +28,6 @@ public class ChessPiece extends NonPlayerItem {
     this.health = health;
   }
 
-  /**
-   * A getter for variable coordinate.
-   *
-   * @return coordinate
-   */
-  @Override
-  public Coordinate getCoordinate() {
-    return coordinate;
-  }
 
   /**
    * A getter for variable power.
@@ -46,9 +37,6 @@ public class ChessPiece extends NonPlayerItem {
   public int getPower() {
     return power;
   }
-
-  @Override
-  public void draw(Canvas canvas, Paint paint) {}
 
   @Override
   public void action() {}

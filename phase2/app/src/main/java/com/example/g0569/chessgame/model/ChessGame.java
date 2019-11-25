@@ -3,6 +3,8 @@ package com.example.g0569.chessgame.model;
 // import com.example.g0569.base.model.Player;
 
 import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.chessgame.ChessContract;
+import com.example.g0569.chessgame.ChessPresenter;
 import com.example.g0569.chessgame.model.ChessPiece;
 import com.example.g0569.chessgame.model.LevelTwoPlayer;
 import com.example.g0569.chessgame.model.StarChessPiece;
@@ -17,6 +19,7 @@ import java.util.List;
 /** A game manager for ChessGame. */
 public class ChessGame extends BaseGame {
 
+  private ChessContract.Presenter presenter;
   // TODO still need to figure out a way to implement two different NPC's game.
   private int round = 0;
   private int winNumbers;
@@ -26,9 +29,11 @@ public class ChessGame extends BaseGame {
   private List<List<ChessPiece>> NPCData = new ArrayList<>();
   // save where the NPC place the chess piece for different round.
 
-  /** Initialize a game manager for ChessGame. */
-  ChessGame() {
+  /** Initialize a game manager for ChessGame.
+   * @param presenter*/
+  public ChessGame(ChessContract.Presenter presenter) {
     super();
+    this.presenter = presenter;
     l2player = new LevelTwoPlayer(this);
     List<ChessPiece> NPC1ChessPiece = new ArrayList<>();
     NPC1ChessPiece.add(
