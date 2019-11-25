@@ -8,15 +8,24 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
 import com.example.g0569.R;
+import com.example.g0569.base.GameView;
 import com.example.g0569.mazegame.model.MazeGame;
-import com.example.g0569.view.BaseView;
+import com.example.g0569.utils.Constants;
+import com.example.g0569.utils.Coordinate;
 
 /** The Maze view. */
-public class MazeView extends BaseView implements MazeContract.View{
+public class MazeView extends GameView implements MazeContract.View {
 
   private Bitmap background;
-  private MazeGame mazeGame;
   private MazeContract.Presenter presenter;
+
+  private Bitmap wall;
+  private Bitmap moveButtons;
+  private Bitmap player;
+  private Bitmap npc;
+
+  private float gridWidth;
+  private float gridHeight;
 
   /**
    * Instantiates a new Maze view.
@@ -32,11 +41,8 @@ public class MazeView extends BaseView implements MazeContract.View{
   @Override
   public void surfaceCreated(SurfaceHolder holder) {
     super.surfaceCreated(holder);
-    background = BitmapFactory.decodeResource(getResources(), R.drawable.maze_background);
-    scalex = screenWidth / background.getWidth();
-    scaley = screenHeight / background.getHeight();
-    mazeGame = (MazeGame) mainActivity.getGameManager().getCurrentGame();
-    mazeGame.setMyMazeItem();
+    initBitmaps();
+
     if (thread.isAlive()) {
       thread.start();
     } else {
@@ -62,10 +68,9 @@ public class MazeView extends BaseView implements MazeContract.View{
       canvas.drawColor(Color.rgb(246, 216, 115));
       canvas.save();
       canvas.scale(scalex, scaley, 0, 0);
-//      canvas.drawBitmap(background, 0, 0, paint);
+      //      canvas.drawBitmap(background, 0, 0, paint);
       canvas.restore();
-      mazeGame.draw(canvas, paint);
-
+      initView();
     } catch (Exception err) {
       System.out.println(err);
       err.printStackTrace();
@@ -81,7 +86,7 @@ public class MazeView extends BaseView implements MazeContract.View{
     while (threadFlag) {
       long startTime = System.currentTimeMillis();
       draw();
-      mazeGame.action();
+      presenter.update();
       long endTime = System.currentTimeMillis();
       try {
         if (endTime - startTime < 100) Thread.sleep((100 - (endTime - startTime)));
@@ -98,13 +103,10 @@ public class MazeView extends BaseView implements MazeContract.View{
     if (event.getAction() == MotionEvent.ACTION_DOWN && event.getPointerCount() == 1) {
       float x = event.getX();
       float y = event.getY();
-      mazeGame.move(x, y);
-      if(mazeGame.getMazePlayer().interact()){
-        mazeGame.showStatistic();
-      }
+      moveDetect(x, y);
       return true;
     } else if (event.getAction() == MotionEvent.ACTION_UP && event.getPointerCount() == 1) {
-      mazeGame.stopMove();
+      presenter.stopMove();
     }
     return false;
   }
@@ -112,5 +114,111 @@ public class MazeView extends BaseView implements MazeContract.View{
   @Override
   public void setPresenter(MazeContract.Presenter presenter) {
     this.presenter = presenter;
+  }
+
+  private void initBitmaps() {
+    background = BitmapFactory.decodeResource(getResources(), R.drawable.maze_background);
+    scalex = screenWidth / background.getWidth();
+    scaley = screenHeight / background.getHeight();
+
+    wall = BitmapFactory.decodeResource(getResources(), R.drawable.tile);
+    wall = Bitmap.createScaledBitmap(wall, getWidth(), getHeight(), false);
+    player = BitmapFactory.decodeResource(getResources(), R.drawable.pacman_2);
+    player = Bitmap.createScaledBitmap(player, getWidth(), getHeight(), false);
+    moveButtons = BitmapFactory.decodeResource(getResources(), R.drawable.move_button);
+    moveButtons = Bitmap.createScaledBitmap(moveButtons, getWidth(), getHeight(), false);
+  }
+
+  @Override
+  public void initView() {
+    drawMaze(presenter.getMazeGrid());
+    drawButton();
+    drawPlayer(presenter.getPlayCoor());
+  }
+
+  private void drawButton() {
+    int unitX = (int) (screenWidth * 0.13 / 3);
+    int unitY = (int) (screenHeight * 0.13 / 3);
+    paint.setColor(Color.WHITE);
+    canvas.drawBitmap(moveButtons, screenWidth - 4 * unitX, screenHeight - 4 * unitY, paint);
+  }
+
+  public float getGridWidth() {
+    return gridWidth;
+  }
+
+  public float getGridHeight() {
+    return gridHeight;
+  }
+
+  private Coordinate gridNum2Coor(int x, int y) {
+    return Coordinate.create(x * getGridWidth(), y * getGridHeight());
+  }
+
+  @Override
+  public void drawMaze(int[][] mazeGrid) {
+    for (int i = 0; i < Constants.GRID_WIDTH; i++) {
+      for (int j = 0; j < Constants.GRID_HEIGHT; j++) {
+        if (mazeGrid[i][j] == 0) {;
+        } else if (mazeGrid[i][j] == 1) {
+          drawWall(gridNum2Coor(j, i));
+        } else if (mazeGrid[i][j] == 2) {
+          drawNPC(gridNum2Coor(j, i));
+        }
+      }
+    }
+  }
+
+  private void drawWall(Coordinate coor) {
+    paint.setColor(Color.WHITE);
+    canvas.drawBitmap(wall, coor.getX(), coor.getY(), paint);
+  }
+
+  @Override
+  public void drawPlayer(Coordinate coor) {
+    paint.setColor(Color.WHITE);
+    canvas.drawBitmap(player, coor.getX(), coor.getY(), paint);
+  }
+
+  @Override
+  public void drawNPC(Coordinate coor) {
+    paint.setColor(Color.GRAY);
+    paint.setTextSize(70);
+    canvas.drawText("NPC", coor.getX(), coor.getY(), paint);
+  }
+
+  @Override
+  public Coordinate getPlayerDimensions() {
+    return Coordinate.create(player.getWidth(), player.getHeight());
+  }
+
+  /*
+  detecting the moving direction (sth for button to do.)
+   */
+  private void moveDetect(float x, float y) {
+    int unitX = (int) (screenWidth * 0.13 / 3);
+    int unitY = (int) (screenHeight * 0.13 / 3);
+    if (x >= screenWidth - 2 * unitX
+        && x <= screenWidth - unitX
+        && y >= screenHeight - 3 * unitY
+        && y <= screenHeight - 2 * unitY) {
+      presenter.movePlayer(Coordinate.create(0.5f, 0f));
+    } else if (x >= screenWidth - 4 * unitX
+        && x <= screenWidth - 3 * unitX
+        && y >= screenHeight - 3 * unitY
+        && y <= screenHeight - 2 * unitY) {
+      presenter.movePlayer(Coordinate.create(-0.5f, 0f));
+    } else if (x >= screenWidth - 3 * unitX
+        && x <= screenWidth - 2 * unitX
+        && y >= screenHeight - 4 * unitY
+        && y <= screenHeight - 3 * unitY) {
+      presenter.movePlayer(Coordinate.create(0f, -0.5f));
+    } else if (x >= screenWidth - 3 * unitX
+        && x <= screenWidth - 2 * unitX
+        && y >= screenHeight - 2 * unitY
+        && y <= screenHeight - unitY) {
+      presenter.movePlayer(Coordinate.create(0f, 0.5f));
+    } else {
+    }
   }
 }

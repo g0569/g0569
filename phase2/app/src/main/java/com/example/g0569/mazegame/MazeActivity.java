@@ -17,8 +17,7 @@ public class MazeActivity extends AppCompatActivity {
         if (mazeView == null) {
             mazeView = new MazeView(this);
         }
-        presenter = new MazePresenter();
-        mazeView.setPresenter(presenter);
+        presenter = new MazePresenter(mazeView);
         setContentView(mazeView);
     }
 }
