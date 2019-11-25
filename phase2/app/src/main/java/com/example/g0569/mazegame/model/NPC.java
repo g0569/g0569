@@ -9,27 +9,10 @@ import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.utils.Coordinate;
 
 public class NPC extends Item {
-  NPC(BaseGame game, float x, float y) {
+  NPC(BaseGame game) {
     super(game);
-    this.coordinate = new Coordinate(x, y);
   }
 
-  /**
-   * Draw the NPC, text for now
-   *
-   * @param canvas of the button that is being drawn on
-   * @param paint the style of the button
-   */
-  @Override
-  public void draw(Canvas canvas, Paint paint) {
-    paint.setColor(Color.GRAY);
-    paint.setTextSize(70);
-    canvas.drawText(
-        "NPC",
-        coordinate.getX() * ((MazeGame) getGame()).getGridWidth(),
-        coordinate.getY() * ((MazeGame) getGame()).getGridHeight(),
-        paint);
-  }
 
   @Override
   public void action() {}
