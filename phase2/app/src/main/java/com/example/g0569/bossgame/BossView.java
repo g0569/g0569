@@ -8,14 +8,19 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
 import com.example.g0569.R;
-import com.example.g0569.bossgame.model.BossGame;
-import com.example.g0569.view.BaseView;
+import com.example.g0569.base.GameView;
 
 /** The Bossview for the bossgame. */
-public class BossView extends BaseView implements BossContract.View{
-  private BossPresenter bossPresenter;
+public class BossView extends GameView implements BossContract.View {
+  private BossContract.Presenter bossPresenter;
   private Bitmap background;
   private Bitmap bossPlayer;
+  private Bitmap enemy;
+  private Bitmap menuButton;
+  private Bitmap pauseButton;
+  private Bitmap shootButton;
+  private Bitmap healthBar;
+  private Bitmap star;
 
   //  private BaseButton button;
   //  private BossPlayer aim;
@@ -38,13 +43,12 @@ public class BossView extends BaseView implements BossContract.View{
   public void surfaceCreated(SurfaceHolder holder) {
     super.surfaceCreated(holder);
 
-    background = BitmapFactory.decodeResource(getResources(), R.drawable.bossforest);
-    bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.aim);
+
 
     scalex = screenWidth / background.getWidth();
     scaley = screenHeight / background.getHeight();
-//    bossGame = (BossGame) mainActivity.getGameManager().getCurrentGame();
-//    bossGame.createItems(getResources());
+    //    bossGame = (BossGame) mainActivity.getGameManager().getCurrentGame();
+    //    bossGame.createItems(getResources());
     if (thread.isAlive()) {
       thread.start();
     } else {
@@ -72,7 +76,7 @@ public class BossView extends BaseView implements BossContract.View{
       canvas.scale(scalex, scaley, 0, 0);
       canvas.drawBitmap(background, 0, 0, paint);
       canvas.restore();
-//      bossGame.draw(canvas, paint);
+      //      bossGame.draw(canvas, paint);
     } catch (Exception err) {
       err.printStackTrace();
     } finally {
@@ -88,7 +92,7 @@ public class BossView extends BaseView implements BossContract.View{
       float x = event.getX();
       float y = event.getY();
       System.out.println(String.valueOf(x) + " " + String.valueOf(y));
-//      bossGame.touch(x, y);
+      //      bossGame.touch(x, y);
     }
     return false;
   }
@@ -98,7 +102,7 @@ public class BossView extends BaseView implements BossContract.View{
     while (threadFlag) {
       long startTime = System.currentTimeMillis();
       draw();
-//      bossGame.action();
+      //      bossGame.action();
       long endTime = System.currentTimeMillis();
       try {
         if (endTime - startTime < 1) Thread.sleep((long) (1 - (endTime - startTime)));
@@ -107,9 +111,32 @@ public class BossView extends BaseView implements BossContract.View{
       }
     }
   }
+private void initBitmaps(){
+  background = BitmapFactory.decodeResource(getResources(), R.drawable.bossforest);
+  bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.aim);
+  healthbar = BitmapFactory.decodeResource(resources, R.drawable.redbar);
+
+}
+  @Override
+  public void setPresenter(BossContract.Presenter presenter) {this.bossPresenter = presenter;}
 
   @Override
-  public void setPresenter(BossContract.Presenter presenter) {
+  public void initView() {
+
+  }
+
+  @Override
+  public void drawBossPlayer() {
+
+  }
+
+  @Override
+  public void drawEnemy() {
+
+  }
+
+  @Override
+  public void drawHealthBar() {
 
   }
 }
