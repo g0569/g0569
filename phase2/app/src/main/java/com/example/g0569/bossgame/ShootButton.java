@@ -1,4 +1,4 @@
-package com.example.g0569.module.component.Boss;
+package com.example.g0569.bossgame;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

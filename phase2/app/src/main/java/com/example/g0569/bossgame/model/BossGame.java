@@ -1,4 +1,4 @@
-package com.example.g0569.module.game.Boss;
+package com.example.g0569.bossgame.model;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -7,14 +7,9 @@ import android.graphics.Paint;
 import android.widget.Toast;
 
 import com.example.g0569.base.model.BaseGame;
-import com.example.g0569.module.component.Boss.BossPlayer;
-import com.example.g0569.module.component.Boss.MenuButton;
-import com.example.g0569.module.component.Boss.PauseButton;
-import com.example.g0569.module.component.Boss.ShootButton;
-import com.example.g0569.module.component.Boss.Enemy;
-import com.example.g0569.module.component.Boss.HealthBar;
-import com.example.g0569.module.component.Boss.Star;
-import com.example.g0569.module.component.Boss.ThrownItems;
+import com.example.g0569.bossgame.MenuButton;
+import com.example.g0569.bossgame.PauseButton;
+import com.example.g0569.bossgame.ShootButton;
 import com.example.g0569.module.game.GameManager;
 
 import java.util.ArrayList;

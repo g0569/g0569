@@ -1,4 +1,4 @@
-package com.example.g0569.view;
+package com.example.g0569.bossgame;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,7 +8,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
 import com.example.g0569.R;
-import com.example.g0569.module.game.Boss.BossGame;
+import com.example.g0569.bossgame.model.BossGame;
+import com.example.g0569.view.BaseView;
 
 /** The Bossview for the bossgame. */
 public class BossView extends BaseView {
