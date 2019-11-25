@@ -28,12 +28,14 @@ public class HealthBar extends NonPlayerItem implements Observer{
   // The rectangle for the red bar which represents health
   private Rect healthRect;
 
-  public HealthBar(BaseGame game, Resources resources) {
+  public HealthBar(BaseGame game, Resources resources, Observable observable) {
     super(game);
     // Sets the height and width
     screenHeight = game.getGameManager().getScreenHeight();
     screenWidth = game.getGameManager().getScreenWidth();
 
+    this.observable = observable;
+    observable.attach(this);
     // Sets the size of the bar
     size = (int) screenWidth / 5;
 
