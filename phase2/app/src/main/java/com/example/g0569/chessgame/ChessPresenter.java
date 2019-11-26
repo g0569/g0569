@@ -36,18 +36,40 @@ public class ChessPresenter implements ChessContract.Presenter {
   public boolean startAutoFight() {
     // TODO
     return chessGame.autoFight();
-
   }
 
   @Override
   public Coordinate boardCoordinateToViewCoordinate(Coordinate coordinate) {
     // TODO
-    return null;
+    Coordinate viewCoordinate = new Coordinate(0, 0);
+    float x = coordinate.getX();
+    float y = coordinate.getY();
+    float width = ((ChessView) chessView).getScreenWidth();
+    float height = ((ChessView) chessView).getScreenHeight();
+    if (x == 1 && y == 1) {
+      viewCoordinate.setXY(width * 0.55f, height * 0.4f);
+    } else if (x == 1 && y == 2) {
+      viewCoordinate.setXY(width * 0.65f, height * 0.4f);
+    } else if (x == 2 && y == 1) {
+      viewCoordinate.setXY(width * 0.55f, height * 0.65f);
+    } else if (x == 2 && y == 2) {
+      viewCoordinate.setXY(width * 0.65f, height * 0.65f);
+    } else if (x == 3 && y == 1) {
+      viewCoordinate.setXY(width * 0.55f, height * 0.9f);
+    } else if (x == 3 && y == 2) {
+      viewCoordinate.setXY(width * 0.65f, height * 0.9f);
+    }
+    return viewCoordinate;
   }
 
   @Override
   public void placePlayerChess(Coordinate coordinate, String type) {
     // TODO
     chessGame.setPlayerChess(coordinate.getX(), coordinate.getY(), type);
+  }
+
+  @Override
+  public String InventoryCoordinateToChessType(Coordinate coordinate) {
+    return chessGame.getChessPieceType(coordinate);
   }
 }

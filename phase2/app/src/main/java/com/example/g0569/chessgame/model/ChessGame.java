@@ -79,6 +79,24 @@ public class ChessGame extends BaseGame {
     l2player.getInventory().add(chessPiece);
   }
 
+  public String getChessPieceType(Coordinate coordinate) {
+    String result = "";
+    for (ChessPiece chesspiece : NPCData) {
+      if (chesspiece.getCoordinate().equals(coordinate)) {
+        result = typeGetter(chesspiece);
+      }
+    }
+    return result;
+  }
+
+  private String typeGetter(ChessPiece chessPiece) {
+    if (chessPiece instanceof StarChessPiece) {
+      return "star";
+      //    }else if(chessPiece instanceof TriangleChessPiece){
+      //      return "triangle";
+    } else return "triangle";
+  }
+
   //  /**
   //   * Show the statistic of the game.
   //   *
