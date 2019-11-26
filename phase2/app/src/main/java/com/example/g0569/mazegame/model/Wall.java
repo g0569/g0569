@@ -19,5 +19,5 @@ public class Wall extends Item {
   }
 
   @Override
-  public void action() {}
+  public void update() {}
 }
