@@ -1,8 +1,5 @@
 package com.example.g0569.chessgame.model;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.base.model.Player;
 

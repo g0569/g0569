@@ -6,7 +6,7 @@ import java.util.List;
 /** The item that is controlled by user. */
 public abstract class Player extends Item {
 
-  private List<NonPlayerItem> inventory = new ArrayList<>();
+  private List<Item> inventory = new ArrayList<>();
 
   /**
    * Instantiates a new Player.
@@ -24,7 +24,7 @@ public abstract class Player extends Item {
    *
    * @return the inventory
    */
-  public List<NonPlayerItem> getInventory() {
+  public List<Item> getInventory() {
     return inventory;
   }
 }

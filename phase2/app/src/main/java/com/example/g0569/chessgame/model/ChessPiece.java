@@ -1,14 +1,11 @@
 package com.example.g0569.chessgame.model;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-
 import com.example.g0569.base.model.BaseGame;
-import com.example.g0569.base.model.NonPlayerItem;
+import com.example.g0569.base.model.Item;
 import com.example.g0569.utils.Coordinate;
 
 /** The chess piece on the chess board. */
-public class ChessPiece extends NonPlayerItem {
+public class ChessPiece extends Item {
   private Coordinate coordinate;
   private String appearance;
   private int power; // The amount for the chess piece can attack in one round.
@@ -27,7 +24,6 @@ public class ChessPiece extends NonPlayerItem {
     this.power = power;
     this.health = health;
   }
-
 
   /**
    * A getter for variable power.

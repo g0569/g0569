@@ -8,8 +8,8 @@ public class ChessPieceFactory {
     }
     if (type.equals("star")) {
       return new StarChessPiece(x, y, game);
-    }else if (type.equals("triangle")){
-        return new TriangleChessPiece(x, y, game);
+    } else if (type.equals("triangle")) {
+      return new TriangleChessPiece(x, y, game);
     }
     return null;
   }

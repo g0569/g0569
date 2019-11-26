@@ -3,14 +3,8 @@ package com.example.g0569.chessgame.model;
 // import com.example.g0569.base.model.Player;
 
 import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.base.model.Item;
 import com.example.g0569.chessgame.ChessContract;
-import com.example.g0569.chessgame.ChessPresenter;
-import com.example.g0569.chessgame.model.ChessPiece;
-import com.example.g0569.chessgame.model.LevelTwoPlayer;
-import com.example.g0569.chessgame.model.StarChessPiece;
-import com.example.g0569.chessgame.model.TriangleChessPiece;
-import com.example.g0569.base.model.NonPlayerItem;
-import com.example.g0569.module.game.GameManager;
 import com.example.g0569.utils.Coordinate;
 
 import java.util.ArrayList;
@@ -29,21 +23,6 @@ public class ChessGame extends BaseGame {
   private ChessSQLiteAccessInterface BoardData;
   private List<List<ChessPiece>> NPCData = new ArrayList<>();
   // save where the NPC place the chess piece for different round.
-
-  public void setBoardData(ChessSQLiteAccessInterface boardData) {
-    BoardData = boardData;
-  }
-
-  public void decodeNPCData() {
-    String s = BoardData.getChessBoardData();
-    // TODO Decoder for string. Add objects to NPCData.
-    // TODO when decode the string, for each chess piece call placeNPCChess().
-  }
-
-  private void placeNPCChess(String x, String y, String type,){
-    // TODO
-    ChessPiece chessPiece = chessPieceFactory.getChessPiece();
-  }
 
   /**
    * Initialize a game manager for ChessGame.
@@ -73,6 +52,21 @@ public class ChessGame extends BaseGame {
 
     NPCData.add(NPC1ChessPiece);
     NPCData.add(NPC2ChessPiece);
+  }
+
+  public void setBoardData(ChessSQLiteAccessInterface boardData) {
+    BoardData = boardData;
+  }
+
+  public void decodeNPCData() {
+    String s = BoardData.getChessBoardData();
+    // TODO Decoder for string. Add objects to NPCData.
+    // TODO when decode the string, for each chess piece call placeNPCChess().
+  }
+
+  private void placeNPCChess(String x, String y, String type,){
+    // TODO
+    ChessPiece chessPiece = chessPieceFactory.getChessPiece();
   }
   // save where the NPC place the chess piece for different round.
 
@@ -108,7 +102,7 @@ public class ChessGame extends BaseGame {
    * @param round The round.
    * @return number of rows the player wins.
    */
-  private int fightCounter(NonPlayerItem PlayerChess, int round) {
+  private int fightCounter(Item PlayerChess, int round) {
     int win = 0;
     for (ChessPiece NPCChess : NPCData.get(round)) {
       if (NPCChess.getCoordinate().getY() == PlayerChess.getCoordinate().getY()
@@ -125,7 +119,7 @@ public class ChessGame extends BaseGame {
    * @return whether player win the game.
    */
   public boolean autoFight() {
-    for (NonPlayerItem chess : l2player.getInventory()) {
+    for (Item chess : l2player.getInventory()) {
       winNumbers += fightCounter(chess, round);
     }
     return (winNumbers >= 2);

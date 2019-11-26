@@ -9,12 +9,12 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.g0569.R;
-import com.example.g0569.base.model.NonPlayerItem;
+import com.example.g0569.base.model.Item;
 import com.example.g0569.utils.Coordinate;
 
 import java.util.List;
 
-public class Enemy extends NonPlayerItem implements Observable {
+public class Enemy extends Item implements Observable {
 
   private List<Observer> observers;
   // The health and initial health of the Enemy
