@@ -11,10 +11,10 @@ public class LevelTwoPlayer extends Player {
    *
    * @param game the current game.
    */
-  public LevelTwoPlayer(BaseGame game) {
+  LevelTwoPlayer(BaseGame game) {
     super(game);
-    getInventory().add(new StarChessPiece(0, 0, game));
-    getInventory().add(new TriangleChessPiece(0, 0, game));
+//    getInventory().add(new StarChessPiece(0, 0, game));
+//    getInventory().add(new TriangleChessPiece(0, 0, game));
     //        getInventory().add(new StarChessPiece(0,0));
     // Put three chess piece into the getInventory() area.
   }

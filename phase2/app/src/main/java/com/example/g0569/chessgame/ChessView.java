@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.g0569.R;
 import com.example.g0569.base.GameView;
-import com.example.g0569.chessgame.model.ChessGame;
+import com.example.g0569.bossgame.model.Star;
 import com.example.g0569.utils.Coordinate;
 
 /** The ChessView for the autoChessGame. */
@@ -18,25 +18,24 @@ public class ChessView extends GameView implements ChessContract.View {
   private Bitmap background;
   private Bitmap inventory;
   private Bitmap button;
-  private Bitmap l2npc; // TODO
+  //  private Bitmap l2npc; // TODO
   private float buttonX;
   private float buttonY;
   private float inventoryX;
   private float inventoryY;
   private Bitmap triangle;
-  private float triangleX;
-  private float triangleY;
-  private Bitmap triangle2;
-  private float triangle2X;
-  private float triangle2Y;
+  //  private float triangleX;
+  //  private float triangleY;
+  //  private Bitmap triangle2;
+  //  private float triangle2X;
+  //  private float triangle2Y;
   private Bitmap star;
-  private float starX;
-  private float starY;
-  private Bitmap star2;
-  private float star2X;
-  private float star2Y;
+  //  private float starX;
+  //  private float starY;
+  //  private Bitmap star2;
+  //  private float star2X;
+  //  private float star2Y;
 
-  private ChessGame autoChessGame;
   private ChessContract.Presenter presenter;
 
   /**
@@ -80,31 +79,29 @@ public class ChessView extends GameView implements ChessContract.View {
 
     button = BitmapFactory.decodeResource(getResources(), R.drawable.start);
     button = Bitmap.createScaledBitmap(button, 150, 150, false);
+
     inventory = BitmapFactory.decodeResource(getResources(), R.drawable.iteminventory);
     inventory = Bitmap.createScaledBitmap(inventory, 200, 300, false);
 
     triangle = BitmapFactory.decodeResource(getResources(), R.drawable.triangle);
     triangle = Bitmap.createScaledBitmap(triangle, 80, 80, false);
-    triangleX = inventoryX;
-    triangleY = inventoryY;
-
-    triangle2 = BitmapFactory.decodeResource(getResources(), R.drawable.triangle);
-    triangle2 = Bitmap.createScaledBitmap(triangle, 80, 80, false);
-    triangle2X = screenWidth * 0.6f;
-    triangle2Y = screenHeight * 0.4f;
+    //    triangleX = inventoryX;
+    //    triangleY = inventoryY;
+    //
+    //    triangle2 = BitmapFactory.decodeResource(getResources(), R.drawable.triangle);
+    //    triangle2 = Bitmap.createScaledBitmap(triangle, 80, 80, false);
+    //    triangle2X = screenWidth * 0.6f;
+    //    triangle2Y = screenHeight * 0.4f;
 
     star = BitmapFactory.decodeResource(getResources(), R.drawable.star);
     star = Bitmap.createScaledBitmap(star, 80, 80, false);
-    starX = inventoryX + inventory.getWidth() * 0.5f;
-    starY = inventoryY;
-
-    star2 = BitmapFactory.decodeResource(getResources(), R.drawable.star);
-    star2 = Bitmap.createScaledBitmap(star, 80, 80, false);
-    star2X = screenWidth * 0.6f;
-    star2Y = screenHeight * 0.65f;
-
-    autoChessGame = activity.getGameManager().getCurrentGame();
-    // TODO store the presenter rather than the game
+    //    starX = inventoryX + inventory.getWidth() * 0.5f;
+    //    starY = inventoryY;
+    //
+    //    star2 = BitmapFactory.decodeResource(getResources(), R.drawable.star);
+    //    star2 = Bitmap.createScaledBitmap(star, 80, 80, false);
+    //    star2X = screenWidth * 0.6f;
+    //    star2Y = screenHeight * 0.65f;
   }
 
   public void drawButton() {
@@ -125,6 +122,11 @@ public class ChessView extends GameView implements ChessContract.View {
 
   public void drawTriangle(Coordinate coordinate) {
     canvas.drawBitmap(triangle, coordinate.getX(), coordinate.getY(), paint);
+  }
+
+  @Override
+  public Coordinate viewCoordinateToBoardCoordinate(float x, float y) {
+    return null;
   }
 
   // TODO Add two images for player and NPC. Maybe...
@@ -153,10 +155,10 @@ public class ChessView extends GameView implements ChessContract.View {
       canvas.drawBitmap(background, 0, 0, paint);
       canvas.restore();
       initView();
-      canvas.drawBitmap(star, starX, starY, paint);
-      canvas.drawBitmap(triangle, triangleX, triangleY, paint);
-      canvas.drawBitmap(triangle2, triangle2X, triangle2Y, paint);
-      canvas.drawBitmap(star2, star2X, star2Y, paint);
+      //      canvas.drawBitmap(star, starX, starY, paint);
+      //      canvas.drawBitmap(triangle, triangleX, triangleY, paint);
+      //      canvas.drawBitmap(triangle2, triangle2X, triangle2Y, paint);
+      //      canvas.drawBitmap(star2, star2X, star2Y, paint);
     } catch (Exception err) {
       err.printStackTrace();
     } finally {
@@ -185,10 +187,8 @@ public class ChessView extends GameView implements ChessContract.View {
     if (event.getAction() == MotionEvent.ACTION_DOWN && event.getPointerCount() == 1) {
       float x = event.getX();
       float y = event.getY();
-      //      For later design... TODO
-      //      List inventory_data = new ArrayList();
-      //      inventory_data.add(inventoryX);
-      //      inventory_data.add(inventory.getWidth());
+      Coordinate viewCoordinate = new Coordinate(x, y);
+      Coordinate touchLocation = viewCoordinateToBoardCoordinate(x, y);
       System.out.println(String.valueOf(x) + " " + String.valueOf(y));
       if (x > buttonX
           && x < buttonX + button.getWidth()
@@ -196,12 +196,12 @@ public class ChessView extends GameView implements ChessContract.View {
           && y < buttonY + button.getHeight()) {
         Toast.makeText(activity, "Start the game.", Toast.LENGTH_SHORT).show();
         // Call method to start the game.
-        boolean result = autoChessGame.autoFight();
+        boolean result = presenter.startAutoFight();
         if (result) {
           Toast.makeText(activity, "You win the game!", Toast.LENGTH_SHORT).show();
-          autoChessGame.showStatistic(true); // Win and get 2 cards.
+          //          autoChessGame.showStatistic(true); // Win and get 2 cards.
         } else {
-          autoChessGame.showStatistic(false); // Lose and get 0 cards.
+          //          autoChessGame.showStatistic(false); // Lose and get 0 cards.
           Toast.makeText(activity, "You lose the game!", Toast.LENGTH_SHORT).show();
         }
       } else if (x > inventoryX
@@ -209,20 +209,25 @@ public class ChessView extends GameView implements ChessContract.View {
           && y > inventoryY
           && y < inventoryY + inventory.getHeight() * 0.3333f) {
         Toast.makeText(activity, "Triangle chess was chosen", Toast.LENGTH_SHORT).show();
-        int chosenPlace = 0;
-        Coordinate location = autoChessGame.placeChess(chosenPlace);
-        triangleX = location.getX();
-        triangleY = location.getY();
+        //        int chosenPlace = 0;
+        //        Coordinate location = autoChessGame.placeChess(chosenPlace);
+        //        triangleX = touchLocation.getX();
+        //        triangleY = touchLocation.getY();
+        drawTriangle(viewCoordinate);
+        presenter.placePlayerChess(touchLocation,"Triangle"); // TODO Need to be modified.
       } else if (x > inventoryX + inventory.getWidth() * 0.5f
           && x < inventoryX + inventory.getWidth()
           && y > inventoryY
           && y < inventoryY + inventory.getHeight() * 0.3333f) {
         Toast.makeText(activity, "Star chess was chosen", Toast.LENGTH_SHORT).show();
-        int chosenPlace = 1;
-        Coordinate location = autoChessGame.placeChess(chosenPlace);
-        starX = location.getX();
-        starY = location.getY();
-      }
+        //        int chosenPlace = 1;
+        //        Coordinate location = autoChessGame.placeChess(chosenPlace);
+        //        starX = location.getX();
+        //        starY = location.getY();
+        drawStar(viewCoordinate);
+        presenter.placePlayerChess(touchLocation, "Star"); // TODO Need to be modified.
+      } // TODO
+
       return true;
     }
     return false;
