@@ -24,7 +24,7 @@ public abstract class Item {
   }
 
   /** Update */
-  public abstract void action();
+  public abstract void update();
 
   /**
    * Gets game it corresponding to.
