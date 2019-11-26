@@ -47,6 +47,11 @@ public class BossPlayer extends Item {
 //                    (int) coordinate.getY() + size);
   }
 
+  @Override
+  public void update() {
+
+  }
+
   /**
    * Draws the target that represents the player
    *
@@ -93,13 +98,6 @@ public class BossPlayer extends Item {
   public float getR1() {
     return r1;
   }
-
-  /**
-   * Action so that it updates the inventory to show the next item to be thrown Updates the list
-   * essentially
-   */
-  @Override
-  public void action() {}
 
   /**
    * Returns the inventory of the player

@@ -121,7 +121,12 @@ public class BossView extends GameView implements BossContract.View {
     while (threadFlag) {
       long startTime = System.currentTimeMillis();
       draw();
-      update();
+      try{
+        update();
+      }
+      catch (NullPointerException e){
+        System.out.println(e);
+      }
       //      bossGame.update();
       bossPresenter.update();
       long endTime = System.currentTimeMillis();
@@ -147,7 +152,7 @@ public class BossView extends GameView implements BossContract.View {
     enemyLeft = Bitmap.createScaledBitmap(enemyLeft, getWidth() / 6, getHeight() / 6, false);
     enemyRight = Bitmap.createScaledBitmap(enemyLeft, getWidth() / 6, getHeight() / 6, false);
 
-    bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.aim);
+    //    bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.aim);
     bossPlayer = Bitmap.createScaledBitmap(bossPlayer, getWidth() / 36, getHeight() / 36, false);
     shootButton = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_button);
     shootButton =
@@ -162,27 +167,49 @@ public class BossView extends GameView implements BossContract.View {
 
   @Override
   public void initView() {
+    bossPlayerCoordinate = new Coordinate(0, 0);
+    bossCoordinate = new Coordinate(0, 0);
+    healthBarCoordinate = new Coordinate(0, 0);
+    currentProjectileCoordinate = new Coordinate(0, 0);
+    bossPlayerCoordinate.setXY(screenWidth / 2, screenHeight / 2);
     drawBossPlayer();
+    bossCoordinate.setXY(0, screenHeight / 2);
     drawEnemy();
+    healthBarCoordinate.setXY(
+        screenWidth / 2,
+        (float) (screenHeight - screenWidth * 3 / 32 - 2.5 * healthBar.getHeight()));
     drawHealthBar();
     drawShootButton();
     drawCurrentProjectile();
+    currentProjectileCoordinate.setXY(
+        screenWidth / 2, (float) (screenHeight / 2 + screenHeight * 0.5));
   }
 
   @Override
   public void drawBossPlayer() {
-    canvas.drawBitmap(bossPlayer, bossCoordinate.getX(), bossCoordinate.getY(), paint);
+    try {
+      canvas.drawBitmap(bossPlayer, bossCoordinate.getX(), bossCoordinate.getY(), paint);
+    } catch (NullPointerException e) {
+      System.out.println(e.toString());
+    }
   }
 
   @Override
   public void drawEnemy() {
-
-    canvas.drawBitmap(enemyAppearance, bossCoordinate.getX(), bossCoordinate.getY(), paint);
+    try {
+      canvas.drawBitmap(enemyAppearance, bossCoordinate.getX(), bossCoordinate.getY(), paint);
+    } catch (NullPointerException e) {
+      System.out.println(e.toString());
+    }
   }
 
   @Override
   public void drawHealthBar() {
-    canvas.drawBitmap(healthBar, healthBarCoordinate.getX(), healthBarCoordinate.getY(), paint);
+    try {
+      canvas.drawBitmap(healthBar, healthBarCoordinate.getX(), healthBarCoordinate.getY(), paint);
+    } catch (NullPointerException e) {
+      System.out.println(e.toString());
+    }
   }
 
   public void drawShootButton() {
@@ -249,7 +276,7 @@ public class BossView extends GameView implements BossContract.View {
 
   public void drawCurrentProjectile() {
     if (currentProjectile != null) {
-//            canvas.drawBitmap(currentProjectile);
+      //            canvas.drawBitmap(currentProjectile);
     }
   }
 

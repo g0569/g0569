@@ -1,19 +1,15 @@
 package com.example.g0569.bossgame.model;
 
 import com.example.g0569.base.model.BaseGame;
-import com.example.g0569.bossgame.ButtonsToDelete.MenuButton;
-import com.example.g0569.bossgame.ButtonsToDelete.PauseButton;
-import com.example.g0569.bossgame.ButtonsToDelete.ShootButton;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class BossGame extends BaseGame {
   BossPlayer bossPlayer;
   Enemy enemy;
-  MenuButton menuButton;
-  PauseButton pauseButton;
-  ShootButton shootButton;
+//  MenuButton menuButton;
+//  PauseButton pauseButton;
+//  ShootButton shootButton;
   HealthBar healthBar;
   int items;
   boolean paused;
@@ -33,7 +29,7 @@ public class BossGame extends BaseGame {
     //    pauseButton =
     //        new PauseButton(
     //            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
-    shootButton = new ShootButton(this);
+//    shootButton = new ShootButton(this);
     healthBar = new HealthBar(this, enemy);
     //    Star star =
     //        new Star(

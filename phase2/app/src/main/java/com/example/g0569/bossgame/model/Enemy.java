@@ -12,11 +12,12 @@ import com.example.g0569.R;
 import com.example.g0569.base.model.Item;
 import com.example.g0569.utils.Coordinate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Enemy extends Item implements Observable {
 
-  private List<Observer> observers;
+  private List<Observer> observers = new ArrayList<Observer>();
   // The health and initial health of the Enemy
   private int health;
   private int initialHealth;
@@ -159,5 +160,10 @@ public class Enemy extends Item implements Observable {
     for (Observer observer: observers){
       observer.update();
     }
+  }
+
+  @Override
+  public void update() {
+
   }
 }

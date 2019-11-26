@@ -21,7 +21,9 @@ public class BossPresenter implements BossContract.Presenter {
     this.bossView = bossView;
     bossView.setPresenter(this);
     bossGame = new BossGame();
+    bossGame.onStart();
     bossGame.setEnemyMovement(bossView.getWidth());
+
   }
 
   /** Action. */
@@ -31,7 +33,7 @@ public class BossPresenter implements BossContract.Presenter {
 
   @Override
   public void start() {
-    bossView.initView();
+//    bossView.initView();
   }
 
   //  public Coordinate getPlayerCoor() {
