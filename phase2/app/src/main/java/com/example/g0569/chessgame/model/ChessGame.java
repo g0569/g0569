@@ -20,8 +20,8 @@ public class ChessGame extends BaseGame {
   private LevelTwoPlayer l2player;
   private int clickNumbers = 1;
   private ChessPieceFactory chessPieceFactory;
-  private ChessSQLiteAccessInterface BoardData;
-  private List<List<ChessPiece>> NPCData = new ArrayList<>();
+  private ChessSQLiteAccessInterface boardData;
+  private List<ChessPiece> NPCData = new ArrayList<>();
   // save where the NPC place the chess piece for different round.
 
   /**
@@ -50,23 +50,27 @@ public class ChessGame extends BaseGame {
         new StarChessPiece(
             gameManager.getScreenWidth() * 0.6f, gameManager.getScreenHeight() * 0.65f, this));
 
-    NPCData.add(NPC1ChessPiece);
-    NPCData.add(NPC2ChessPiece);
+//    NPCData.add(NPC1ChessPiece);
+//    NPCData.add(NPC2ChessPiece);
   }
 
   public void setBoardData(ChessSQLiteAccessInterface boardData) {
-    BoardData = boardData;
+    this.boardData = boardData;
   }
 
   public void decodeNPCData() {
-    String s = BoardData.getChessBoardData();
-    // TODO Decoder for string. Add objects to NPCData.
-    // TODO when decode the string, for each chess piece call placeNPCChess().
+    String s = boardData.getChessBoardData();
+//    float x = 0;
+//    float y = 0;
+//    String type = "";
+//    placeNPCChess(x,y,type);
+    // TODO when decoding the string, for each chess piece, call placeNPCChess(x, y, type).
   }
 
-  private void placeNPCChess(String x, String y, String type,){
-    // TODO
-    ChessPiece chessPiece = chessPieceFactory.getChessPiece();
+  private void placeNPCChess(float x, float y, String type){
+    ChessPiece chessPiece = chessPieceFactory.getChessPiece(x, y, this, type);
+    NPCData.add(chessPiece);
+    presenter.drawChessPiece(chessPiece);
   }
   // save where the NPC place the chess piece for different round.
 

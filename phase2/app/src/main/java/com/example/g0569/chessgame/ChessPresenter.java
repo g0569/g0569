@@ -1,6 +1,7 @@
 package com.example.g0569.chessgame;
 
 import com.example.g0569.chessgame.model.ChessGame;
+import com.example.g0569.chessgame.model.ChessPiece;
 import com.example.g0569.utils.Coordinate;
 
 public class ChessPresenter implements ChessContract.Presenter {
@@ -19,5 +20,10 @@ public class ChessPresenter implements ChessContract.Presenter {
   @Override
   public Coordinate getChessPieceCoordinate() {
     return null;
+  }
+
+  @Override
+  public void drawChessPiece(ChessPiece chessPiece) {
+
   }
 }
