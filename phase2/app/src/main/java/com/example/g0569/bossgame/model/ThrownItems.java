@@ -28,29 +28,30 @@ public class ThrownItems extends NonPlayerItem implements Observer {
   // The direction it should move
   private int x_direction;
   private int y_direction;
+  private String type;
 
-  public ThrownItems(BaseGame game, float screen_width, float screen_height, Resources resource) {
+  public ThrownItems(BaseGame game) {
     super(game);
     // Sets the size
-    size = (int) screen_width / 12;
+//    size = (int) screen_width / 12;
 
     // Sets the coordinate
-    float x = (int) (screen_width / 2 - size / 2);
-    float y = (int) (screen_height - screen_width * 3 / 32 - size / 2);
-    coordinate = new Coordinate(x, y);
+//    float x = (int) (screen_width / 2 - size / 2);
+//    float y = (int) (screen_height - screen_width * 3 / 32 - size / 2);
+//    coordinate = new Coordinate(x, y);
 
     // Sets the shrinkage
     shrink = 0.99;
 
     // Sets the direction of items being thrown
     x_direction = (int) (size * (1 - shrink));
-    y_direction = (int) (-screen_height / 100 + size * (1 - shrink));
+//    y_direction = (int) (-screen_height / 100 + size * (1 - shrink));
 
     // Sets that is has not been thrown
     thrown = false;
 
     // Sets its rectangle
-    dest_rect = new Rect((int) x, (int) y, (int) x + size, (int) y + size);
+//    dest_rect = new Rect((int) x, (int) y, (int) x + size, (int) y + size);
     //        super.appearance = appearance;
 
   }
@@ -60,11 +61,11 @@ public class ThrownItems extends NonPlayerItem implements Observer {
    *
    * @param canvas of the thing being drawn
    * @param paint the style of the item
-   */
-  @Override
-  public void draw(Canvas canvas, Paint paint) {
-    canvas.drawBitmap(appearance, src_rect, dest_rect, paint);
-  }
+//   */
+//  @Override
+//  public void draw(Canvas canvas, Paint paint) {
+//    canvas.drawBitmap(appearance, src_rect, dest_rect, paint);
+//  }
 
   /**
    * Returns how much damage it deals
@@ -80,7 +81,7 @@ public class ThrownItems extends NonPlayerItem implements Observer {
     //    System.out.println(thrown);
     if (thrown) {
       size = (int) (size * shrink);
-      actionHelp();
+//      actionHelp();
     }
   }
 
@@ -90,10 +91,10 @@ public class ThrownItems extends NonPlayerItem implements Observer {
    * @param screen_height of the phone
    * @return if it is in the screen
    */
-  public boolean inTheScreen(float screen_height) {
-    // THis can be done in GameBoss instead so move there in the future, for now it is also fine
-    return 0 <= (coordinate.getY() + size) && (coordinate.getY() + size) <= screen_height;
-  }
+//  public boolean inTheScreen(float screen_height) {
+//    // THis can be done in GameBoss instead so move there in the future, for now it is also fine
+//    return 0 <= (coordinate.getY() + size) && (coordinate.getY() + size) <= screen_height;
+//  }
 
   /** Sets thrown to true */
   public void thrown() {
@@ -101,15 +102,15 @@ public class ThrownItems extends NonPlayerItem implements Observer {
   }
 
   /** Helper so that it can tell the item to change coordinates */
-  private void actionHelp() {
-    coordinate.setX(coordinate.getX() + x_direction);
-    coordinate.setY(coordinate.getY() + y_direction - 50);
-    dest_rect.set(
-        (int) coordinate.getX(),
-        (int) coordinate.getY(),
-        (int) coordinate.getX() + size,
-        (int) coordinate.getY() + size);
-  }
+//  private void actionHelp() {
+//    coordinate.setX(coordinate.getX() + x_direction);
+//    coordinate.setY(coordinate.getY() + y_direction - 50);
+//    dest_rect.set(
+//        (int) coordinate.getX(),
+//        (int) coordinate.getY(),
+//        (int) coordinate.getX() + size,
+//        (int) coordinate.getY() + size);
+//  }
 
   /**
    * Returns the radius
@@ -120,27 +121,26 @@ public class ThrownItems extends NonPlayerItem implements Observer {
     return size;
   }
 
-  /**
-   * Checks to see if it has attacked something or not by checking coordinates
-   *
-   * @param coordinateX of the thing being attacked
-   * @param coordinateY of the thing being attacked
-   * @return whether it is in range
-   */
-  public boolean isAttacking(float coordinateX, float coordinateY) {
-    if ((getCoordinate().getX() < coordinateX && coordinateX < dest_rect.right)
-        && (getCoordinate().getY() < coordinateY && coordinateY < dest_rect.bottom)) {
-      //      appearance = BitmapFactory.decodeResource(resource, R.drawable.star);
-      appearance = explodingAppearance;
 
-      return true;
-    }
-    //    System.out.println("Not attacked");
-    return false;
-  }
+
+//  public boolean isAttacking(float coordinateX, float coordinateY) {
+//    if ((getCoordinate().getX() < coordinateX && coordinateX < dest_rect.right)
+//        && (getCoordinate().getY() < coordinateY && coordinateY < dest_rect.bottom)) {
+//      //      appearance = BitmapFactory.decodeResource(resource, R.drawable.star);
+//      appearance = explodingAppearance;
+//
+//      return true;
+//    }
+//    //    System.out.println("Not attacked");
+//    return false;
+//  }
 
   @Override
   public void update() {
     // Could have experience section that updates
   }
+
+    public String getType() {
+      return type;
+    }
 }

@@ -21,32 +21,30 @@ public class BossPlayer extends NonPlayerItem {
   private float r1;
   private float r2;
 
-  // Appearance not used for now, is drawn in draw method instead
-  private Bitmap appearance;
-
   // The inventory of the items the Player can throw
   private List<ThrownItems> inventory = new ArrayList<>();
 
   private Rect srcRect;
   private Rect destRect;
+  private Coordinate coordinate;
 
-  public BossPlayer(BaseGame game, float screenWidth, float screenHeight, Resources resource) {
+  public BossPlayer(BaseGame game) {
     super(game);
-    r1 = screenWidth / 36;
-    size = (int) r1;
-    r2 = screenWidth / 200;
-    float x = screenWidth / 2;
-    float y = screenHeight / 2 - r1 * 2;
-    super.coordinate = new Coordinate(x, y);
-    appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyright);
-
-    srcRect = new Rect(0, 0, appearance.getWidth(), appearance.getHeight());
-    destRect =
-            new Rect(
-                    (int) coordinate.getX(),
-                    (int) coordinate.getY(),
-                    (int) coordinate.getX() + size,
-                    (int) coordinate.getY() + size);
+//    r1 = screenWidth / 36;
+//    size = (int) r1;
+//    r2 = screenWidth / 200;
+//    float x = screenWidth / 2;
+//    float y = screenHeight / 2 - r1 * 2;
+//    coordinate = new Coordinate(x, y);
+//    appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyright);
+//
+//    srcRect = new Rect(0, 0, appearance.getWidth(), appearance.getHeight());
+//    destRect =
+//            new Rect(
+//                    (int) coordinate.getX(),
+//                    (int) coordinate.getY(),
+//                    (int) coordinate.getX() + size,
+//                    (int) coordinate.getY() + size);
   }
 
   /**
@@ -55,9 +53,6 @@ public class BossPlayer extends NonPlayerItem {
    * @param canvas
    * @param paint
    */
-  @Override
-  public void draw(Canvas canvas, Paint paint) {
-    canvas.drawBitmap(appearance, srcRect, destRect, paint);
 
 //    paint.setColor(Color.BLACK);
 //    canvas.drawCircle(coordinate.getX(), coordinate.getY(), r2, paint);
@@ -88,7 +83,7 @@ public class BossPlayer extends NonPlayerItem {
 //        coordinate.getX() + r1 * 1 / 2,
 //        coordinate.getY(),
 //        paint);
-  }
+
 
   /**
    * Returns the radius
@@ -114,4 +109,6 @@ public class BossPlayer extends NonPlayerItem {
   public List getInventory() {
     return inventory;
   }
+
+  public BossPlayer getBossPlayer(){return this;}
 }

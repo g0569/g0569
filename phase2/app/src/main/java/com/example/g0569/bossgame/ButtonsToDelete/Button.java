@@ -18,7 +18,7 @@ public class Button extends NonPlayerItem {
   float x;
   float y;
 
-  public Button(BaseGame game, float screenWidth, float screenHeight) {
+  public Button(BaseGame game) {
     // Radius of BaseButton
     super(game);
   }
@@ -29,8 +29,6 @@ public class Button extends NonPlayerItem {
    * @param canvas of the button that is being drawn on
    * @param paint the style of the button
    */
-  @Override
-  public void draw(Canvas canvas, Paint paint) {}
 
   /**
    * Changes the color of the launch button

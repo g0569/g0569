@@ -20,74 +20,61 @@ public class Enemy extends NonPlayerItem implements Observable {
   // The health and initial health of the Enemy
   private int health;
   private int initialHealth;
+  private boolean resistFire;
+  private boolean resistWater;
+  private boolean resistLightning;
 
   // The direction it moves
   private int xDirection;
   private int yDirection;
 
-  // The rectangles used for drawing
-  private Rect srcRect;
-  private Rect destRect;
 
-  // Screen Width and Height
-  private float screenWidth;
-  private float screenHeight;
-
-  private Resources resource;
-  private Bitmap appearance;
-
-
-  public Enemy(BossGame game, float screenWidth, float screenHeight, Resources resource) {
+  public Enemy(BossGame game) {
     super(game);
-    this.screenHeight = screenHeight;
-    this.screenWidth = screenWidth;
-
-    // Appearance of the enemy
-    this.resource = resource;
-    appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyright);
-
-
-    // Size of the Enemy
-    size = (int) this.screenWidth / 6;
-
-    // Sets the coordinate of the Enemy
-    float y = (int) (this.screenHeight / 2 - this.screenWidth / 18 - size / 2);
-    coordinate = new Coordinate(0, y);
 
     // Sets the direction of the Enemy
-    xDirection = (int) this.screenWidth / 100;
+//    xDirection = (int) this.screenWidth / 100;
     yDirection = 0;
 
     // Sets the health of the boss
     health = 30;
     initialHealth = health;
-
-    // Sets the rectangles to be drawn (size and stuff)
-    srcRect = new Rect(0, 0, appearance.getWidth(), appearance.getHeight());
-    destRect =
-        new Rect(
-            (int) coordinate.getX(),
-            (int) coordinate.getY(),
-            (int) coordinate.getX() + size,
-            (int) coordinate.getY() + size);
   }
 
   /**
    * Moves the Boss around based on its position
    *
-   * @param screen_width of the screen to know the limit of movement
+
    */
-  private void action(float screen_width) {
-    if (health > 0) {
-      if (coordinate.getX() <= 0) {
-        xDirection = Math.abs(xDirection);
-        appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyright);
-      } else if (coordinate.getX() >= screen_width - size) {
-        xDirection = -Math.abs(xDirection);
-        appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyleft);
-      }
-      //        action();
+  public void action() {
+    double d = Math.random();
+    if (d>0.7){
+      resistFire = true;
+      resistLightning = false;
+      resistWater = false;
+    } else if (d>0.5){
+      resistFire = false;
+      resistLightning = true;
+      resistWater = false;
+    } else if (d>0.3){
+      resistFire = false;
+      resistLightning = false;
+      resistWater = true;
+    } else {
+      resistFire = false;
+      resistLightning = false;
+      resistWater = false;
     }
+//    if (health > 0) {
+//      if (coordinate.getX() <= 0) {
+//        xDirection = Math.abs(xDirection);
+//        appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyright);
+//      } else if (coordinate.getX() >= screen_width - size) {
+//        xDirection = -Math.abs(xDirection);
+//        appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyleft);
+//      }
+//      //        action();
+//    }
   }
 
   /**
@@ -96,57 +83,30 @@ public class Enemy extends NonPlayerItem implements Observable {
    * @param canvas of the Enemy being drawn on
    * @param paint the style of the enemy
    */
-  @Override
-  public void draw(Canvas canvas, Paint paint) {
-    if (health > 0) {
-      canvas.drawBitmap(appearance, srcRect, destRect, paint);
-    } else {
-      paint.setColor(Color.RED);
-      paint.setTextSize(300);
-      float width = paint.measureText("You Won!!!");
-      canvas.drawText("You Won!!!", screenWidth / 2 - width / 2, screenHeight / 2, paint);
-    }
-  }
-
-  /** Moves the Enemy around, left and right right now */
-  @Override
-  public void action() {
-    action(screenWidth);
-    coordinate.setX(coordinate.getX() + xDirection);
-    coordinate.setY(coordinate.getY() + yDirection);
-    destRect.set(
-        (int) coordinate.getX(),
-        (int) coordinate.getY(),
-        (int) coordinate.getX() + size,
-        (int) coordinate.getY() + size);
-  }
 
   /** Decreases the health of the enemy when Item hits it */
-  public void attacked(int damageTaken) {
-//    health -= damageTaken;
+  public void attacked(int damageTaken, String attackType) {
+    if (resistFire && attackType == "fire"){
+      health -= damageTaken/2;
+    } else if (resistWater && attackType == "water"){
+      health -=damageTaken/2;
+    } else if (resistLightning && attackType == "lightning"){
+      health -=damageTaken/2;
+    }else{
+
+    health -= damageTaken;
     setState(health-damageTaken);
-    if (health <= 0) {
-      appearance = null;
     }
   }
 
-  public boolean isAttacked(float coordinateX, float coordinateY) {
-    if ((getCoordinate().getX() < coordinateX && coordinateX < destRect.right)
-        && (getCoordinate().getY() < coordinateY && coordinateY < destRect.bottom)) {
-      //      System.out.println("I'm hit");
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Getter of the size
-   *
-   * @return size
-   */
-  public int getSize() {
-    return size;
-  }
+//  public boolean isAttacked(float coordinateX, float coordinateY) {
+////    if ((getCoordinate().getX() < coordinateX && coordinateX < destRect.right)
+////        && (getCoordinate().getY() < coordinateY && coordinateY < destRect.bottom)) {
+////      //      System.out.println("I'm hit");
+////      return true;
+////    }
+//    return false;
+//  }
 
   /**
    * Getter for the health

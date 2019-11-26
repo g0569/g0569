@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.example.g0569.bossgame.model.BossGame;
+import com.example.g0569.utils.Coordinate;
 
 /** The type Boss presenter. */
 public class BossPresenter implements BossContract.Presenter {
@@ -22,35 +23,6 @@ public class BossPresenter implements BossContract.Presenter {
     bossGame = new BossGame();
   }
 
-  /**
-   * Draw.
-   *
-   * @param canvas the canvas
-   * @param paint the paint
-   */
-  public void draw(Canvas canvas, Paint paint) {
-    bossGame.draw(canvas, paint);
-  }
-
-  /**
-   * Create items.
-   *
-   * @param resources the resources
-   */
-  public void createItems(Resources resources) {
-    bossGame.createItems(resources);
-  }
-
-  /**
-   * Touch.
-   *
-   * @param xCoordinate the x coordinate
-   * @param yCoordinate the y coordinate
-   */
-  public void touch(float xCoordinate, float yCoordinate) {
-    bossGame.touch(xCoordinate, yCoordinate);
-  }
-
   /** Action. */
   public void action() {
     bossGame.action();
@@ -59,5 +31,74 @@ public class BossPresenter implements BossContract.Presenter {
   @Override
   public void start() {
     bossView.initView();
+  }
+
+//  public Coordinate getPlayerCoor() {
+//    Coordinate playerCoor = Coordinate.create(0,0);
+//    try{
+//      playerCoor = bossGame.getBossPlayer().getCoordinate();
+//    }
+//    catch (NullPointerException e) {
+//    }
+//    finally{
+//      return playerCoor;
+//    }
+//  }
+
+//  public Coordinate getEnemyCoordinate() {
+//    Coordinate playerCoor = Coordinate.create(0,0);;
+//    try{
+//      playerCoor = bossGame.getEnemy().getCoordinate();
+//    }
+//    catch (NullPointerException e) {
+//    }
+//    finally{
+//      return playerCoor;
+//    }
+//  }
+
+  @Override
+  public void pause() {
+
+  }
+
+  public void update() {
+
+  }
+
+  @Override
+  public void shoot() {
+
+  }
+
+  @Override
+  public void showMenu() {
+
+  }
+
+//  @Override
+//  public Coordinate getBossPlayerCoordinate() {
+//    return null;
+//  }
+//
+//  @Override
+//  public Coordinate getEnemeyCoordinate() {
+//    return null;
+//  }
+//
+//  public Coordinate getHealthBarCoordinate() {
+//    Coordinate playerCoor = Coordinate.create(0,0);;
+//    try{
+//      playerCoor = bossGame.getHealthBar().getCoordinate();
+//    }
+//    catch (NullPointerException e) {
+//    }
+//    finally{
+//      return playerCoor;
+//    }
+//  }
+
+  public void attackBoss(){
+    bossGame.attackBoss();
   }
 }
