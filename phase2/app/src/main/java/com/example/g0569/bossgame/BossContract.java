@@ -10,6 +10,10 @@ public interface BossContract {
     void drawBossPlayer();
     void drawEnemy();
     void drawHealthBar();
+
+    void setThrown(boolean b);
+
+    void setCurrentProjectileBitmap(String typeProjectile);
   }
 
   interface Presenter extends BasePresenter {

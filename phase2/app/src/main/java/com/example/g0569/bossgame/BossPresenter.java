@@ -68,7 +68,10 @@ public class BossPresenter implements BossContract.Presenter {
 
   @Override
   public void shoot() {
-
+    bossGame.throwProjectile();
+    String typeProjectile = bossGame.getNextProjectile().toString();
+    bossView.setCurrentProjectileBitmap(typeProjectile);
+    bossView.setThrown(true);
   }
 
   @Override
@@ -100,5 +103,7 @@ public class BossPresenter implements BossContract.Presenter {
 
   public void attackBoss(){
     bossGame.attackBoss();
+    // if there is contact, set the map to nothing
+    bossView.setCurrentProjectileBitmap("null");
   }
 }

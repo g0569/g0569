@@ -25,6 +25,8 @@ public class BossView extends GameView implements BossContract.View {
   private Bitmap shootButton;
   private Bitmap healthBar;
   private Bitmap star;
+  private boolean thrown;
+  private Bitmap currentProjectile;
   private int enemyDirection = (int) this.screenWidth/100;
   private Coordinate bossCoordinate;
   private Coordinate shootButtonCoordinate;
@@ -115,6 +117,7 @@ public class BossView extends GameView implements BossContract.View {
     while (threadFlag) {
       long startTime = System.currentTimeMillis();
       draw();
+      update();
       //      bossGame.update();
       bossPresenter.update();
       long endTime = System.currentTimeMillis();
@@ -160,7 +163,7 @@ private void initBitmaps(){
     drawEnemy();
     drawHealthBar();
     drawShootButton();
-
+    drawCurrentProjectile();
   }
 
   @Override
@@ -205,7 +208,13 @@ private void initBitmaps(){
 
 
   // TODO
-  public void updateMovementProjectile(){}
+  public void updateMovementProjectile(){
+    int yDirection = (int) (-screenHeight / 100 + screenWidth/12 * (1 - 0.99));
+    int xDirection= (int) (screenWidth/2 - (screenWidth/12)/2);
+    if (thrown){
+      currentProjectileCoordinate.setXY(currentProjectileCoordinate.getX()+xDirection, currentProjectileCoordinate.getY()+yDirection);
+    }
+  }
 
   private boolean inRange(
           float itemX,float itemY, float rangeX, float rangeY, float rangeDx, float rangeDy) {
@@ -220,4 +229,27 @@ private void initBitmaps(){
       bossPresenter.attackBoss();
     }
   }
+
+  public void setThrown(boolean thrown){
+    this.thrown = thrown;
+  }
+
+  @Override
+  public void setCurrentProjectileBitmap(String typeProjectile) {
+    //use hashtable to find appropriate image
+  }
+
+  public void drawCurrentProjectile(){
+    if (currentProjectile != null){
+//      canvas.drawBitmap();
+    }
+  }
+
+  public void update(){
+    updateMovementEnemy();
+    updateMovementProjectile();
+    detectCollision();
+  }
+
+
 }

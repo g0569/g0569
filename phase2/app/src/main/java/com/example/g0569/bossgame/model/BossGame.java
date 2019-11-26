@@ -30,127 +30,126 @@ public class BossGame extends BaseGame {
     paused = false;
   }
 
-  /**
-   * Creates the items for the game
-   *
-
-   */
+  /** Creates the items for the game */
   public void onStart() {
 
-    bossPlayer =
-        new BossPlayer(this);
-    enemy =
-        new Enemy(
-            this);
-//    menuButton =
-//        ;
-//    pauseButton =
-//        new PauseButton(
-//            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
-    shootButton =
-        new ShootButton(
-            this);
+    bossPlayer = new BossPlayer(this);
+    enemy = new Enemy(this);
+    //    menuButton =
+    //        ;
+    //    pauseButton =
+    //        new PauseButton(
+    //            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
+    shootButton = new ShootButton(this);
     healthBar = new HealthBar(this, enemy);
-//    Star star =
-//        new Star(
-//            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(), resources);
-//    Star star1 =
-//        new Star(
-//            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(), resources);
+    //    Star star =
+    //        new Star(
+    //            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(),
+    // resources);
+    //    Star star1 =
+    //        new Star(
+    //            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(),
+    // resources);
 
     // Adds some stars for now just to show the game works
-//    bossPlayer.getInventory().add(star);
-//    bossPlayer.getInventory().add(star1);
+    //    bossPlayer.getInventory().add(star);
+    //    bossPlayer.getInventory().add(star1);
     items = bossPlayer.getInventory().size();
   }
 
-  public HealthBar getHealthBar(){return healthBar;}
+  public HealthBar getHealthBar() {
+    return healthBar;
+  }
 
-  public Enemy getEnemy(){return enemy;}
+  public Enemy getEnemy() {
+    return enemy;
+  }
 
-  public BossPlayer getBossPlayer(){return bossPlayer;}
+  public BossPlayer getBossPlayer() {
+    return bossPlayer;
+  }
   /**
    * Draws all the components necessary
    *
    * @param canvas of the things being drawn
    * @param paint the style of teh things being drawm
    */
-//  public void draw(Canvas canvas, Paint paint) {
-//    enemy.draw(canvas, paint);
-//    bossPlayer.draw(canvas, paint);
-//    menuButton.draw(canvas, paint);
-//    pauseButton.draw(canvas, paint);
-//    shootButton.draw(canvas, paint);
-//    healthBar.draw(canvas, paint);
-//
-//    for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
-//      ThrownItems projectile;
-//      projectile = (ThrownItems) bossPlayer.getInventory().get(i);
-//      projectile.draw(canvas, paint);
-//    }
-//    // Draws the button to change colors
-//    paint.setStyle(Paint.Style.FILL);
-//    paint.setColor(Color.RED);
-//    canvas.drawCircle(50, 50, getGameManager().getScreenWidth() / 20, paint);
-//
-//    // Draws the text to display stats and messages
-//
-//    paint.setColor(Color.WHITE);
-//    paint.setTextSize(50);
-//    canvas.drawText(
-//        "Items Left: " + items,
-//        getGameManager().getScreenWidth() / 2,
-//        getGameManager().getScreenHeight(),
-//        paint);
-//    canvas.drawText(
-//        "Health Left: " + StrictMath.max(0, enemy.getHealth()),
-//        healthBar.getX(),
-//        getGameManager().getScreenHeight() / 2 + 50,
-//        paint);
-//    paint.setColor(Color.BLACK);
-//    canvas.drawText("Change Color!!", 50, 50, paint);
-//    if (items < 1 && enemy.getHealth() > 0) {
-//      paint.setColor(Color.RED);
-//      paint.setTextSize(300);
-//      float width = paint.measureText("You Lose!!!");
-//      canvas.drawText(
-//          "You Lose!!!",
-//          getGameManager().getScreenWidth() / 2 - width / 2,
-//          getGameManager().getScreenHeight() / 2,
-//          paint);
-//    }
-//    if (paused) {
-//      paint.setColor(Color.RED);
-//      paint.setTextSize(300);
-//      float width = paint.measureText("Paused");
-//      canvas.drawText(
-//          "Paused",
-//          getGameManager().getScreenWidth() / 2 - width / 2,
-//          getGameManager().getScreenHeight() / 2,
-//          paint);
-//    }
-//  }
+  //  public void draw(Canvas canvas, Paint paint) {
+  //    enemy.draw(canvas, paint);
+  //    bossPlayer.draw(canvas, paint);
+  //    menuButton.draw(canvas, paint);
+  //    pauseButton.draw(canvas, paint);
+  //    shootButton.draw(canvas, paint);
+  //    healthBar.draw(canvas, paint);
+  //
+  //    for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
+  //      ThrownItems projectile;
+  //      projectile = (ThrownItems) bossPlayer.getInventory().get(i);
+  //      projectile.draw(canvas, paint);
+  //    }
+  //    // Draws the button to change colors
+  //    paint.setStyle(Paint.Style.FILL);
+  //    paint.setColor(Color.RED);
+  //    canvas.drawCircle(50, 50, getGameManager().getScreenWidth() / 20, paint);
+  //
+  //    // Draws the text to display stats and messages
+  //
+  //    paint.setColor(Color.WHITE);
+  //    paint.setTextSize(50);
+  //    canvas.drawText(
+  //        "Items Left: " + items,
+  //        getGameManager().getScreenWidth() / 2,
+  //        getGameManager().getScreenHeight(),
+  //        paint);
+  //    canvas.drawText(
+  //        "Health Left: " + StrictMath.max(0, enemy.getHealth()),
+  //        healthBar.getX(),
+  //        getGameManager().getScreenHeight() / 2 + 50,
+  //        paint);
+  //    paint.setColor(Color.BLACK);
+  //    canvas.drawText("Change Color!!", 50, 50, paint);
+  //    if (items < 1 && enemy.getHealth() > 0) {
+  //      paint.setColor(Color.RED);
+  //      paint.setTextSize(300);
+  //      float width = paint.measureText("You Lose!!!");
+  //      canvas.drawText(
+  //          "You Lose!!!",
+  //          getGameManager().getScreenWidth() / 2 - width / 2,
+  //          getGameManager().getScreenHeight() / 2,
+  //          paint);
+  //    }
+  //    if (paused) {
+  //      paint.setColor(Color.RED);
+  //      paint.setTextSize(300);
+  //      float width = paint.measureText("Paused");
+  //      canvas.drawText(
+  //          "Paused",
+  //          getGameManager().getScreenWidth() / 2 - width / 2,
+  //          getGameManager().getScreenHeight() / 2,
+  //          paint);
+  //    }
+  //  }
 
   /** Updates all the components that are part of the lab */
   public void action() {
-//    if (!paused) {
-//      enemy.action();
-//      for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
-//        ThrownItems projectile;
-//        projectile = (ThrownItems) bossPlayer.getInventory().get(i);
-//        projectile.action();
-//        if (!projectile.inTheScreen(getGameManager().getScreenHeight())) {
-//          bossPlayer.getInventory().remove(projectile);
-//        }
-//        if (enemy.isAttacked(projectile.getX(), projectile.getY())
-//            || projectile.isAttacking(enemy.getX(), enemy.getY())) {
-//          enemy.attacked(projectile.getDamage());
-//          healthBar.action(enemy.getHealth(), enemy.getInitialHealth());
-//          // Want the explosion pic to come in to play before we get rid of the projectile
-//          bossPlayer.getInventory().remove(projectile);
-//        }
-//      }
-//    }
+    //    if (!paused) {
+    //      enemy.action();
+    //      for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
+    //        ThrownItems projectile;
+    //        projectile = (ThrownItems) bossPlayer.getInventory().get(i);
+    //        projectile.action();
+    //        if (!projectile.inTheScreen(getGameManager().getScreenHeight())) {
+    //          bossPlayer.getInventory().remove(projectile);
+    //        }
+    //        if (enemy.isAttacked(projectile.getX(), projectile.getY())
+    //            || projectile.isAttacking(enemy.getX(), enemy.getY())) {
+    //          enemy.attacked(projectile.getDamage());
+    //          healthBar.action(enemy.getHealth(), enemy.getInitialHealth());
+    //          // Want the explosion pic to come in to play before we get rid of the projectile
+    //          bossPlayer.getInventory().remove(projectile);
+    //        }
+    //      }
+    //    }
 
   }
 
@@ -170,20 +169,20 @@ public class BossGame extends BaseGame {
    * @param
    * @param
    */
-//  public void hit() {
-//
-//    if (!bossPlayer.getInventory().isEmpty() && bossPlayer.getInventory().get(0) != null) {
-//      ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
-//      projectile.thrown();
-//      items--;
-//      // Seems not to be accurate yet
-//      if (enemy.isAttacked(projectile.getX(), projectile.getY())
-//          || projectile.isAttacking(enemy.getX(), enemy.getY())) {
-//        enemy.attacked(projectile.getDamage());
-//        healthBar.action(enemy.getHealth(), enemy.getInitialHealth());
-//      }
-//    }
-//  }
+  //  public void hit() {
+  //
+  //    if (!bossPlayer.getInventory().isEmpty() && bossPlayer.getInventory().get(0) != null) {
+  //      ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
+  //      projectile.thrown();
+  //      items--;
+  //      // Seems not to be accurate yet
+  //      if (enemy.isAttacked(projectile.getX(), projectile.getY())
+  //          || projectile.isAttacking(enemy.getX(), enemy.getY())) {
+  //        enemy.attacked(projectile.getDamage());
+  //        healthBar.action(enemy.getHealth(), enemy.getInitialHealth());
+  //      }
+  //    }
+  //  }
 
   /**
    * Checks to see if its within the range
@@ -209,55 +208,61 @@ public class BossGame extends BaseGame {
         && item_y > range_y
         && item_y < range_y + range_dy);
   }
-  
-//  public void touch(float x, float y) {
-//    if (enemy.getHealth() > 0 && items >= 1) {
-//      if (inRange(x, y, shootButton.getX(), shootButton.getY(), shootButton.getR())) {
-//        Toast.makeText(getGameManager().getMainActivity(), "Throw!!!!", Toast.LENGTH_SHORT).show();
-//        this.hit();
-//        // If we press the button on top is changes the color of the button
-//      } else if (inRange(x, y, 50, 50, getGameManager().getScreenWidth() / 20)) {
-//        shootButton.changeColor();
-//      } else if (inRange(
-//          x,
-//          y,
-//          pauseButton.getX(),
-//          pauseButton.getY(),
-//          pauseButton.getWidth(),
-//          pauseButton.getHeight())) {
-//        // Pauses the game if anywhere else is paused. Update later to include a pause button for
-//        // all games
-//        pause();
-//      } else if (inRange(
-//          x,
-//          y,
-//          menuButton.getX(),
-//          menuButton.getY(),
-//          menuButton.getWidth(),
-//          menuButton.getHeight())) {
-//        List<String> statistic = new ArrayList<String>();
-//        getGameManager().showStatistic(statistic);
-//      }
-//    } else if (enemy.getHealth() <= 0) {
-//      List<String> statistic = new ArrayList<String>();
-//      statistic.add("YOU WON!!!");
-//      getGameManager().showStatistic(statistic);
-//    } else if (items < 1) {
-//      List<String> statistic = new ArrayList<String>();
-//      statistic.add("YOU LOSE!!!");
-//      getGameManager().showStatistic(statistic);
-//    }
-//  }
 
-    public void attackBoss() {
-//      ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
-//      enemy.attacked(projectile.getDamage());
-      ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
-      enemy.attacked(projectile.getDamage(), projectile.getType());
-    }
+  //  public void touch(float x, float y) {
+  //    if (enemy.getHealth() > 0 && items >= 1) {
+  //      if (inRange(x, y, shootButton.getX(), shootButton.getY(), shootButton.getR())) {
+  //        Toast.makeText(getGameManager().getMainActivity(), "Throw!!!!",
+  // Toast.LENGTH_SHORT).show();
+  //        this.hit();
+  //        // If we press the button on top is changes the color of the button
+  //      } else if (inRange(x, y, 50, 50, getGameManager().getScreenWidth() / 20)) {
+  //        shootButton.changeColor();
+  //      } else if (inRange(
+  //          x,
+  //          y,
+  //          pauseButton.getX(),
+  //          pauseButton.getY(),
+  //          pauseButton.getWidth(),
+  //          pauseButton.getHeight())) {
+  //        // Pauses the game if anywhere else is paused. Update later to include a pause button
+  // for
+  //        // all games
+  //        pause();
+  //      } else if (inRange(
+  //          x,
+  //          y,
+  //          menuButton.getX(),
+  //          menuButton.getY(),
+  //          menuButton.getWidth(),
+  //          menuButton.getHeight())) {
+  //        List<String> statistic = new ArrayList<String>();
+  //        getGameManager().showStatistic(statistic);
+  //      }
+  //    } else if (enemy.getHealth() <= 0) {
+  //      List<String> statistic = new ArrayList<String>();
+  //      statistic.add("YOU WON!!!");
+  //      getGameManager().showStatistic(statistic);
+  //    } else if (items < 1) {
+  //      List<String> statistic = new ArrayList<String>();
+  //      statistic.add("YOU LOSE!!!");
+  //      getGameManager().showStatistic(statistic);
+  //    }
+  //  }
 
-    public void throwProjectile(){
-      ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
-      projectile.thrown();
-    }
+  public void attackBoss() {
+    //      ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
+    //      enemy.attacked(projectile.getDamage());
+    ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
+    enemy.attacked(projectile.getDamage(), projectile.getType());
+  }
+
+  public void throwProjectile() {
+    ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
+    projectile.thrown();
+  }
+
+  public ThrownItems getNextProjectile(){
+    return (ThrownItems)bossPlayer.getInventory().get(0);
+  }
 }
