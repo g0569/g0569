@@ -107,6 +107,13 @@ public class Enemy extends Item implements Observable {
 ////    }
 //    return false;
 //  }
+  public void setxDirection(int directionMovement){
+    this.xDirection = directionMovement/100;
+  }
+
+  public int getXDirection(){
+    return this.xDirection;
+  }
 
   /**
    * Getter for the health

@@ -14,18 +14,22 @@ public interface BossContract {
     void setThrown(boolean b);
 
     void setCurrentProjectileBitmap(String typeProjectile);
+
+    void updateMovementHealthBar(double ratio);
+
+    int getWidth();
   }
 
   interface Presenter extends BasePresenter {
     void pause();
     void shoot();
     void showMenu();
-//    Coordinate getBossPlayerCoordinate();
-//    Coordinate getEnemeyCoordinate();
-//    Coordinate getHealthBarCoordinate();
 
     void update();
 
     void attackBoss();
+
+    int getEnemyMovement();
+
   }
 }

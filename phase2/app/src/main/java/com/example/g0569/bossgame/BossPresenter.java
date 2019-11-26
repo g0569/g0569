@@ -21,6 +21,7 @@ public class BossPresenter implements BossContract.Presenter {
     this.bossView = bossView;
     bossView.setPresenter(this);
     bossGame = new BossGame();
+    bossGame.setEnemyMovement(bossView.getWidth());
   }
 
   /** Action. */
@@ -33,38 +34,42 @@ public class BossPresenter implements BossContract.Presenter {
     bossView.initView();
   }
 
-//  public Coordinate getPlayerCoor() {
-//    Coordinate playerCoor = Coordinate.create(0,0);
-//    try{
-//      playerCoor = bossGame.getBossPlayer().getCoordinate();
-//    }
-//    catch (NullPointerException e) {
-//    }
-//    finally{
-//      return playerCoor;
-//    }
-//  }
+  //  public Coordinate getPlayerCoor() {
+  //    Coordinate playerCoor = Coordinate.create(0,0);
+  //    try{
+  //      playerCoor = bossGame.getBossPlayer().getCoordinate();
+  //    }
+  //    catch (NullPointerException e) {
+  //    }
+  //    finally{
+  //      return playerCoor;
+  //    }
+  //  }
 
-//  public Coordinate getEnemyCoordinate() {
-//    Coordinate playerCoor = Coordinate.create(0,0);;
-//    try{
-//      playerCoor = bossGame.getEnemy().getCoordinate();
-//    }
-//    catch (NullPointerException e) {
-//    }
-//    finally{
-//      return playerCoor;
-//    }
-//  }
+  //  public Coordinate getEnemyCoordinate() {
+  //    Coordinate playerCoor = Coordinate.create(0,0);;
+  //    try{
+  //      playerCoor = bossGame.getEnemy().getCoordinate();
+  //    }
+  //    catch (NullPointerException e) {
+  //    }
+  //    finally{
+  //      return playerCoor;
+  //    }
+  //  }
+
+  public int getEnemyMovement() {
+    return bossGame.getEnemyMovement();
+  }
+
+  public void setEnemyMovement(int sizeOfScreen) {
+    bossGame.setEnemyMovement(sizeOfScreen);
+  }
 
   @Override
-  public void pause() {
+  public void pause() {}
 
-  }
-
-  public void update() {
-
-  }
+  public void update() {}
 
   @Override
   public void shoot() {
@@ -75,35 +80,35 @@ public class BossPresenter implements BossContract.Presenter {
   }
 
   @Override
-  public void showMenu() {
+  public void showMenu() {}
 
-  }
+  //  @Override
+  //  public Coordinate getBossPlayerCoordinate() {
+  //    return null;
+  //  }
+  //
+  //  @Override
+  //  public Coordinate getEnemeyCoordinate() {
+  //    return null;
+  //  }
+  //
+  //  public Coordinate getHealthBarCoordinate() {
+  //    Coordinate playerCoor = Coordinate.create(0,0);;
+  //    try{
+  //      playerCoor = bossGame.getHealthBar().getCoordinate();
+  //    }
+  //    catch (NullPointerException e) {
+  //    }
+  //    finally{
+  //      return playerCoor;
+  //    }
+  //  }
 
-//  @Override
-//  public Coordinate getBossPlayerCoordinate() {
-//    return null;
-//  }
-//
-//  @Override
-//  public Coordinate getEnemeyCoordinate() {
-//    return null;
-//  }
-//
-//  public Coordinate getHealthBarCoordinate() {
-//    Coordinate playerCoor = Coordinate.create(0,0);;
-//    try{
-//      playerCoor = bossGame.getHealthBar().getCoordinate();
-//    }
-//    catch (NullPointerException e) {
-//    }
-//    finally{
-//      return playerCoor;
-//    }
-//  }
-
-  public void attackBoss(){
+  public void attackBoss() {
     bossGame.attackBoss();
     // if there is contact, set the map to nothing
     bossView.setCurrentProjectileBitmap("null");
+
+    bossView.updateMovementHealthBar(bossGame.getHealthBar().getHealthRatio());
   }
 }

@@ -1,16 +1,9 @@
 package com.example.g0569.bossgame.model;
 
-import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.widget.Toast;
-
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.bossgame.ButtonsToDelete.MenuButton;
 import com.example.g0569.bossgame.ButtonsToDelete.PauseButton;
 import com.example.g0569.bossgame.ButtonsToDelete.ShootButton;
-import com.example.g0569.module.game.GameManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -262,7 +255,15 @@ public class BossGame extends BaseGame {
     projectile.thrown();
   }
 
-  public ThrownItems getNextProjectile(){
-    return (ThrownItems)bossPlayer.getInventory().get(0);
+  public ThrownItems getNextProjectile() {
+    return (ThrownItems) bossPlayer.getInventory().get(0);
+  }
+
+  public void setEnemyMovement(int sizeOfScreen) {
+    enemy.setxDirection(sizeOfScreen);
+  }
+
+  public int getEnemyMovement() {
+    return enemy.getXDirection();
   }
 }

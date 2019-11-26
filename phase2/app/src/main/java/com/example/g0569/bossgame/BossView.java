@@ -27,13 +27,12 @@ public class BossView extends GameView implements BossContract.View {
   private Bitmap star;
   private boolean thrown;
   private Bitmap currentProjectile;
-  private int enemyDirection = (int) this.screenWidth/100;
+  //  private int enemyDirection = (int) this.screenWidth/100;
   private Coordinate bossCoordinate;
   private Coordinate shootButtonCoordinate;
   private Coordinate bossPlayerCoordinate;
   private Coordinate healthBarCoordinate;
   private Coordinate currentProjectileCoordinate;
-
 
   //  private BaseButton button;
   //  private BossPlayer aim;
@@ -55,8 +54,7 @@ public class BossView extends GameView implements BossContract.View {
   @Override
   public void surfaceCreated(SurfaceHolder holder) {
     super.surfaceCreated(holder);
-
-
+    initBitmaps();
 
     scalex = screenWidth / background.getWidth();
     scaley = screenHeight / background.getHeight();
@@ -105,7 +103,13 @@ public class BossView extends GameView implements BossContract.View {
       float x = event.getX();
       float y = event.getY();
       System.out.println(String.valueOf(x) + " " + String.valueOf(y));
-      if (inRange(x,y,shootButtonCoordinate.getX(),shootButtonCoordinate.getY(),(int)(screenWidth * 0.13 / 3),(int)(screenWidth * 0.13 / 3))){
+      if (inRange(
+          x,
+          y,
+          shootButtonCoordinate.getX(),
+          shootButtonCoordinate.getY(),
+          (int) (screenWidth * 0.13 / 3),
+          (int) (screenWidth * 0.13 / 3))) {
         bossPresenter.shoot();
       }
     }
@@ -129,33 +133,32 @@ public class BossView extends GameView implements BossContract.View {
     }
   }
 
+  private void initBitmaps() {
+    background = BitmapFactory.decodeResource(getResources(), R.drawable.bossforest);
+    bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.aim);
+    healthBar = BitmapFactory.decodeResource(getResources(), R.drawable.redbar);
+    healthBar = Bitmap.createScaledBitmap(healthBar, getWidth() / 5, getHeight() / 5, false);
+    scalex = screenWidth / background.getWidth();
+    scaley = screenHeight / background.getHeight();
 
+    enemyRight = BitmapFactory.decodeResource(getResources(), R.drawable.enemyright);
+    enemyLeft = BitmapFactory.decodeResource(getResources(), R.drawable.enemyleft);
 
-private void initBitmaps(){
-  background = BitmapFactory.decodeResource(getResources(), R.drawable.bossforest);
-  bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.aim);
-  healthBar = BitmapFactory.decodeResource(getResources(), R.drawable.redbar);
-  healthBar = Bitmap.createScaledBitmap(healthBar, getWidth()/5, getHeight()/5, false);
-  scalex = screenWidth / background.getWidth();
-  scaley = screenHeight / background.getHeight();
+    enemyLeft = Bitmap.createScaledBitmap(enemyLeft, getWidth() / 6, getHeight() / 6, false);
+    enemyRight = Bitmap.createScaledBitmap(enemyLeft, getWidth() / 6, getHeight() / 6, false);
 
-  enemyRight = BitmapFactory.decodeResource(getResources(), R.drawable.enemyright);
-  enemyLeft = BitmapFactory.decodeResource(getResources(), R.drawable.enemyleft);
+    bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.aim);
+    bossPlayer = Bitmap.createScaledBitmap(bossPlayer, getWidth() / 36, getHeight() / 36, false);
+    shootButton = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_button);
+    shootButton =
+        Bitmap.createScaledBitmap(
+            shootButton, (int) (getWidth() * 0.13f), (int) (getHeight() * 0.13f), false);
+  }
 
-  enemyLeft = Bitmap.createScaledBitmap(enemyLeft, getWidth() / 6, getHeight() / 6, false);
-  enemyRight = Bitmap.createScaledBitmap(enemyLeft, getWidth() / 6, getHeight() / 6, false);
-
-  bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.aim);
-  bossPlayer = Bitmap.createScaledBitmap(bossPlayer, getWidth() / 36, getHeight() / 36, false);
-  shootButton = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_button);
-  shootButton =
-          Bitmap.createScaledBitmap(
-                  shootButton, (int) (getWidth() * 0.13f), (int) (getHeight() * 0.13f), false);
-
-
-}
   @Override
-  public void setPresenter(BossContract.Presenter presenter) {this.bossPresenter = presenter;}
+  public void setPresenter(BossContract.Presenter presenter) {
+    this.bossPresenter = presenter;
+  }
 
   @Override
   public void initView() {
@@ -180,76 +183,79 @@ private void initBitmaps(){
   @Override
   public void drawHealthBar() {
     canvas.drawBitmap(healthBar, healthBarCoordinate.getX(), healthBarCoordinate.getY(), paint);
-
   }
 
-  public void drawShootButton(){
-    int unitX = (int)(screenWidth * 0.13 / 3);
-    int unitY = (int)(screenHeight * 0.13 / 3);
-    canvas.drawBitmap(shootButton, screenWidth-4*unitX, screenHeight-4*unitY, paint);
-
+  public void drawShootButton() {
+    int unitX = (int) (screenWidth * 0.13 / 3);
+    int unitY = (int) (screenHeight * 0.13 / 3);
+    canvas.drawBitmap(shootButton, screenWidth - 4 * unitX, screenHeight - 4 * unitY, paint);
   }
 
-  public void updateMovementEnemy(){
+  public void updateMovementEnemy() {
     // Updates the movement of the enemy
-    if (bossCoordinate.getX() <= 0){
+    int enemyDirection = bossPresenter.getEnemyMovement();
+    if (bossCoordinate.getX() <= 0) {
       enemyDirection = Math.abs(enemyDirection);
       enemyAppearance = BitmapFactory.decodeResource(getResources(), R.drawable.enemyright);
-    } else if (bossCoordinate.getX() >= screenWidth - enemyAppearance.getWidth()){
+    } else if (bossCoordinate.getX() >= screenWidth - enemyAppearance.getWidth()) {
       enemyDirection = -Math.abs(enemyDirection);
       enemyAppearance = BitmapFactory.decodeResource(getResources(), R.drawable.enemyleft);
     }
-    bossCoordinate.setX(bossCoordinate.getX()+enemyDirection);
+    bossCoordinate.setX(bossCoordinate.getX() + enemyDirection);
   }
 
-  public void updateMovementHealthBar(int currentHealth, int initialHealth){
-
-  }
-
+  public void updateMovementHealthBar(double ratio) {}
 
   // TODO
-  public void updateMovementProjectile(){
-    int yDirection = (int) (-screenHeight / 100 + screenWidth/12 * (1 - 0.99));
-    int xDirection= (int) (screenWidth/2 - (screenWidth/12)/2);
-    if (thrown){
-      currentProjectileCoordinate.setXY(currentProjectileCoordinate.getX()+xDirection, currentProjectileCoordinate.getY()+yDirection);
+  public void updateMovementProjectile() {
+    int yDirection = (int) (-screenHeight / 100 + screenWidth / 12 * (1 - 0.99));
+    int xDirection = (int) (screenWidth / 2 - (screenWidth / 12) / 2);
+    if (thrown) {
+      currentProjectileCoordinate.setXY(
+          currentProjectileCoordinate.getX() + xDirection,
+          currentProjectileCoordinate.getY() + yDirection);
     }
   }
 
   private boolean inRange(
-          float itemX,float itemY, float rangeX, float rangeY, float rangeDx, float rangeDy) {
+      float itemX, float itemY, float rangeX, float rangeY, float rangeDx, float rangeDy) {
     return (itemX > rangeX
-            && itemX < rangeX + rangeDx
-            && itemY > rangeY
-            && itemY < rangeY + rangeDy);
+        && itemX < rangeX + rangeDx
+        && itemY > rangeY
+        && itemY < rangeY + rangeDy);
   }
-  //TODO
-  public void detectCollision(){
-    if(inRange(bossCoordinate.getX(), bossCoordinate.getY(), currentProjectileCoordinate.getX(), currentProjectileCoordinate.getY(), star.getWidth(), star.getHeight())){
+  // TODO
+  public void detectCollision() {
+    if (inRange(
+        bossCoordinate.getX(),
+        bossCoordinate.getY(),
+        currentProjectileCoordinate.getX(),
+        currentProjectileCoordinate.getY(),
+        star.getWidth(),
+        star.getHeight())) {
       bossPresenter.attackBoss();
     }
   }
 
-  public void setThrown(boolean thrown){
+  public void setThrown(boolean thrown) {
     this.thrown = thrown;
   }
 
   @Override
   public void setCurrentProjectileBitmap(String typeProjectile) {
-    //use hashtable to find appropriate image
+    // use hashtable to find appropriate image
+    // then set it properly
   }
 
-  public void drawCurrentProjectile(){
-    if (currentProjectile != null){
-//      canvas.drawBitmap();
+  public void drawCurrentProjectile() {
+    if (currentProjectile != null) {
+//            canvas.drawBitmap(currentProjectile);
     }
   }
 
-  public void update(){
+  public void update() {
     updateMovementEnemy();
     updateMovementProjectile();
     detectCollision();
   }
-
-
 }

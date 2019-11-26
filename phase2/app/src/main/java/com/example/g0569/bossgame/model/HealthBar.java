@@ -12,7 +12,7 @@ import com.example.g0569.base.model.Item;
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.utils.Coordinate;
 
-public class HealthBar extends Item implements Observer{
+public class HealthBar extends Item implements Observer {
 
   private Observable observable;
   // The screenWidth and Screen Height
@@ -27,12 +27,14 @@ public class HealthBar extends Item implements Observer{
 
   // The rectangle for the red bar which represents health
   private Rect healthRect;
+  private int total;
+  private int ratioOfHealth;
 
   public HealthBar(BaseGame game, Observable observable) {
     super(game);
     // Sets the height and width
-//    screenHeight = game.getGameManager().getScreenHeight();
-//    screenWidth = game.getGameManager().getScreenWidth();
+    //    screenHeight = game.getGameManager().getScreenHeight();
+    //    screenWidth = game.getGameManager().getScreenWidth();
 
     this.observable = observable;
     observable.attach(this);
@@ -40,21 +42,21 @@ public class HealthBar extends Item implements Observer{
     size = (int) screenWidth / 5;
 
     // Sets the coordinate of the bar
-//    float x = (int) (screenWidth / 2 - size / 2);
-//    float y = (int) (screenHeight - screenWidth * 3 / 32 - 2.5 * size);
-//    coordinate = new Coordinate(x, y);
+    //    float x = (int) (screenWidth / 2 - size / 2);
+    //    float y = (int) (screenHeight - screenWidth * 3 / 32 - 2.5 * size);
+    //    coordinate = new Coordinate(x, y);
 
     // Sets the appearance of the empty bar
-//    appearance = BitmapFactory.decodeResource(resources, R.drawable.bar);
+    //    appearance = BitmapFactory.decodeResource(resources, R.drawable.bar);
 
     // Sets the rectangle of the empty bar
-//    dest_rect = new Rect((int) x, (int) y, (int) x + size, (int) y + size);
-//
-//    // Sets the rectangle of the red bar
-//    healthRect = new Rect((int) x, (int) y, (int) x + size, (int) y + size);
-//
-//    // Sets the appearance of the red bar
-//    healthbar = BitmapFactory.decodeResource(resources, R.drawable.redbar);
+    //    dest_rect = new Rect((int) x, (int) y, (int) x + size, (int) y + size);
+    //
+    //    // Sets the rectangle of the red bar
+    //    healthRect = new Rect((int) x, (int) y, (int) x + size, (int) y + size);
+    //
+    //    // Sets the appearance of the red bar
+    //    healthbar = BitmapFactory.decodeResource(resources, R.drawable.redbar);
   }
 
   /**
@@ -63,11 +65,11 @@ public class HealthBar extends Item implements Observer{
    * @param canvas of the bar and red bar
    * @param paint the style of them
    */
-//  public void draw(Canvas canvas, Paint paint) {
-//    canvas.drawBitmap(appearance, null, dest_rect, paint);
-//
-//    canvas.drawBitmap(healthbar, null, healthRect, paint);
-//  }
+  //  public void draw(Canvas canvas, Paint paint) {
+  //    canvas.drawBitmap(appearance, null, dest_rect, paint);
+  //
+  //    canvas.drawBitmap(healthbar, null, healthRect, paint);
+  //  }
 
   /**
    * Determines how much to change the rectangle to draw remaining health by
@@ -81,6 +83,10 @@ public class HealthBar extends Item implements Observer{
   }
 
   public void action() {}
+
+  public double getHealthRatio() {
+    return ratioOfHealth;
+  }
 
   /**
    * Determines how much health the boss should have left based on the ratio of his health with the
