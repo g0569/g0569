@@ -1,8 +1,8 @@
 package com.example.g0569.chessgame.model;
 
 /** A factory for making chessPiece instance. */
-public class ChessPieceFactory {
-  public ChessPiece getChessPiece(float x, float y, ChessGame game, String type) {
+class ChessPieceFactory {
+  ChessPiece getChessPiece(float x, float y, ChessGame game, String type) {
     if (type == null) {
       return null;
     }
