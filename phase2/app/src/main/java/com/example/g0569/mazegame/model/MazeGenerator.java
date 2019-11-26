@@ -38,7 +38,7 @@ public class MazeGenerator {
       while (!newMaze.getStack().empty()) {
         Coordinate next = newMaze.getStack().pop();
         if (newMaze.validNextNode(next)) {
-          newMaze.getMaze()[(int) next.getY()][(int) next.getX()] = 1;
+          newMaze.getMaze()[next.getIntY()][next.getIntX()] = 1;
           ArrayList<Coordinate> neighbors = newMaze.findNeighbors(next);
           newMaze.randomlyAddNodesToStack(neighbors);
         }
@@ -49,14 +49,14 @@ public class MazeGenerator {
 
   private boolean validNextNode(Coordinate coor) {
     int numNeighboringOnes = 0;
-    for (int y = (int) coor.getY() - 1; y < (int) coor.getY() + 2; y++) {
-      for (int x = (int) coor.getX() - 1; x < (int) coor.getX() + 2; x++) {
+    for (int y = coor.getIntY() - 1; y < coor.getIntY() + 2; y++) {
+      for (int x = coor.getIntX() - 1; x <  coor.getIntX() + 2; x++) {
         if (pointOnGrid(x, y) && pointNotCoor(coor, x, y) && maze[y][x] == 1) {
           numNeighboringOnes++;
         }
       }
     }
-    return (numNeighboringOnes < 3) && maze[(int) coor.getY()][(int) coor.getX()] != 1;
+    return (numNeighboringOnes < 3) && maze[coor.getIntY()][coor.getIntX()] != 1;
   }
 
   private Boolean pointOnGrid(int x, int y) {
