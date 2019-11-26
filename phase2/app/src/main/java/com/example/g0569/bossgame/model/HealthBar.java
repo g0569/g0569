@@ -8,11 +8,11 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.g0569.R;
-import com.example.g0569.base.model.NonPlayerItem;
+import com.example.g0569.base.model.Item;
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.utils.Coordinate;
 
-public class HealthBar extends NonPlayerItem implements Observer{
+public class HealthBar extends Item implements Observer{
 
   private Observable observable;
   // The screenWidth and Screen Height

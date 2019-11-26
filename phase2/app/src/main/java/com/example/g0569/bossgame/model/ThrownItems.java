@@ -6,11 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
-import com.example.g0569.base.model.NonPlayerItem;
+import com.example.g0569.base.model.Item;
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.utils.Coordinate;
 
-public class ThrownItems extends NonPlayerItem implements Observer {
+public class ThrownItems extends Item implements Observer {
   // Some should be set outside the initalizer instead.
 
   // How much damange the item has

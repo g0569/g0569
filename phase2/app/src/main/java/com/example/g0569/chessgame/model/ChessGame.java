@@ -1,37 +1,38 @@
-package com.example.g0569.module.game;
+package com.example.g0569.chessgame.model;
 
 // import com.example.g0569.base.model.Player;
 
 import com.example.g0569.base.model.BaseGame;
-import com.example.g0569.module.component.LV2AutoChess.ChessPiece;
-import com.example.g0569.module.component.LV2AutoChess.LevelTwoPlayer;
-import com.example.g0569.module.component.LV2AutoChess.StarChessPiece;
-import com.example.g0569.module.component.LV2AutoChess.TriangleChessPiece;
-import com.example.g0569.base.model.NonPlayerItem;
+import com.example.g0569.base.model.Item;
+import com.example.g0569.chessgame.ChessContract;
 import com.example.g0569.utils.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/** A game manager for AutoChessGame. */
-public class AutoChessGame extends BaseGame {
+/** A game manager for ChessGame. */
+public class ChessGame extends BaseGame {
 
+  private ChessContract.Presenter presenter;
   // TODO still need to figure out a way to implement two different NPC's game.
   private int round = 0;
   private int winNumbers;
   private LevelTwoPlayer l2player;
   private int clickNumbers = 1;
-
-  private List<List<ChessPiece>> NPCData = new ArrayList<>();
+  private ChessPieceFactory chessPieceFactory;
+  private ChessSQLiteAccessInterface boardData;
+  private List<ChessPiece> NPCData = new ArrayList<>();
   // save where the NPC place the chess piece for different round.
 
   /**
-   * Initialize a game manager for AutoChessGame.
+   * Initialize a game manager for ChessGame.
    *
-   * @param gameManager the game manager.
+   * @param presenter
    */
-  AutoChessGame(GameManager gameManager) {
-    super(gameManager);
+  public ChessGame(ChessContract.Presenter presenter) {
+    super();
+    this.presenter = presenter;
+    this.chessPieceFactory = new ChessPieceFactory();
     l2player = new LevelTwoPlayer(this);
     List<ChessPiece> NPC1ChessPiece = new ArrayList<>();
     NPC1ChessPiece.add(
@@ -49,8 +50,27 @@ public class AutoChessGame extends BaseGame {
         new StarChessPiece(
             gameManager.getScreenWidth() * 0.6f, gameManager.getScreenHeight() * 0.65f, this));
 
-    NPCData.add(NPC1ChessPiece);
-    NPCData.add(NPC2ChessPiece);
+//    NPCData.add(NPC1ChessPiece);
+//    NPCData.add(NPC2ChessPiece);
+  }
+
+  public void setBoardData(ChessSQLiteAccessInterface boardData) {
+    this.boardData = boardData;
+  }
+
+  public void decodeNPCData() {
+    String s = boardData.getChessBoardData();
+//    float x = 0;
+//    float y = 0;
+//    String type = "";
+//    placeNPCChess(x,y,type);
+    // TODO when decoding the string, for each chess piece, call placeNPCChess(x, y, type).
+  }
+
+  private void placeNPCChess(float x, float y, String type){
+    ChessPiece chessPiece = chessPieceFactory.getChessPiece(x, y, this, type);
+    NPCData.add(chessPiece);
+    presenter.drawChessPiece(chessPiece);
   }
   // save where the NPC place the chess piece for different round.
 
@@ -86,7 +106,7 @@ public class AutoChessGame extends BaseGame {
    * @param round The round.
    * @return number of rows the player wins.
    */
-  private int fightCounter(NonPlayerItem PlayerChess, int round) {
+  private int fightCounter(Item PlayerChess, int round) {
     int win = 0;
     for (ChessPiece NPCChess : NPCData.get(round)) {
       if (NPCChess.getCoordinate().getY() == PlayerChess.getCoordinate().getY()
@@ -103,7 +123,7 @@ public class AutoChessGame extends BaseGame {
    * @return whether player win the game.
    */
   public boolean autoFight() {
-    for (NonPlayerItem chess : l2player.getInventory()) {
+    for (Item chess : l2player.getInventory()) {
       winNumbers += fightCounter(chess, round);
     }
     return (winNumbers >= 2);
@@ -126,8 +146,7 @@ public class AutoChessGame extends BaseGame {
           .get(chosenPlace)
           .getCoordinate()
           .setXY(
-              getGameManager().getScreenWidth() * 0.45f,
-              getGameManager().getScreenHeight() * 0.4f);
+              getGameManager().getScreenWidth() * 0.45f, getGameManager().getScreenHeight() * 0.4f);
       clickNumbers++;
       return new Coordinate(
           getGameManager().getScreenWidth() * 0.45f, getGameManager().getScreenHeight() * 0.4f);

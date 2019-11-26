@@ -5,9 +5,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.g0569.base.model.BaseGame;
-import com.example.g0569.base.model.NonPlayerItem;
+import com.example.g0569.base.model.Item;
 
-public class Button extends NonPlayerItem {
+public class Button extends Item {
 
   public float button_r;
   int red = Color.RED;

@@ -1,7 +1,4 @@
-package com.example.g0569.module.component.LV2AutoChess;
-
-import android.graphics.Canvas;
-import android.graphics.Paint;
+package com.example.g0569.chessgame.model;
 
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.base.model.Player;
@@ -21,9 +18,6 @@ public class LevelTwoPlayer extends Player {
     //        getInventory().add(new StarChessPiece(0,0));
     // Put three chess piece into the getInventory() area.
   }
-
-  @Override
-  public void draw(Canvas canvas, Paint paint) {}
 
   @Override
   public void action() {}

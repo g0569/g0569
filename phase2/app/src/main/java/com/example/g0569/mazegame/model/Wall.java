@@ -9,15 +9,15 @@ import android.graphics.Paint;
 
 import com.example.g0569.R;
 import com.example.g0569.base.model.BaseGame;
-import com.example.g0569.base.model.NonPlayerItem;
+import com.example.g0569.base.model.Item;
 import com.example.g0569.utils.Coordinate;
 
-public class Wall extends NonPlayerItem {
+public class Wall extends Item {
 
   Wall(BaseGame game) {
     super(game);
   }
+
   @Override
-  public void action() {
-  }
+  public void action() {}
 }

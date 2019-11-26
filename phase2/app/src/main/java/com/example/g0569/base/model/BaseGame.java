@@ -6,15 +6,15 @@ import java.util.List;
 /** The BaseGame Manager for each game. */
 public abstract class BaseGame {
 
-  private List<NonPlayerItem> gameInventory = new ArrayList<>();
-  // An array list for storing the NonPlayerItem.
+  private List<Item> gameInventory = new ArrayList<>();
+  // An array list for storing the Item.
 
   /**
    * Gets game inventory.
    *
    * @return the game inventory
    */
-  List<NonPlayerItem> getGameInventory() {
+  List<Item> getGameInventory() {
     return gameInventory;
   }
 

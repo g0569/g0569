@@ -1,14 +1,11 @@
-package com.example.g0569.module.component.LV2AutoChess;
-
-import android.graphics.Canvas;
-import android.graphics.Paint;
+package com.example.g0569.chessgame.model;
 
 import com.example.g0569.base.model.BaseGame;
-import com.example.g0569.base.model.NonPlayerItem;
+import com.example.g0569.base.model.Item;
 import com.example.g0569.utils.Coordinate;
 
 /** The chess piece on the chess board. */
-public class ChessPiece extends NonPlayerItem {
+public class ChessPiece extends Item {
   private Coordinate coordinate;
   private String appearance;
   private int power; // The amount for the chess piece can attack in one round.
@@ -29,16 +26,6 @@ public class ChessPiece extends NonPlayerItem {
   }
 
   /**
-   * A getter for variable coordinate.
-   *
-   * @return coordinate
-   */
-  @Override
-  public Coordinate getCoordinate() {
-    return coordinate;
-  }
-
-  /**
    * A getter for variable power.
    *
    * @return power
@@ -46,9 +33,6 @@ public class ChessPiece extends NonPlayerItem {
   public int getPower() {
     return power;
   }
-
-  @Override
-  public void draw(Canvas canvas, Paint paint) {}
 
   @Override
   public void action() {}
