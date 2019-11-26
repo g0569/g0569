@@ -23,8 +23,5 @@ public class LevelTwoPlayer extends Player {
   }
 
   @Override
-  public void draw(Canvas canvas, Paint paint) {}
-
-  @Override
   public void action() {}
 }

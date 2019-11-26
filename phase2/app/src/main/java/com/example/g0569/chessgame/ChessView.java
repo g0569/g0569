@@ -4,26 +4,25 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.g0569.R;
 import com.example.g0569.base.GameView;
 import com.example.g0569.chessgame.model.ChessGame;
 import com.example.g0569.utils.Coordinate;
-import com.example.g0569.view.BaseView;
 
 /** The ChessView for the autoChessGame. */
-public class ChessView extends GameView implements ChessContract.View{
+public class ChessView extends GameView implements ChessContract.View {
   private Bitmap background;
   private Bitmap inventory;
   private Bitmap button;
-  //  private ChessPiece chess;
-  private Bitmap l2npc;
+  private Bitmap l2npc; // TODO
   private float buttonX;
   private float buttonY;
-  private float buttonY2;
   private float inventoryX;
   private float inventoryY;
   private Bitmap triangle;
@@ -56,19 +55,35 @@ public class ChessView extends GameView implements ChessContract.View{
   @Override
   public void surfaceCreated(SurfaceHolder holder) {
     super.surfaceCreated(holder);
+    initBitmaps();
+    if (thread.isAlive()) {
+      thread.start();
+    } else {
+      thread = new Thread(this);
+      thread.start();
+    }
+  }
+
+  @Override
+  public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+    super.surfaceChanged(holder, format, width, height);
+  }
+
+  @Override
+  public void surfaceDestroyed(SurfaceHolder holder) {
+    super.surfaceDestroyed(holder);
+  }
+
+  private void initBitmaps() {
     background = BitmapFactory.decodeResource(getResources(), R.drawable.autochessboard);
-    button = BitmapFactory.decodeResource(getResources(), R.drawable.start);
-    button = Bitmap.createScaledBitmap(button, 150, 150, false);
+
     scalex = screenWidth / background.getWidth();
     scaley = screenHeight / background.getHeight();
 
-    buttonX = screenWidth * 0.9f;
-    buttonY = screenHeight * 0.7f;
-    //        buttonY2 = buttonY + button.getHeight() + 40;
+    button = BitmapFactory.decodeResource(getResources(), R.drawable.start);
+    button = Bitmap.createScaledBitmap(button, 150, 150, false);
     inventory = BitmapFactory.decodeResource(getResources(), R.drawable.iteminventory);
     inventory = Bitmap.createScaledBitmap(inventory, 200, 300, false);
-    inventoryX = screenWidth / 30;
-    inventoryY = screenHeight * 0.7f;
 
     triangle = BitmapFactory.decodeResource(getResources(), R.drawable.triangle);
     triangle = Bitmap.createScaledBitmap(triangle, 80, 80, false);
@@ -92,23 +107,42 @@ public class ChessView extends GameView implements ChessContract.View{
 
     autoChessGame = activity.getGameManager().getCurrentGame();
     // TODO store the presenter rather than the game
-
-    if (thread.isAlive()) {
-      thread.start();
-    } else {
-      thread = new Thread(this);
-      thread.start();
-    }
   }
 
-  @Override
-  public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-    super.surfaceChanged(holder, format, width, height);
+  public void drawButton() {
+    buttonX = screenWidth * 0.9f;
+    buttonY = screenHeight * 0.7f;
+    canvas.drawBitmap(button, buttonX, buttonY, paint);
   }
 
+  public void drawInventory() {
+    inventoryX = screenWidth / 30;
+    inventoryY = screenHeight * 0.7f;
+    canvas.drawBitmap(inventory, inventoryX, inventoryY, paint);
+  }
+
+  public void drawStar(Coordinate coordinate) {
+    canvas.drawBitmap(star, coordinate.getX(), coordinate.getY(), paint);
+  }
+
+  public void drawTriangle(Coordinate coordinate) {
+    canvas.drawBitmap(triangle, coordinate.getX(), coordinate.getY(), paint);
+  }
+
+  // TODO Add two images for player and NPC. Maybe...
+
+  //  public void drawPlayer(Coordinate coordinate) {
+  //    canvas.drawBitmap(l2player, coordinate.getX(), coordinate.getY(), paint);
+  //  }
+  //
+  //  public void drawNPC(Coordinate coordinate) {
+  //    canvas.drawBitmap(l2npc, coordinate.getX(), coordinate.getY(), paint);
+  //  }
+
   @Override
-  public void surfaceDestroyed(SurfaceHolder holder) {
-    super.surfaceDestroyed(holder);
+  public void initView() {
+    drawButton();
+    drawInventory();
   }
 
   @Override
@@ -120,8 +154,7 @@ public class ChessView extends GameView implements ChessContract.View{
       canvas.scale(scalex, scaley, 0, 0);
       canvas.drawBitmap(background, 0, 0, paint);
       canvas.restore();
-      canvas.drawBitmap(button, buttonX, buttonY, paint);
-      canvas.drawBitmap(inventory, inventoryX, inventoryY, paint);
+      initView();
       canvas.drawBitmap(star, starX, starY, paint);
       canvas.drawBitmap(triangle, triangleX, triangleY, paint);
       canvas.drawBitmap(triangle2, triangle2X, triangle2Y, paint);

@@ -25,15 +25,35 @@ public class ChessGame extends BaseGame {
   private int winNumbers;
   private LevelTwoPlayer l2player;
   private int clickNumbers = 1;
-
+  private ChessPieceFactory chessPieceFactory;
+  private ChessSQLiteAccessInterface BoardData;
   private List<List<ChessPiece>> NPCData = new ArrayList<>();
   // save where the NPC place the chess piece for different round.
 
-  /** Initialize a game manager for ChessGame.
-   * @param presenter*/
+  public void setBoardData(ChessSQLiteAccessInterface boardData) {
+    BoardData = boardData;
+  }
+
+  public void decodeNPCData() {
+    String s = BoardData.getChessBoardData();
+    // TODO Decoder for string. Add objects to NPCData.
+    // TODO when decode the string, for each chess piece call placeNPCChess().
+  }
+
+  private void placeNPCChess(String x, String y, String type,){
+    // TODO
+    ChessPiece chessPiece = chessPieceFactory.getChessPiece();
+  }
+
+  /**
+   * Initialize a game manager for ChessGame.
+   *
+   * @param presenter
+   */
   public ChessGame(ChessContract.Presenter presenter) {
     super();
     this.presenter = presenter;
+    this.chessPieceFactory = new ChessPieceFactory();
     l2player = new LevelTwoPlayer(this);
     List<ChessPiece> NPC1ChessPiece = new ArrayList<>();
     NPC1ChessPiece.add(
