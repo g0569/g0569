@@ -30,6 +30,8 @@ public class Coordinate {
     return x;
   }
 
+  public int getIntX() {return (int)x;}
+
   /**
    * Sets x.
    *
@@ -47,6 +49,8 @@ public class Coordinate {
   public float getY() {
     return y;
   }
+
+  public int getIntY() {return (int)y;}
 
   /**
    * Sets y.

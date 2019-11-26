@@ -17,7 +17,7 @@ public abstract class Player extends Item {
     super(game);
   }
 
-  public abstract void action();
+  public abstract void update();
 
   /**
    * Gets inventory.

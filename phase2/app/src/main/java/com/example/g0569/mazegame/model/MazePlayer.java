@@ -9,17 +9,20 @@ import java.util.ArrayList;
 
 public class MazePlayer extends Player {
 
-  Coordinate direction;
+  private Coordinate direction;
   private Coordinate appearenceSize;
   private Coordinate coordinate;
-  private MazeGame game;
+//  private MazeGame game;
+  private ArrayList<NPC> collectedNPC;
 
-  public MazePlayer(MazeGame game) {
+  /** @param game */
+  MazePlayer(MazeGame game) {
     super(game);
-    this.game = game;
+//    this.game = game;
     float x = ((MazeGame) this.getGame()).getStartpoint().getX();
     float y = ((MazeGame) this.getGame()).getStartpoint().getY();
     this.coordinate = new Coordinate(x, y);
+    appearenceSize = game.getPlayerDimensions();
   direction = Coordinate.create(0,0);
   }
 
@@ -28,15 +31,15 @@ public class MazePlayer extends Player {
   }
 
   public void update() {
-    appearenceSize = game.getPlayerDimensions();
     this.move();
+    this.getNPCAround();
   }
 
   public Coordinate getDirection() {
     return direction;
   }
 
-  public void setDirection(Coordinate direction) {
+  void setDirection(Coordinate direction) {
     this.direction = direction;
   }
 
@@ -60,7 +63,6 @@ public class MazePlayer extends Player {
           instanceof Wall)) {
         this.coordinate.setX(targetX);
         this.coordinate.setY(targetY);
-        System.out.println(targetY);
       }
     } catch (ArrayIndexOutOfBoundsException ignored) {
     }
@@ -69,44 +71,34 @@ public class MazePlayer extends Player {
 
   /**
    * Detect the NPCs around the player.
-   *
-   * @return an arraylist of NPC around
    */
-  private ArrayList<NPC> getNPCAround() {
+  private void getNPCAround() {
     int currX = (int) this.coordinate.getX();
     int currY = (int) this.coordinate.getY();
-    Item currItem;
-    ArrayList<NPC> NPCAround = new ArrayList<>();
+    Item currItemX;
+    Item currItemY;
     for (int i = -2; i <= 2; i++) {
-      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currY][currX + i];
-      if (currItem instanceof NPC) {
-        NPCAround.add((NPC) currItem);
+      currItemX = ((MazeGame) this.getGame()).getMyMazeItem()[currY][currX + i];
+      if (currItemX instanceof NPC) {
+        this.collectedNPC.add((NPC)currItemX);
+        interact((NPC)currItemX);
       }
-      currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currY + i][currX];
-      if (currItem instanceof NPC) {
-        NPCAround.add((NPC) currItem);
+      currItemY = ((MazeGame) this.getGame()).getMyMazeItem()[currY + i][currX];
+      if (currItemY instanceof NPC) {
+        this.collectedNPC.add((NPC)currItemY);
+        interact((NPC)currItemY);
       }
     }
-    return NPCAround;
   }
 
   /**
-   * Interact with the NPC around. cannot continue moving after detecting right now. Will interact
-   * with NPC (but not now...
+   * 1. add to inventory
+   * 2. delete from the maze
+   * @param npc
+   * @return
    */
-  public boolean interact() {
-    //    for (NPC i : this.getNPCAround()) {
-    //      i.pop();
-    // it leads an error, cannot find symbol pop()
-    //      Looper.prepare();
-    //      Toast.makeText(getGame().getGameManager().getMainActivity(), "test",
-    // Toast.LENGTH_SHORT)
-    //          .show();
-    //      Looper.loop();
-    //    }
-    return this.getNPCAround().size() != 0;
+  public boolean interact(NPC npc) {
+    return true;
   }
 
-  @Override
-  public void action() {}
 }
