@@ -68,7 +68,7 @@ public class ChessGame extends BaseGame {
     int hardNPCIndex = 0;
     boolean hard_found = false;
     while (hardNPCIndex < chessDataList.length & !hard_found) {
-      if (chessDataList[hardNPCIndex] == "HD") {
+      if (chessDataList[hardNPCIndex].equals("HD")) {
         hard_found = true;//find the starting index of the NPC(Hard difficulty)
       }
       if (!hard_found) {
@@ -78,7 +78,7 @@ public class ChessGame extends BaseGame {
     int insaneNPCIndex = hardNPCIndex;
     boolean insane_found = false;
     while (insaneNPCIndex < chessDataList.length & !insane_found) {
-        if (chessDataList[insaneNPCIndex] == "IS") {
+        if (chessDataList[insaneNPCIndex].equals("IS")) {
             insane_found = true;//find the starting index of the NPC(Insane difficulty)
         }
         if (!insane_found) {
@@ -88,15 +88,15 @@ public class ChessGame extends BaseGame {
     int count = 0;
     int loopLimit = 0;
     // place chess pieces in easy mode.
-    if (difficulty == "easy") {
+    if (difficulty.equals("easy")) {
         count = 1; // the first element in the list is obviously "EZ"
         loopLimit = hardNPCIndex;
     }
-    else if (difficulty == "hard") {
+    else if (difficulty.equals("hard")) {
         count = hardNPCIndex + 1;
         loopLimit = insaneNPCIndex;
     }
-    else if (difficulty == "insane"){
+    else if (difficulty.equals("insane")){
         count = insaneNPCIndex + 1;
         loopLimit = chessDataList.length;
     }
@@ -176,10 +176,16 @@ public class ChessGame extends BaseGame {
   //  }
   //
   private int powerCalculator(String side, int row){
+    // TODO This method need to be improved!
     int power = 0;
-    List<ChessPiece> requiredInventory = new ArrayList();
-    if(side == "player"){requiredInventory = l2player.getInventory();}
-    else if(side == "NPC"){requiredInventory = NPCData;}
+    List<ChessPiece> requiredInventory = new ArrayList<>();
+    if(side.equals("player")){
+      for (Item chessPiece: l2player.getInventory() ) {
+        requiredInventory.add((ChessPiece) chessPiece);
+      }
+//      requiredInventory = l2player.getInventory();
+    }
+    else if(side.equals("NPC")){requiredInventory = NPCData;}
     for (ChessPiece curr_chess : requiredInventory) {
       // PROBLEM: items in player's inventory has type Item and NPCdata has type Chesspiece.
       if (curr_chess.getCoordinate().getX() == row){
@@ -190,13 +196,13 @@ public class ChessGame extends BaseGame {
   }
   private boolean singleRowFight(int row){
     boolean playerWin = false;
-    if(difficulty == "easy"){
+    if(difficulty.equals("easy")){
       playerWin = (powerCalculator("player", row) >= powerCalculator("NPC", row));// player under easy mode can win a row with power equal to NPC.
     }
-    else if(difficulty == "hard"){
+    else if(difficulty.equals("hard")){
       playerWin = (powerCalculator("player", row) > powerCalculator("NPC", row));// now player can only win a row with more power.
     }
-    else if(difficulty == "insane"){
+    else if(difficulty.equals("insane")){
       playerWin = (powerCalculator("player", row) > powerCalculator("NPC", row)&
               powerCalculator("player", row) > powerCalculator("NPC", 1));// insane enemy at row 1 gains ability to fight other chess pieces on other rows.
     }
