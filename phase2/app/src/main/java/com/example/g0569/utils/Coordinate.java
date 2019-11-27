@@ -18,7 +18,14 @@ public class Coordinate {
     this.y = y;
   }
 
-  public static Coordinate create(float x, float y){
+  /**
+   * Create coordinate.
+   *
+   * @param x the x
+   * @param y the y
+   * @return the coordinate
+   */
+  public static Coordinate create(float x, float y) {
     return new Coordinate(x, y);
   }
   /**
@@ -30,7 +37,13 @@ public class Coordinate {
     return x;
   }
 
-  public int getIntX() {return (int)x;}
+  /**
+   * Gets int x.
+   *
+   * @return the int x
+   */
+  public int getIntX() {
+    return (int)x;}
 
   /**
    * Sets x.
@@ -50,7 +63,13 @@ public class Coordinate {
     return y;
   }
 
-  public int getIntY() {return (int)y;}
+  /**
+   * Gets int y.
+   *
+   * @return the int y
+   */
+  public int getIntY() {
+    return (int)y;}
 
   /**
    * Sets y.

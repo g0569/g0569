@@ -33,6 +33,7 @@ public class MazeView extends GameView implements MazeContract.View {
    */
   public MazeView(Context context) {
     super(context);
+
     paint.setTextSize(40);
     thread = new Thread(this);
   }
@@ -43,7 +44,6 @@ public class MazeView extends GameView implements MazeContract.View {
     gridHeight = getHeight() / Constants.GRID_HEIGHT;
     gridWidth = getWidth() / Constants.GRID_WIDTH;
     initBitmaps();
-
     if (thread.isAlive()) {
       thread.start();
     } else {
@@ -117,17 +117,23 @@ public class MazeView extends GameView implements MazeContract.View {
     this.presenter = presenter;
   }
 
-  private void initBitmaps() {
+  public void initBitmaps() {
     background = BitmapFactory.decodeResource(getResources(), R.drawable.maze_background);
     scalex = screenWidth / background.getWidth();
     scaley = screenHeight / background.getHeight();
 
     wall = BitmapFactory.decodeResource(getResources(), R.drawable.tile);
-    wall = Bitmap.createScaledBitmap(wall, getWidth()/Constants.GRID_WIDTH, getHeight()/Constants.GRID_HEIGHT, false);
+    wall =
+        Bitmap.createScaledBitmap(
+            wall, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
     player = BitmapFactory.decodeResource(getResources(), R.drawable.pacman_2);
-    player = Bitmap.createScaledBitmap(player, getWidth()/Constants.GRID_WIDTH, getHeight()/Constants.GRID_HEIGHT, false);
+    player =
+        Bitmap.createScaledBitmap(
+            player, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
     moveButtons = BitmapFactory.decodeResource(getResources(), R.drawable.move_button);
-    moveButtons = Bitmap.createScaledBitmap(moveButtons, (int) (getWidth() * 0.13f), (int) (getHeight() * 0.13f), false);
+    moveButtons =
+        Bitmap.createScaledBitmap(
+            moveButtons, (int) (getWidth() * 0.13f), (int) (getHeight() * 0.13f), false);
   }
 
   @Override
@@ -181,7 +187,7 @@ public class MazeView extends GameView implements MazeContract.View {
   @Override
   public void drawPlayer(Coordinate coor) {
     paint.setColor(Color.WHITE);
-    coor = gridNum2Coor((int)coor.getX(), (int)coor.getY());
+    coor = gridNum2Coor((int) coor.getX(), (int) coor.getY());
     canvas.drawBitmap(player, coor.getX(), coor.getY(), paint);
   }
 
@@ -194,7 +200,13 @@ public class MazeView extends GameView implements MazeContract.View {
 
   @Override
   public Coordinate getPlayerDimensions() {
-    return Coordinate.create(player.getWidth(), player.getHeight());
+    Coordinate coordinate = Coordinate.create(0, 0);
+    try {
+      coordinate = Coordinate.create(player.getWidth(), player.getHeight());
+    } catch (NullPointerException e) {
+    } finally {
+      return coordinate;
+    }
   }
 
   /*
