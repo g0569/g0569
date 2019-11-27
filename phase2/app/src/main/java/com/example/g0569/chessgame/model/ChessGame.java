@@ -1,6 +1,8 @@
 package com.example.g0569.chessgame.model;
 
 import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.base.model.Item;
+import com.example.g0569.base.model.Player;
 import com.example.g0569.chessgame.ChessContract;
 import com.example.g0569.utils.Coordinate;
 
@@ -173,14 +175,48 @@ public class ChessGame extends BaseGame {
   //    return win;
   //  }
   //
+  private int powerCalculator(String side, int row){
+    int power = 0;
+    List<ChessPiece> requiredInventory = new ArrayList();
+    if(side == "player"){requiredInventory = l2player.getInventory();}
+    else if(side == "NPC"){requiredInventory = NPCData;}
+    for (ChessPiece curr_chess : requiredInventory) {
+      // PROBLEM: items in player's inventory has type Item and NPCdata has type Chesspiece.
+      if (curr_chess.getCoordinate().getX() == row){
+        power += curr_chess.getPower();
+      }
+    }
+    return power;
+  }
+  private boolean singleRowFight(int row){
+    boolean playerWin = false;
+    if(difficulty == "easy"){
+      playerWin = (powerCalculator("player", row) >= powerCalculator("NPC", row));// player under easy mode can win a row with power equal to NPC.
+    }
+    else if(difficulty == "hard"){
+      playerWin = (powerCalculator("player", row) > powerCalculator("NPC", row));// now player can only win a row with more power.
+    }
+    else if(difficulty == "insane"){
+      playerWin = (powerCalculator("player", row) > powerCalculator("NPC", row)&
+              powerCalculator("player", row) > powerCalculator("NPC", 1));// insane enemy at row 1 gains ability to fight other chess pieces on other rows.
+    }
+    return playerWin;
+  }
   /**
    * Let the chess fight and return the result.
    *
    * @return whether player win the game.
    */
   public boolean autoFight() {
+    int winCount = 0;
+    int row = 1;
+    while (row <= 3) {
+      if (singleRowFight(row)){winCount += 1;}
+      row ++;
+    }
+    return (winCount >= 2);
     // TODO Need to be implemented.
-    return false;
+
     //      for (Item chess : l2player.getInventory()) {
     //        winNumbers += fightCounter(chess, round);
     //      }
