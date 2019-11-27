@@ -15,7 +15,7 @@ public class ChessGame extends BaseGame {
   private int winNumbers;
   private LevelTwoPlayer l2player;
   private int clickNumbers = 1;
-  private String difficulty;
+  private String difficulty;// might be "easy", "hard", or "insane"
   private ChessPieceFactory chessPieceFactory;
   private ChessSQLiteAccessInterface boardData;
   private List<ChessPiece> NPCData = new ArrayList<>();
@@ -65,7 +65,7 @@ public class ChessGame extends BaseGame {
     String[] chessDataList = chessString.split(".");//suppose we are getting string like"EZ.star,1,1.circle,1,2.HD.circle,1,1.nochess,1,2"
     int hardNPCIndex = 0;
     boolean hard_found = false;
-    while (hardNPCIndex <= chessDataList.length & !hard_found) {
+    while (hardNPCIndex < chessDataList.length & !hard_found) {
       if (chessDataList[hardNPCIndex] == "HD") {
         hard_found = true;//find the starting index of the NPC(Hard difficulty)
       }
@@ -73,29 +73,38 @@ public class ChessGame extends BaseGame {
         hardNPCIndex++;
       }
     }
-    //place chess pieces in easy mode.
-    if(difficulty == "easy"){
-      int count = 1;// the first element in the list is obviously "EZ"
-      while(count < hardNPCIndex){
+    int insaneNPCIndex = hardNPCIndex;
+    boolean insane_found = false;
+    while (insaneNPCIndex < chessDataList.length & !insane_found) {
+        if (chessDataList[insaneNPCIndex] == "IS") {
+            insane_found = true;//find the starting index of the NPC(Insane difficulty)
+        }
+        if (!insane_found) {
+            hardNPCIndex++;
+        }
+    }
+    int count = 0;
+    int loopLimit = 0;
+    // place chess pieces in easy mode.
+    if (difficulty == "easy") {
+        count = 1; // the first element in the list is obviously "EZ"
+        loopLimit = hardNPCIndex;
+    }
+    else if (difficulty == "hard") {
+        count = hardNPCIndex + 1;
+        loopLimit = insaneNPCIndex;
+    }
+    else if (difficulty == "insane"){
+        count = insaneNPCIndex + 1;
+        loopLimit = chessDataList.length;
+    }
+    while(count < loopLimit){
         String[] curr_chess = chessDataList[count].split(",");// for example:["star","1","1"]
         String type = curr_chess[0];
         float x = Float.parseFloat(curr_chess[1]);
         float y = Float.parseFloat(curr_chess[2]);
         placeNPCChess(x,y,type);
         count ++;
-      }
-    }
-    //place chess pieces in hard mode.
-    if(difficulty == "hard"){
-      int count = hardNPCIndex + 1;// start from the next element of element "HD"
-      while(count < chessDataList.length){
-        String[] curr_chess = chessDataList[count].split(",");
-        String type = curr_chess[0];
-        float x = Float.parseFloat(curr_chess[1]);
-        float y = Float.parseFloat(curr_chess[2]);
-        placeNPCChess(x,y,type);
-        count ++;
-      }
     }
     // TODO when decoding the string, for each chess piece, call placeNPCChess(x, y, type).
   }
