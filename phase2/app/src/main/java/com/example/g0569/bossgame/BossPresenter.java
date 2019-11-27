@@ -64,9 +64,20 @@ public class BossPresenter implements BossContract.Presenter {
     return bossGame.getEnemyMovement();
   }
 
-  public void setEnemyMovement(int sizeOfScreen) {
-    bossGame.setEnemyMovement(sizeOfScreen);
+  @Override
+  public void setEnemyMovement(float screenWidth) {
+    bossGame.setEnemyMovement((int) screenWidth);
+
   }
+
+  @Override
+  public void switchTeam() {
+    
+  }
+
+//  public void setEnemyMovement(int sizeOfScreen) {
+//    bossGame.setEnemyMovement(sizeOfScreen);
+//  }
 
   @Override
   public void pause() {}
