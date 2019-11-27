@@ -28,6 +28,8 @@ public class BossPresenter implements BossContract.Presenter {
   @Override
   public void start() {
     //    bossView.initView();
+    String npc = bossGame.initBossTeam().getName();
+    bossView.setCurrentProjectileBitmap(npc);
   }
 
   public int getEnemyMovement() {
@@ -41,8 +43,10 @@ public class BossPresenter implements BossContract.Presenter {
 
   @Override
   public void switchTeam() {
-//    String typeProjectile = bossGame.getNextProjectile().getType();
-//    bossView.setCurrentProjectileBitmap(typeProjectile);
+    String nextTeam = bossGame.getNextProjectile().getName();
+    bossView.setCurrentProjectileBitmap(nextTeam);
+    //    String typeProjectile = bossGame.getNextProjectile().getType();
+    //    bossView.setCurrentProjectileBitmap(typeProjectile);
   }
 
   @Override

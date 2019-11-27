@@ -4,6 +4,7 @@ import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.utils.NPC;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class BossGame extends BaseGame {
@@ -16,6 +17,7 @@ public class BossGame extends BaseGame {
   int items;
   boolean paused;
   List<NPC> bossTeam;
+  int currentTeam;
 
   public BossGame() {
     super();
@@ -27,25 +29,7 @@ public class BossGame extends BaseGame {
 
     bossPlayer = new BossPlayer(this);
     enemy = new Enemy(this);
-    //    menuButton =
-    //        ;
-    //    pauseButton =
-    //        new PauseButton(
-    //            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
-    //    shootButton = new ShootButton(this);
     healthBar = new HealthBar(this, enemy);
-    //    Star star =
-    //        new Star(
-    //            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(),
-    // resources);
-    //    Star star1 =
-    //        new Star(
-    //            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight(),
-    // resources);
-
-    // Adds some stars for now just to show the game works
-    //    bossPlayer.getInventory().add(star);
-    //    bossPlayer.getInventory().add(star1);
     items = bossPlayer.getInventory().size();
   }
 
@@ -60,90 +44,9 @@ public class BossGame extends BaseGame {
   public BossPlayer getBossPlayer() {
     return bossPlayer;
   }
-  /**
-   * Draws all the components necessary
-   *
-   * @param canvas of the things being drawn
-   * @param paint the style of teh things being drawm
-   */
-  //  public void draw(Canvas canvas, Paint paint) {
-  //    enemy.draw(canvas, paint);
-  //    bossPlayer.draw(canvas, paint);
-  //    menuButton.draw(canvas, paint);
-  //    pauseButton.draw(canvas, paint);
-  //    shootButton.draw(canvas, paint);
-  //    healthBar.draw(canvas, paint);
-  //
-  //    for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
-  //      ThrownItems projectile;
-  //      projectile = (ThrownItems) bossPlayer.getInventory().get(i);
-  //      projectile.draw(canvas, paint);
-  //    }
-  //    // Draws the button to change colors
-  //    paint.setStyle(Paint.Style.FILL);
-  //    paint.setColor(Color.RED);
-  //    canvas.drawCircle(50, 50, getGameManager().getScreenWidth() / 20, paint);
-  //
-  //    // Draws the text to display stats and messages
-  //
-  //    paint.setColor(Color.WHITE);
-  //    paint.setTextSize(50);
-  //    canvas.drawText(
-  //        "Items Left: " + items,
-  //        getGameManager().getScreenWidth() / 2,
-  //        getGameManager().getScreenHeight(),
-  //        paint);
-  //    canvas.drawText(
-  //        "Health Left: " + StrictMath.max(0, enemy.getHealth()),
-  //        healthBar.getX(),
-  //        getGameManager().getScreenHeight() / 2 + 50,
-  //        paint);
-  //    paint.setColor(Color.BLACK);
-  //    canvas.drawText("Change Color!!", 50, 50, paint);
-  //    if (items < 1 && enemy.getHealth() > 0) {
-  //      paint.setColor(Color.RED);
-  //      paint.setTextSize(300);
-  //      float width = paint.measureText("You Lose!!!");
-  //      canvas.drawText(
-  //          "You Lose!!!",
-  //          getGameManager().getScreenWidth() / 2 - width / 2,
-  //          getGameManager().getScreenHeight() / 2,
-  //          paint);
-  //    }
-  //    if (paused) {
-  //      paint.setColor(Color.RED);
-  //      paint.setTextSize(300);
-  //      float width = paint.measureText("Paused");
-  //      canvas.drawText(
-  //          "Paused",
-  //          getGameManager().getScreenWidth() / 2 - width / 2,
-  //          getGameManager().getScreenHeight() / 2,
-  //          paint);
-  //    }
-  //  }
 
   /** Updates all the components that are part of the lab */
-  public void action() {
-    //    if (!paused) {
-    //      enemy.action();
-    //      for (int i = 0; i < bossPlayer.getInventory().size(); i++) {
-    //        ThrownItems projectile;
-    //        projectile = (ThrownItems) bossPlayer.getInventory().get(i);
-    //        projectile.action();
-    //        if (!projectile.inTheScreen(getGameManager().getScreenHeight())) {
-    //          bossPlayer.getInventory().remove(projectile);
-    //        }
-    //        if (enemy.isAttacked(projectile.getX(), projectile.getY())
-    //            || projectile.isAttacking(enemy.getX(), enemy.getY())) {
-    //          enemy.attacked(projectile.getDamage());
-    //          healthBar.action(enemy.getHealth(), enemy.getInitialHealth());
-    //          // Want the explosion pic to come in to play before we get rid of the projectile
-    //          bossPlayer.getInventory().remove(projectile);
-    //        }
-    //      }
-    //    }
-
-  }
+  public void action() {}
 
   /** Pauses the game or unpauses the game depending on the state it is in */
   @Override
@@ -154,27 +57,6 @@ public class BossGame extends BaseGame {
   /** Loads teh game after it has been saved */
   @Override
   public void load() {}
-
-  /**
-   * Check if the item has hit the enemy
-   *
-   * @param
-   * @param
-   */
-  //  public void hit() {
-  //
-  //    if (!bossPlayer.getInventory().isEmpty() && bossPlayer.getInventory().get(0) != null) {
-  //      ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
-  //      projectile.thrown();
-  //      items--;
-  //      // Seems not to be accurate yet
-  //      if (enemy.isAttacked(projectile.getX(), projectile.getY())
-  //          || projectile.isAttacking(enemy.getX(), enemy.getY())) {
-  //        enemy.attacked(projectile.getDamage());
-  //        healthBar.action(enemy.getHealth(), enemy.getInitialHealth());
-  //      }
-  //    }
-  //  }
 
   /**
    * Checks to see if its within the range
@@ -255,7 +137,11 @@ public class BossGame extends BaseGame {
   }
 
   public NPC getNextProjectile() {
-    return (NPC) this.bossTeam.get(0);
+    currentTeam++;
+    if (currentTeam > bossTeam.size()) {
+      currentTeam = 0;
+    }
+    return bossTeam.get(currentTeam);
   }
 
   public void setEnemyMovement(int sizeOfScreen) {
@@ -264,5 +150,14 @@ public class BossGame extends BaseGame {
 
   public int getEnemyMovement() {
     return enemy.getXDirection();
+  }
+
+  public void setBossTeam(List team) {
+    currentTeam = 0;
+    this.bossTeam = team;
+  }
+
+  public NPC initBossTeam() {
+    return bossTeam.get(currentTeam);
   }
 }
