@@ -1,11 +1,6 @@
 package com.example.g0569.bossgame;
 
-import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-
 import com.example.g0569.bossgame.model.BossGame;
-import com.example.g0569.utils.Coordinate;
 
 /** The type Boss presenter. */
 public class BossPresenter implements BossContract.Presenter {
@@ -21,6 +16,7 @@ public class BossPresenter implements BossContract.Presenter {
     this.bossView = bossView;
     bossView.setPresenter(this);
     bossGame = new BossGame();
+    bossGame.onStart();
     bossGame.setEnemyMovement(bossView.getWidth());
   }
 
@@ -31,39 +27,22 @@ public class BossPresenter implements BossContract.Presenter {
 
   @Override
   public void start() {
-    bossView.initView();
+    //    bossView.initView();
   }
-
-  //  public Coordinate getPlayerCoor() {
-  //    Coordinate playerCoor = Coordinate.create(0,0);
-  //    try{
-  //      playerCoor = bossGame.getBossPlayer().getCoordinate();
-  //    }
-  //    catch (NullPointerException e) {
-  //    }
-  //    finally{
-  //      return playerCoor;
-  //    }
-  //  }
-
-  //  public Coordinate getEnemyCoordinate() {
-  //    Coordinate playerCoor = Coordinate.create(0,0);;
-  //    try{
-  //      playerCoor = bossGame.getEnemy().getCoordinate();
-  //    }
-  //    catch (NullPointerException e) {
-  //    }
-  //    finally{
-  //      return playerCoor;
-  //    }
-  //  }
 
   public int getEnemyMovement() {
     return bossGame.getEnemyMovement();
   }
 
-  public void setEnemyMovement(int sizeOfScreen) {
-    bossGame.setEnemyMovement(sizeOfScreen);
+  @Override
+  public void setEnemyMovement(float screenWidth) {
+    bossGame.setEnemyMovement((int) screenWidth);
+  }
+
+  @Override
+  public void switchTeam() {
+//    String typeProjectile = bossGame.getNextProjectile().getType();
+//    bossView.setCurrentProjectileBitmap(typeProjectile);
   }
 
   @Override
@@ -81,28 +60,6 @@ public class BossPresenter implements BossContract.Presenter {
 
   @Override
   public void showMenu() {}
-
-  //  @Override
-  //  public Coordinate getBossPlayerCoordinate() {
-  //    return null;
-  //  }
-  //
-  //  @Override
-  //  public Coordinate getEnemeyCoordinate() {
-  //    return null;
-  //  }
-  //
-  //  public Coordinate getHealthBarCoordinate() {
-  //    Coordinate playerCoor = Coordinate.create(0,0);;
-  //    try{
-  //      playerCoor = bossGame.getHealthBar().getCoordinate();
-  //    }
-  //    catch (NullPointerException e) {
-  //    }
-  //    finally{
-  //      return playerCoor;
-  //    }
-  //  }
 
   public void attackBoss() {
     bossGame.attackBoss();

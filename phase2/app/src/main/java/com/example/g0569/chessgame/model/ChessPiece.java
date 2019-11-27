@@ -38,6 +38,9 @@ public class ChessPiece extends Item {
     return coordinate;
   }
 
+
   @Override
-  public void action() {}
+  public void update() {
+
+  }
 }

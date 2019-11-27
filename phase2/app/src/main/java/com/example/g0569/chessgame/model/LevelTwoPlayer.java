@@ -20,5 +20,8 @@ public class LevelTwoPlayer extends Player {
   }
 
   @Override
-  public void action() {}
+  public void update() {
+
+  }
+
 }
