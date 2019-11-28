@@ -1,9 +1,7 @@
 package com.example.g0569.bossgame.model;
 
 import com.example.g0569.base.model.BaseGame;
-import com.example.g0569.bossgame.ButtonsToDelete.MenuButton;
-import com.example.g0569.bossgame.ButtonsToDelete.PauseButton;
-import com.example.g0569.bossgame.ButtonsToDelete.ShootButton;
+import com.example.g0569.utils.NPC;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +9,13 @@ import java.util.List;
 public class BossGame extends BaseGame {
   BossPlayer bossPlayer;
   Enemy enemy;
-  MenuButton menuButton;
-  PauseButton pauseButton;
-  ShootButton shootButton;
+  //  MenuButton menuButton;
+  //  PauseButton pauseButton;
+  //  ShootButton shootButton;
   HealthBar healthBar;
   int items;
   boolean paused;
+  List<NPC> bossTeam;
 
   public BossGame() {
     super();
@@ -33,7 +32,7 @@ public class BossGame extends BaseGame {
     //    pauseButton =
     //        new PauseButton(
     //            this, getGameManager().getScreenWidth(), getGameManager().getScreenHeight());
-    shootButton = new ShootButton(this);
+    //    shootButton = new ShootButton(this);
     healthBar = new HealthBar(this, enemy);
     //    Star star =
     //        new Star(
@@ -255,8 +254,8 @@ public class BossGame extends BaseGame {
     projectile.thrown();
   }
 
-  public ThrownItems getNextProjectile() {
-    return (ThrownItems) bossPlayer.getInventory().get(0);
+  public NPC getNextProjectile() {
+    return (NPC) this.bossTeam.get(0);
   }
 
   public void setEnemyMovement(int sizeOfScreen) {

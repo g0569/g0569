@@ -31,5 +31,8 @@ public interface BossContract {
 
     int getEnemyMovement();
 
+    void setEnemyMovement(float screenWidth);
+
+    void switchTeam();
   }
 }
