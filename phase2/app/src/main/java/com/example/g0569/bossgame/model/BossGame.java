@@ -2,51 +2,56 @@ package com.example.g0569.bossgame.model;
 
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.utils.NPC;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
+//TODO set classes to private or public
+
 public class BossGame extends BaseGame {
-  BossPlayer bossPlayer;
-  Enemy enemy;
+  private BossPlayer bossPlayer;
+  private Enemy enemy;
   //  MenuButton menuButton;
   //  PauseButton pauseButton;
   //  ShootButton shootButton;
-  HealthBar healthBar;
-  int items;
-  boolean paused;
-  List<NPC> bossTeam;
-  int currentTeam;
+  private HealthBar healthBar;
+  private boolean paused;
+  private List bossTeam;
+  private int currentTeam;
+  private NPC currentNPC;
 
   public BossGame() {
     super();
     paused = false;
   }
 
-  /** Creates the items for the game */
+  /**
+   * Instantiates everything needed for bossGame to run smoothly Makes a healthbar, enemy, and
+   * player Might need to initialize current projectile upon creation
+   */
   public void onStart() {
 
     bossPlayer = new BossPlayer(this);
     enemy = new Enemy(this);
     healthBar = new HealthBar(this, enemy);
-    items = bossPlayer.getInventory().size();
   }
 
+  /**
+   * Returns the healthbar instance of the game. Should prob not need to use this later
+   *
+   * @return healthbar of the game
+   */
   public HealthBar getHealthBar() {
     return healthBar;
   }
 
-  public Enemy getEnemy() {
-    return enemy;
-  }
+  //  public Enemy getEnemy() {
+  //    return enemy;
+  //  }
 
-  public BossPlayer getBossPlayer() {
-    return bossPlayer;
-  }
+  //  public BossPlayer getBossPlayer() {
+  //    return bossPlayer;
+  //  }
 
-  /** Updates all the components that are part of the lab */
-  public void action() {}
+  //  public void action() {}
 
   /** Pauses the game or unpauses the game depending on the state it is in */
   @Override
@@ -124,40 +129,80 @@ public class BossGame extends BaseGame {
   //    }
   //  }
 
+  /**
+   * Attacks the boss and changes it's health accordingly Might want it to return something later so
+   * that healthbar is not needed later
+   */
   public void attackBoss() {
-    //      ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
-    //      enemy.attacked(projectile.getDamage());
-    ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
-    enemy.attacked(projectile.getDamage(), projectile.getType());
+    enemy.attacked(currentNPC.getDamage(), currentNPC.getPower());
   }
 
+  /** Throws the projectile, this logic should become useless later on */
   public void throwProjectile() {
     ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
     projectile.thrown();
   }
 
+  /**
+   * Switches the npc currently being used to attack the boss in the game Since it is rotational, if
+   * it gets to the size then we reset to the first npc
+   *
+   * @return the npc that is next to attack
+   */
   public NPC getNextProjectile() {
-    currentTeam++;
-    if (currentTeam > bossTeam.size()) {
-      currentTeam = 0;
+    if (bossTeam.size() != 0) {
+      currentTeam++;
+      if (currentTeam > bossTeam.size()) {
+        currentTeam = 0;
+      }
+      currentNPC = (NPC) bossTeam.get(currentTeam);
     }
-    return bossTeam.get(currentTeam);
+    return currentNPC;
   }
 
+  /**
+   * Allows the movement of the enemy to be set since it is dependent on the screen size of the
+   * android device
+   *
+   * @param sizeOfScreen that the game is being played on.
+   */
   public void setEnemyMovement(int sizeOfScreen) {
     enemy.setxDirection(sizeOfScreen);
   }
 
+  /**
+   * Gets the movement of the enemy to send back to the View so that the view knows how much to
+   * change it by each time to enemy moves
+   *
+   * @return the amount the enemy should move.
+   */
   public int getEnemyMovement() {
     return enemy.getXDirection();
   }
 
+  /**
+   * When initializing the presenter, we should get data that consists of what npcs we can choose to
+   * attack with. We initalize it here and sets currentNPC to a default first in line npc
+   *
+   * @param team that we are entering the game with
+   */
   public void setBossTeam(List team) {
     currentTeam = 0;
     this.bossTeam = team;
+    if (bossTeam != null) currentNPC = (NPC) bossTeam.get(0);
   }
 
-  public NPC initBossTeam() {
-    return bossTeam.get(currentTeam);
+  /**
+   * Allows us to know when the game has come to an end, which is dependent on the enemy's health
+   *
+   * @return whether or not the enemy is dead
+   */
+  public boolean determineEnd() {
+    return enemy.getHealth() <= 0;
   }
+
+  //  public NPC initNPC() {
+  //    if (bossTeam != null){
+  //    return bossTeam.get(currentTeam);
+  //  }}
 }
