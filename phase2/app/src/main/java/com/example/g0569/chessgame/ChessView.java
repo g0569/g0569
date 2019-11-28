@@ -121,15 +121,18 @@ public class ChessView extends GameView implements ChessContract.View {
     button = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_start);
     button = Bitmap.createScaledBitmap(button, 150, 150, false);
 
-    inventory = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_iteminventory);
+    inventory =
+        BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_iteminventory);
     inventory = Bitmap.createScaledBitmap(inventory, 200, 300, false);
 
-    triangle = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_triangle);
+    triangle =
+        BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_triangle);
     triangle = Bitmap.createScaledBitmap(triangle, 80, 80, false);
     //    triangleX = inventoryX;
     //    triangleY = inventoryY;
     //
-    //    triangle2 = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_triangle);
+    //    triangle2 = BitmapFactory.decodeResource(getResources(),
+    // R.drawable.chessgame_component_triangle);
     //    triangle2 = Bitmap.createScaledBitmap(chessgame_component_triangle, 80, 80, false);
     //    triangle2X = screenWidth * 0.6f;
     //    triangle2Y = screenHeight * 0.4f;
@@ -159,13 +162,13 @@ public class ChessView extends GameView implements ChessContract.View {
 
   // TODO Add two images for player and NPC. Maybe...
 
-//    public void drawPlayer(Coordinate coordinate) {
-//      canvas.drawBitmap(l2player, coordinate.getX(), coordinate.getY(), paint);
-//    }
-//
-//    public void drawNPC(Coordinate coordinate) {
-//      canvas.drawBitmap(l2npc, coordinate.getX(), coordinate.getY(), paint);
-//    }
+  //    public void drawPlayer(Coordinate coordinate) {
+  //      canvas.drawBitmap(l2player, coordinate.getX(), coordinate.getY(), paint);
+  //    }
+  //
+  //    public void drawNPC(Coordinate coordinate) {
+  //      canvas.drawBitmap(l2npc, coordinate.getX(), coordinate.getY(), paint);
+  //    }
 
   @Override
   public void initView() {
@@ -177,7 +180,8 @@ public class ChessView extends GameView implements ChessContract.View {
   @Override
   public void drawChessPiece(Coordinate coordinate, String type) {
     Coordinate viewCoordinate = presenter.boardCoordinateToViewCoordinate(coordinate);
-    if (type.equals("chessgame_component_star")) canvas.drawBitmap(star, viewCoordinate.getX(), viewCoordinate.getY(), paint);
+    if (type.equals("chessgame_component_star"))
+      canvas.drawBitmap(star, viewCoordinate.getX(), viewCoordinate.getY(), paint);
     else if (type.equals("chessgame_component_triangle"))
       canvas.drawBitmap(triangle, viewCoordinate.getX(), viewCoordinate.getY(), paint);
   }
@@ -195,29 +199,29 @@ public class ChessView extends GameView implements ChessContract.View {
       initView();
       //      canvas.drawBitmap(chessgame_component_star, starX, starY, paint);
       //      canvas.drawBitmap(chessgame_component_triangle, triangleX, triangleY, paint);
-//      canvas.drawBitmap(star, screenWidth * 0.32f, screenHeight * 0.46f, paint);
-//
-//      canvas.drawBitmap(star, screenWidth * 0.42f, screenHeight * 0.46f, paint);
-//
-//      canvas.drawBitmap(star, screenWidth * 0.52f, screenHeight * 0.46f, paint);
-//
-//      canvas.drawBitmap(star, screenWidth * 0.62f, screenHeight * 0.46f, paint);
-//
-//      canvas.drawBitmap(star, screenWidth * 0.3f, screenHeight * 0.61f, paint);
-//
-//      canvas.drawBitmap(star, screenWidth * 0.41f, screenHeight * 0.61f, paint);
-//
-//      canvas.drawBitmap(star, screenWidth * 0.525f, screenHeight * 0.61f, paint);
-//
-//      canvas.drawBitmap(star, screenWidth * 0.64f, screenHeight * 0.61f, paint);
-//
-//      canvas.drawBitmap(star, screenWidth * 0.27f, screenHeight * 0.8f, paint);
-//
-//      canvas.drawBitmap(star, screenWidth * 0.395f, screenHeight * 0.8f, paint);
-//
-//      canvas.drawBitmap(star, screenWidth * 0.53f, screenHeight * 0.8f, paint);
-//
-//      canvas.drawBitmap(star, screenWidth * 0.67f, screenHeight * 0.8f, paint);
+      //      canvas.drawBitmap(star, screenWidth * 0.32f, screenHeight * 0.46f, paint);
+      //
+      //      canvas.drawBitmap(star, screenWidth * 0.42f, screenHeight * 0.46f, paint);
+      //
+      //      canvas.drawBitmap(star, screenWidth * 0.52f, screenHeight * 0.46f, paint);
+      //
+      //      canvas.drawBitmap(star, screenWidth * 0.62f, screenHeight * 0.46f, paint);
+      //
+      //      canvas.drawBitmap(star, screenWidth * 0.3f, screenHeight * 0.61f, paint);
+      //
+      //      canvas.drawBitmap(star, screenWidth * 0.41f, screenHeight * 0.61f, paint);
+      //
+      //      canvas.drawBitmap(star, screenWidth * 0.525f, screenHeight * 0.61f, paint);
+      //
+      //      canvas.drawBitmap(star, screenWidth * 0.64f, screenHeight * 0.61f, paint);
+      //
+      //      canvas.drawBitmap(star, screenWidth * 0.27f, screenHeight * 0.8f, paint);
+      //
+      //      canvas.drawBitmap(star, screenWidth * 0.395f, screenHeight * 0.8f, paint);
+      //
+      //      canvas.drawBitmap(star, screenWidth * 0.53f, screenHeight * 0.8f, paint);
+      //
+      //      canvas.drawBitmap(star, screenWidth * 0.67f, screenHeight * 0.8f, paint);
       //      canvas.drawBitmap(triangle, triangleX, triangleY, paint);
       //      canvas.drawBitmap(triangle2, triangle2X, triangle2Y, paint);
       //      canvas.drawBitmap(star2, star2X, star2Y, paint);
@@ -255,14 +259,16 @@ public class ChessView extends GameView implements ChessContract.View {
       Coordinate BoardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);
       String type = presenter.InventoryCoordinateToChessType(InventoryCoordinate);
       System.out.println(String.valueOf(x) + " " + String.valueOf(y));
-      if ( x > screenWidth * 0.3f
-          && x < screenWidth * 0.5f
-          && y > screenHeight * 0.44f
-          && y < screenHeight) {
-        // Place a chess piece that has been chosen.
-//        drawChessPiece(BoardCoordinate, "chessgame_component_star");
-        presenter.placePlayerChess(BoardCoordinate, "chessgame_component_star");
-        placeChess = false;
+      if (placeChess) {
+        if (x > screenWidth * 0.3f
+            && x < screenWidth * 0.5f
+            && y > screenHeight * 0.44f
+            && y < screenHeight) {
+          // Place a chess piece that has been chosen.
+          //        drawChessPiece(BoardCoordinate, "chessgame_component_star");
+          presenter.placePlayerChess(BoardCoordinate, "chessgame_component_star");
+          placeChess = false;
+        }
       } else {
         if (x > buttonX
             && x < buttonX + button.getWidth()

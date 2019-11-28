@@ -12,10 +12,8 @@ import java.util.List;
 public class ChessGame extends BaseGame {
 
   private ChessContract.Presenter presenter;
-  // TODO still need to figure out a way to implement two different NPC's game.
-  private int winNumbers;
+
   private LevelTwoPlayer l2player;
-  private int clickNumbers = 1;
   private String difficulty; // might be "easy", "hard", or "insane"
   private ChessPieceFactory chessPieceFactory;
   private ChessSQLiteAccessInterface boardData;
@@ -30,38 +28,19 @@ public class ChessGame extends BaseGame {
   public ChessGame(ChessContract.Presenter presenter) {
     super();
     this.presenter = presenter;
-    //    List<ChessPiece> NPC1ChessPiece = new ArrayList<>();
-    //    NPC1ChessPiece.add(
-    //        new StarChessPiece(
-    //            gameManager.getScreenWidth() * 0.6f, gameManager.getScreenHeight() * 0.4f, this));
-    //    NPC1ChessPiece.add(
-    //        new TriangleChessPiece(
-    //            gameManager.getScreenWidth() * 0.6f, gameManager.getScreenHeight() * 0.65f,
-    // this));
-    //    //    NPC1ChessPiece.add(new StarChessPiece(1, 2));
-    //    List<ChessPiece> NPC2ChessPiece = new ArrayList<>();
-    //    NPC2ChessPiece.add(
-    //        new TriangleChessPiece(
-    //            gameManager.getScreenWidth() * 0.6f, gameManager.getScreenHeight() * 0.4f, this));
-    //    NPC2ChessPiece.add(
-    //        new StarChessPiece(
-    //            gameManager.getScreenWidth() * 0.6f, gameManager.getScreenHeight() * 0.65f,
-    // this));
-    //
-    //    NPCChessPiece.add(NPC1ChessPiece);
-    //    NPCChessPiece.add(NPC2ChessPiece);
   }
 
   public void onStart() {
     l2player = new LevelTwoPlayer(this);
     this.chessPieceFactory = new ChessPieceFactory();
+    decodeNPCData();
   }
 
   public void setBoardData(ChessSQLiteAccessInterface boardData) {
     this.boardData = boardData;
   }
 
-  public void decodeNPCData() {
+  private void decodeNPCData() {
     String chessString =
         boardData.getChessBoardData(
             difficulty); // get data before the chessgame_component_start of each round.
@@ -216,50 +195,7 @@ public class ChessGame extends BaseGame {
     }
     return (winNumbers >= 2);
     // TODO Need to be implemented.
-
-    //      for (Item chess : l2player.getInventory()) {
-    //        winNumbers += fightCounter(chess, round);
-    //      }
-    //      return (winNumbers >= 2);
   }
-  //
-  //  /**
-  //   * Place the chess piece in the place has been touched. And store the chess in the players
-  //   * inventory.
-  //   *
-  //   * @param chosenPlace The place has been chosen.
-  //   * @return the coordinate.
-  //   */
-  //  public Coordinate placeChess(int chosenPlace) {
-  //    // In data, first is inventoryX. second is the width of inventory image.
-  //    // Get the location where player place the chess piece and change the location of original
-  // chess
-  //    // piece.
-  //    if (clickNumbers == 1) {
-  //      l2player
-  //          .getInventory()
-  //          .get(chosenPlace)
-  //          .getCoordinate()
-  //          .setXY(
-  //              getGameManager().getScreenWidth() * 0.45f, getGameManager().getScreenHeight() *
-  // 0.4f);
-  //      clickNumbers++;
-  //      return new Coordinate(
-  //          getGameManager().getScreenWidth() * 0.45f, getGameManager().getScreenHeight() * 0.4f);
-  //      //    } else if (clickNumbers == 2) {
-  //    } else { // For now we use else here, since there is a limit for number of chess.
-  //      l2player
-  //          .getInventory()
-  //          .get(chosenPlace)
-  //          .getCoordinate()
-  //          .setXY(
-  //              getGameManager().getScreenWidth() * 0.45f,
-  //              getGameManager().getScreenHeight() * 0.65f);
-  //      return new Coordinate(
-  //          getGameManager().getScreenWidth() * 0.45f, getGameManager().getScreenHeight() *
-  // 0.65f);
-  //    }
-  //  }
 
   @Override
   public void pause() {}

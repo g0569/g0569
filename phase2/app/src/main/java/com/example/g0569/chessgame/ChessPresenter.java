@@ -2,6 +2,7 @@ package com.example.g0569.chessgame;
 
 import com.example.g0569.chessgame.model.ChessGame;
 import com.example.g0569.chessgame.model.ChessPiece;
+import com.example.g0569.chessgame.model.ChessSQLiteAccessInterface;
 import com.example.g0569.utils.Coordinate;
 
 import java.util.ArrayList;
@@ -11,10 +12,11 @@ public class ChessPresenter implements ChessContract.Presenter {
   private ChessContract.View chessView;
   private ChessGame chessGame;
 
-  ChessPresenter(ChessContract.View chessView) {
+  ChessPresenter(ChessContract.View chessView, ChessSQLiteAccessInterface boardData) {
     this.chessView = chessView;
     this.chessView.setPresenter(this);
     this.chessGame = new ChessGame(this);
+    this.chessGame.setBoardData(boardData);
   }
 
   @Override
@@ -22,16 +24,6 @@ public class ChessPresenter implements ChessContract.Presenter {
     // TODO
     chessGame.onStart();
   }
-
-  //  @Override
-  //  public void drawChessPiece(ChessPiece chessPiece) {
-  //    Coordinate coordinate = boardCoordinateToViewCoordinate(chessPiece.getCoordinate());
-  //    if (chessPiece instanceof StarChessPiece) {
-  //      chessView.drawChessPiece(coordinate, "chessgame_component_star");
-  //    } else if (chessPiece instanceof TriangleChessPiece) {
-  //      chessView.drawChessPiece(coordinate, "chessgame_component_triangle");
-  //    }
-  //  }
 
   @Override
   public void drawChessPiece() {
@@ -42,10 +34,6 @@ public class ChessPresenter implements ChessContract.Presenter {
       chessView.drawChessPiece(chessPiece.getCoordinate(),chessGame.typeGetter(chessPiece));
     }
   }
-
-//  public void drawNPCChessPiece(List<ChessPiece> NPCData) {
-//    for (ChessPiece chessPiece : NPCData) {}
-//  }
 
   @Override
   public boolean startAutoFight() {
