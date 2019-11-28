@@ -22,10 +22,7 @@ public class BaseButton extends Item {
     super(game);
 
   }
-
+  /** Update */
   @Override
-  public void update() {
-
-  }
-
+  public void update() {}
 }
