@@ -14,7 +14,7 @@ public class MazePresenter implements MazeContract.Presenter {
 
   @Override
   public void start() {
-    mazeView.drawMaze(mazeGame.getMazeGrid());
+//    mazeView.drawMaze(mazeGame.getMazeGrid());
     mazeGame.onStart();
   }
 

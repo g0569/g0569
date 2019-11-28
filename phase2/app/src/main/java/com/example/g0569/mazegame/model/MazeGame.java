@@ -36,7 +36,7 @@ public class MazeGame extends BaseGame {
   }
 
   public void onStart() {
-    startpoint = Coordinate.create(2, 2);
+    startpoint = Coordinate.create(0, 0);
     mazePlayer = new MazePlayer(this);
     mazeGrid = MazeGenerator.generate(Constants.GRID_HEIGHT, Constants.GRID_WIDTH);
 //    Button = new BaseButton(this);
@@ -50,7 +50,7 @@ public class MazeGame extends BaseGame {
 
 
 
-  public Coordinate getStartpoint() {
+  public Coordinate getStartPoint() {
     return this.startpoint;
   }
 

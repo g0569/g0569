@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.provider.SyncStateContract;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
@@ -168,16 +169,18 @@ public class MazeView extends GameView implements MazeContract.View {
     } else {
       for (int i = 0; i < Constants.GRID_WIDTH; i++) {
         for (int j = 0; j < Constants.GRID_HEIGHT; j++) {
-          if (mazeGrid[i][j] == 0) {;
-          } else if (mazeGrid[i][j] == 1) {
-            drawWall(gridNum2Coor(j, i));
-          } else if (mazeGrid[i][j] == 2) {
-            drawNPC(gridNum2Coor(j, i));
+          if (mazeGrid[j][i] == 0) {;
+          } else if (mazeGrid[j][i] == 1) {
+            drawWall(gridNum2Coor(i, j));
+          } else if (mazeGrid[j][i] == 2) {
+            drawNPC(gridNum2Coor(i, j));
           }
         }
       }
     }
   }
+
+
 
   private void drawWall(Coordinate coor) {
     paint.setColor(Color.WHITE);
@@ -187,11 +190,11 @@ public class MazeView extends GameView implements MazeContract.View {
   @Override
   public void drawPlayer(Coordinate coor) {
     paint.setColor(Color.WHITE);
-    coor = gridNum2Coor((int) coor.getX(), (int) coor.getY());
-    canvas.drawBitmap(player, coor.getX(), coor.getY(), paint);
+    Coordinate screenCoor = gridNum2Coor(coor.getIntX(), (int) coor.getIntY());
+    canvas.drawBitmap(player, screenCoor.getX(), screenCoor.getY(), paint);
   }
 
-  @Override
+
   public void drawNPC(Coordinate coor) {
     paint.setColor(Color.GRAY);
     paint.setTextSize(70);
