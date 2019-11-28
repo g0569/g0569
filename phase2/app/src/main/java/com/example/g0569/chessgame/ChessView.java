@@ -175,9 +175,10 @@ public class ChessView extends GameView implements ChessContract.View {
 
   @Override
   public void drawChessPiece(Coordinate coordinate, String type) {
-    if (type.equals("star")) canvas.drawBitmap(star, coordinate.getX(), coordinate.getY(), paint);
+    Coordinate viewCoordinate = presenter.boardCoordinateToViewCoordinate(coordinate);
+    if (type.equals("star")) canvas.drawBitmap(star, viewCoordinate.getX(), viewCoordinate.getY(), paint);
     else if (type.equals("triangle"))
-      canvas.drawBitmap(triangle, coordinate.getX(), coordinate.getY(), paint);
+      canvas.drawBitmap(triangle, viewCoordinate.getX(), viewCoordinate.getY(), paint);
   }
 
   @Override
@@ -228,13 +229,13 @@ public class ChessView extends GameView implements ChessContract.View {
       Coordinate BoardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);
       String type = presenter.InventoryCoordinateToChessType(InventoryCoordinate);
       System.out.println(String.valueOf(x) + " " + String.valueOf(y));
-      if (placeChess
-          && x > screenWidth * 0.3f
+      if ( x > screenWidth * 0.3f
           && x < screenWidth * 0.5f
           && y > screenHeight * 0.44f
           && y < screenHeight) {
-        drawChessPiece(viewCoordinate, type);
-        presenter.placePlayerChess(InventoryCoordinate, type);
+        // Place a chess piece that has been chosen.
+        drawChessPiece(BoardCoordinate, "star");
+        presenter.placePlayerChess(InventoryCoordinate, "star");
         placeChess = false;
       } else {
         if (x > buttonX
