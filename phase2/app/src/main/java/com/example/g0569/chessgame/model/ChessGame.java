@@ -63,43 +63,10 @@ public class ChessGame extends BaseGame {
   }
 
   public void decodeNPCData() {
-    String chessString = boardData.getChessBoardData();//get data before the start of each round.
-    String[] chessDataList = chessString.split(".");//suppose we are getting string like"EZ.star,1,1.circle,1,2.HD.circle,1,1.nochess,1,2"
-    int hardNPCIndex = 0;
-    boolean hard_found = false;
-    while (hardNPCIndex < chessDataList.length & !hard_found) {
-      if (chessDataList[hardNPCIndex].equals("HD")) {
-        hard_found = true;//find the starting index of the NPC(Hard difficulty)
-      }
-      if (!hard_found) {
-        hardNPCIndex++;
-      }
-    }
-    int insaneNPCIndex = hardNPCIndex;
-    boolean insane_found = false;
-    while (insaneNPCIndex < chessDataList.length & !insane_found) {
-        if (chessDataList[insaneNPCIndex].equals("IS")) {
-            insane_found = true;//find the starting index of the NPC(Insane difficulty)
-        }
-        if (!insane_found) {
-            hardNPCIndex++;
-        }
-    }
+    String chessString = boardData.getChessBoardData(difficulty);//get data before the start of each round.
+    String[] chessDataList = chessString.split(".");//suppose we are getting string like"star,1,1.circle,1,2.circle,1,3.nochess,2,1"
     int count = 0;
-    int loopLimit = 0;
-    // place chess pieces in easy mode.
-    if (difficulty.equals("easy")) {
-        count = 1; // the first element in the list is obviously "EZ"
-        loopLimit = hardNPCIndex;
-    }
-    else if (difficulty.equals("hard")) {
-        count = hardNPCIndex + 1;
-        loopLimit = insaneNPCIndex;
-    }
-    else if (difficulty.equals("insane")){
-        count = insaneNPCIndex + 1;
-        loopLimit = chessDataList.length;
-    }
+    int loopLimit = chessDataList.length;
     while(count < loopLimit){
         String[] curr_chess = chessDataList[count].split(",");// for example:["star","1","1"]
         String type = curr_chess[0];
@@ -177,34 +144,34 @@ public class ChessGame extends BaseGame {
   //
   private int powerCalculator(String side, int row){
     // TODO This method need to be improved!
-    int power = 0;
+    int rowPower = 0;
     List<ChessPiece> requiredInventory = new ArrayList<>();
     if(side.equals("player")){
       for (Item chessPiece: l2player.getInventory() ) {
         requiredInventory.add((ChessPiece) chessPiece);
       }
-//      requiredInventory = l2player.getInventory();
     }
     else if(side.equals("NPC")){requiredInventory = NPCData;}
     for (ChessPiece curr_chess : requiredInventory) {
-      // PROBLEM: items in player's inventory has type Item and NPCdata has type Chesspiece.
       if (curr_chess.getCoordinate().getX() == row){
-        power += curr_chess.getPower();
+        rowPower += curr_chess.getPower();
       }
     }
-    return power;
+    return rowPower;
   }
   private boolean singleRowFight(int row){
     boolean playerWin = false;
+    int playerPower = powerCalculator("player", row);
+    int NPCPower = powerCalculator("NPC", row);
     if(difficulty.equals("easy")){
-      playerWin = (powerCalculator("player", row) >= powerCalculator("NPC", row));// player under easy mode can win a row with power equal to NPC.
+      playerWin = (playerPower >= NPCPower);// player under easy mode can win a row with power equal to NPC.
     }
     else if(difficulty.equals("hard")){
-      playerWin = (powerCalculator("player", row) > powerCalculator("NPC", row));// now player can only win a row with more power.
+      playerWin = (playerPower > NPCPower);// now player can only win a row with more power.
     }
     else if(difficulty.equals("insane")){
-      playerWin = (powerCalculator("player", row) > powerCalculator("NPC", row)&
-              powerCalculator("player", row) > powerCalculator("NPC", 1));// insane enemy at row 1 gains ability to fight other chess pieces on other rows.
+      playerWin = (playerPower > NPCPower&
+              playerPower > powerCalculator("NPC", 1));// insane NPC at row 1 gains ability to fight other chess pieces on other rows.
     }
     return playerWin;
   }
@@ -214,13 +181,13 @@ public class ChessGame extends BaseGame {
    * @return whether player win the game.
    */
   public boolean autoFight() {
-    int winCount = 0;
+    int winNumbers = 0;
     int row = 1;
     while (row <= 3) {
-      if (singleRowFight(row)){winCount += 1;}
+      if (singleRowFight(row)){winNumbers += 1;}
       row ++;
     }
-    return (winCount >= 2);
+    return (winNumbers >= 2);
     // TODO Need to be implemented.
 
     //      for (Item chess : l2player.getInventory()) {
