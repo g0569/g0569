@@ -102,57 +102,19 @@ public class ChessGame extends BaseGame {
     }
     return playerChessPieceList;
   }
-  //  /**
-  //   * Show the statistic of the game.
-  //   *
-  //   * @param win whether or not the player win the game.
-  //   */
-  //  public void showStatistic(boolean win) {
-  //    // TODO
-  //    List<String> statistic = new ArrayList<>();
-  //    if (win) {
-  //      statistic.add("Number of Cards You Get: 2");
-  //    } else {
-  //      statistic.add("Number of Cards You Get: 0");
-  //    }
-  //    getGameManager().showStatistic(statistic);
-  //  }
-  //
-
-  //  /**
-  //   * An counter to count how many rows the player win.
-  //   *
-  //   * @param PlayerChess The players' chess.
-  //   * @param round The round.
-  //   * @return number of rows the player wins.
-  //   */
-  //  private int fightCounter(Item PlayerChess, int round) {
-  //    int win = 0;
-  //    for (ChessPiece NPCChess : NPCChessPiece.get(round)) {
-  //      if (NPCChess.getCoordinate().getY() == PlayerChess.getCoordinate().getY()
-  //          && NPCChess.getPower() <= ((ChessPiece) PlayerChess).getPower()) {
-  //        win++; // Compared power it has.
-  //      }
-  //    }
-  //    return win;
-  //  }
-  //
 
   private int powerCalculator(String side, int row) {
     // TODO This method need to be improved!
     int rowPower = 0;
     List<ChessPiece> requiredInventory = new ArrayList<>();
     if (side.equals("player")) {
-      requiredInventory = getPlayerChessPiece();
-//      for (Item chessPiece : l2player.getInventory()) {
-//        requiredInventory.add((ChessPiece) chessPiece);
-//      }
+      requiredInventory.addAll(getPlayerChessPiece());
     } else if (side.equals("NPC")) {
-      requiredInventory = NPCChessPiece;
+      requiredInventory.addAll(NPCChessPiece);
     }
-    for (ChessPiece curr_chess : requiredInventory) {
-      if (curr_chess.getCoordinate().getX() == row) {
-        rowPower += curr_chess.getPower();
+    for (ChessPiece currentChess : requiredInventory) {
+      if (currentChess.getCoordinate().getX() == row) {
+        rowPower += currentChess.getPower();
       }
     }
     return rowPower;
@@ -179,6 +141,7 @@ public class ChessGame extends BaseGame {
     }
     return playerWin;
   }
+
   /**
    * Let the chess fight and return the result.
    *
