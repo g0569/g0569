@@ -26,9 +26,9 @@ public class ChessPresenter implements ChessContract.Presenter {
   public void drawChessPiece(ChessPiece chessPiece) {
     Coordinate coordinate = boardCoordinateToViewCoordinate(chessPiece.getCoordinate());
     if (chessPiece instanceof StarChessPiece) {
-      chessView.drawStar(coordinate);
+      chessView.drawChessPiece(coordinate, "star");
     } else if (chessPiece instanceof TriangleChessPiece) {
-      chessView.drawTriangle(coordinate);
+      chessView.drawChessPiece(coordinate, "triangle");
     }
   }
 
@@ -64,7 +64,6 @@ public class ChessPresenter implements ChessContract.Presenter {
 
   @Override
   public void placePlayerChess(Coordinate coordinate, String type) {
-    // TODO
     chessGame.setPlayerChess(coordinate.getX(), coordinate.getY(), type);
   }
 
@@ -126,43 +125,24 @@ public class ChessPresenter implements ChessContract.Presenter {
     return InventoryCoordinate;
   }
 
-
   @Override
   public Coordinate viewCoordinateToBoardCoordinate(Coordinate coordinate) {
- float x = coordinate.getX();
+    float x = coordinate.getX();
     float y = coordinate.getY();
     float width = ((ChessView) chessView).getScreenWidth();
     float height = ((ChessView) chessView).getScreenHeight();
     Coordinate BoardCoordinate = new Coordinate(0, 0);
-    if (x > width * 0.3f
-        && x < width * 0.39f
-        && y > height * 0.44f
-        && y < height * 0.59f) {
+    if (x > width * 0.3f && x < width * 0.39f && y > height * 0.44f && y < height * 0.59f) {
       BoardCoordinate.setXY(1, 1);
-    } else if (x > width * 0.27f
-        && x < width * 0.37f
-        && y > height * 0.59f
-        && y < height * 0.72f) {
+    } else if (x > width * 0.27f && x < width * 0.37f && y > height * 0.59f && y < height * 0.72f) {
       BoardCoordinate.setXY(2, 1);
-    } else if (x > width * 0.23f
-        && x < width * 0.35f
-        && y > height * 0.72f
-        && y < height) {
+    } else if (x > width * 0.23f && x < width * 0.35f && y > height * 0.72f && y < height) {
       BoardCoordinate.setXY(3, 1);
-    } else if (x > width * 0.39f
-        && x < width * 0.5f
-        && y > height * 0.44f
-        && y < height * 0.59f) {
+    } else if (x > width * 0.39f && x < width * 0.5f && y > height * 0.44f && y < height * 0.59f) {
       BoardCoordinate.setXY(1, 2);
-    } else if (x > width * 0.37f
-        && x < width * 0.5f
-        && y > height * 0.59f
-        && y < height * 0.72f) {
+    } else if (x > width * 0.37f && x < width * 0.5f && y > height * 0.59f && y < height * 0.72f) {
       BoardCoordinate.setXY(2, 2);
-    } else if (x > width * 0.35f
-        && x < width * 0.5f
-        && y > height * 0.72f
-        && y < height) {
+    } else if (x > width * 0.35f && x < width * 0.5f && y > height * 0.72f && y < height) {
       BoardCoordinate.setXY(3, 2);
     }
     return BoardCoordinate;

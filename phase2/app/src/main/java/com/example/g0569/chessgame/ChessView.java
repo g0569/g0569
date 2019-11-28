@@ -157,15 +157,6 @@ public class ChessView extends GameView implements ChessContract.View {
     canvas.drawBitmap(inventory, inventoryX, inventoryY, paint);
   }
 
-  public void drawStar(Coordinate coordinate) {
-    canvas.drawBitmap(star, coordinate.getX(), coordinate.getY(), paint);
-  }
-
-  public void drawTriangle(Coordinate coordinate) {
-    canvas.drawBitmap(triangle, coordinate.getX(), coordinate.getY(), paint);
-  }
-
-
   // TODO Add two images for player and NPC. Maybe...
 
   //  public void drawPlayer(Coordinate coordinate) {
@@ -180,6 +171,13 @@ public class ChessView extends GameView implements ChessContract.View {
   public void initView() {
     drawButton();
     drawInventory();
+  }
+
+  @Override
+  public void drawChessPiece(Coordinate coordinate, String type) {
+    if (type.equals("star")) canvas.drawBitmap(star, coordinate.getX(), coordinate.getY(), paint);
+    else if (type.equals("triangle"))
+      canvas.drawBitmap(triangle, coordinate.getX(), coordinate.getY(), paint);
   }
 
   @Override
@@ -225,38 +223,45 @@ public class ChessView extends GameView implements ChessContract.View {
       float x = event.getX();
       float y = event.getY();
       Coordinate viewCoordinate = new Coordinate(x, y);
-      Coordinate InventoryCoordinate = presenter.viewCoordinateToInventoryCoordinate(viewCoordinate);
+      Coordinate InventoryCoordinate =
+          presenter.viewCoordinateToInventoryCoordinate(viewCoordinate);
       Coordinate BoardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);
       String type = presenter.InventoryCoordinateToChessType(InventoryCoordinate);
       System.out.println(String.valueOf(x) + " " + String.valueOf(y));
-      if (x > buttonX
-          && x < buttonX + button.getWidth()
-          && y > buttonY
-          && y < buttonY + button.getHeight()) {
-        Toast.makeText(activity, "Start the game.", Toast.LENGTH_SHORT).show();
-        // Call method to start the game.
-        boolean result = presenter.startAutoFight();
-        if (result) {
-          Toast.makeText(activity, "You win the game!", Toast.LENGTH_SHORT).show();
-          //          autoChessGame.showStatistic(true); // Win and get 2 cards.
-        } else {
-          //          autoChessGame.showStatistic(false); // Lose and get 0 cards.
-          Toast.makeText(activity, "You lose the game!", Toast.LENGTH_SHORT).show();
+      if (placeChess
+          && x > screenWidth * 0.3f
+          && x < screenWidth * 0.5f
+          && y > screenHeight * 0.44f
+          && y < screenHeight) {
+        drawChessPiece(viewCoordinate, type);
+        presenter.placePlayerChess(InventoryCoordinate, type);
+        placeChess = false;
+      } else {
+        if (x > buttonX
+            && x < buttonX + button.getWidth()
+            && y > buttonY
+            && y < buttonY + button.getHeight()) {
+          Toast.makeText(activity, "Start the game.", Toast.LENGTH_SHORT).show();
+          // Call method to start the game.
+          boolean winGame = presenter.startAutoFight();
+          if (winGame) {
+            Toast.makeText(activity, "You win the game!", Toast.LENGTH_SHORT).show();
+            //          autoChessGame.showStatistic(true); // Win and get 2 cards.
+          } else {
+            //          autoChessGame.showStatistic(false); // Lose and get 0 cards.
+            Toast.makeText(activity, "You lose the game!", Toast.LENGTH_SHORT).show();
+          }
+        } else if (x > inventoryX
+            && x < inventoryX + inventory.getWidth()
+            && y > inventoryY
+            && y < inventoryY + inventory.getHeight()) {
+          // Choose a chess piece from inventory.
+          Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
+          // TODO To highlight the chess has been chosen.
+          placeChess = true;
         }
-
-      } else if (type.equals("star") && !placeChess) {
-        Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
-        drawStar(viewCoordinate);
-        presenter.placePlayerChess(InventoryCoordinate, type);
-        placeChess = true; // TODO
-
-      } else if (type.equals("triangle") && !placeChess) {
-        Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
-        drawTriangle(viewCoordinate);
-        presenter.placePlayerChess(InventoryCoordinate, type);
-        placeChess = true;
+        return true;
       }
-      return true;
     }
     return false;
   }

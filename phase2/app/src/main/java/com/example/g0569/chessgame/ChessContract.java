@@ -9,9 +9,7 @@ public interface ChessContract {
   interface View extends BaseView<Presenter> {
     void initView();
 
-    void drawStar(Coordinate coordinate);
-
-    void drawTriangle(Coordinate coordinate);
+    void drawChessPiece(Coordinate coordinate, String type);
   }
 
   interface Presenter extends BasePresenter {
@@ -21,12 +19,12 @@ public interface ChessContract {
 
     Coordinate boardCoordinateToViewCoordinate(Coordinate coordinate);
 
-
     void placePlayerChess(Coordinate coordinate, String type);
 
     String InventoryCoordinateToChessType(Coordinate coordinate);
 
     Coordinate viewCoordinateToInventoryCoordinate(Coordinate coordinate);
+
     Coordinate viewCoordinateToBoardCoordinate(Coordinate coordinate);
   }
 }
