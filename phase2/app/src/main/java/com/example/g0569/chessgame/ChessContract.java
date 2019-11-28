@@ -11,12 +11,12 @@ public interface ChessContract {
   interface View extends BaseView<Presenter> {
     void initView();
 
-//    void drawChessPiece(Coordinate coordinate, String type);
+    void drawChessPiece(Coordinate coordinate, String type);
   }
 
   interface Presenter extends BasePresenter {
 //    void drawChessPiece(ChessPiece chessPiece);
-    void drawNPCChessPiece(List<ChessPiece> NPCData);
+    void drawChessPiece();
 
     boolean startAutoFight();
 

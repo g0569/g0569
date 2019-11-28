@@ -157,40 +157,29 @@ public class ChessView extends GameView implements ChessContract.View {
     canvas.drawBitmap(inventory, inventoryX, inventoryY, paint);
   }
 
-//  public enum drawChessPieceHelper(){
-//
-//  }
-//
-//  public void drawNPCChessPiece(){
-//    canvas.drawBitmap();
-//  }
-
   // TODO Add two images for player and NPC. Maybe...
 
-  //  public void drawPlayer(Coordinate coordinate) {
-  //    canvas.drawBitmap(l2player, coordinate.getX(), coordinate.getY(), paint);
-  //  }
-  //
-  //  public void drawNPC(Coordinate coordinate) {
-  //    canvas.drawBitmap(l2npc, coordinate.getX(), coordinate.getY(), paint);
-  //  }
+//    public void drawPlayer(Coordinate coordinate) {
+//      canvas.drawBitmap(l2player, coordinate.getX(), coordinate.getY(), paint);
+//    }
+//
+//    public void drawNPC(Coordinate coordinate) {
+//      canvas.drawBitmap(l2npc, coordinate.getX(), coordinate.getY(), paint);
+//    }
 
   @Override
   public void initView() {
     drawButton();
     drawInventory();
+    presenter.drawChessPiece();
   }
 
-//  @Override
-//  public void drawChessPiece(Coordinate coordinate, String type) {
-//    Coordinate viewCoordinate = presenter.boardCoordinateToViewCoordinate(coordinate);
-//    if (type.equals("chessgame_component_star")) canvas.drawBitmap(star, viewCoordinate.getX(), viewCoordinate.getY(), paint);
-//    else if (type.equals("chessgame_component_triangle"))
-//      canvas.drawBitmap(triangle, viewCoordinate.getX(), viewCoordinate.getY(), paint);
-//  }
-
-private void getViewCoordinateToDraw(Coordinate coordinate, String type){
-
+  @Override
+  public void drawChessPiece(Coordinate coordinate, String type) {
+    Coordinate viewCoordinate = presenter.boardCoordinateToViewCoordinate(coordinate);
+    if (type.equals("chessgame_component_star")) canvas.drawBitmap(star, viewCoordinate.getX(), viewCoordinate.getY(), paint);
+    else if (type.equals("chessgame_component_triangle"))
+      canvas.drawBitmap(triangle, viewCoordinate.getX(), viewCoordinate.getY(), paint);
   }
 
   @Override
@@ -272,7 +261,7 @@ private void getViewCoordinateToDraw(Coordinate coordinate, String type){
           && y < screenHeight) {
         // Place a chess piece that has been chosen.
 //        drawChessPiece(BoardCoordinate, "chessgame_component_star");
-        presenter.placePlayerChess(InventoryCoordinate, "chessgame_component_star");
+        presenter.placePlayerChess(BoardCoordinate, "chessgame_component_star");
         placeChess = false;
       } else {
         if (x > buttonX

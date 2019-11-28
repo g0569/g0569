@@ -4,6 +4,7 @@ import com.example.g0569.chessgame.model.ChessGame;
 import com.example.g0569.chessgame.model.ChessPiece;
 import com.example.g0569.utils.Coordinate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChessPresenter implements ChessContract.Presenter {
@@ -32,9 +33,19 @@ public class ChessPresenter implements ChessContract.Presenter {
   //    }
   //  }
 
-  public void drawNPCChessPiece(List<ChessPiece> NPCData) {
-    for (ChessPiece chessPiece : NPCData) {}
+  @Override
+  public void drawChessPiece() {
+    List<ChessPiece> chessPieceToDraw = new ArrayList<>();
+    chessPieceToDraw.addAll(chessGame.getPlayerChessPiece());
+    chessPieceToDraw.addAll(chessGame.getNPCChessPiece());
+    for (ChessPiece chessPiece : chessPieceToDraw) {
+      chessView.drawChessPiece(chessPiece.getCoordinate(),chessGame.typeGetter(chessPiece));
+    }
   }
+
+//  public void drawNPCChessPiece(List<ChessPiece> NPCData) {
+//    for (ChessPiece chessPiece : NPCData) {}
+//  }
 
   @Override
   public boolean startAutoFight() {
@@ -80,7 +91,7 @@ public class ChessPresenter implements ChessContract.Presenter {
 
   @Override
   public void placePlayerChess(Coordinate coordinate, String type) {
-    chessGame.setPlayerChess(coordinate.getX(), coordinate.getY(), type);
+    chessGame.placePlayerChess(coordinate.getX(), coordinate.getY(), type);
   }
 
   @Override
