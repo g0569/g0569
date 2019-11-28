@@ -46,6 +46,7 @@ public class MazeGenerator {
 
     }
       newMaze.updateNPCMaze(newMaze.maze);
+//      System.out.println(int[][] newMaze.maze);
     return newMaze.getMaze();
   }
 
@@ -56,13 +57,14 @@ public class MazeGenerator {
       while (i < Constants.NPC_NUM) {
         int y = (int)(Math.random() * Constants.GRID_HEIGHT);
         int x = (int)(Math.random() * Constants.GRID_WIDTH);
-        if (mazeGrid[y][x] == 0) {
-          System.out.println(mazeGrid[y][x]);
+        if (mazeGrid[y][x] == 1) {
+//          System.out.println(mazeGrid[y][x]);
           i += 1;
           mazeGrid[y][x] = 2;
-          System.out.println(mazeGrid[y][x]);
+//          System.out.println(mazeGrid[y][x]);
         }
       }
+      System.out.println(mazeGrid);
     }
   }
 

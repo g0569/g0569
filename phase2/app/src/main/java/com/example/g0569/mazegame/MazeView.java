@@ -169,8 +169,8 @@ public class MazeView extends GameView implements MazeContract.View {
     } else {
       for (int i = 0; i < Constants.GRID_WIDTH; i++) {
         for (int j = 0; j < Constants.GRID_HEIGHT; j++) {
-          if (mazeGrid[j][i] == 0) {;
-          } else if (mazeGrid[j][i] == 1) {
+          if (mazeGrid[j][i] == 1) {;
+          } else if (mazeGrid[j][i] == 0) {
             drawWall(gridNum2Coor(i, j));
           } else if (mazeGrid[j][i] == 2) {
             drawNPC(gridNum2Coor(i, j));
