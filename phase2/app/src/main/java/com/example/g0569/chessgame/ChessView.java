@@ -14,6 +14,8 @@ import com.example.g0569.utils.Coordinate;
 
 /** The ChessView for the autoChessGame. */
 public class ChessView extends GameView implements ChessContract.View {
+  // The indicator whether the player choose the chessPiece(false) or place the chessPiece(true).
+  private boolean placeChess;
   private Bitmap background;
   private Bitmap inventory;
   private Bitmap button;
@@ -60,12 +62,44 @@ public class ChessView extends GameView implements ChessContract.View {
     }
   }
 
-   protected float getScreenHeight() {
+  protected float getScreenHeight() {
     return screenHeight;
   }
 
-  protected float getScreenWidth(){
+  protected float getScreenWidth() {
     return screenWidth;
+  }
+
+  protected float getButtonX() {
+    return buttonX;
+  }
+
+  protected float getButtonY() {
+    return buttonY;
+  }
+
+  protected float getButtonWidth() {
+    return button.getWidth();
+  }
+
+  protected float getButtonHeight() {
+    return button.getHeight();
+  }
+
+  protected float getInventoryX() {
+    return inventoryX;
+  }
+
+  protected float getInventoryY() {
+    return inventoryY;
+  }
+
+  protected float getInventoryWidth() {
+    return inventory.getWidth();
+  }
+
+  protected float getInventoryHeight() {
+    return inventory.getHeight();
   }
 
   @Override
@@ -118,7 +152,7 @@ public class ChessView extends GameView implements ChessContract.View {
   }
 
   public void drawInventory() {
-    inventoryX = screenWidth / 30;
+    inventoryX = screenWidth * 0.033f;
     inventoryY = screenHeight * 0.7f;
     canvas.drawBitmap(inventory, inventoryX, inventoryY, paint);
   }
@@ -131,47 +165,6 @@ public class ChessView extends GameView implements ChessContract.View {
     canvas.drawBitmap(triangle, coordinate.getX(), coordinate.getY(), paint);
   }
 
-  @Override
-  public Coordinate viewCoordinateToInventoryCoordinate(float x, float y) {
-    Coordinate coordinate = new Coordinate(0, 0);
-    if (x > inventoryX
-        && x < inventoryX + inventory.getWidth() * 0.5f
-        && y > inventoryY
-        && y < inventoryY + inventory.getHeight() * 0.3333f) {
-      coordinate.setXY(1, 1);
-    } else if (x > inventoryX
-        && x < inventoryX + inventory.getWidth() * 0.5f
-        && y > inventoryY + inventory.getHeight() * 0.3333f
-        && y < inventoryY + inventory.getHeight() * 0.6666f) {
-      coordinate.setXY(2, 1);
-    } else if (x > inventoryX
-        && x < inventoryX + inventory.getWidth() * 0.5f
-        && y > inventoryY + inventory.getHeight() * 0.6666f
-        && y < inventoryY + inventory.getHeight()) {
-      coordinate.setXY(3, 1);
-    } else if (x > inventoryX + inventory.getWidth() * 0.5f
-        && x < inventoryX + inventory.getWidth()
-        && y > inventoryY
-        && y < inventoryY + inventory.getHeight() * 0.3333f) {
-      coordinate.setXY(1, 2);
-    }else if (x > inventoryX + inventory.getWidth() * 0.5f
-        && x < inventoryX + inventory.getWidth()
-        && y > inventoryY + inventory.getHeight() * 0.3333f
-        && y < inventoryY + inventory.getHeight() * 0.6666f) {
-      coordinate.setXY(2, 2);
-    }else if (x > inventoryX + inventory.getWidth() * 0.5f
-        && x < inventoryX + inventory.getWidth()
-        && y > inventoryY + inventory.getHeight() * 0.6666f
-        && y < inventoryY + inventory.getHeight()) {
-      coordinate.setXY(3, 2);
-    }else if(x > buttonX
-          && x < buttonX + button.getWidth()
-          && y > buttonY
-          && y < buttonY + button.getHeight()){
-      coordinate.setXY(0,0);
-    }
-    return coordinate;
-  }
 
   // TODO Add two images for player and NPC. Maybe...
 
@@ -232,7 +225,8 @@ public class ChessView extends GameView implements ChessContract.View {
       float x = event.getX();
       float y = event.getY();
       Coordinate viewCoordinate = new Coordinate(x, y);
-      Coordinate InventoryCoordinate = viewCoordinateToInventoryCoordinate(x, y);
+      Coordinate InventoryCoordinate = presenter.viewCoordinateToInventoryCoordinate(viewCoordinate);
+      Coordinate BoardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);
       String type = presenter.InventoryCoordinateToChessType(InventoryCoordinate);
       System.out.println(String.valueOf(x) + " " + String.valueOf(y));
       if (x > buttonX
@@ -249,42 +243,46 @@ public class ChessView extends GameView implements ChessContract.View {
           //          autoChessGame.showStatistic(false); // Lose and get 0 cards.
           Toast.makeText(activity, "You lose the game!", Toast.LENGTH_SHORT).show();
         }
-//      } else if (x > inventoryX
-//          && x < inventoryX + inventory.getWidth() * 0.5f
-//          && y > inventoryY
-//          && y < inventoryY + inventory.getHeight() * 0.3333f) {
-//        Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
-//        //        int chosenPlace = 0;
-//        //        Coordinate location = autoChessGame.placeChess(chosenPlace);
-//        //        triangleX = InventoryCoordinate.getX();
-//        //        triangleY = InventoryCoordinate.getY();
-//        drawTriangle(viewCoordinate);
-//        presenter.placePlayerChess(InventoryCoordinate, type); //
-//      } else if (x > inventoryX + inventory.getWidth() * 0.5f
-//          && x < inventoryX + inventory.getWidth()
-//          && y > inventoryY
-//          && y < inventoryY + inventory.getHeight() * 0.3333f) {
-//        Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
-//        //        int chosenPlace = 1;
-//        //        Coordinate location = autoChessGame.placeChess(chosenPlace);
-//        //        starX = location.getX();
-//        //        starY = location.getY();
-//        drawStar(viewCoordinate);
-//        presenter.placePlayerChess(InventoryCoordinate, type); //
-      }else if (type.equals("star")){
+
+      } else if (type.equals("star") && !placeChess) {
         Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
         drawStar(viewCoordinate);
-        presenter.placePlayerChess(InventoryCoordinate, type); // TODO
+        presenter.placePlayerChess(InventoryCoordinate, type);
+        placeChess = true; // TODO
 
-      }else if (type.equals("triangle")){
+      } else if (type.equals("triangle") && !placeChess) {
         Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
         drawTriangle(viewCoordinate);
         presenter.placePlayerChess(InventoryCoordinate, type);
+        placeChess = true;
       }
       return true;
     }
     return false;
   }
+
+  //      } else if (x > inventoryX
+  //          && x < inventoryX + inventory.getWidth() * 0.5f
+  //          && y > inventoryY
+  //          && y < inventoryY + inventory.getHeight() * 0.3333f) {
+  //        Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
+  //        //        int chosenPlace = 0;
+  //        //        Coordinate location = autoChessGame.placeChess(chosenPlace);
+  //        //        triangleX = InventoryCoordinate.getX();
+  //        //        triangleY = InventoryCoordinate.getY();
+  //        drawTriangle(viewCoordinate);
+  //        presenter.placePlayerChess(InventoryCoordinate, type); //
+  //      } else if (x > inventoryX + inventory.getWidth() * 0.5f
+  //          && x < inventoryX + inventory.getWidth()
+  //          && y > inventoryY
+  //          && y < inventoryY + inventory.getHeight() * 0.3333f) {
+  //        Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
+  //        //        int chosenPlace = 1;
+  //        //        Coordinate location = autoChessGame.placeChess(chosenPlace);
+  //        //        starX = location.getX();
+  //        //        starY = location.getY();
+  //        drawStar(viewCoordinate);
+  //        presenter.placePlayerChess(InventoryCoordinate, type); //
 
   @Override
   public void setPresenter(ChessContract.Presenter presenter) {
