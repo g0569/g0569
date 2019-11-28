@@ -8,6 +8,7 @@ import java.util.Stack;
 import java.util.Random;
 import java.util.Arrays;
 
+// TODO: 2019-11-27 maze in a dead end; NPC wrong placing
 /** The type Maze generator. */
 public class MazeGenerator {
 
@@ -20,7 +21,7 @@ public class MazeGenerator {
    */
   private Stack<Coordinate> stack = new Stack<>();
 
-  private Random rand = new Random();
+
   private int[][] maze;
   private int gridWidth;
   private int gridHeight;
@@ -44,7 +45,27 @@ public class MazeGenerator {
         }
 
     }
+      newMaze.updateNPCMaze(newMaze.maze);
+//      System.out.println(int[][] newMaze.maze);
     return newMaze.getMaze();
+  }
+
+  private void updateNPCMaze(int[][] mazeGrid) {
+    if (mazeGrid == null) {
+    } else {
+      int i = 0;
+      while (i < Constants.NPC_NUM) {
+        int y = (int)(Math.random() * Constants.GRID_HEIGHT);
+        int x = (int)(Math.random() * Constants.GRID_WIDTH);
+        if (mazeGrid[y][x] == 1) {
+//          System.out.println(mazeGrid[y][x]);
+          i += 1;
+          mazeGrid[y][x] = 2;
+//          System.out.println(mazeGrid[y][x]);
+        }
+      }
+      System.out.println(mazeGrid);
+    }
   }
 
   private boolean validNextNode(Coordinate coor) {
@@ -85,6 +106,7 @@ public class MazeGenerator {
   }
 
   private void randomlyAddNodesToStack(ArrayList<Coordinate> coors) {
+    Random rand = new Random();
     int targetIndex;
     while (!coors.isEmpty()) {
       targetIndex = rand.nextInt(coors.size());

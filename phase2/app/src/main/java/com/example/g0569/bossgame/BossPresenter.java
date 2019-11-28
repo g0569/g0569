@@ -20,14 +20,11 @@ public class BossPresenter implements BossContract.Presenter {
     bossGame.setEnemyMovement(bossView.getWidth());
   }
 
-  /** Action. */
-  public void action() {
-    bossGame.action();
-  }
-
   @Override
   public void start() {
     //    bossView.initView();
+//    String npc = bossGame.initBossTeam().getName();
+//    bossView.setCurrentProjectileBitmap(npc);
   }
 
   public int getEnemyMovement() {
@@ -41,8 +38,10 @@ public class BossPresenter implements BossContract.Presenter {
 
   @Override
   public void switchTeam() {
-//    String typeProjectile = bossGame.getNextProjectile().getType();
-//    bossView.setCurrentProjectileBitmap(typeProjectile);
+    String nextTeam = bossGame.getNextProjectile().getName();
+    bossView.setCurrentProjectileBitmap(nextTeam);
+    //    String typeProjectile = bossGame.getNextProjectile().getType();
+    //    bossView.setCurrentProjectileBitmap(typeProjectile);
   }
 
   @Override
@@ -64,8 +63,10 @@ public class BossPresenter implements BossContract.Presenter {
   public void attackBoss() {
     bossGame.attackBoss();
     // if there is contact, set the map to nothing
-    bossView.setCurrentProjectileBitmap("null");
+//    bossView.setCurrentProjectileBitmap("null");
 
     bossView.updateMovementHealthBar(bossGame.getHealthBar().getHealthRatio());
+    boolean end = bossGame.determineEnd();
+    bossView.end(end);
   }
 }

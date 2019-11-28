@@ -19,13 +19,13 @@ public class HealthBar extends Item implements Observer {
   private float screenWidth;
   private float screenHeight;
 
-  // The rectangles for the bar to be drawn
+  // The rectangles for the bossgame_component_bar to be drawn
   private Rect dest_rect;
 
-  // The image of the bar
+  // The image of the bossgame_component_bar
   private Bitmap healthbar;
 
-  // The rectangle for the red bar which represents health
+  // The rectangle for the red bossgame_component_bar which represents health
   private Rect healthRect;
   private int total;
   private int ratioOfHealth;
@@ -38,31 +38,31 @@ public class HealthBar extends Item implements Observer {
 
     this.observable = observable;
     observable.attach(this);
-    // Sets the size of the bar
+    // Sets the size of the bossgame_component_bar
     size = (int) screenWidth / 5;
 
-    // Sets the coordinate of the bar
+    // Sets the coordinate of the bossgame_component_bar
     //    float x = (int) (screenWidth / 2 - size / 2);
     //    float y = (int) (screenHeight - screenWidth * 3 / 32 - 2.5 * size);
     //    coordinate = new Coordinate(x, y);
 
-    // Sets the appearance of the empty bar
-    //    appearance = BitmapFactory.decodeResource(resources, R.drawable.bar);
+    // Sets the appearance of the empty bossgame_component_bar
+    //    appearance = BitmapFactory.decodeResource(resources, R.drawable.bossgame_component_bar);
 
-    // Sets the rectangle of the empty bar
+    // Sets the rectangle of the empty bossgame_component_bar
     //    dest_rect = new Rect((int) x, (int) y, (int) x + size, (int) y + size);
     //
-    //    // Sets the rectangle of the red bar
+    //    // Sets the rectangle of the red bossgame_component_bar
     //    healthRect = new Rect((int) x, (int) y, (int) x + size, (int) y + size);
     //
-    //    // Sets the appearance of the red bar
+    //    // Sets the appearance of the red bossgame_component_bar
     //    healthbar = BitmapFactory.decodeResource(resources, R.drawable.redbar);
   }
 
   /**
-   * Draws the bar as well as the red bar
+   * Draws the bossgame_component_bar as well as the red bossgame_component_bar
    *
-   * @param canvas of the bar and red bar
+   * @param canvas of the bossgame_component_bar and red bossgame_component_bar
    * @param paint the style of them
    */
   //  public void draw(Canvas canvas, Paint paint) {
@@ -90,14 +90,14 @@ public class HealthBar extends Item implements Observer {
 
   /**
    * Determines how much health the boss should have left based on the ratio of his health with the
-   * bar length
+   * bossgame_component_bar length
    *
    * @param health of the boss
    * @param totalHealth of the boss
    * @return the health we should take away
    */
   private int determineHealth(int health, int totalHealth) {
-    // Determine the health of the bar relative to the health and totalHealth of the Boss
+    // Determine the health of the bossgame_component_bar relative to the health and totalHealth of the Boss
     int totalBar = getSize();
     int healthToDraw = health * totalBar / totalHealth;
     return totalBar - healthToDraw;

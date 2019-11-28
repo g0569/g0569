@@ -1,3 +1,4 @@
+
 package com.example.g0569.bossgame.model;
 
 import android.content.res.Resources;
@@ -126,7 +127,7 @@ public class ThrownItems extends Item implements Observer {
 //  public boolean isAttacking(float coordinateX, float coordinateY) {
 //    if ((getCoordinate().getX() < coordinateX && coordinateX < dest_rect.right)
 //        && (getCoordinate().getY() < coordinateY && coordinateY < dest_rect.bottom)) {
-//      //      appearance = BitmapFactory.decodeResource(resource, R.drawable.star);
+//      //      appearance = BitmapFactory.decodeResource(resource, R.drawable.chessgame_component_star);
 //      appearance = explodingAppearance;
 //
 //      return true;

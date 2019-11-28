@@ -18,6 +18,8 @@ public interface BossContract {
     void updateMovementHealthBar(double ratio);
 
     int getWidth();
+
+    void end(boolean end);
   }
 
   interface Presenter extends BasePresenter {

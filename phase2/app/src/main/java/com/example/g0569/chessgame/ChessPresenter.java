@@ -2,8 +2,6 @@ package com.example.g0569.chessgame;
 
 import com.example.g0569.chessgame.model.ChessGame;
 import com.example.g0569.chessgame.model.ChessPiece;
-import com.example.g0569.chessgame.model.StarChessPiece;
-import com.example.g0569.chessgame.model.TriangleChessPiece;
 import com.example.g0569.utils.Coordinate;
 
 import java.util.List;
@@ -24,21 +22,18 @@ public class ChessPresenter implements ChessContract.Presenter {
     chessGame.onStart();
   }
 
-//  @Override
-//  public void drawChessPiece(ChessPiece chessPiece) {
-//    Coordinate coordinate = boardCoordinateToViewCoordinate(chessPiece.getCoordinate());
-//    if (chessPiece instanceof StarChessPiece) {
-//      chessView.drawChessPiece(coordinate, "star");
-//    } else if (chessPiece instanceof TriangleChessPiece) {
-//      chessView.drawChessPiece(coordinate, "triangle");
-//    }
-//  }
+  //  @Override
+  //  public void drawChessPiece(ChessPiece chessPiece) {
+  //    Coordinate coordinate = boardCoordinateToViewCoordinate(chessPiece.getCoordinate());
+  //    if (chessPiece instanceof StarChessPiece) {
+  //      chessView.drawChessPiece(coordinate, "chessgame_component_star");
+  //    } else if (chessPiece instanceof TriangleChessPiece) {
+  //      chessView.drawChessPiece(coordinate, "chessgame_component_triangle");
+  //    }
+  //  }
 
-  @Override
   public void drawNPCChessPiece(List<ChessPiece> NPCData) {
-    for (ChessPiece chessPiece : NPCData ) {
-
-    }
+    for (ChessPiece chessPiece : NPCData) {}
   }
 
   @Override

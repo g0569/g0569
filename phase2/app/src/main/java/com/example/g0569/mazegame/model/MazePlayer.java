@@ -4,12 +4,10 @@ import com.example.g0569.base.model.Item;
 import com.example.g0569.base.model.Player;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
-import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.NPC;
 
-import java.util.ArrayList;
-
 /** The type Maze player. */
+// TODO START POINT
 public class MazePlayer extends Player {
 
   private Coordinate direction;
@@ -26,8 +24,8 @@ public class MazePlayer extends Player {
   MazePlayer(MazeGame game) {
     super(game);
     this.game = game;
-    float x = ((MazeGame) this.getGame()).getStartpoint().getX();
-    float y = ((MazeGame) this.getGame()).getStartpoint().getY();
+    float x = ((MazeGame) this.getGame()).getStartPoint().getX();
+    float y = ((MazeGame) this.getGame()).getStartPoint().getY();
     this.coordinate = new Coordinate(x, y);
     appearenceSize = game.getPlayerDimensions();
   direction = Coordinate.create(0,0);

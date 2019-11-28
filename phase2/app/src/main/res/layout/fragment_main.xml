@@ -32,7 +32,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/game_title" />
+        app:layout_constraintTop_toBottomOf="@+id/game_title"
+        android:textColor="#009688" />
 
     <Button
         android:id="@+id/main_signup_btn"
@@ -42,6 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_login_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/main_login_btn"
+        android:textColor="#009688" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
