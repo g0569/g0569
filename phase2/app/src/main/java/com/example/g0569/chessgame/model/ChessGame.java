@@ -81,7 +81,7 @@ public class ChessGame extends BaseGame {
   private void placeNPCChess(float x, float y, String type) {
     ChessPiece chessPiece = chessPieceFactory.getChessPiece(x, y, this, type);
     NPCData.add(chessPiece);
-    presenter.drawChessPiece(chessPiece);
+//    presenter.drawChessPiece(chessPiece);
   }
 
   public void setPlayerChess(float x, float y, String type) {
