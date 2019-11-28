@@ -26,9 +26,9 @@ public class ChessPresenter implements ChessContract.Presenter {
   public void drawChessPiece(ChessPiece chessPiece) {
     Coordinate coordinate = boardCoordinateToViewCoordinate(chessPiece.getCoordinate());
     if (chessPiece instanceof StarChessPiece) {
-      chessView.drawChessPiece(coordinate, "star");
+      chessView.drawChessPiece(coordinate, "chessgame_component_star");
     } else if (chessPiece instanceof TriangleChessPiece) {
-      chessView.drawChessPiece(coordinate, "triangle");
+      chessView.drawChessPiece(coordinate, "chessgame_component_triangle");
     }
   }
 

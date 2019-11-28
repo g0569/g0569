@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.provider.SyncStateContract;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
@@ -119,19 +118,19 @@ public class MazeView extends GameView implements MazeContract.View {
   }
 
   public void initBitmaps() {
-    background = BitmapFactory.decodeResource(getResources(), R.drawable.maze_background);
-    scalex = screenWidth / background.getWidth();
-    scaley = screenHeight / background.getHeight();
+//    background = BitmapFactory.decodeResource(getResources(), R.drawable.maze_background);
+//    scalex = screenWidth / background.getWidth();
+//    scaley = screenHeight / background.getHeight();
 
-    wall = BitmapFactory.decodeResource(getResources(), R.drawable.tile);
+    wall = BitmapFactory.decodeResource(getResources(), R.drawable.mazegame_component_tile);
     wall =
         Bitmap.createScaledBitmap(
             wall, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-    player = BitmapFactory.decodeResource(getResources(), R.drawable.pacman_2);
+    player = BitmapFactory.decodeResource(getResources(), R.drawable.mazegame_component_pacman_2);
     player =
         Bitmap.createScaledBitmap(
             player, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-    moveButtons = BitmapFactory.decodeResource(getResources(), R.drawable.move_button);
+    moveButtons = BitmapFactory.decodeResource(getResources(), R.drawable.mazegame_movebutton);
     moveButtons =
         Bitmap.createScaledBitmap(
             moveButtons, (int) (getWidth() * 0.13f), (int) (getHeight() * 0.13f), false);

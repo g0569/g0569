@@ -14,7 +14,7 @@ public class Star extends ThrownItems {
   public Star(BaseGame game, float screen_width, float screen_height, Resources resource) {
     super(game);
 //    super(game, screen_width, screen_height, resource);
-//    appearance = BitmapFactory.decodeResource(resource, R.drawable.star);
+//    appearance = BitmapFactory.decodeResource(resource, R.drawable.chessgame_component_star);
 //    damage = 20;
 //    src_rect = new Rect(0, 0, appearance.getWidth(), appearance.getHeight());
 //    explodingAppearance = BitmapFactory.decodeResource(resource, R.drawable.explosion);
