@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.example.g0569.R;
 import com.example.g0569.base.GameView;
-import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
 // TODO use factory method to determine which npc
 // TODO find out how to input npc
@@ -167,22 +166,22 @@ public class BossView extends GameView implements BossContract.View {
   /** Initializes all the bitmaps needed for the game. Called upon creation */
   private void initBitmaps() {
 
-    background = BitmapFactory.decodeResource(getResources(), R.drawable.bossforest);
+    background = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_background_2);
     pauseButton = BitmapFactory.decodeResource(getResources(), R.drawable.pause);
     pauseButton = Bitmap.createScaledBitmap(pauseButton, (int) (getWidth()*0.08f), (int)(getHeight()*0.10f), false);
     menuButton = BitmapFactory.decodeResource(getResources(), R.drawable.homebutton);
     menuButton = Bitmap.createScaledBitmap(menuButton, (int) (getWidth()*0.08f), (int)(getHeight()*0.11f), false);
-    bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.aim);
+    bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_component_aim);
     healthBar = BitmapFactory.decodeResource(getResources(), R.drawable.redbar);
     healthBar = Bitmap.createScaledBitmap(healthBar, getWidth() / 3, getHeight() / 3, false);
-    healthBarHolder = BitmapFactory.decodeResource(getResources(), R.drawable.bar);
+    healthBarHolder = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_component_bar);
     healthBarHolder =
         Bitmap.createScaledBitmap(healthBarHolder, getWidth() / 3, getHeight() / 3, false);
     scalex = screenWidth / background.getWidth();
     scaley = screenHeight / background.getHeight();
 
-    enemyRight = BitmapFactory.decodeResource(getResources(), R.drawable.enemyright);
-    enemyLeft = BitmapFactory.decodeResource(getResources(), R.drawable.enemyleft);
+    enemyRight = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_enemy_r);
+    enemyLeft = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_enemy_l);
 
     enemyLeft =
         Bitmap.createScaledBitmap(
@@ -191,7 +190,7 @@ public class BossView extends GameView implements BossContract.View {
         Bitmap.createScaledBitmap(
             enemyLeft, (int) (getWidth() * 0.20f), (int) (getHeight() * 0.25f), false);
     enemyAppearance = enemyRight;
-    //    bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.aim);
+    //    bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_component_aim);
     bossPlayer =
         Bitmap.createScaledBitmap(
             bossPlayer, (int) (getWidth() * 0.25f), (int) (getHeight() * 0.30f), false);
@@ -298,14 +297,14 @@ public class BossView extends GameView implements BossContract.View {
 
     if (enemyCoordinate.getX() <= 0) {
       enemyDirection = Math.abs(enemyDirection);
-      enemyAppearance = BitmapFactory.decodeResource(getResources(), R.drawable.enemyright);
+      enemyAppearance = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_enemy_r);
       enemyAppearance =
           Bitmap.createScaledBitmap(
               enemyAppearance, (int) (getWidth() * 0.20f), (int) (getHeight() * 0.25f), false);
       //      enemyAppearance = enemyLeft;
     } else if (enemyCoordinate.getX() >= screenWidth - enemyLeft.getWidth()) {
       enemyDirection = -Math.abs(enemyDirection);
-      enemyAppearance = BitmapFactory.decodeResource(getResources(), R.drawable.enemyleft);
+      enemyAppearance = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_enemy_l);
       //      enemyAppearance = enemyRight;
       enemyAppearance =
           Bitmap.createScaledBitmap(
@@ -316,7 +315,7 @@ public class BossView extends GameView implements BossContract.View {
   }
 
   /**
-   * Updates the healthbar based on the ratio of the health left. Simply multiply the health bar
+   * Updates the healthbar based on the ratio of the health left. Simply multiply the health bossgame_component_bar
    * size with the ratio to determine new size
    *
    * @param ratio of the health left to health total
@@ -372,8 +371,8 @@ public class BossView extends GameView implements BossContract.View {
   //        bossCoordinate.getY(),
   //        currentProjectileCoordinate.getX(),
   //        currentProjectileCoordinate.getY(),
-  //        star.getWidth(),
-  //        star.getHeight())) {
+  //        chessgame_component_star.getWidth(),
+  //        chessgame_component_star.getHeight())) {
   //      bossPresenter.attackBoss();
   //    }
   //  }

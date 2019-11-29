@@ -36,7 +36,7 @@ public class BossPlayer extends Item {
 //    float x = screenWidth / 2;
 //    float y = screenHeight / 2 - r1 * 2;
 //    coordinate = new Coordinate(x, y);
-//    appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyright);
+//    appearance = BitmapFactory.decodeResource(resource, R.drawable.bossgame_enemy_r);
 //
 //    srcRect = new Rect(0, 0, appearance.getWidth(), appearance.getHeight());
 //    destRect =

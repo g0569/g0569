@@ -63,12 +63,12 @@ public class ChessGame extends BaseGame {
   }
 
   public void decodeNPCData() {
-    String chessString = boardData.getChessBoardData(difficulty);//get data before the start of each round.
-    String[] chessDataList = chessString.split(".");//suppose we are getting string like"star,1,1.circle,1,2.circle,1,3.nochess,2,1"
+    String chessString = boardData.getChessBoardData(difficulty);//get data before the chessgame_component_start of each round.
+    String[] chessDataList = chessString.split(".");//suppose we are getting string like"chessgame_component_star,1,1.circle,1,2.circle,1,3.nochess,2,1"
     int count = 0;
     int loopLimit = chessDataList.length;
     while(count < loopLimit){
-        String[] curr_chess = chessDataList[count].split(",");// for example:["star","1","1"]
+        String[] curr_chess = chessDataList[count].split(",");// for example:["chessgame_component_star","1","1"]
         String type = curr_chess[0];
         float x = Float.parseFloat(curr_chess[1]);
         float y = Float.parseFloat(curr_chess[2]);
@@ -81,7 +81,7 @@ public class ChessGame extends BaseGame {
   private void placeNPCChess(float x, float y, String type) {
     ChessPiece chessPiece = chessPieceFactory.getChessPiece(x, y, this, type);
     NPCData.add(chessPiece);
-    presenter.drawChessPiece(chessPiece);
+//    presenter.drawChessPiece(chessPiece);
   }
 
   public void setPlayerChess(float x, float y, String type) {
@@ -101,10 +101,10 @@ public class ChessGame extends BaseGame {
 
   private String typeGetter(ChessPiece chessPiece) {
     if (chessPiece instanceof StarChessPiece) {
-      return "star";
+      return "chessgame_component_star";
       //    }else if(chessPiece instanceof TriangleChessPiece){
-      //      return "triangle";
-    } else return "triangle";
+      //      return "chessgame_component_triangle";
+    } else return "chessgame_component_triangle";
   }
 
   //  /**

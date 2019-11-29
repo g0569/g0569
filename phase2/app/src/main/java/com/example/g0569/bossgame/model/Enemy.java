@@ -64,10 +64,10 @@ public class Enemy extends Item implements Observable {
     //    if (health > 0) {
     //      if (coordinate.getX() <= 0) {
     //        xDirection = Math.abs(xDirection);
-    //        appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyright);
+    //        appearance = BitmapFactory.decodeResource(resource, R.drawable.bossgame_enemy_r);
     //      } else if (coordinate.getX() >= screen_width - size) {
     //        xDirection = -Math.abs(xDirection);
-    //        appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyleft);
+    //        appearance = BitmapFactory.decodeResource(resource, R.drawable.bossgame_enemy_l);
     //      }
     //      //        action();
     //    }

@@ -2,9 +2,9 @@ package com.example.g0569.chessgame;
 
 import com.example.g0569.chessgame.model.ChessGame;
 import com.example.g0569.chessgame.model.ChessPiece;
-import com.example.g0569.chessgame.model.StarChessPiece;
-import com.example.g0569.chessgame.model.TriangleChessPiece;
 import com.example.g0569.utils.Coordinate;
+
+import java.util.List;
 
 public class ChessPresenter implements ChessContract.Presenter {
   private ChessContract.View chessView;
@@ -22,14 +22,18 @@ public class ChessPresenter implements ChessContract.Presenter {
     chessGame.onStart();
   }
 
-  @Override
-  public void drawChessPiece(ChessPiece chessPiece) {
-    Coordinate coordinate = boardCoordinateToViewCoordinate(chessPiece.getCoordinate());
-    if (chessPiece instanceof StarChessPiece) {
-      chessView.drawChessPiece(coordinate, "star");
-    } else if (chessPiece instanceof TriangleChessPiece) {
-      chessView.drawChessPiece(coordinate, "triangle");
-    }
+  //  @Override
+  //  public void drawChessPiece(ChessPiece chessPiece) {
+  //    Coordinate coordinate = boardCoordinateToViewCoordinate(chessPiece.getCoordinate());
+  //    if (chessPiece instanceof StarChessPiece) {
+  //      chessView.drawChessPiece(coordinate, "chessgame_component_star");
+  //    } else if (chessPiece instanceof TriangleChessPiece) {
+  //      chessView.drawChessPiece(coordinate, "chessgame_component_triangle");
+  //    }
+  //  }
+
+  public void drawNPCChessPiece(List<ChessPiece> NPCData) {
+    for (ChessPiece chessPiece : NPCData) {}
   }
 
   @Override
@@ -47,17 +51,29 @@ public class ChessPresenter implements ChessContract.Presenter {
     float width = ((ChessView) chessView).getScreenWidth();
     float height = ((ChessView) chessView).getScreenHeight();
     if (x == 1 && y == 1) {
-      viewCoordinate.setXY(width * 0.55f, height * 0.4f);
+      viewCoordinate.setXY(width * 0.32f, height * 0.46f);
     } else if (x == 1 && y == 2) {
-      viewCoordinate.setXY(width * 0.65f, height * 0.4f);
+      viewCoordinate.setXY(width * 0.42f, height * 0.46f);
+    } else if (x == 1 && y == 3) {
+      viewCoordinate.setXY(width * 0.52f, height * 0.46f);
+    } else if (x == 1 && y == 4) {
+      viewCoordinate.setXY(width * 0.62f, height * 0.46f);
     } else if (x == 2 && y == 1) {
-      viewCoordinate.setXY(width * 0.55f, height * 0.65f);
+      viewCoordinate.setXY(width * 0.3f, height * 0.61f);
     } else if (x == 2 && y == 2) {
-      viewCoordinate.setXY(width * 0.65f, height * 0.65f);
+      viewCoordinate.setXY(width * 0.41f, height * 0.61f);
+    } else if (x == 2 && y == 3) {
+      viewCoordinate.setXY(width * 0.525f, height * 0.61f);
+    } else if (x == 2 && y == 4) {
+      viewCoordinate.setXY(width * 0.64f, height * 0.61f);
     } else if (x == 3 && y == 1) {
-      viewCoordinate.setXY(width * 0.55f, height * 0.9f);
+      viewCoordinate.setXY(width * 0.27f, height * 0.8f);
     } else if (x == 3 && y == 2) {
-      viewCoordinate.setXY(width * 0.65f, height * 0.9f);
+      viewCoordinate.setXY(width * 0.395f, height * 0.8f);
+    } else if (x == 3 && y == 3) {
+      viewCoordinate.setXY(width * 0.53f, height * 0.8f);
+    } else if (x == 3 && y == 4) {
+      viewCoordinate.setXY(width * 0.67f, height * 0.8f);
     }
     return viewCoordinate;
   }
