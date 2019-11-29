@@ -1,5 +1,6 @@
 package com.example.g0569.auth;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.g0569.R;
 import com.example.g0569.auth.model.AuthInteractor;
+import com.example.g0569.savegame.SaveGameActivity;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.SQLiteHelper;
 
@@ -41,7 +43,7 @@ public class AuthActivity extends AppCompatActivity {
           .replace(R.id.ContentFrame, (Fragment) mView)
           .commit();
     }
-    SQLiteHelper sqLitehelper = new SQLiteHelper(this, "users");
+    SQLiteHelper sqLitehelper = new SQLiteHelper(this, "g0569");
 
     authPresenter = new AuthPresenter(mView, new AuthInteractor(), sqLitehelper);
   }
@@ -65,5 +67,11 @@ public class AuthActivity extends AppCompatActivity {
         .addToBackStack(null)
         .commit();
     ((AuthContract.View) newFragment).setPresenter(authPresenter);
+  }
+
+  public void toSaveGameMenu(Bundle bundle) {
+    Intent intent = new Intent(this, SaveGameActivity.class);
+    intent.putExtras(bundle);
+    startActivity(intent);
   }
 }
