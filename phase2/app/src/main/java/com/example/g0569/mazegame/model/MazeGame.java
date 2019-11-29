@@ -9,6 +9,8 @@ import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.mazegame.MazeContract;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Constants;
+import com.example.g0569.utils.Inventory;
+import com.example.g0569.utils.NPC;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,18 +18,29 @@ import java.util.List;
 public class MazeGame extends BaseGame {
 
   private MazeContract.Presenter presenter;
+  private MazeContract.View view;
   private float gridWidth;
   private float gridHeight;
   private Coordinate startpoint;
-
+  private Inventory inventory;
   private Item[][] myMazeItem = new Item[Constants.GRID_HEIGHT][Constants.GRID_WIDTH];
   private int[][] mazeGrid;
   private MazePlayer mazePlayer;
   private BaseButton Button;
+  private int unbuiltNPC = Constants.NPC_NUM;
 
-  public MazeGame(MazeContract.Presenter presenter) {
+    public MazeContract.Presenter getPresenter() {
+        return presenter;
+    }
+
+    public MazeContract.View getView() {
+        return view;
+    }
+
+    public MazeGame(MazeContract.Presenter presenter, Inventory inventory) {
     super();
     this.presenter = presenter;
+    this.inventory = inventory;
 
   }
 
@@ -81,11 +94,34 @@ public class MazeGame extends BaseGame {
     return mazeGrid;
   }
 
-  public Coordinate getPlayerDimensions() {
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public Coordinate getPlayerDimensions() {
     return presenter.getPlayerDimensions();
   }
 
   public void movePlayer(Coordinate coordinate) {
     getMazePlayer().setDirection(coordinate);
+  }
+
+    /**
+     * @param x
+     * @param y
+     * @return
+     */
+  public NPC addItemToMazeItem(int x, int y){
+        this.getMyMazeItem()[y][x] = this.getInventory().getNonCollectedItem().get(unbuiltNPC);
+        unbuiltNPC -= 1;
+        return this.getInventory().getNonCollectedItem().get(unbuiltNPC);
+  }
+
+    /**
+     * TODO delete from 2d array mazeItem; check the default value of Item
+
+     */
+  public void deleteItem(int x, int y){
+        this.getMyMazeItem()[y][x] = null;
   }
 }

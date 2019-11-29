@@ -12,12 +12,11 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
         <activity android:name=".chessgame.ChessActivity"></activity>
-        <activity android:name=".mazegame.MazeActivity" />
         <activity
                 android:name=".auth.AuthActivity"
                 android:screenOrientation="landscape" />
         <activity
-                android:name=".bossgame.BossActivity"
+                android:name=".mazegame.MazeActivity"
                 android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

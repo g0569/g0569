@@ -91,10 +91,11 @@ public class MazePlayer extends Player {
       }
     } catch (ArrayIndexOutOfBoundsException ignored) {
     }
-    //    this.interact();
+    //    this.collectedNPC();
   }
 
   /**
+   * TODO build a mazeitem 2d array.
    * Detect the NPCs around the player.
    */
   private void getNPCAround() {
@@ -106,11 +107,13 @@ public class MazePlayer extends Player {
       try{
         currItemX = ((MazeGame) this.getGame()).getMyMazeItem()[currY][currX + i];
         if (currItemX instanceof NPC) {
-          interact((NPC)currItemX);
+          collectedNPC((NPC)currItemX);
+          deleteItem(currX+1, currY, ((MazeGame)this.getGame()).getMazeGrid());
         }
         currItemY = ((MazeGame) this.getGame()).getMyMazeItem()[currY + i][currX];
         if (currItemY instanceof NPC) {
-          interact((NPC)currItemY);
+          collectedNPC((NPC)currItemY);
+          deleteItem(currX, currY+1, ((MazeGame)this.getGame()).getMazeGrid());
         }
       }catch (ArrayIndexOutOfBoundsException ignored){
 
@@ -121,14 +124,24 @@ public class MazePlayer extends Player {
   }
 
   /**
-   *
-   * Todo 1. add to inventory: access from presenter; get from MazeActivity Bundle and be a presentor constructor parameter 2. delete from the maze
-   *
+   * Todo 1. add to inventory: access from presenter; get from MazeActivity Bundle and be a presentor constructor parameter 2. delete from the maze 3. move in inventory
+   * collect NPC in the inventory
    * @param npc the npc
    * @return boolean
    */
-  public void interact(NPC npc) {
+  public void collectedNPC(NPC npc) {
 
+    this.game.getPresenter().addCollectedNPC(npc);
   }
 
+  /**
+   * delete NPC in mazeGrid and mazeItem respectively.
+   * @param x
+   * @param y
+   * @param maze
+   */
+  public void deleteItem(int x, int y, int[][] maze){
+    this.game.getPresenter().getMazeView().deleteGridItem(x, y, maze);
+    this.game.deleteItem(x, y);
+  }
 }

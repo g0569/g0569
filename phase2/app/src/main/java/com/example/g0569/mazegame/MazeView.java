@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.provider.SyncStateContract;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
@@ -12,6 +11,7 @@ import com.example.g0569.R;
 import com.example.g0569.base.GameView;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
+import com.example.g0569.utils.NPC;
 
 /** The Maze view. */
 public class MazeView extends GameView implements MazeContract.View {
@@ -22,7 +22,13 @@ public class MazeView extends GameView implements MazeContract.View {
   private Bitmap wall;
   private Bitmap moveButtons;
   private Bitmap player;
-  private Bitmap npc;
+  private Bitmap npc1;
+  private Bitmap npc2;
+  private Bitmap npc3;
+  private Bitmap npc4;
+  private Bitmap npc5;
+  private Bitmap npc6;
+
 
   private float gridWidth;
   private float gridHeight;
@@ -135,7 +141,34 @@ public class MazeView extends GameView implements MazeContract.View {
     moveButtons =
         Bitmap.createScaledBitmap(
             moveButtons, (int) (getWidth() * 0.13f), (int) (getHeight() * 0.13f), false);
+    npc1 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l1);
+    npc1 =
+        Bitmap.createScaledBitmap(
+                npc1, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+    npc2 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l2);
+    npc2 =
+            Bitmap.createScaledBitmap(
+                    npc2, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+    npc3 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l3);
+    npc3 =
+            Bitmap.createScaledBitmap(
+                    npc3, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+    npc4 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l4);
+    npc4 =
+            Bitmap.createScaledBitmap(
+                    npc4, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+    npc5 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l5);
+    npc5 =
+            Bitmap.createScaledBitmap(
+                    npc5, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+    npc6 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l6);
+    npc6 =
+            Bitmap.createScaledBitmap(
+                    npc6, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
   }
+
+
+
 
   @Override
   public void initView() {
@@ -173,14 +206,17 @@ public class MazeView extends GameView implements MazeContract.View {
           } else if (mazeGrid[j][i] == 0) {
             drawWall(gridNum2Coor(i, j));
           } else if (mazeGrid[j][i] == 2) {
-            drawNPC(gridNum2Coor(i, j));
+            drawNPC(gridNum2Coor(i, j), presenter.addItemToMazeItem(i, j));
           }
         }
       }
     }
   }
 
-
+  @Override
+  public void deleteGridItem(int x, int y, int[][] mazeGrid){
+    mazeGrid[y][x] = 1;
+  }
 
   private void drawWall(Coordinate coor) {
     paint.setColor(Color.WHITE);
@@ -195,10 +231,29 @@ public class MazeView extends GameView implements MazeContract.View {
   }
 
 
-  public void drawNPC(Coordinate coor) {
+  /**
+   * TODO what if it is not limited to 6???
+   * @param coor
+   * @param npc
+   */
+  @Override
+  public void drawNPC(Coordinate coor, NPC npc) {
     paint.setColor(Color.GRAY);
     paint.setTextSize(70);
-    canvas.drawText("NPC", coor.getX(), coor.getY(), paint);
+    if (presenter.getNPCType(npc) == "type1") {
+      canvas.drawBitmap(npc1, coor.getX(), coor.getY(), paint);
+    }else if(presenter.getNPCName(npc) == "type2"){
+      canvas.drawBitmap(npc2, coor.getX(), coor.getY(), paint);
+    }else if(presenter.getNPCName(npc) == "type3"){
+      canvas.drawBitmap(npc3, coor.getX(), coor.getY(), paint);
+    }else if(presenter.getNPCName(npc) == "type4"){
+      canvas.drawBitmap(npc4, coor.getX(), coor.getY(), paint);
+    }else if(presenter.getNPCName(npc) == "type5"){
+      canvas.drawBitmap(npc5, coor.getX(), coor.getY(), paint);
+    }else if(presenter.getNPCName(npc) == "l6"){
+      canvas.drawBitmap(npc6, coor.getX(), coor.getY(), paint);
+    }
+
   }
 
   @Override
