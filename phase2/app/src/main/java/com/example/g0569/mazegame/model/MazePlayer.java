@@ -101,26 +101,29 @@ public class MazePlayer extends Player {
   private void getNPCAround() {
     int currX = (int) this.coordinate.getX();
     int currY = (int) this.coordinate.getY();
-    Item currItemX;
-    Item currItemY;
-    for (int i = -2; i <= 2; i++) {
-      try{
-        currItemX = ((MazeGame) this.getGame()).getMyMazeItem()[currY][currX + i];
-        if (currItemX instanceof NPC) {
-          collectedNPC((NPC)currItemX);
-          deleteItem(currX+1, currY, ((MazeGame)this.getGame()).getMazeGrid());
-        }
-        currItemY = ((MazeGame) this.getGame()).getMyMazeItem()[currY + i][currX];
-        if (currItemY instanceof NPC) {
-          collectedNPC((NPC)currItemY);
-          deleteItem(currX, currY+1, ((MazeGame)this.getGame()).getMazeGrid());
-        }
-      }catch (ArrayIndexOutOfBoundsException ignored){
-
-      }
-
-
+//    for (int i = -2; i <= 2; i++) {
+//      try{
+//        currItemX = ((MazeGame) this.getGame()).getMyMazeItem()[currY][currX + i];
+//        if (currItemX instanceof NPC) {
+//          collectedNPC((NPC)currItemX);
+//          deleteItem(currX+1, currY, ((MazeGame)this.getGame()).getMazeGrid());
+//        }
+//        currItemY = ((MazeGame) this.getGame()).getMyMazeItem()[currY + i][currX];
+//        if (currItemY instanceof NPC) {
+//          collectedNPC((NPC)currItemY);
+//          deleteItem(currX, currY+1, ((MazeGame)this.getGame()).getMazeGrid());
+//        }
+//      }catch (ArrayIndexOutOfBoundsException ignored){
+//
+//      }
+    Item currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currY][currX];
+    if (currItem instanceof NPC){
+      collectedNPC((NPC)currItem);
+      deleteItem(currX, currY, ((MazeGame)this.getGame()).getMazeGrid());
     }
+
+
+
   }
 
   /**

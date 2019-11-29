@@ -45,5 +45,7 @@ public interface MazeContract {
     NPC addItemToMazeItem(int x, int y);
 
     Inventory getInventory();
+
+    String getRemainTime();
   }
 }

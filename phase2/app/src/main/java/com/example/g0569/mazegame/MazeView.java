@@ -184,6 +184,16 @@ public class MazeView extends GameView implements MazeContract.View {
     canvas.drawBitmap(moveButtons, screenWidth - 4 * unitX, screenHeight - 4 * unitY, paint);
   }
 
+  /**
+   * put unitX unitY to be instance variable??
+   */
+  private void drawClock() {
+    int unitX = (int) (screenWidth * 0.13 / 3);
+    int unitY = (int) (screenHeight * 0.13 / 3);
+    paint.setColor(Color.WHITE);
+    canvas.drawText(presenter.getRemainTime(), screenWidth - 4 * unitX, 4 * unitY, paint);
+  }
+
   public float getGridWidth() {
     return gridWidth;
   }
@@ -193,7 +203,7 @@ public class MazeView extends GameView implements MazeContract.View {
   }
 
   private Coordinate gridNum2Coor(int x, int y) {
-    return Coordinate.create(x * getGridWidth(), y * getGridHeight());
+    return Coordinate.create(x * getGridWidth() * 3/4, y * getGridHeight() * 3/4);
   }
 
   @Override

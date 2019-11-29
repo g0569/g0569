@@ -1,19 +1,14 @@
 package com.example.g0569.mazegame.model;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-
 import com.example.g0569.base.BaseButton;
-import com.example.g0569.base.model.Item;
 import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.base.model.Item;
 import com.example.g0569.mazegame.MazeContract;
-import com.example.g0569.utils.Coordinate;
+import com.example.g0569.mazegame.model.MazeStopWatch;
 import com.example.g0569.utils.Constants;
+import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.NPC;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MazeGame extends BaseGame {
 
@@ -28,6 +23,7 @@ public class MazeGame extends BaseGame {
   private MazePlayer mazePlayer;
   private BaseButton Button;
   private int unbuiltNPC = Constants.NPC_NUM;
+  private MazeStopWatch stopWatch;
 
     public MazeContract.Presenter getPresenter() {
         return presenter;
@@ -52,7 +48,8 @@ public class MazeGame extends BaseGame {
     startpoint = Coordinate.create(0, 0);
     mazePlayer = new MazePlayer(this);
     mazeGrid = MazeGenerator.generate(Constants.GRID_HEIGHT, Constants.GRID_WIDTH);
-//    Button = new BaseButton(this);
+    stopWatch = new MazeStopWatch(this, 60);
+//    Button = new BaseButton(this)
   }
 
   @Override
@@ -71,7 +68,11 @@ public class MazeGame extends BaseGame {
 //    MazeHelper.loadMaze(myMazeItem, this);
   }
 
-  public Item[][] getMyMazeItem() {
+    public MazeStopWatch getStopWatch() {
+        return stopWatch;
+    }
+
+    public Item[][] getMyMazeItem() {
     return myMazeItem;
   }
 

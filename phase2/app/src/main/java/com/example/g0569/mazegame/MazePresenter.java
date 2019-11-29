@@ -1,6 +1,7 @@
 package com.example.g0569.mazegame;
 
 import com.example.g0569.mazegame.model.MazeGame;
+import com.example.g0569.mazegame.model.MazeStopWatch;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.NPC;
@@ -90,5 +91,10 @@ public class MazePresenter implements MazeContract.Presenter {
   @Override
   public String getNPCType(NPC npc) {
     return npc.getType();
+  }
+
+  @Override
+  public String getRemainTime(){
+    return mazeGame.getStopWatch().toString();
   }
 }
