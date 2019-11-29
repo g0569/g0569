@@ -26,4 +26,7 @@ public interface Constants {
   int TO_DEMO_VIEW = 999;
 
   int NPC_NUM = 6;
+
+  String BUNDLE_USER_KEY = "BUNDLE_USER_KEY";
+  String BUNDLE_INVENTORY_KEY = "BUNDLE_INVENTORY_KEY";
 }

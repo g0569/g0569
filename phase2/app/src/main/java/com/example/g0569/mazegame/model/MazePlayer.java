@@ -22,13 +22,17 @@ public class MazePlayer extends Player {
    * @param game the game
    */
   MazePlayer(MazeGame game) {
-    super(game);
+    super();
     this.game = game;
     float x = ((MazeGame) this.getGame()).getStartPoint().getX();
     float y = ((MazeGame) this.getGame()).getStartPoint().getY();
     this.coordinate = new Coordinate(x, y);
     appearenceSize = game.getPlayerDimensions();
   direction = Coordinate.create(0,0);
+  }
+
+  public MazeGame getGame() {
+    return game;
   }
 
   /**

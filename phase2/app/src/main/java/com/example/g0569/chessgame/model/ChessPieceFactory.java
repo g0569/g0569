@@ -7,9 +7,9 @@ class ChessPieceFactory {
       return null;
     }
     if (type.equals("chessgame_component_star")) {
-      return new StarChessPiece(x, y, game);
+      return new StarChessPiece(x, y);
     } else if (type.equals("chessgame_component_triangle")) {
-      return new TriangleChessPiece(x, y, game);
+      return new TriangleChessPiece(x, y);
     }
     return null;
   }

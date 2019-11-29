@@ -31,8 +31,8 @@ public class ThrownItems extends Item implements Observer {
   private int y_direction;
   private String type;
 
-  public ThrownItems(BaseGame game) {
-    super(game);
+  public ThrownItems() {
+    super();
     // Sets the size
 //    size = (int) screen_width / 12;
 
