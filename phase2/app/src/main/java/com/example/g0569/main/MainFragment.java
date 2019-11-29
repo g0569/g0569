@@ -77,10 +77,6 @@ public class MainFragment extends Fragment implements MainContract.View {
     super.onDetach();
   }
 
-  public void setMainPresenter(MainContract.Presenter mainPresenter) {
-    this.mainPresenter = mainPresenter;
-  }
-
   @Override
   public void setPresenter(MainContract.Presenter presenter) {
     this.mainPresenter = presenter;
