@@ -2,7 +2,6 @@ package com.example.g0569.chessgame.model;
 
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.base.model.Item;
-import com.example.g0569.base.model.Player;
 import com.example.g0569.chessgame.ChessContract;
 import com.example.g0569.utils.Coordinate;
 
@@ -13,14 +12,12 @@ import java.util.List;
 public class ChessGame extends BaseGame {
 
   private ChessContract.Presenter presenter;
-  // TODO still need to figure out a way to implement two different NPC's game.
-  private int winNumbers;
+
   private LevelTwoPlayer l2player;
-  private int clickNumbers = 1;
-  private String difficulty;// might be "easy", "hard", or "insane"
+  private String difficulty; // might be "easy", "hard", or "insane"
   private ChessPieceFactory chessPieceFactory;
   private ChessSQLiteAccessInterface boardData;
-  private List<ChessPiece> NPCData = new ArrayList<>();
+  private List<ChessPiece> NPCChessPiece = new ArrayList<>();
   // save where the NPC place the chess piece for different round.
 
   /**
@@ -31,67 +28,54 @@ public class ChessGame extends BaseGame {
   public ChessGame(ChessContract.Presenter presenter) {
     super();
     this.presenter = presenter;
-    //    List<ChessPiece> NPC1ChessPiece = new ArrayList<>();
-    //    NPC1ChessPiece.add(
-    //        new StarChessPiece(
-    //            gameManager.getScreenWidth() * 0.6f, gameManager.getScreenHeight() * 0.4f, this));
-    //    NPC1ChessPiece.add(
-    //        new TriangleChessPiece(
-    //            gameManager.getScreenWidth() * 0.6f, gameManager.getScreenHeight() * 0.65f,
-    // this));
-    //    //    NPC1ChessPiece.add(new StarChessPiece(1, 2));
-    //    List<ChessPiece> NPC2ChessPiece = new ArrayList<>();
-    //    NPC2ChessPiece.add(
-    //        new TriangleChessPiece(
-    //            gameManager.getScreenWidth() * 0.6f, gameManager.getScreenHeight() * 0.4f, this));
-    //    NPC2ChessPiece.add(
-    //        new StarChessPiece(
-    //            gameManager.getScreenWidth() * 0.6f, gameManager.getScreenHeight() * 0.65f,
-    // this));
-    //
-    //    NPCData.add(NPC1ChessPiece);
-    //    NPCData.add(NPC2ChessPiece);
   }
 
   public void onStart() {
     l2player = new LevelTwoPlayer();
     this.chessPieceFactory = new ChessPieceFactory();
+    decodeNPCData();
   }
 
   public void setBoardData(ChessSQLiteAccessInterface boardData) {
     this.boardData = boardData;
   }
 
-  public void decodeNPCData() {
-    String chessString = boardData.getChessBoardData(difficulty);//get data before the chessgame_component_start of each round.
-    String[] chessDataList = chessString.split(".");//suppose we are getting string like"chessgame_component_star,1,1.circle,1,2.circle,1,3.nochess,2,1"
+  private void decodeNPCData() {
+    String chessString =
+        boardData.getChessBoardData(
+            difficulty); // get data before the chessgame_component_start of each round.
+    String[] chessDataList =
+        chessString.split(
+            "."); // suppose we are getting string
+                  // like"chessgame_component_star,1,1.circle,1,2.circle,1,3.nochess,2,1"
     int count = 0;
     int loopLimit = chessDataList.length;
-    while(count < loopLimit){
-        String[] curr_chess = chessDataList[count].split(",");// for example:["chessgame_component_star","1","1"]
-        String type = curr_chess[0];
-        float x = Float.parseFloat(curr_chess[1]);
-        float y = Float.parseFloat(curr_chess[2]);
-        placeNPCChess(x,y,type);
-        count ++;
+    while (count < loopLimit) {
+      String[] curr_chess =
+          chessDataList[count].split(","); // for example:["chessgame_component_star","1","1"]
+      String type = curr_chess[0];
+      float x = Float.parseFloat(curr_chess[1]);
+      float y = Float.parseFloat(curr_chess[2]);
+      placeNPCChess(x, y, type);
+      count++;
     }
     // TODO when decoding the string, for each chess piece, call placeNPCChess(x, y, type).
   }
 
   private void placeNPCChess(float x, float y, String type) {
     ChessPiece chessPiece = chessPieceFactory.getChessPiece(x, y, this, type);
-    NPCData.add(chessPiece);
-//    presenter.drawChessPiece(chessPiece);
+    NPCChessPiece.add(chessPiece);
+    //    presenter.drawChessPiece(chessPiece);
   }
 
-  public void setPlayerChess(float x, float y, String type) {
+  public void placePlayerChess(float x, float y, String type) {
     ChessPiece chessPiece = chessPieceFactory.getChessPiece(x, y, this, type);
     l2player.getInventory().add(chessPiece);
   }
 
   public String getChessPieceType(Coordinate coordinate) {
     String result = "";
-    for (ChessPiece chesspiece : NPCData) {
+    for (ChessPiece chesspiece : NPCChessPiece) {
       if (chesspiece.getCoordinate().equals(coordinate)) {
         result = typeGetter(chesspiece);
       }
@@ -99,7 +83,7 @@ public class ChessGame extends BaseGame {
     return result;
   }
 
-  private String typeGetter(ChessPiece chessPiece) {
+  public String typeGetter(ChessPiece chessPiece) {
     if (chessPiece instanceof StarChessPiece) {
       return "chessgame_component_star";
       //    }else if(chessPiece instanceof TriangleChessPiece){
@@ -107,74 +91,57 @@ public class ChessGame extends BaseGame {
     } else return "chessgame_component_triangle";
   }
 
-  //  /**
-  //   * Show the statistic of the game.
-  //   *
-  //   * @param win whether or not the player win the game.
-  //   */
-  //  public void showStatistic(boolean win) {
-  //    // TODO
-  //    List<String> statistic = new ArrayList<>();
-  //    if (win) {
-  //      statistic.add("Number of Cards You Get: 2");
-  //    } else {
-  //      statistic.add("Number of Cards You Get: 0");
-  //    }
-  //    getGameManager().showStatistic(statistic);
-  //  }
-  //
+  public List<ChessPiece> getNPCChessPiece() {
+    return NPCChessPiece;
+  }
 
-  //  /**
-  //   * An counter to count how many rows the player win.
-  //   *
-  //   * @param PlayerChess The players' chess.
-  //   * @param round The round.
-  //   * @return number of rows the player wins.
-  //   */
-  //  private int fightCounter(Item PlayerChess, int round) {
-  //    int win = 0;
-  //    for (ChessPiece NPCChess : NPCData.get(round)) {
-  //      if (NPCChess.getCoordinate().getY() == PlayerChess.getCoordinate().getY()
-  //          && NPCChess.getPower() <= ((ChessPiece) PlayerChess).getPower()) {
-  //        win++; // Compared power it has.
-  //      }
-  //    }
-  //    return win;
-  //  }
-  //
-  private int powerCalculator(String side, int row){
+  public List<ChessPiece> getPlayerChessPiece() {
+    List<ChessPiece> playerChessPieceList = new ArrayList<>();
+    for (Item chessPiece : l2player.getInventory()) {
+      playerChessPieceList.add((ChessPiece) chessPiece);
+    }
+    return playerChessPieceList;
+  }
+
+  private int powerCalculator(String side, int row) {
     // TODO This method need to be improved!
     int rowPower = 0;
     List<ChessPiece> requiredInventory = new ArrayList<>();
-    if(side.equals("player")){
-      for (Item chessPiece: l2player.getInventory() ) {
-        requiredInventory.add((ChessPiece) chessPiece);
-      }
+    if (side.equals("player")) {
+      requiredInventory.addAll(getPlayerChessPiece());
+    } else if (side.equals("NPC")) {
+      requiredInventory.addAll(NPCChessPiece);
     }
-    else if(side.equals("NPC")){requiredInventory = NPCData;}
-    for (ChessPiece curr_chess : requiredInventory) {
-      if (curr_chess.getCoordinate().getX() == row){
-        rowPower += curr_chess.getPower();
+    for (ChessPiece currentChess : requiredInventory) {
+      if (currentChess.getCoordinate().getX() == row) {
+        rowPower += currentChess.getPower();
       }
     }
     return rowPower;
   }
-  private boolean singleRowFight(int row){
+
+  private boolean singleRowFight(int row) {
     boolean playerWin = false;
     int playerPower = powerCalculator("player", row);
     int NPCPower = powerCalculator("NPC", row);
-    if(difficulty.equals("easy")){
-      playerWin = (playerPower >= NPCPower);// player under easy mode can win a row with power equal to NPC.
-    }
-    else if(difficulty.equals("hard")){
-      playerWin = (playerPower > NPCPower);// now player can only win a row with more power.
-    }
-    else if(difficulty.equals("insane")){
-      playerWin = (playerPower > NPCPower&
-              playerPower > powerCalculator("NPC", 1));// insane NPC at row 1 gains ability to fight other chess pieces on other rows.
+    if (difficulty.equals("easy")) {
+      playerWin =
+          (playerPower
+              >= NPCPower); // player under easy mode can win a row with power equal to NPC.
+    } else if (difficulty.equals("hard")) {
+      playerWin = (playerPower > NPCPower); // now player can only win a row with more power.
+    } else if (difficulty.equals("insane")) {
+      playerWin =
+          (playerPower > NPCPower
+              & playerPower
+                  > powerCalculator(
+                      "NPC",
+                      1)); // insane NPC at row 1 gains ability to fight other chess pieces on other
+                           // rows.
     }
     return playerWin;
   }
+
   /**
    * Let the chess fight and return the result.
    *
@@ -184,55 +151,14 @@ public class ChessGame extends BaseGame {
     int winNumbers = 0;
     int row = 1;
     while (row <= 3) {
-      if (singleRowFight(row)){winNumbers += 1;}
-      row ++;
+      if (singleRowFight(row)) {
+        winNumbers += 1;
+      }
+      row++;
     }
     return (winNumbers >= 2);
     // TODO Need to be implemented.
-
-    //      for (Item chess : l2player.getInventory()) {
-    //        winNumbers += fightCounter(chess, round);
-    //      }
-    //      return (winNumbers >= 2);
   }
-  //
-  //  /**
-  //   * Place the chess piece in the place has been touched. And store the chess in the players
-  //   * inventory.
-  //   *
-  //   * @param chosenPlace The place has been chosen.
-  //   * @return the coordinate.
-  //   */
-  //  public Coordinate placeChess(int chosenPlace) {
-  //    // In data, first is inventoryX. second is the width of inventory image.
-  //    // Get the location where player place the chess piece and change the location of original
-  // chess
-  //    // piece.
-  //    if (clickNumbers == 1) {
-  //      l2player
-  //          .getInventory()
-  //          .get(chosenPlace)
-  //          .getCoordinate()
-  //          .setXY(
-  //              getGameManager().getScreenWidth() * 0.45f, getGameManager().getScreenHeight() *
-  // 0.4f);
-  //      clickNumbers++;
-  //      return new Coordinate(
-  //          getGameManager().getScreenWidth() * 0.45f, getGameManager().getScreenHeight() * 0.4f);
-  //      //    } else if (clickNumbers == 2) {
-  //    } else { // For now we use else here, since there is a limit for number of chess.
-  //      l2player
-  //          .getInventory()
-  //          .get(chosenPlace)
-  //          .getCoordinate()
-  //          .setXY(
-  //              getGameManager().getScreenWidth() * 0.45f,
-  //              getGameManager().getScreenHeight() * 0.65f);
-  //      return new Coordinate(
-  //          getGameManager().getScreenWidth() * 0.45f, getGameManager().getScreenHeight() *
-  // 0.65f);
-  //    }
-  //  }
 
   @Override
   public void pause() {}
