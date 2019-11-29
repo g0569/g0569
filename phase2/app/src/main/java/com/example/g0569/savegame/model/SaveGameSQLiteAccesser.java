@@ -22,7 +22,7 @@ public class SaveGameSQLiteAccesser implements SaveGameSQLiteAccessInterface {
   public List<SaveGame> getSaveGames(int uid) {
     SQLiteDatabase db = sqliteHelper.getReadableDatabase();
     List<SaveGame> saveGames = new ArrayList<>();
-    saveGames.add(new SaveGame(new Date(), -1, 0, "", uid));
+    saveGames.add(new SaveGame(new Date(), -1, 0, uid, true));
 
     Cursor cursor =
         db.query(

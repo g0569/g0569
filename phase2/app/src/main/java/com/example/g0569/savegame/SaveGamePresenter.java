@@ -44,15 +44,20 @@ public class SaveGamePresenter implements SaveGameContract.Presenter, BaseView {
 
   @Override
   public void startNewGame(SaveGame saveGame) {
-    saveGame = saveGameSQLiteAccesser.saveNewGame(saveGame);
     List<NPC> allNPC = saveGameSQLiteAccesser.getAvaliableNPCs();
     Collections.shuffle(allNPC);
     Inventory inventory = new Inventory(allNPC.subList(0, 2), allNPC.subList(2, allNPC.size()));
+    saveGame.setInventory(inventory);
+    saveGame = saveGameSQLiteAccesser.saveNewGame(saveGame);
     bundle.putSerializable(Constants.BUNDLE_INVENTORY_KEY, inventory);
     System.out.println("Starting New Game");
     mView.startGmae(bundle);
   }
 
   @Override
-  public void loadGame(SaveGame saveGame) {}
+  public void loadGame(SaveGame saveGame) {
+    Inventory inventory = saveGame.getInventory();
+    bundle.putSerializable(Constants.BUNDLE_INVENTORY_KEY, inventory);
+    mView.startGmae(bundle);
+  }
 }

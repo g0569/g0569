@@ -1,6 +1,7 @@
 package com.example.g0569.savegame.model;
 
 import com.example.g0569.utils.Inventory;
+import com.example.g0569.utils.Utils;
 
 import java.util.Date;
 
@@ -10,12 +11,22 @@ public class SaveGame {
   private int progress;
   private int uid;
   private Inventory inventory;
+  private boolean isNewGame;
 
   public SaveGame(Date createdTime, int saveId, int progress, String inventoryData, int uid) {
     this.createdTime = createdTime;
     this.saveId = saveId;
     this.progress = progress;
     this.uid = uid;
+    this.isNewGame = false;
+  }
+
+  public SaveGame(Date createdTime, int saveId, int progress, int uid, boolean isNewGame) {
+    this.createdTime = createdTime;
+    this.saveId = saveId;
+    this.progress = progress;
+    this.uid = uid;
+    this.isNewGame = isNewGame;
   }
 
   public Date getCreatedTime() {
@@ -43,7 +54,15 @@ public class SaveGame {
   }
 
   public String getStringInventory() {
-    return null;
+    String serializedInventory = null;
+    try {
+      serializedInventory = Utils.serializeToString(this);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    finally{
+      return serializedInventory;
+    }
   }
 
   public int getProgress() {
@@ -56,5 +75,13 @@ public class SaveGame {
 
   public int getUid() {
     return uid;
+  }
+
+  public boolean isNewGame() {
+    return isNewGame;
+  }
+
+  public void setNewGame(boolean newGame) {
+    isNewGame = newGame;
   }
 }

@@ -60,13 +60,15 @@ public class SaveGameListAdapter extends BaseAdapter {
     } else {
       viewHolder = (ViewHolder) convertView.getTag();
     }
-    viewHolder.progress.setText(String.valueOf(saveGame.getProgress()));
+    viewHolder.progress.setText(
+        saveGame.isNewGame() ? "Start a new game!" : String.valueOf(saveGame.getProgress()));
     viewHolder.date.setText(saveGame.getCreatedTime().toString());
     viewHolder.savegameItem.setOnClickListener(
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
             isSelected = position;
+            notifyDataSetChanged();
           }
         });
     viewHolder.checkBox.setChecked(position == isSelected);
