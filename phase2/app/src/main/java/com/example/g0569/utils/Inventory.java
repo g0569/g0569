@@ -7,10 +7,11 @@ import java.util.List;
 public class Inventory implements Serializable {
     private ArrayList<NPC> collectedItem = new ArrayList<>();;
     private ArrayList<NPC> nonCollectedItem = new ArrayList<>();;
+    private ArrayList<NPC> availableItem;
 
     public Inventory(ArrayList<NPC> defaultNPC) {
         for (int i = 0; i < defaultNPC.size(); i++){
-            collectedItem.add(defaultNPC.get(i));
+            availableItem.add(defaultNPC.get(i));
         }
     }
 
@@ -27,6 +28,10 @@ public class Inventory implements Serializable {
         return nonCollectedItem;
     }
 
+    /**
+     * do in MazeGame when the player comes across NPC.
+     * @param e
+     */
     public void addCollectedItem(NPC e){
         collectedItem.add(e);
         if (nonCollectedItem.contains(e)) {
@@ -34,8 +39,23 @@ public class Inventory implements Serializable {
         }
     }
 
+    /**
+     * do when initiating the project.
+     * @param e
+     */
     public void addNonCollectedItem(NPC e){
         nonCollectedItem.add(e);
+    }
+
+    /**
+     * do if its corresponding ChessGame wins
+     * @param e
+     */
+    public void addAvailableItem(NPC e){
+        availableItem.add(e);
+        if (collectedItem.contains(e)) {
+            deleteCollectedItem(e);
+        }
     }
 
     public void deleteNoneCollectedItem(NPC e){
@@ -45,4 +65,5 @@ public class Inventory implements Serializable {
     public void deleteCollectedItem(NPC e){
         collectedItem.remove(e);
     }
+
 }

@@ -2,6 +2,7 @@ package com.example.g0569.utils;
 
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.base.model.Item;
+import com.example.g0569.mazegame.model.MazeGame;
 
 import java.io.Serializable;
 
@@ -47,6 +48,9 @@ public class NPC extends Item implements Serializable {
     return power;
   }
 
+  // TODO: 2019-11-28 return a NPC instance of the name type
+  public void getNPCType() {
+    ; }
   public Coordinate getThrowDirection() {
     return throwDirection;
   }
