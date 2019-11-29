@@ -5,16 +5,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.g0569.R;
+import com.example.g0569.auth.model.AuthInteractor;
 import com.example.g0569.utils.Constants;
 
 public class SignUpFragment extends Fragment implements AuthContract.View {
 
   private AuthContract.Presenter authPresenter;
+
+  private TextView email;
+  private TextView password;
+  private TextView username;
 
   public SignUpFragment() {
     // Required empty public constructor
@@ -39,7 +46,31 @@ public class SignUpFragment extends Fragment implements AuthContract.View {
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_signup, container, false);
+    View view = inflater.inflate(R.layout.fragment_signup, container, false);
+    this.email = view.findViewById(R.id.signup_input_email);
+    this.password = view.findViewById(R.id.signup_input_password);
+    this.username = view.findViewById(R.id.signup_input_name);
+    Button signUpBtn = view.findViewById(R.id.signup_button);
+    signUpBtn.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            ((AuthInteractor.OnAuthListener) authPresenter)
+                .onSignUp(
+                    email.getText().toString(),
+                    username.getText().toString(),
+                    password.getText().toString());
+          }
+        });
+    view.findViewById(R.id.signup_to_login)
+        .setOnClickListener(
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                authPresenter.toLoginPage();
+              }
+            });
+    return view;
   }
 
   @Override
@@ -68,5 +99,10 @@ public class SignUpFragment extends Fragment implements AuthContract.View {
   @Override
   public void toLogin() {
     ((AuthActivity) getActivity()).replaceFragment(Constants.TO_LOGIN_VIEW);
+  }
+
+  @Override
+  public void toSaveGameMenu(Bundle bundle) {
+    ((AuthActivity) getActivity()).toSaveGameMenu(bundle);
   }
 }

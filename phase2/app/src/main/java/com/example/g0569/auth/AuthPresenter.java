@@ -1,7 +1,10 @@
 package com.example.g0569.auth;
 
+import android.os.Bundle;
+
 import com.example.g0569.auth.model.AuthInteractor;
 import com.example.g0569.auth.model.User;
+import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.SQLiteHelper;
 
 /** The type Auth presenter. */
@@ -44,6 +47,9 @@ public class AuthPresenter implements AuthContract.Presenter, AuthInteractor.OnA
   public void onLoginSuccess(User user) {
     this.user = user;
     authView.ShowToast("Welcome Back, " + user.getUsername());
+    Bundle bundle = new Bundle();
+    bundle.putSerializable(Constants.BUNDLE_USER_KEY, user);
+    authView.toSaveGameMenu(bundle);
   }
 
   @Override

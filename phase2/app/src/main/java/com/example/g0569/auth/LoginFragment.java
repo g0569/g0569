@@ -100,4 +100,9 @@ public class LoginFragment extends Fragment implements AuthContract.View {
 
   @Override
   public void toLogin() {}
+
+  @Override
+  public void toSaveGameMenu(Bundle bundle) {
+    ((AuthActivity) getActivity()).toSaveGameMenu(bundle);
+  }
 }

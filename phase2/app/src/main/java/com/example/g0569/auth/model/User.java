@@ -1,15 +1,15 @@
 package com.example.g0569.auth.model;
 
-public class User {
+import java.io.Serializable;
 
-  UserSQLiteAccessInterface sqLiteAccesser;
+public class User implements Serializable {
+
   private int uid;
   private String email;
   private String username;
 
-  public User(int uid, UserSQLiteAccessInterface sqLiteAccesser) {
-    this.sqLiteAccesser = sqLiteAccesser;
-    this.username = sqLiteAccesser.getUserName(uid);
+  public User(int uid, String username) {
+    this.username = username;
   }
 
   protected void loadSave() {
@@ -22,5 +22,13 @@ public class User {
 
   public String getUsername() {
     return username;
+  }
+
+  public int getUid() {
+    return uid;
+  }
+
+  public String getEmail() {
+    return email;
   }
 }

@@ -8,6 +8,7 @@ import com.example.g0569.utils.SQLiteHelper;
 import com.example.g0569.utils.Utils;
 
 public class AuthInteractor {
+
   public void login(
       final String email,
       final String password,
@@ -29,7 +30,8 @@ public class AuthInteractor {
               null);
       if (cursor.getCount() > 0) {
         cursor.moveToNext();
-        User user = new User(cursor.getInt(cursor.getColumnIndex("uid")), userSQLiteAccesser);
+        int uid = cursor.getInt(cursor.getColumnIndex("uid"));
+        User user = new User(uid, userSQLiteAccesser.getUserName(uid));
         listener.onLoginSuccess(user);
       } else {
         listener.onLoginError("Incorrect email or password");
@@ -54,7 +56,7 @@ public class AuthInteractor {
       ContentValues contentValues = new ContentValues();
       contentValues.put("username", username);
       contentValues.put("email", email);
-      contentValues.put("password", password);
+      contentValues.put("password", passwdMD5);
       contentValues.put("created_time", System.currentTimeMillis());
       db.insert("users", null, contentValues);
       listener.onSignUpSuccess();
