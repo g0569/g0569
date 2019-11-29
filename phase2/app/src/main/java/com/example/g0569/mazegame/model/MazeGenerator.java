@@ -1,7 +1,11 @@
 package com.example.g0569.mazegame.model;
 
+import com.example.g0569.base.model.Item;
+import com.example.g0569.mazegame.MazeContract;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
+import com.example.g0569.utils.Inventory;
+import com.example.g0569.utils.NPC;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -23,11 +27,13 @@ public class MazeGenerator {
 
 
   private int[][] maze;
+  private Item[][] mazeItem;
   private int gridWidth;
   private int gridHeight;
 
   MazeGenerator(int x, int y) {
     maze = new int[y][x];
+    mazeItem = new Item[y][x];
     gridWidth = x;
     gridHeight = y;
   }
@@ -45,12 +51,12 @@ public class MazeGenerator {
         }
 
     }
-      newMaze.updateNPCMaze(newMaze.maze);
+      newMaze.updateNPCMaze(newMaze.maze, newMaze.mazeItem);
 //      System.out.println(int[][] newMaze.maze);
     return newMaze.getMaze();
   }
 
-  private void updateNPCMaze(int[][] mazeGrid) {
+  private void updateNPCMaze(int[][] mazeGrid, Item[][] mazeItem) {
     if (mazeGrid == null) {
     } else {
       int i = 0;
@@ -61,10 +67,11 @@ public class MazeGenerator {
 //          System.out.println(mazeGrid[y][x]);
           i += 1;
           mazeGrid[y][x] = 2;
+
 //          System.out.println(mazeGrid[y][x]);
         }
       }
-      System.out.println(mazeGrid);
+//      System.out.println(mazeGrid);
     }
   }
 
