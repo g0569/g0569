@@ -16,10 +16,9 @@ public class ChessPiece extends Item {
    * @param y The y coordinate for chess piece.
    * @param power The power of this chess piece.
    * @param health The health of this chess piece.
-   * @param game Current game.
    */
-  ChessPiece(float x, float y, int power, int health, BaseGame game) {
-    super(game);
+  ChessPiece(float x, float y, int power, int health) {
+    super();
     this.coordinate = new Coordinate(x, y);
     this.power = power;
     this.health = health;

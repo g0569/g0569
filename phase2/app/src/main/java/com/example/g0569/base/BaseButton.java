@@ -18,8 +18,8 @@ public class BaseButton extends Item {
   private int unitY;
 
 //  TODO
-  public BaseButton(BaseGame game) {
-    super(game);
+  public BaseButton() {
+    super();
 
   }
   /** Update */

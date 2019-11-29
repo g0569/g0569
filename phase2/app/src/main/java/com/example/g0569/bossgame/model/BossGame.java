@@ -29,9 +29,9 @@ public class BossGame extends BaseGame {
    */
   public void onStart() {
 
-    bossPlayer = new BossPlayer(this);
-    enemy = new Enemy(this);
-    healthBar = new HealthBar(this, enemy);
+    bossPlayer = new BossPlayer();
+    enemy = new Enemy();
+    healthBar = new HealthBar(enemy);
   }
 
   /**

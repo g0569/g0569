@@ -28,8 +28,8 @@ public class BossPlayer extends Item {
   private Rect destRect;
   private Coordinate coordinate;
 
-  public BossPlayer(BaseGame game) {
-    super(game);
+  public BossPlayer() {
+    super();
 //    r1 = screenWidth / 36;
 //    size = (int) r1;
 //    r2 = screenWidth / 200;

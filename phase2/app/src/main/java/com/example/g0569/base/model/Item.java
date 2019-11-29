@@ -12,28 +12,15 @@ public abstract class Item {
   /** The Size of this item. */
   public int size;
 
-  private BaseGame game;
-
   /**
    * Instantiates a new Item.
    *
-   * @param game the game it corresponding to
    */
-  public Item(BaseGame game) {
-    this.game = game;
+  public Item() {
   }
 
   /** Update */
   public abstract void update();
-
-  /**
-   * Gets game it corresponding to.
-   *
-   * @return the game it corresponding to
-   */
-  public BaseGame getGame() {
-    return game;
-  }
 
   /**
    * Gets size of this item.

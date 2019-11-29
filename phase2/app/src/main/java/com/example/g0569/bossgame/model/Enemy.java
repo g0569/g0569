@@ -29,8 +29,8 @@ public class Enemy extends Item implements Observable {
   private int xDirection;
   private int yDirection;
 
-  public Enemy(BossGame game) {
-    super(game);
+  public Enemy() {
+    super();
 
     // Sets the direction of the Enemy
     //    xDirection = (int) this.screenWidth / 100;
@@ -111,7 +111,7 @@ public class Enemy extends Item implements Observable {
     return this.xDirection;
   }
 
-  /**
+  /**a
    * Getter for the health
    *
    * @return the current health

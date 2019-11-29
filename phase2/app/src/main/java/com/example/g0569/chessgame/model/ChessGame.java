@@ -54,7 +54,7 @@ public class ChessGame extends BaseGame {
   }
 
   public void onStart() {
-    l2player = new LevelTwoPlayer(this);
+    l2player = new LevelTwoPlayer();
     this.chessPieceFactory = new ChessPieceFactory();
   }
 

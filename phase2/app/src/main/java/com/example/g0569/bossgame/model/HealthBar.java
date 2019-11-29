@@ -30,8 +30,8 @@ public class HealthBar extends Item implements Observer {
   private int total;
   private int ratioOfHealth;
 
-  public HealthBar(BaseGame game, Observable observable) {
-    super(game);
+  public HealthBar(Observable observable) {
+    super();
     // Sets the height and width
     //    screenHeight = game.getGameManager().getScreenHeight();
     //    screenWidth = game.getGameManager().getScreenWidth();

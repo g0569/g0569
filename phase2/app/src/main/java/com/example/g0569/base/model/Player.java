@@ -11,10 +11,9 @@ public abstract class Player extends Item {
   /**
    * Instantiates a new Player.
    *
-   * @param game the game
    */
-  public Player(BaseGame game) {
-    super(game);
+  public Player() {
+    super();
   }
 
   public abstract void update();

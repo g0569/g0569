@@ -11,8 +11,8 @@ import com.example.g0569.base.model.BaseGame;
 
 public class Star extends ThrownItems {
 
-  public Star(BaseGame game, float screen_width, float screen_height, Resources resource) {
-    super(game);
+  public Star(float screen_width, float screen_height, Resources resource) {
+    super();
 //    super(game, screen_width, screen_height, resource);
 //    appearance = BitmapFactory.decodeResource(resource, R.drawable.chessgame_component_star);
 //    damage = 20;
