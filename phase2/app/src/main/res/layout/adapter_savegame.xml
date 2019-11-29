@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:id="@+id/savegame_item">
+
+    <CheckBox
+        android:id="@+id/savegame_select"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:clickable="false"
+        android:focusable="false" />
+
+    <TextView
+        android:id="@+id/savegame_progress"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:text="Progress"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/savegame_date"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Date"
+        android:textAlignment="textEnd"
+        android:textSize="16dp" />
+</LinearLayout>

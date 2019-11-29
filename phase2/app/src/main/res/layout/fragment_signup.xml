@@ -1,72 +1,81 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg"
-    tools:context=".auth.AuthActivity">
+    tools:context=".auth.AuthActivity"><![CDATA[
     android:background="@drawable/main_bg">
+
+    ]]>
 
     <EditText
         android:id="@+id/signup_input_name"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="150dp"
+        android:layout_marginTop="116dp"
+        android:background="#fff"
+        android:hint="User name"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/signup_input_email"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:background="#fff"
         android:hint="@string/email"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
-        android:padding="8dp" />
-
-    <EditText
-        android:id="@+id/signup_input_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/signup_input_name"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="150dp"
-        android:background="#fff"
-        android:hint="@string/password"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:padding="8dp" />
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_input_name" />
 
     <EditText
         android:id="@+id/signup_input_password"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signup_input_email"
-        android:layout_marginLeft="150dp"
         android:layout_marginTop="12dp"
-        android:layout_marginRight="150dp"
         android:background="#fff"
         android:hint="@string/password"
         android:importantForAutofill="no"
         android:inputType="textPassword"
-        android:padding="8dp" />
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_input_email" />
 
     <Button
         android:id="@+id/signup_button"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signup_input_password"
-        android:layout_alignStart="@+id/signup_input_password"
-        android:layout_alignEnd="@+id/signup_input_password"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="32dp"
         android:text="Create Account"
-        android:textColor="#009688" />
+        android:textColor="#009688"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_input_password" />
 
     <TextView
         android:id="@+id/signup_to_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signup_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
         android:text="Already a member? Login"
-        android:textColor="#fff" />
+        android:textColor="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_button"
+        app:layout_constraintVertical_bias="0.0" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
