@@ -13,10 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".savegame.SavegameActivity" />
-        <activity android:name=".bossgame.BossActivity" />
-        <activity android:name=".chessgame.ChessActivity" />
-        <activity android:name=".mazegame.MazeActivity" />
+        <activity
+            android:name=".savegame.SaveGameActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".bossgame.BossActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".chessgame.ChessActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".mazegame.MazeActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".auth.AuthActivity"
             android:screenOrientation="landscape" />
