@@ -1,6 +1,5 @@
 package com.example.g0569.utils;
 
-import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.base.model.Item;
 
 import java.io.Serializable;
