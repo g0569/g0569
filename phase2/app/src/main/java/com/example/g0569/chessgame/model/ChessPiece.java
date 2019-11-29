@@ -1,11 +1,11 @@
 package com.example.g0569.chessgame.model;
 
-import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.base.model.Item;
 import com.example.g0569.utils.Coordinate;
+import com.example.g0569.utils.InterchangeableBehavior;
 
 /** The chess piece on the chess board. */
-public class ChessPiece extends Item {
+public class ChessPiece extends Item implements InterchangeableBehavior {
   private Coordinate coordinate;
   private String appearance;
   private int power; // The amount for the chess piece can attack in one round.
@@ -41,5 +41,9 @@ public class ChessPiece extends Item {
   @Override
   public void update() {
 
+  }
+
+  @Override
+  public void action() {
   }
 }
