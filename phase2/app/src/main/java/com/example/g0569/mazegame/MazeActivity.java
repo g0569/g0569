@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.g0569.R;
+import com.example.g0569.utils.Constants;
+import com.example.g0569.utils.Inventory;
 
 public class MazeActivity extends AppCompatActivity {
 
@@ -18,7 +20,9 @@ public class MazeActivity extends AppCompatActivity {
             mazeView = new MazeView(this);
         }
         setContentView(mazeView);
-        presenter = new MazePresenter(mazeView);
+        Bundle bundle = getIntent().getExtras();
+        Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
+        presenter = new MazePresenter(mazeView, inventory);
     }
 
     @Override

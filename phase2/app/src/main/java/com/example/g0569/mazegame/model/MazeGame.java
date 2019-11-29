@@ -48,7 +48,7 @@ public class MazeGame extends BaseGame {
     startpoint = Coordinate.create(0, 0);
     mazePlayer = new MazePlayer(this);
     mazeGrid = MazeGenerator.generate(Constants.GRID_HEIGHT, Constants.GRID_WIDTH);
-    stopWatch = new MazeStopWatch(this, 60);
+    stopWatch = new MazeStopWatch(60);
 //    Button = new BaseButton(this)
   }
 

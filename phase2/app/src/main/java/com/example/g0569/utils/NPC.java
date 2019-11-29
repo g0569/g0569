@@ -48,9 +48,10 @@ public class NPC extends Item implements Serializable {
     return power;
   }
 
-  // TODO: 2019-11-28 return a NPC instance of the name type
-  public void getNPCType() {
-    ; }
+  public String getType() {
+    return type;
+  }
+
   public Coordinate getThrowDirection() {
     return throwDirection;
   }
