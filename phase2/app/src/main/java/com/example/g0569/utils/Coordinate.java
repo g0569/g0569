@@ -1,9 +1,10 @@
 package com.example.g0569.utils;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /** The type Coordinate. */
-public class Coordinate {
+public class Coordinate implements Serializable {
   private float x;
   private float y;
 
