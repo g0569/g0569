@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.g0569.chessgame.model.ChessSQLiteAccesser;
+
 public class ChessActivity extends AppCompatActivity {
 
     private ChessView chessView;
@@ -16,7 +18,8 @@ public class ChessActivity extends AppCompatActivity {
         if (chessView == null){
             chessView = new ChessView(this);
         }
-        presenter = new ChessPresenter(chessView);
+
+        presenter = new ChessPresenter(chessView, new ChessSQLiteAccesser());
         setContentView(chessView);
     }
 
