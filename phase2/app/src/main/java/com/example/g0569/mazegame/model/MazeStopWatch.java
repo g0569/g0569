@@ -11,8 +11,8 @@ public class MazeStopWatch extends Item {
     private long pauseEnd;
 
 
-    MazeStopWatch(MazeGame game, int time){
-        super(game);
+    MazeStopWatch(int time){
+        super();
         totalTime = convertSecondToNano(time);
         running = false;
     }

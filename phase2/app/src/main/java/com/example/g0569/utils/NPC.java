@@ -15,20 +15,15 @@ public class NPC extends Item implements Serializable {
   private String difficulty;
   private String type;
   private String chessLayout;
-  /** Instantiates a new Item. */
+  /**
+   * Instantiates a new Item.
+   */
   public NPC(String Name) {
     super();
     this.name = Name;
   }
 
-  public NPC(
-      int npcId,
-      String name,
-      int damage,
-      String power,
-      String difficulty,
-      String type,
-      String chessLayout) {
+  public NPC(int npcId, String name, int damage, String power, String difficulty, String type, String chessLayout) {
     super();
     this.npcId = npcId;
     this.name = name;
@@ -51,10 +46,10 @@ public class NPC extends Item implements Serializable {
     return power;
   }
 
-  // TODO: 2019-11-28 return a NPC instance of the name type
-  public void getNPCType() {
-
+  public String getType() {
+    return type;
   }
+
 
   public Coordinate getCoordinate() {
     return behavior.getCoordinate();
@@ -71,4 +66,6 @@ public class NPC extends Item implements Serializable {
   /** Update */
   @Override
   public void update() {}
+
 }
+
