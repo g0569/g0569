@@ -3,6 +3,8 @@ package com.example.g0569.bossgame;
 import com.example.g0569.bossgame.model.BossGame;
 import com.example.g0569.utils.Inventory;
 
+import java.util.Currency;
+
 /** The type Boss presenter. */
 public class BossPresenter implements BossContract.Presenter {
   private BossContract.View bossView;
@@ -30,10 +32,10 @@ public class BossPresenter implements BossContract.Presenter {
     //    String npc = bossGame.initBossTeam().getName();
     //    bossView.setCurrentProjectileBitmap(npc);
     bossGame.setBossTeam(this.inventory.getAvailableItem());
-    String currentNPC = bossGame.getCurrentNPC().getName();
-    String currentType = bossGame.getCurrentNPC().getType();
-    bossView.setCurrentNPCBitmap(currentNPC);
-    bossView.setCurrentProjectileBitmap(currentType);
+    String currentNPC = bossGame.getCurrentNPC().getType();
+    String currentPower = bossGame.getCurrentNPC().getPower();
+    bossView.setCurrentNPCBitmap("npc1");
+    bossView.setCurrentProjectileBitmap("ice");
     //    bossView.setCurrentProjectileBitmap(inventory.getAvailableItem().get(0).getType());
     //    bossView.setCurrentNPCBitmap(inventory.getAvailableItem().get(0).getName());
     //    bossView.setCurrentProjectileBitmap("ice");
@@ -53,8 +55,8 @@ public class BossPresenter implements BossContract.Presenter {
     // TODO may want to use getCurrentNPC instead, segregate methods
     String nextType = bossGame.getNextNPC().getType();
     String nextNPC = bossGame.getNextNPC().getName();
-    bossView.setCurrentProjectileBitmap(nextType);
-    bossView.setCurrentNPCBitmap(nextNPC);
+    bossView.setCurrentProjectileBitmap("ice");
+    bossView.setCurrentNPCBitmap("npc1");
     //    String typeProjectile = bossGame.getNextNPC().getType();
     //    bossView.setCurrentProjectileBitmap(typeProjectile);
   }
@@ -66,9 +68,9 @@ public class BossPresenter implements BossContract.Presenter {
 
   @Override
   public void shoot() {
-    bossGame.throwProjectile();
-    String typeProjectile = bossGame.getNextNPC().toString();
-    bossView.setCurrentProjectileBitmap(typeProjectile);
+//    bossGame.throwProjectile();
+//    String typeProjectile = bossGame.getNextNPC().toString();
+//    bossView.setCurrentProjectileBitmap(typeProjectile);
     bossView.setThrown(true);
   }
 

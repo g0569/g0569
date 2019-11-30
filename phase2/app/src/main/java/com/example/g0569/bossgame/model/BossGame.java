@@ -97,11 +97,11 @@ public class BossGame extends BaseGame {
     enemy.attacked(currentNPC.getDamage(), currentNPC.getPower());
   }
 
-  /** Throws the projectile, this logic should become useless later on */
-  public void throwProjectile() {
-    ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
-    projectile.thrown();
-  }
+//  /** Throws the projectile, this logic should become useless later on */
+//  public void throwProjectile() {
+//    ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
+//    projectile.thrown();
+//  }
 
   /**
    * Switches the npc currently being used to attack the boss in the game Since it is rotational, if
@@ -112,7 +112,7 @@ public class BossGame extends BaseGame {
   public NPC getNextNPC() {
     if (bossTeam.size() != 0) {
       currentTeam++;
-      if (currentTeam > bossTeam.size()) {
+      if (currentTeam >= bossTeam.size()) {
         currentTeam = 0;
       }
       currentNPC = (NPC) bossTeam.get(currentTeam);
