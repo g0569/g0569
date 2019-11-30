@@ -22,15 +22,16 @@ public class ChessActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (chessView == null){
-            chessView = new ChessView(this);
-        }
+//        if (chessView == null){
+//            chessView = new ChessView(this);
+//        }
 
         Bundle bundle = getIntent().getExtras();
         Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
         NPC selectedNPC = (NPC) bundle.getSerializable(Constants.BUNDLE_SELECTEDNPC_KEY);
+        setContentView(R.layout.activity_chessgame);
+        chessView = findViewById(R.id.chessview);
         presenter = new ChessPresenter(chessView, inventory, selectedNPC);
-        setContentView(chessView);
 
         final LinearLayout menuLayout = findViewById(R.id.menu_layout);
         menuLayout.setVisibility(View.GONE);
