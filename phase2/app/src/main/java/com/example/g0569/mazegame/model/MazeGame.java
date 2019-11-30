@@ -112,8 +112,11 @@ public class MazeGame extends BaseGame {
    * @return
    */
   public NPC addItemToMazeItem(int x, int y) {
-    this.getMyMazeItem()[y][x] = this.getInventory().getNonCollectedItem().get(unbuiltNPC - 1);
-    return this.getInventory().getNonCollectedItem().get(unbuiltNPC - 1);
+      unbuiltNPC -= 1;
+      if (unbuiltNPC == -1) unbuiltNPC = inventory.getNonCollectedItem().size() - 1;
+    this.getMyMazeItem()[y][x] = this.getInventory().getNonCollectedItem().get(unbuiltNPC);
+//    System.out.println(this.getInventory().getNonCollectedItem().get(unbuiltNPC - 1));
+    return this.getInventory().getNonCollectedItem().get(unbuiltNPC);
   }
 
   /** TODO delete from 2d array mazeItem; check the default value of Item */

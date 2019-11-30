@@ -250,17 +250,18 @@ public class MazeView extends GameView implements MazeContract.View {
   public void drawNPC(Coordinate coor, NPC npc) {
     paint.setColor(Color.GRAY);
     paint.setTextSize(70);
-    if (presenter.getNPCType(npc) == "type1") {
+    String type = presenter.getNPCType(npc);
+    if (presenter.getNPCType(npc).equals("type1")) {
       canvas.drawBitmap(npc1, coor.getX(), coor.getY(), paint);
-    } else if (presenter.getNPCName(npc) == "type2") {
+    } else if (presenter.getNPCType(npc) == "type2") {
       canvas.drawBitmap(npc2, coor.getX(), coor.getY(), paint);
-    } else if (presenter.getNPCName(npc) == "type3") {
+    } else if (presenter.getNPCType(npc).equals("type3")) {
       canvas.drawBitmap(npc3, coor.getX(), coor.getY(), paint);
-    } else if (presenter.getNPCName(npc) == "type4") {
+    } else if (presenter.getNPCType(npc).equals("type4")) {
       canvas.drawBitmap(npc4, coor.getX(), coor.getY(), paint);
-    } else if (presenter.getNPCName(npc) == "type5") {
+    } else if (presenter.getNPCType(npc).equals("type5")) {
       canvas.drawBitmap(npc5, coor.getX(), coor.getY(), paint);
-    } else if (presenter.getNPCName(npc) == "l6") {
+    } else if (presenter.getNPCType(npc).equals("type6")) {
       canvas.drawBitmap(npc6, coor.getX(), coor.getY(), paint);
     }
   }
