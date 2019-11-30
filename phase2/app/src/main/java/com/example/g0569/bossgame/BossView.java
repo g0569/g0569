@@ -18,6 +18,7 @@ import com.example.g0569.utils.Coordinate;
 /** The Bossview for the bossgame. */
 public class BossView extends GameView implements BossContract.View {
   private BossContract.Presenter bossPresenter;
+  private boolean pause;
   private Bitmap background;
   private Bitmap bossPlayer;
   private Bitmap enemyRight;
@@ -123,10 +124,11 @@ public class BossView extends GameView implements BossContract.View {
           shootButtonCoordinate.getY(),
           shootButton.getWidth(),
           shootButton.getHeight())) {
-        System.out.println("shoot out");
-        Toast.makeText(activity, "Throw", Toast.LENGTH_SHORT).show();
-        bossPresenter.shoot();
-
+        if (!pause) {
+          System.out.println("shoot out");
+          Toast.makeText(activity, "Throw", Toast.LENGTH_SHORT).show();
+          bossPresenter.shoot();
+        }
       } else if (inRange(
           x,
           y,
@@ -134,11 +136,12 @@ public class BossView extends GameView implements BossContract.View {
           switchButtonCoordinates.getY(),
           switchButton.getWidth(),
           switchButton.getHeight())) {
-        System.out.println("switch team");
-        bossPresenter.switchTeam();
-        resetCurrentProjectile();
-        Toast.makeText(activity, "Switch", Toast.LENGTH_SHORT).show();
-
+        if (!pause) {
+          System.out.println("switch team");
+          bossPresenter.switchTeam();
+          resetCurrentProjectile();
+          Toast.makeText(activity, "Switch", Toast.LENGTH_SHORT).show();
+        }
         //        bossPresenter.switchTeam();
       } else if (inRange(
           x,
@@ -148,6 +151,7 @@ public class BossView extends GameView implements BossContract.View {
           pauseButton.getWidth(),
           pauseButton.getHeight())) {
         Toast.makeText(activity, "Paused", Toast.LENGTH_SHORT).show();
+        pause();
       } else if (inRange(
           x,
           y,
@@ -483,9 +487,15 @@ public class BossView extends GameView implements BossContract.View {
   }
 
   public void update() {
-    updateMovementEnemy();
-    updateMovementProjectile();
-    detectCollision();
+    if (!pause) {
+      updateMovementEnemy();
+      updateMovementProjectile();
+      detectCollision();
+    }
+  }
+
+  public void pause() {
+    pause = !pause;
   }
 
   private void detectCollision() {
