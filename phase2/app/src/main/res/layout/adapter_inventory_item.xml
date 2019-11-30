@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/inventory_item_npc_avatar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
