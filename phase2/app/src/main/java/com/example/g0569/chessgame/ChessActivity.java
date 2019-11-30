@@ -1,10 +1,12 @@
 package com.example.g0569.chessgame;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-import com.example.g0569.chessgame.model.ChessSQLiteAccesser;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.g0569.utils.Constants;
+import com.example.g0569.utils.Inventory;
+import com.example.g0569.utils.NPC;
 
 public class ChessActivity extends AppCompatActivity {
 
@@ -19,7 +21,10 @@ public class ChessActivity extends AppCompatActivity {
             chessView = new ChessView(this);
         }
 
-        presenter = new ChessPresenter(chessView, new ChessSQLiteAccesser());
+        Bundle bundle = getIntent().getExtras();
+        Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
+        NPC selectedNPC = (NPC) bundle.getSerializable(Constants.BUNDLE_SELECTEDNPC_KEY);
+        presenter = new ChessPresenter(chessView, inventory, selectedNPC);
         setContentView(chessView);
     }
 

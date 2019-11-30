@@ -7,34 +7,36 @@ import com.example.g0569.utils.InterchangeableBehavior;
 /** The chess piece on the chess board. */
 public class ChessPiece extends Item implements InterchangeableBehavior {
   private Coordinate coordinate;
-  private String appearance;
-  private int power; // The amount for the chess piece can attack in one round.
-  private int health; // The amount of the hp for the chess piece.
+  private int damage; // The amount for the chess piece can attack in one round.
 
   /**
    * @param x The x coordinate for chess piece.
    * @param y The y coordinate for chess piece.
-   * @param power The power of this chess piece.
-   * @param health The health of this chess piece.
+   * @param damage The damage of this chess piece.
    */
-  ChessPiece(float x, float y, int power, int health) {
+  ChessPiece(float x, float y, int damage) {
     super();
     this.coordinate = new Coordinate(x, y);
-    this.power = power;
-    this.health = health;
+    this.damage = damage;
   }
 
   /**
-   * A getter for variable power.
+   * A getter for variable damage.
    *
-   * @return power
+   * @return damage
    */
-  public int getPower() {
-    return power;
+  int getDamage() {
+    return damage;
   }
 
+  @Override
   public Coordinate getCoordinate() {
     return coordinate;
+  }
+
+  @Override
+  public void setCoordinate(Coordinate coordinate) {
+    this.coordinate = coordinate;
   }
 
 
