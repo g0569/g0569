@@ -143,10 +143,6 @@ public class ChessPresenter implements ChessContract.Presenter {
     float inventoryY = ((ChessView) chessView).getInventoryY();
     float inventoryWidth = ((ChessView) chessView).getInventoryWidth();
     float inventoryHeight = ((ChessView) chessView).getInventoryHeight();
-    float buttonX = ((ChessView) chessView).getButtonX();
-    float buttonY = ((ChessView) chessView).getButtonY();
-    float buttonWidth = ((ChessView) chessView).getButtonWidth();
-    float buttonHeight = ((ChessView) chessView).getButtonHeight();
 
     Coordinate InventoryCoordinate = new Coordinate(0, 0);
     if (x > inventoryX
