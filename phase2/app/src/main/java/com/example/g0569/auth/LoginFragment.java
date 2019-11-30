@@ -62,7 +62,7 @@ public class LoginFragment extends Fragment implements AuthContract.View {
             new View.OnClickListener() {
               @Override
               public void onClick(View v) {
-                authPresenter.toSignupPage();
+                authPresenter.toSignUpPage();
               }
             });
     return view;
