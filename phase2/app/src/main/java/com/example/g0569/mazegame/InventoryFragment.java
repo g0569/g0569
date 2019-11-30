@@ -10,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.g0569.R;
 import com.example.g0569.base.BaseView;
 import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.NPC;
 
@@ -53,6 +55,7 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
     }
 
     public void updateNpcData(){
+        ImageView npcAvatar = view.findViewById(R.id.inventory_npc_avatar);
         TextView npcName = view.findViewById(R.id.inventory_npc_name);
         TextView npcDamage = view.findViewById(R.id.inventory_npc_damage);
         TextView npcPower = view.findViewById(R.id.inventory_npc_power);
@@ -61,6 +64,7 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
             npcName.setText(selectedNpc.getName());
             npcDamage.setText(String.valueOf(selectedNpc.getDamage()));
             npcPower.setText(selectedNpc.getPower());
+            npcAvatar.setImageDrawable(getActivity().getDrawable(Constants.NPCIMAGELOOKUPTABLE.get(selectedNpc.getType())));
         } catch (NullPointerException e){
             npcName.setText("Please select an NPC");
             npcDamage.setText("0");
