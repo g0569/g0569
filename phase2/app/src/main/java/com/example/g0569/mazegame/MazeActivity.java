@@ -3,9 +3,11 @@ package com.example.g0569.mazegame;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.g0569.R;
 import com.example.g0569.utils.Constants;
@@ -15,7 +17,8 @@ public class MazeActivity extends AppCompatActivity {
 
     private MazeView mazeView;
     private MazeContract.Presenter presenter;
-    private boolean isMenuVisible = false;
+    private boolean isMenuVisible = true;
+    private boolean isInventoryVisible = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +30,27 @@ public class MazeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mazegame);
         mazeView = findViewById(R.id.mazeview);
         Bundle bundle = getIntent().getExtras();
-        Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
+        final Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
+
+        InventoryFragment inventoryView =
+                (InventoryFragment) getSupportFragmentManager().findFragmentById(R.id.ContentFrame);
+        if (inventoryView == null) {
+            inventoryView = new InventoryFragment(inventory);
+        }
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.ContentFrame, (Fragment) inventoryView)
+                    .commit();
+
         presenter = new MazePresenter(mazeView, inventory);
 
         final LinearLayout menuLayout = findViewById(R.id.menu_layout);
         menuLayout.setVisibility(View.GONE);
-        Button menuBtn = findViewById(R.id.meny_btn);
+        final FrameLayout inventoryLayout = findViewById(R.id.ContentFrame);
 
+        inventoryLayout.setVisibility(View.GONE);
+        Button menuBtn = findViewById(R.id.meny_btn);
+        Button inventoryBtn = findViewById(R.id.mazegame_inventory_btn);
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +64,19 @@ public class MazeActivity extends AppCompatActivity {
 
             }
         });
+        inventoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isInventoryVisible){
+                    isInventoryVisible = false;
+                    inventoryLayout.setVisibility(View.VISIBLE);
+                } else {
+                    isInventoryVisible = true;
+                    inventoryLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
     }
 
     @Override
