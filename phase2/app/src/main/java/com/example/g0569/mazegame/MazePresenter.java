@@ -21,6 +21,7 @@ public class MazePresenter implements MazeContract.Presenter {
   public void start() {
 //    mazeView.drawMaze(mazeGame.getMazeGrid());
     mazeGame.onStart();
+
   }
 
   @Override
@@ -94,7 +95,24 @@ public class MazePresenter implements MazeContract.Presenter {
   }
 
   @Override
-  public String getRemainTime(){
-    return mazeGame.getStopWatch().toString();
+  public int getRemainTime(){
+//    System.out.println(mazeGame.getStopWatch().toString());
+    return mazeGame.getStopWatch().getRemainTime();
+
   }
+
+  @Override
+  public void pauseStopWatch(){
+    mazeGame.getStopWatch().pause();
+  }
+
+  @Override
+  public void resumeStopWatch(){
+    mazeGame.getStopWatch().resume();
+  }
+
+  @Override
+  public void stopView(){
+    mazeView.stopView();
+  };
 }

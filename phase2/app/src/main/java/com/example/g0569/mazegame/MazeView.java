@@ -35,6 +35,7 @@ public class MazeView extends GameView implements MazeContract.View {
     private float gridWidth;
     private float gridHeight;
 
+    private boolean ableMove;
     /**
      * Instantiates a new Maze view.
      *
@@ -44,6 +45,7 @@ public class MazeView extends GameView implements MazeContract.View {
         super(context);
         paint.setTextSize(40);
         thread = new Thread(this);
+        ableMove = true;
 
     }
 
@@ -51,7 +53,7 @@ public class MazeView extends GameView implements MazeContract.View {
         super(context, attrs);
         paint.setTextSize(40);
         thread = new Thread(this);
-
+        ableMove = true;
     }
 
     @Override
@@ -203,7 +205,7 @@ public class MazeView extends GameView implements MazeContract.View {
         int unitX = (int) (screenWidth * 0.13 / 3);
         int unitY = (int) (screenHeight * 0.13 / 3);
         paint.setColor(Color.WHITE);
-        canvas.drawText(presenter.getRemainTime(), screenWidth - 4 * unitX, 4 * unitY, paint);
+        canvas.drawText(Integer.toString(presenter.getRemainTime()), screenWidth - 4 * unitX, 4 * unitY, paint);
     }
 
     public float getGridWidth() {
@@ -265,7 +267,7 @@ public class MazeView extends GameView implements MazeContract.View {
     public void drawNPC(Coordinate coor, NPC npc) {
         paint.setColor(Color.GRAY);
         paint.setTextSize(70);
-        String type = presenter.getNPCType(npc);
+//        String type = presenter.getNPCType(npc);
         if (presenter.getNPCType(npc).equals("type1")) {
             canvas.drawBitmap(npc1, coor.getX(), coor.getY(), paint);
         } else if (presenter.getNPCType(npc).equals("type2")) {
@@ -292,37 +294,55 @@ public class MazeView extends GameView implements MazeContract.View {
         }
     }
 
+    @Override
+    public void stopView(){
+        ableMove = false;
+    }
+
     /*
     detecting the moving direction (sth for button to do.)
      */
     private void moveDetect(float x, float y) {
         int unitX = (int) (screenWidth * 0.13 / 3);
         int unitY = (int) (screenHeight * 0.13 / 3);
-        if (x >= screenWidth - 2 * unitX
-                && x <= screenWidth - unitX
-                && y >= screenHeight - 3 * unitY
-                && y <= screenHeight) {
-//        && y <= screenHeight - 2 * unitY) {
-            presenter.movePlayer(Coordinate.create(0.5f, 0f));
-            //    } else if (x >= screenWidth - 4 * unitX
-        } else if (x >= screenWidth - 6 * unitX
-                && x <= screenWidth - 3 * unitX
-                && y >= screenHeight - 3 * unitY
-                && y <= screenHeight - 2 * unitY) {
-            presenter.movePlayer(Coordinate.create(-0.5f, 0f));
-        } else if (x >= screenWidth - 3 * unitX
-                && x <= screenWidth - 2 * unitX
-                //            && y >= screenHeight - 4 * unitY
-                && y >= screenHeight - 6 * unitY
-                && y <= screenHeight - 3 * unitY) {
-            presenter.movePlayer(Coordinate.create(0f, -0.5f));
-        } else if (x >= screenWidth - 3 * unitX
-                && x <= screenWidth - 2 * unitX
-                && y >= screenHeight - 2 * unitY
-                //            && y <= screenHeight - unitY) {
-                && y <= screenHeight) {
-            presenter.movePlayer(Coordinate.create(0f, 0.5f));
-        } else {
+        System.out.println(ableMove);
+        if (ableMove){
+            Coordinate coor = new Coordinate(0f, 0f);
+            if (x >= screenWidth - 2 * unitX
+                    && x <= screenWidth - unitX
+                    && y >= screenHeight - 3 * unitY
+                    && y <= screenHeight) {
+        //        && y <= screenHeight - 2 * unitY) {
+//                presenter.movePlayer(Coordinate.create(0.5f, 0f));
+                coor.setXY(0.5f, 0f);
+                //    } else if (x >= screenWidth - 4 * unitX
+            } else if (x >= screenWidth - 6 * unitX
+                    && x <= screenWidth - 3 * unitX
+                    && y >= screenHeight - 3 * unitY
+                    && y <= screenHeight - 2 * unitY) {
+//                presenter.movePlayer(Coordinate.create(-0.5f, 0f));
+                coor.setXY(-0.5f, 0f);
+            } else if (x >= screenWidth - 3 * unitX
+                    && x <= screenWidth - 2 * unitX
+                    //            && y >= screenHeight - 4 * unitY
+                    && y >= screenHeight - 6 * unitY
+                    && y <= screenHeight - 3 * unitY) {
+//                presenter.movePlayer(Coordinate.create(0f, -0.5f));
+                coor.setXY(0f, -0.5f);
+            } else if (x >= screenWidth - 3 * unitX
+                    && x <= screenWidth - 2 * unitX
+                    && y >= screenHeight - 2 * unitY
+                    //            && y <= screenHeight - unitY) {
+                    && y <= screenHeight) {
+//                presenter.movePlayer(Coordinate.create(0f, 0.5f));
+                coor.setXY(0f, 0.5f);
+            } else {
+            }
+            System.out.println(coor.getX());
+            System.out.println(coor.getY());
+            presenter.movePlayer(coor);
+    }else{
+
         }
     }
 }
