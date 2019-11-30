@@ -43,16 +43,12 @@ public class MazeStopWatch extends Item {
         return elapsedTime;
     }
 
-    public void setStartTime(long startTime) {
+    private void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 
-    public void setElapsedTime(long elapsedTime) {
+    private void setElapsedTime(long elapsedTime) {
         this.elapsedTime = elapsedTime;
-    }
-
-    private long convertSecondToNano(int time){
-        return time*1000000000;
     }
 
     private int convertNanoToSecond(long time){
@@ -71,7 +67,7 @@ public class MazeStopWatch extends Item {
         setStartTime(System.nanoTime());
     }
 
-    public void stop(){
+    void stop(){
         running = false;
         setElapsedTime(0);
         setStartTime(0);

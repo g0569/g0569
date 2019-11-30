@@ -1,21 +1,18 @@
 package com.example.g0569.mazegame.model;
 
 import com.example.g0569.base.model.Item;
-import com.example.g0569.mazegame.MazeContract;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
-import com.example.g0569.utils.Inventory;
-import com.example.g0569.utils.NPC;
-
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Random;
-import java.util.Arrays;
 
-// TODO: 2019-11-27 maze in a dead end; NPC wrong placing
 /** The type Maze generator. */
-public class MazeGenerator {
+class MazeGenerator {
 
+  private static int n;
+  private static int m;
+  private static int npcNum;
   /**
    * Generate a n by m maze represented in List.
    *
@@ -39,6 +36,9 @@ public class MazeGenerator {
   }
 
   public static int[][] generate(int n, int m, int npcNum) {
+    MazeGenerator.n = n;
+    MazeGenerator.m = m;
+    MazeGenerator.npcNum = npcNum;
     MazeGenerator newMaze = new MazeGenerator(Constants.GRID_WIDTH, Constants.GRID_HEIGHT);
 
       newMaze.getStack().push(new Coordinate(0, 0));
