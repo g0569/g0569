@@ -122,7 +122,7 @@ public class MazePlayer extends Player {
     Item currItem = ((MazeGame) this.getGame()).getMyMazeItem()[currY][currX];
     if (currItem instanceof NPC){
       collectedNPC((NPC)currItem);
-      deleteItem(currX, currY, ((MazeGame)this.getGame()).getMazeGrid());
+      deleteItem(currX, currY, ((MazeGame)this.getGame()).getMazeGrid(), (NPC)currItem);
     }
 
 
@@ -146,8 +146,8 @@ public class MazePlayer extends Player {
    * @param y
    * @param maze
    */
-  public void deleteItem(int x, int y, int[][] maze){
+  public void deleteItem(int x, int y, int[][] maze, NPC npc){
     this.game.getPresenter().getMazeView().deleteGridItem(x, y, maze);
-    this.game.deleteItem(x, y);
+    this.game.deleteItem(x, y, npc);
   }
 }

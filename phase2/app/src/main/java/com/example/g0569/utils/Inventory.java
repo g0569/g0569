@@ -26,16 +26,21 @@ public class Inventory implements Serializable {
         return nonCollectedItem;
     }
 
-    /**
-     * do in MazeGame when the player comes across NPC.
-     * @param e
-     */
-    public void addCollectedItem(NPC e){
-        collectedItem.add(e);
-        if (nonCollectedItem.contains(e)) {
-            deleteNoneCollectedItem(e);
-        }
+  public ArrayList<NPC> getAvailableItem() {
+    return availableItem;
+  }
+
+  /**
+   * do in MazeGame when the player comes across NPC.
+   *
+   * @param e
+   */
+  public void addCollectedItem(NPC e) {
+    collectedItem.add(e);
+    if (nonCollectedItem.contains(e)) {
+      deleteNoneCollectedItem(e);
     }
+  }
 
     public List<NPC> getAvailableItem(){
         return availableItem;

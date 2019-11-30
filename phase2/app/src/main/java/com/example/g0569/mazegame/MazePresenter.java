@@ -70,7 +70,7 @@ public class MazePresenter implements MazeContract.Presenter {
 
   @Override
   public void addCollectedNPC(NPC npc){
-    inventory.addNonCollectedItem(npc);
+    inventory.addCollectedItem(npc);
   }
 
   @Override

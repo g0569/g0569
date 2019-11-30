@@ -112,7 +112,7 @@ public class SaveGame {
   String getStringInventory() {
     String serializedInventory = null;
     try {
-      serializedInventory = Utils.serializeToString(this);
+      serializedInventory = Utils.serializeToString(this.inventory);
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
