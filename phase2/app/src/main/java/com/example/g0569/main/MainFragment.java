@@ -22,6 +22,7 @@ public class MainFragment extends Fragment implements MainContract.View {
 
   private MainContract.Presenter mainPresenter;
 
+  /** Instantiates a new Main fragment. */
   public MainFragment() {}
 
   /**

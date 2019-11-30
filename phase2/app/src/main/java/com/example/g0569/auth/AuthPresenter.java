@@ -7,7 +7,7 @@ import com.example.g0569.auth.model.User;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.SQLiteHelper;
 
-/** The type Auth presenter. */
+/** The authentication presenter. */
 public class AuthPresenter implements AuthContract.Presenter, AuthInteractor.OnAuthListener {
 
   private final AuthContract.View authView;
@@ -16,17 +16,17 @@ public class AuthPresenter implements AuthContract.Presenter, AuthInteractor.OnA
   private User user;
 
   /**
-   * Instantiates a new Auth presenter.
+   * Instantiates a new authentication presenter.
    *
-   * @param authView the auth view
-   * @param authInteractor the auth interactor
-   * @param sqLitehelper the sq litehelper
+   * @param authView the authentication view
+   * @param authInteractor the authentication interactor
+   * @param sqLiteHelper the SQLite helper
    */
-  public AuthPresenter(
-      AuthContract.View authView, AuthInteractor authInteractor, SQLiteHelper sqLitehelper) {
+  AuthPresenter(
+      AuthContract.View authView, AuthInteractor authInteractor, SQLiteHelper sqLiteHelper) {
     this.authView = authView;
     this.authInteractor = authInteractor;
-    this.sqLiteHelper = sqLitehelper;
+    this.sqLiteHelper = sqLiteHelper;
     authView.setPresenter(this);
   }
 
@@ -69,7 +69,7 @@ public class AuthPresenter implements AuthContract.Presenter, AuthInteractor.OnA
   }
 
   @Override
-  public void toSignupPage() {
+  public void toSignUpPage() {
     authView.toSignUp();
   }
 

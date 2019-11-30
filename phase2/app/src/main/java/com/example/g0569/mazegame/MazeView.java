@@ -29,7 +29,6 @@ public class MazeView extends GameView implements MazeContract.View {
   private Bitmap npc5;
   private Bitmap npc6;
 
-
   private float gridWidth;
   private float gridHeight;
 
@@ -74,10 +73,15 @@ public class MazeView extends GameView implements MazeContract.View {
     try {
       canvas = sfh.lockCanvas();
       canvas.drawColor(Color.rgb(246, 216, 115));
+      //      canvas.drawColor(
+      //          Color.rgb(
+      //              (int) (Math.random() * 255),
+      //              (int) (Math.random() * 255),
+      //              (int) (Math.random() * 255)));
       canvas.save();
-      canvas.scale(scalex, scaley, 0, 0);
+      //      canvas.scale(scalex, scaley, 0, 0);
       //      canvas.drawBitmap(background, 0, 0, paint);
-      canvas.restore();
+      //      canvas.restore();
       initView();
     } catch (Exception err) {
       System.out.println(err);
@@ -125,9 +129,9 @@ public class MazeView extends GameView implements MazeContract.View {
   }
 
   public void initBitmaps() {
-//    background = BitmapFactory.decodeResource(getResources(), R.drawable.maze_background);
-//    scalex = screenWidth / background.getWidth();
-//    scaley = screenHeight / background.getHeight();
+    //    background = BitmapFactory.decodeResource(getResources(), R.drawable.maze_background);
+    //    scalex = screenWidth / background.getWidth();
+    //    scaley = screenHeight / background.getHeight();
 
     wall = BitmapFactory.decodeResource(getResources(), R.drawable.mazegame_component_tile);
     wall =
@@ -144,36 +148,34 @@ public class MazeView extends GameView implements MazeContract.View {
     npc1 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l1);
     npc1 =
         Bitmap.createScaledBitmap(
-                npc1, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+            npc1, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
     npc2 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l2);
     npc2 =
-            Bitmap.createScaledBitmap(
-                    npc2, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+        Bitmap.createScaledBitmap(
+            npc2, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
     npc3 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l3);
     npc3 =
-            Bitmap.createScaledBitmap(
-                    npc3, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+        Bitmap.createScaledBitmap(
+            npc3, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
     npc4 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l4);
     npc4 =
-            Bitmap.createScaledBitmap(
-                    npc4, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+        Bitmap.createScaledBitmap(
+            npc4, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
     npc5 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l5);
     npc5 =
-            Bitmap.createScaledBitmap(
-                    npc5, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+        Bitmap.createScaledBitmap(
+            npc5, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
     npc6 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l6);
     npc6 =
-            Bitmap.createScaledBitmap(
-                    npc6, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+        Bitmap.createScaledBitmap(
+            npc6, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
   }
-
-
-
 
   @Override
   public void initView() {
     drawMaze(presenter.getMazeGrid());
     drawButton();
+    drawClock();
     drawPlayer(presenter.getPlayerCoor());
   }
 
@@ -184,9 +186,7 @@ public class MazeView extends GameView implements MazeContract.View {
     canvas.drawBitmap(moveButtons, screenWidth - 4 * unitX, screenHeight - 4 * unitY, paint);
   }
 
-  /**
-   * put unitX unitY to be instance variable??
-   */
+  /** put unitX unitY to be instance variable?? */
   private void drawClock() {
     int unitX = (int) (screenWidth * 0.13 / 3);
     int unitY = (int) (screenHeight * 0.13 / 3);
@@ -203,7 +203,7 @@ public class MazeView extends GameView implements MazeContract.View {
   }
 
   private Coordinate gridNum2Coor(int x, int y) {
-    return Coordinate.create(x * getGridWidth() * 3/4, y * getGridHeight() * 3/4);
+    return Coordinate.create(x * getGridWidth(), y * getGridHeight());
   }
 
   @Override
@@ -224,7 +224,7 @@ public class MazeView extends GameView implements MazeContract.View {
   }
 
   @Override
-  public void deleteGridItem(int x, int y, int[][] mazeGrid){
+  public void deleteGridItem(int x, int y, int[][] mazeGrid) {
     mazeGrid[y][x] = 1;
   }
 
@@ -240,9 +240,9 @@ public class MazeView extends GameView implements MazeContract.View {
     canvas.drawBitmap(player, screenCoor.getX(), screenCoor.getY(), paint);
   }
 
-
   /**
    * TODO what if it is not limited to 6???
+   *
    * @param coor
    * @param npc
    */
@@ -250,20 +250,20 @@ public class MazeView extends GameView implements MazeContract.View {
   public void drawNPC(Coordinate coor, NPC npc) {
     paint.setColor(Color.GRAY);
     paint.setTextSize(70);
-    if (presenter.getNPCType(npc) == "type1") {
+    String type = presenter.getNPCType(npc);
+    if (presenter.getNPCType(npc).equals("type1")) {
       canvas.drawBitmap(npc1, coor.getX(), coor.getY(), paint);
-    }else if(presenter.getNPCName(npc) == "type2"){
+    } else if (presenter.getNPCType(npc) == "type2") {
       canvas.drawBitmap(npc2, coor.getX(), coor.getY(), paint);
-    }else if(presenter.getNPCName(npc) == "type3"){
+    } else if (presenter.getNPCType(npc).equals("type3")) {
       canvas.drawBitmap(npc3, coor.getX(), coor.getY(), paint);
-    }else if(presenter.getNPCName(npc) == "type4"){
+    } else if (presenter.getNPCType(npc).equals("type4")) {
       canvas.drawBitmap(npc4, coor.getX(), coor.getY(), paint);
-    }else if(presenter.getNPCName(npc) == "type5"){
+    } else if (presenter.getNPCType(npc).equals("type5")) {
       canvas.drawBitmap(npc5, coor.getX(), coor.getY(), paint);
-    }else if(presenter.getNPCName(npc) == "l6"){
+    } else if (presenter.getNPCType(npc).equals("type6")) {
       canvas.drawBitmap(npc6, coor.getX(), coor.getY(), paint);
     }
-
   }
 
   @Override
@@ -286,22 +286,26 @@ public class MazeView extends GameView implements MazeContract.View {
     if (x >= screenWidth - 2 * unitX
         && x <= screenWidth - unitX
         && y >= screenHeight - 3 * unitY
-        && y <= screenHeight - 2 * unitY) {
+            && y <= screenHeight) {
+//        && y <= screenHeight - 2 * unitY) {
       presenter.movePlayer(Coordinate.create(0.5f, 0f));
-    } else if (x >= screenWidth - 4 * unitX
+      //    } else if (x >= screenWidth - 4 * unitX
+    } else if (x >= screenWidth - 6 * unitX
         && x <= screenWidth - 3 * unitX
         && y >= screenHeight - 3 * unitY
         && y <= screenHeight - 2 * unitY) {
       presenter.movePlayer(Coordinate.create(-0.5f, 0f));
     } else if (x >= screenWidth - 3 * unitX
         && x <= screenWidth - 2 * unitX
-        && y >= screenHeight - 4 * unitY
+        //            && y >= screenHeight - 4 * unitY
+        && y >= screenHeight - 6 * unitY
         && y <= screenHeight - 3 * unitY) {
       presenter.movePlayer(Coordinate.create(0f, -0.5f));
     } else if (x >= screenWidth - 3 * unitX
         && x <= screenWidth - 2 * unitX
         && y >= screenHeight - 2 * unitY
-        && y <= screenHeight - unitY) {
+        //            && y <= screenHeight - unitY) {
+        && y <= screenHeight) {
       presenter.movePlayer(Coordinate.create(0f, 0.5f));
     } else {
     }

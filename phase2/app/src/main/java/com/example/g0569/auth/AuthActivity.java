@@ -14,9 +14,12 @@ import com.example.g0569.savegame.SaveGameActivity;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.SQLiteHelper;
 
+/** The activity used for authentication. */
 public class AuthActivity extends AppCompatActivity {
 
-  public static final String AUTH_TYPE = "auth_type"; // used in intent
+  /** In order to know which view (login or signup) to go to. */
+  public static final String AUTH_TYPE = "auth_type";
+
   private AuthContract.Presenter authPresenter;
 
   @Override
@@ -43,11 +46,16 @@ public class AuthActivity extends AppCompatActivity {
           .replace(R.id.ContentFrame, (Fragment) mView)
           .commit();
     }
-    SQLiteHelper sqLitehelper = new SQLiteHelper(this, "g0569");
+    SQLiteHelper sqLiteHelper = new SQLiteHelper(this, "g0569");
 
-    authPresenter = new AuthPresenter(mView, new AuthInteractor(), sqLitehelper);
+    authPresenter = new AuthPresenter(mView, new AuthInteractor(), sqLiteHelper);
   }
 
+  /**
+   * Replace the existing fragment with a new one.
+   *
+   * @param targetFragment the target fragment
+   */
   public void replaceFragment(String targetFragment) {
     Fragment newFragment;
     switch (targetFragment) {
@@ -69,6 +77,11 @@ public class AuthActivity extends AppCompatActivity {
     ((AuthContract.View) newFragment).setPresenter(authPresenter);
   }
 
+  /**
+   * Go to save game menu.
+   *
+   * @param bundle the bundle to pass in
+   */
   public void toSaveGameMenu(Bundle bundle) {
     Intent intent = new Intent(this, SaveGameActivity.class);
     intent.putExtras(bundle);

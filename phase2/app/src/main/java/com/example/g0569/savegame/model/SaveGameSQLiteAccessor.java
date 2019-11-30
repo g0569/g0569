@@ -1,5 +1,6 @@
 package com.example.g0569.savegame.model;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,9 +14,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SaveGameSQLiteAccesser implements SaveGameSQLiteAccessInterface {
+/** The Save game SQLite accessor. */
+public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
 
   private SQLiteHelper sqliteHelper;
+
+  @SuppressLint("SimpleDateFormat")
   private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
   @Override
@@ -38,14 +42,18 @@ public class SaveGameSQLiteAccesser implements SaveGameSQLiteAccessInterface {
       int saveId = cursor.getInt(0);
       String inventoryData = cursor.getString(1);
       String createdTimeString = cursor.getString(2);
-      Date createdTime = null;
+      Date createdTime;
       try {
         createdTime = dateFormat.parse(createdTimeString);
       } catch (ParseException e) {
         createdTime = new Date();
       }
       int progress = cursor.getInt(3);
-      saveGames.add(new SaveGame(createdTime, saveId, progress, inventoryData, uid));
+      try {
+        saveGames.add(new SaveGame(createdTime, saveId, progress, inventoryData, uid));
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
       cursor.moveToNext();
     }
     cursor.close();
@@ -64,7 +72,7 @@ public class SaveGameSQLiteAccesser implements SaveGameSQLiteAccessInterface {
       contentValues.put("created_time", dateFormat.format(saveGame.getCreatedTime()));
       db.insert("users_saves", null, contentValues);
 
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     } finally {
       db.close();
     }
@@ -72,7 +80,7 @@ public class SaveGameSQLiteAccesser implements SaveGameSQLiteAccessInterface {
   }
 
   @Override
-  public List<NPC> getAvaliableNPCs() {
+  public List<NPC> getAvailableNPCs() {
     SQLiteDatabase db = sqliteHelper.getReadableDatabase();
     List<NPC> allNPC = new ArrayList<>();
     Cursor cursor =

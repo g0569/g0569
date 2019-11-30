@@ -5,7 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.g0569.utils.SQLiteHelper;
 
-public class UserSQLiteAccesser implements UserSQLiteAccessInterface {
+/** The User SQLite accessor. */
+public class UserSQLiteAccessor implements UserSQLiteAccessInterface {
 
   private SQLiteHelper sqliteHelper;
 
