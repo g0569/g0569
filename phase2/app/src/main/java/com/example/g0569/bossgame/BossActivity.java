@@ -26,4 +26,12 @@ public class BossActivity extends AppCompatActivity {
     presenter = new BossPresenter(bossView);
     setContentView(bossView);
   }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    presenter.start();
+  }
+
+
 }

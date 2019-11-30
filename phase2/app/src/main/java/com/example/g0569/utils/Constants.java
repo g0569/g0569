@@ -24,4 +24,6 @@ public interface Constants {
   int GRID_HEIGHT = 20;
 
   int TO_DEMO_VIEW = 999;
+
+  int NPC_NUM = 6;
 }

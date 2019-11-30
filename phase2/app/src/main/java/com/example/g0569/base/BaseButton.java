@@ -24,5 +24,5 @@ public class BaseButton extends Item {
   }
   /** Update */
   @Override
-  public void action() {}
+  public void update() {}
 }

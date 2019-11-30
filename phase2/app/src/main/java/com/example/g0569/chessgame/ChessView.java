@@ -14,6 +14,8 @@ import com.example.g0569.utils.Coordinate;
 
 /** The ChessView for the autoChessGame. */
 public class ChessView extends GameView implements ChessContract.View {
+  // The indicator whether the player choose the chessPiece(false) or place the chessPiece(true).
+  private boolean placeChess;
   private Bitmap background;
   private Bitmap inventory;
   private Bitmap button;
@@ -60,12 +62,44 @@ public class ChessView extends GameView implements ChessContract.View {
     }
   }
 
-   protected float getScreenHeight() {
+  protected float getScreenHeight() {
     return screenHeight;
   }
 
-  protected float getScreenWidth(){
+  protected float getScreenWidth() {
     return screenWidth;
+  }
+
+  protected float getButtonX() {
+    return buttonX;
+  }
+
+  protected float getButtonY() {
+    return buttonY;
+  }
+
+  protected float getButtonWidth() {
+    return button.getWidth();
+  }
+
+  protected float getButtonHeight() {
+    return button.getHeight();
+  }
+
+  protected float getInventoryX() {
+    return inventoryX;
+  }
+
+  protected float getInventoryY() {
+    return inventoryY;
+  }
+
+  protected float getInventoryWidth() {
+    return inventory.getWidth();
+  }
+
+  protected float getInventoryHeight() {
+    return inventory.getHeight();
   }
 
   @Override
@@ -79,34 +113,34 @@ public class ChessView extends GameView implements ChessContract.View {
   }
 
   private void initBitmaps() {
-    background = BitmapFactory.decodeResource(getResources(), R.drawable.autochessboard);
+    background = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_background);
 
     scalex = screenWidth / background.getWidth();
     scaley = screenHeight / background.getHeight();
 
-    button = BitmapFactory.decodeResource(getResources(), R.drawable.start);
+    button = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_start);
     button = Bitmap.createScaledBitmap(button, 150, 150, false);
 
-    inventory = BitmapFactory.decodeResource(getResources(), R.drawable.iteminventory);
+    inventory = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_iteminventory);
     inventory = Bitmap.createScaledBitmap(inventory, 200, 300, false);
 
-    triangle = BitmapFactory.decodeResource(getResources(), R.drawable.triangle);
+    triangle = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_triangle);
     triangle = Bitmap.createScaledBitmap(triangle, 80, 80, false);
     //    triangleX = inventoryX;
     //    triangleY = inventoryY;
     //
-    //    triangle2 = BitmapFactory.decodeResource(getResources(), R.drawable.triangle);
-    //    triangle2 = Bitmap.createScaledBitmap(triangle, 80, 80, false);
+    //    triangle2 = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_triangle);
+    //    triangle2 = Bitmap.createScaledBitmap(chessgame_component_triangle, 80, 80, false);
     //    triangle2X = screenWidth * 0.6f;
     //    triangle2Y = screenHeight * 0.4f;
 
-    star = BitmapFactory.decodeResource(getResources(), R.drawable.star);
+    star = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_star);
     star = Bitmap.createScaledBitmap(star, 80, 80, false);
     //    starX = inventoryX + inventory.getWidth() * 0.5f;
     //    starY = inventoryY;
     //
-    //    star2 = BitmapFactory.decodeResource(getResources(), R.drawable.star);
-    //    star2 = Bitmap.createScaledBitmap(star, 80, 80, false);
+    //    star2 = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_star);
+    //    star2 = Bitmap.createScaledBitmap(chessgame_component_star, 80, 80, false);
     //    star2X = screenWidth * 0.6f;
     //    star2Y = screenHeight * 0.65f;
   }
@@ -118,60 +152,18 @@ public class ChessView extends GameView implements ChessContract.View {
   }
 
   public void drawInventory() {
-    inventoryX = screenWidth / 30;
+    inventoryX = screenWidth * 0.033f;
     inventoryY = screenHeight * 0.7f;
     canvas.drawBitmap(inventory, inventoryX, inventoryY, paint);
   }
 
-  public void drawStar(Coordinate coordinate) {
-    canvas.drawBitmap(star, coordinate.getX(), coordinate.getY(), paint);
-  }
-
-  public void drawTriangle(Coordinate coordinate) {
-    canvas.drawBitmap(triangle, coordinate.getX(), coordinate.getY(), paint);
-  }
-
-  @Override
-  public Coordinate viewCoordinateToInventoryCoordinate(float x, float y) {
-    Coordinate coordinate = new Coordinate(0, 0);
-    if (x > inventoryX
-        && x < inventoryX + inventory.getWidth() * 0.5f
-        && y > inventoryY
-        && y < inventoryY + inventory.getHeight() * 0.3333f) {
-      coordinate.setXY(1, 1);
-    } else if (x > inventoryX
-        && x < inventoryX + inventory.getWidth() * 0.5f
-        && y > inventoryY + inventory.getHeight() * 0.3333f
-        && y < inventoryY + inventory.getHeight() * 0.6666f) {
-      coordinate.setXY(2, 1);
-    } else if (x > inventoryX
-        && x < inventoryX + inventory.getWidth() * 0.5f
-        && y > inventoryY + inventory.getHeight() * 0.6666f
-        && y < inventoryY + inventory.getHeight()) {
-      coordinate.setXY(3, 1);
-    } else if (x > inventoryX + inventory.getWidth() * 0.5f
-        && x < inventoryX + inventory.getWidth()
-        && y > inventoryY
-        && y < inventoryY + inventory.getHeight() * 0.3333f) {
-      coordinate.setXY(1, 2);
-    }else if (x > inventoryX + inventory.getWidth() * 0.5f
-        && x < inventoryX + inventory.getWidth()
-        && y > inventoryY + inventory.getHeight() * 0.3333f
-        && y < inventoryY + inventory.getHeight() * 0.6666f) {
-      coordinate.setXY(2, 2);
-    }else if (x > inventoryX + inventory.getWidth() * 0.5f
-        && x < inventoryX + inventory.getWidth()
-        && y > inventoryY + inventory.getHeight() * 0.6666f
-        && y < inventoryY + inventory.getHeight()) {
-      coordinate.setXY(3, 2);
-    }else if(x > buttonX
-          && x < buttonX + button.getWidth()
-          && y > buttonY
-          && y < buttonY + button.getHeight()){
-      coordinate.setXY(0,0);
-    }
-    return coordinate;
-  }
+//  public enum drawChessPieceHelper(){
+//
+//  }
+//
+//  public void drawNPCChessPiece(){
+//    canvas.drawBitmap();
+//  }
 
   // TODO Add two images for player and NPC. Maybe...
 
@@ -189,6 +181,18 @@ public class ChessView extends GameView implements ChessContract.View {
     drawInventory();
   }
 
+//  @Override
+//  public void drawChessPiece(Coordinate coordinate, String type) {
+//    Coordinate viewCoordinate = presenter.boardCoordinateToViewCoordinate(coordinate);
+//    if (type.equals("chessgame_component_star")) canvas.drawBitmap(star, viewCoordinate.getX(), viewCoordinate.getY(), paint);
+//    else if (type.equals("chessgame_component_triangle"))
+//      canvas.drawBitmap(triangle, viewCoordinate.getX(), viewCoordinate.getY(), paint);
+//  }
+
+private void getViewCoordinateToDraw(Coordinate coordinate, String type){
+
+  }
+
   @Override
   public void draw() {
     try {
@@ -197,9 +201,34 @@ public class ChessView extends GameView implements ChessContract.View {
       canvas.save();
       canvas.scale(scalex, scaley, 0, 0);
       canvas.drawBitmap(background, 0, 0, paint);
+      //      canvas.drawBitmap(star, screenWidth * 3, screenHeight * 3, paint);
       canvas.restore();
       initView();
-      //      canvas.drawBitmap(star, starX, starY, paint);
+      //      canvas.drawBitmap(chessgame_component_star, starX, starY, paint);
+      //      canvas.drawBitmap(chessgame_component_triangle, triangleX, triangleY, paint);
+//      canvas.drawBitmap(star, screenWidth * 0.32f, screenHeight * 0.46f, paint);
+//
+//      canvas.drawBitmap(star, screenWidth * 0.42f, screenHeight * 0.46f, paint);
+//
+//      canvas.drawBitmap(star, screenWidth * 0.52f, screenHeight * 0.46f, paint);
+//
+//      canvas.drawBitmap(star, screenWidth * 0.62f, screenHeight * 0.46f, paint);
+//
+//      canvas.drawBitmap(star, screenWidth * 0.3f, screenHeight * 0.61f, paint);
+//
+//      canvas.drawBitmap(star, screenWidth * 0.41f, screenHeight * 0.61f, paint);
+//
+//      canvas.drawBitmap(star, screenWidth * 0.525f, screenHeight * 0.61f, paint);
+//
+//      canvas.drawBitmap(star, screenWidth * 0.64f, screenHeight * 0.61f, paint);
+//
+//      canvas.drawBitmap(star, screenWidth * 0.27f, screenHeight * 0.8f, paint);
+//
+//      canvas.drawBitmap(star, screenWidth * 0.395f, screenHeight * 0.8f, paint);
+//
+//      canvas.drawBitmap(star, screenWidth * 0.53f, screenHeight * 0.8f, paint);
+//
+//      canvas.drawBitmap(star, screenWidth * 0.67f, screenHeight * 0.8f, paint);
       //      canvas.drawBitmap(triangle, triangleX, triangleY, paint);
       //      canvas.drawBitmap(triangle2, triangle2X, triangle2Y, paint);
       //      canvas.drawBitmap(star2, star2X, star2Y, paint);
@@ -232,59 +261,71 @@ public class ChessView extends GameView implements ChessContract.View {
       float x = event.getX();
       float y = event.getY();
       Coordinate viewCoordinate = new Coordinate(x, y);
-      Coordinate InventoryCoordinate = viewCoordinateToInventoryCoordinate(x, y);
+      Coordinate InventoryCoordinate =
+          presenter.viewCoordinateToInventoryCoordinate(viewCoordinate);
+      Coordinate BoardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);
       String type = presenter.InventoryCoordinateToChessType(InventoryCoordinate);
       System.out.println(String.valueOf(x) + " " + String.valueOf(y));
-      if (x > buttonX
-          && x < buttonX + button.getWidth()
-          && y > buttonY
-          && y < buttonY + button.getHeight()) {
-        Toast.makeText(activity, "Start the game.", Toast.LENGTH_SHORT).show();
-        // Call method to start the game.
-        boolean result = presenter.startAutoFight();
-        if (result) {
-          Toast.makeText(activity, "You win the game!", Toast.LENGTH_SHORT).show();
-          //          autoChessGame.showStatistic(true); // Win and get 2 cards.
-        } else {
-          //          autoChessGame.showStatistic(false); // Lose and get 0 cards.
-          Toast.makeText(activity, "You lose the game!", Toast.LENGTH_SHORT).show();
+      if ( x > screenWidth * 0.3f
+          && x < screenWidth * 0.5f
+          && y > screenHeight * 0.44f
+          && y < screenHeight) {
+        // Place a chess piece that has been chosen.
+//        drawChessPiece(BoardCoordinate, "chessgame_component_star");
+        presenter.placePlayerChess(InventoryCoordinate, "chessgame_component_star");
+        placeChess = false;
+      } else {
+        if (x > buttonX
+            && x < buttonX + button.getWidth()
+            && y > buttonY
+            && y < buttonY + button.getHeight()) {
+          Toast.makeText(activity, "Start the game.", Toast.LENGTH_SHORT).show();
+          // Call method to chessgame_component_start the game.
+          boolean winGame = presenter.startAutoFight();
+          if (winGame) {
+            Toast.makeText(activity, "You win the game!", Toast.LENGTH_SHORT).show();
+            //          autoChessGame.showStatistic(true); // Win and get 2 cards.
+          } else {
+            //          autoChessGame.showStatistic(false); // Lose and get 0 cards.
+            Toast.makeText(activity, "You lose the game!", Toast.LENGTH_SHORT).show();
+          }
+        } else if (x > inventoryX
+            && x < inventoryX + inventory.getWidth()
+            && y > inventoryY
+            && y < inventoryY + inventory.getHeight()) {
+          // Choose a chess piece from inventory.
+          Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
+          // TODO To highlight the chess has been chosen.
+          placeChess = true;
         }
-//      } else if (x > inventoryX
-//          && x < inventoryX + inventory.getWidth() * 0.5f
-//          && y > inventoryY
-//          && y < inventoryY + inventory.getHeight() * 0.3333f) {
-//        Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
-//        //        int chosenPlace = 0;
-//        //        Coordinate location = autoChessGame.placeChess(chosenPlace);
-//        //        triangleX = InventoryCoordinate.getX();
-//        //        triangleY = InventoryCoordinate.getY();
-//        drawTriangle(viewCoordinate);
-//        presenter.placePlayerChess(InventoryCoordinate, type); //
-//      } else if (x > inventoryX + inventory.getWidth() * 0.5f
-//          && x < inventoryX + inventory.getWidth()
-//          && y > inventoryY
-//          && y < inventoryY + inventory.getHeight() * 0.3333f) {
-//        Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
-//        //        int chosenPlace = 1;
-//        //        Coordinate location = autoChessGame.placeChess(chosenPlace);
-//        //        starX = location.getX();
-//        //        starY = location.getY();
-//        drawStar(viewCoordinate);
-//        presenter.placePlayerChess(InventoryCoordinate, type); //
-      }else if (type.equals("star")){
-        Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
-        drawStar(viewCoordinate);
-        presenter.placePlayerChess(InventoryCoordinate, type); // TODO
-
-      }else if (type.equals("triangle")){
-        Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
-        drawTriangle(viewCoordinate);
-        presenter.placePlayerChess(InventoryCoordinate, type);
+        return true;
       }
-      return true;
     }
     return false;
   }
+
+  //      } else if (x > inventoryX
+  //          && x < inventoryX + inventory.getWidth() * 0.5f
+  //          && y > inventoryY
+  //          && y < inventoryY + inventory.getHeight() * 0.3333f) {
+  //        Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
+  //        //        int chosenPlace = 0;
+  //        //        Coordinate location = autoChessGame.placeChess(chosenPlace);
+  //        //        triangleX = InventoryCoordinate.getX();
+  //        //        triangleY = InventoryCoordinate.getY();
+  //        drawTriangle(viewCoordinate);
+  //        presenter.placePlayerChess(InventoryCoordinate, type); //
+  //      } else if (x > inventoryX + inventory.getWidth() * 0.5f
+  //          && x < inventoryX + inventory.getWidth()
+  //          && y > inventoryY
+  //          && y < inventoryY + inventory.getHeight() * 0.3333f) {
+  //        Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
+  //        //        int chosenPlace = 1;
+  //        //        Coordinate location = autoChessGame.placeChess(chosenPlace);
+  //        //        starX = location.getX();
+  //        //        starY = location.getY();
+  //        drawStar(viewCoordinate);
+  //        presenter.placePlayerChess(InventoryCoordinate, type); //
 
   @Override
   public void setPresenter(ChessContract.Presenter presenter) {

@@ -1,21 +1,31 @@
 package com.example.g0569.mazegame;
 
 import com.example.g0569.mazegame.model.MazeGame;
+import com.example.g0569.mazegame.model.MazeStopWatch;
 import com.example.g0569.utils.Coordinate;
+import com.example.g0569.utils.Inventory;
+import com.example.g0569.utils.NPC;
 
 public class MazePresenter implements MazeContract.Presenter {
   private MazeContract.View mazeView;
   private MazeGame mazeGame;
-  public MazePresenter(MazeContract.View mazeView) {
+  private Inventory inventory;
+  public MazePresenter(MazeContract.View mazeView, Inventory inventory) {
     this.mazeView = mazeView;
     this.mazeView.setPresenter(this);
-    this.mazeGame = new MazeGame(this);
+    this.mazeGame = new MazeGame(this, inventory);
+    this.inventory = inventory;
   }
 
   @Override
   public void start() {
-    mazeView.drawMaze(mazeGame.getMazeGrid());
+//    mazeView.drawMaze(mazeGame.getMazeGrid());
     mazeGame.onStart();
+  }
+
+  @Override
+  public MazeContract.View getMazeView() {
+    return mazeView;
   }
 
   public void toChessGame(String args) {}
@@ -41,6 +51,11 @@ public class MazePresenter implements MazeContract.Presenter {
   }
 
   @Override
+  public NPC addItemToMazeItem(int x, int y){
+   return mazeGame.addItemToMazeItem(x, y);
+  }
+
+  @Override
   public Coordinate getPlayerCoor() {
     Coordinate playerCoor = Coordinate.create(0,0);;
     try{
@@ -54,7 +69,32 @@ public class MazePresenter implements MazeContract.Presenter {
   }
 
   @Override
+  public void addCollectedNPC(NPC npc){
+    inventory.addNonCollectedItem(npc);
+  }
+
+  @Override
   public Coordinate getPlayerDimensions() {
     return mazeView.getPlayerDimensions();
+  }
+
+  @Override
+  public Inventory getInventory() {
+    return inventory;
+  }
+
+  @Override
+  public String getNPCName(NPC npc) {
+    return npc.getName();
+  }
+
+  @Override
+  public String getNPCType(NPC npc) {
+    return npc.getType();
+  }
+
+  @Override
+  public String getRemainTime(){
+    return mazeGame.getStopWatch().toString();
   }
 }

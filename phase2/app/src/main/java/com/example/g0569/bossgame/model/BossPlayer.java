@@ -36,7 +36,7 @@ public class BossPlayer extends Item {
 //    float x = screenWidth / 2;
 //    float y = screenHeight / 2 - r1 * 2;
 //    coordinate = new Coordinate(x, y);
-//    appearance = BitmapFactory.decodeResource(resource, R.drawable.enemyright);
+//    appearance = BitmapFactory.decodeResource(resource, R.drawable.bossgame_enemy_r);
 //
 //    srcRect = new Rect(0, 0, appearance.getWidth(), appearance.getHeight());
 //    destRect =
@@ -45,6 +45,11 @@ public class BossPlayer extends Item {
 //                    (int) coordinate.getY(),
 //                    (int) coordinate.getX() + size,
 //                    (int) coordinate.getY() + size);
+  }
+
+  @Override
+  public void update() {
+
   }
 
   /**
@@ -93,13 +98,6 @@ public class BossPlayer extends Item {
   public float getR1() {
     return r1;
   }
-
-  /**
-   * Action so that it updates the inventory to show the next item to be thrown Updates the list
-   * essentially
-   */
-  @Override
-  public void action() {}
 
   /**
    * Returns the inventory of the player

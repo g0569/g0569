@@ -5,19 +5,18 @@ import com.example.g0569.base.BaseView;
 import com.example.g0569.chessgame.model.ChessPiece;
 import com.example.g0569.utils.Coordinate;
 
+import java.util.List;
+
 public interface ChessContract {
   interface View extends BaseView<Presenter> {
     void initView();
 
-    void drawStar(Coordinate coordinate);
-
-    void drawTriangle(Coordinate coordinate);
-
-    Coordinate viewCoordinateToInventoryCoordinate(float x, float y);
+//    void drawChessPiece(Coordinate coordinate, String type);
   }
 
   interface Presenter extends BasePresenter {
-    void drawChessPiece(ChessPiece chessPiece);
+//    void drawChessPiece(ChessPiece chessPiece);
+    void drawNPCChessPiece(List<ChessPiece> NPCData);
 
     boolean startAutoFight();
 
@@ -26,5 +25,9 @@ public interface ChessContract {
     void placePlayerChess(Coordinate coordinate, String type);
 
     String InventoryCoordinateToChessType(Coordinate coordinate);
+
+    Coordinate viewCoordinateToInventoryCoordinate(Coordinate coordinate);
+
+    Coordinate viewCoordinateToBoardCoordinate(Coordinate coordinate);
   }
 }
