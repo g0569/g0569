@@ -50,6 +50,9 @@ public class NPC extends Item implements Serializable {
     return type;
   }
 
+  public String getChessLayout() {
+    return chessLayout;
+  }
 
   public Coordinate getCoordinate() {
     return behavior.getCoordinate();
