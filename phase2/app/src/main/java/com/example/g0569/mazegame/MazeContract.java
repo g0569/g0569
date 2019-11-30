@@ -18,6 +18,8 @@ public interface MazeContract {
     void deleteGridItem(int x, int y, int[][] mazeGrid);
 
     void stopView();
+
+    void resumeView();
   }
 
   interface Presenter extends BasePresenter {
@@ -54,6 +56,8 @@ public interface MazeContract {
 
     void resumeStopWatch();
 
-    void stopView();
+    void pause();
+
+    void resume();
   }
 }

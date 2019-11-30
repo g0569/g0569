@@ -111,7 +111,12 @@ public class MazePresenter implements MazeContract.Presenter {
   }
 
   @Override
-  public void stopView(){
-    mazeView.stopView();
-  };
+  public void pause(){
+    mazeGame.pause();
+  }
+
+  @Override
+  public void resume(){
+    mazeGame.load();
+  }
 }

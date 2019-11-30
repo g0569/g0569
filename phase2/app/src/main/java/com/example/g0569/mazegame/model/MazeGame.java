@@ -55,10 +55,16 @@ public class MazeGame extends BaseGame {
   }
 
   @Override
-  public void pause() {}
+  public void pause() {
+      stopWatch.pause();
+      presenter.getMazeView().stopView();
+  }
 
   @Override
-  public void load() {}
+  public void load() {
+      stopWatch.resume();
+      presenter.getMazeView().resumeView();
+  }
 
   public Coordinate getStartPoint() {
     return this.startpoint;
@@ -88,7 +94,7 @@ public class MazeGame extends BaseGame {
   public void timeReach(){
 
       getStopWatch().stop();
-      presenter.stopView();
+      presenter.getMazeView().stopView();
 
   }
 
