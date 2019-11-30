@@ -164,7 +164,7 @@ public class ChessView extends GameView implements ChessContract.View {
 
   @Override
   public void drawChessPiece(Coordinate coordinate, String type) {
-    Coordinate viewCoordinate = presenter.boardCoordinateToViewCoordinate(coordinate);
+    Coordinate viewCoordinate = presenter.gridCoordinateToViewCoordinate(coordinate);
     if (type.equals("chessgame_component_star"))
       canvas.drawBitmap(star, viewCoordinate.getX(), viewCoordinate.getY(), paint);
     else if (type.equals("chessgame_component_triangle"))
@@ -211,10 +211,10 @@ public class ChessView extends GameView implements ChessContract.View {
       float x = event.getX();
       float y = event.getY();
       Coordinate viewCoordinate = new Coordinate(x, y);
-      Coordinate InventoryCoordinate =
+      Coordinate inventoryCoordinate =
           presenter.viewCoordinateToInventoryCoordinate(viewCoordinate);
       Coordinate BoardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);
-      String type = presenter.InventoryCoordinateToChessType(InventoryCoordinate);
+      String type = presenter.InventoryCoordinateToChessType(inventoryCoordinate);
       System.out.println(String.valueOf(x) + " " + String.valueOf(y));
       if (placeChess) {
         // Place Chess Piece now.
@@ -223,7 +223,7 @@ public class ChessView extends GameView implements ChessContract.View {
             && y > screenHeight * 0.44f
             && y < screenHeight) {
           // Place a chess piece that has been chosen.
-          presenter.placePlayerChess(BoardCoordinate, type);
+          presenter.placePlayerChess(BoardCoordinate); // TODO unfinished part!
           placeChess = false;
         }
       } else {
@@ -248,6 +248,7 @@ public class ChessView extends GameView implements ChessContract.View {
             && y < inventoryY + inventory.getHeight()) {
           // Choose a chess piece from inventory.
           Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
+          presenter.setSelectedChessPieceData(inventoryCoordinate);
           // TODO To highlight the chess has been chosen.
           placeChess = true;
         }

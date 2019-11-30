@@ -18,10 +18,11 @@ public class NPC extends Item implements Serializable {
   /**
    * Instantiates a new Item.
    */
-  public NPC(String Name) {
+  public NPC(String type) {
     super();
-    this.name = Name;
+    this.type = type;
   }
+
 
   public NPC(int npcId, String name, int damage, String power, String difficulty, String type, String chessLayout) {
     super();
@@ -52,6 +53,10 @@ public class NPC extends Item implements Serializable {
 
   public String getChessLayout() {
     return chessLayout;
+  }
+
+  public void setCoordinate(Coordinate coordinate) {
+    behavior.setCoordinate(coordinate);
   }
 
   public Coordinate getCoordinate() {

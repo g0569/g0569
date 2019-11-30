@@ -2,8 +2,9 @@ package com.example.g0569.chessgame;
 
 import com.example.g0569.chessgame.model.ChessGame;
 import com.example.g0569.chessgame.model.ChessPiece;
-import com.example.g0569.chessgame.model.ChessSQLiteAccessInterface;
 import com.example.g0569.utils.Coordinate;
+import com.example.g0569.utils.Inventory;
+import com.example.g0569.utils.NPC;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +13,10 @@ public class ChessPresenter implements ChessContract.Presenter {
   private ChessContract.View chessView;
   private ChessGame chessGame;
 
-  ChessPresenter(ChessContract.View chessView, ChessSQLiteAccessInterface boardData) {
+  ChessPresenter(ChessContract.View chessView, Inventory inventory, NPC selectedNPC) {
     this.chessView = chessView;
     this.chessView.setPresenter(this);
-    this.chessGame = new ChessGame(this);
-    this.chessGame.setBoardData(boardData);
+    this.chessGame = new ChessGame(this, inventory, selectedNPC);
   }
 
   @Override
@@ -27,11 +27,11 @@ public class ChessPresenter implements ChessContract.Presenter {
 
   @Override
   public void drawChessPiece() {
-    List<ChessPiece> chessPieceToDraw = new ArrayList<>();
+    List<NPC> chessPieceToDraw = new ArrayList<>();
     chessPieceToDraw.addAll(chessGame.getPlayerChessPiece());
-    chessPieceToDraw.addAll(chessGame.getNPCChessPiece());
-    for (ChessPiece chessPiece : chessPieceToDraw) {
-      chessView.drawChessPiece(chessPiece.getCoordinate(),chessGame.typeGetter(chessPiece));
+    chessPieceToDraw.addAll(chessGame.getNPCChessPieceData());
+    for (NPC chessPiece : chessPieceToDraw) {
+      chessView.drawChessPiece(chessPiece.getCoordinate(), chessGame.typeGetter(chessPiece));
     }
   }
 
@@ -42,13 +42,18 @@ public class ChessPresenter implements ChessContract.Presenter {
   }
 
   @Override
-  public Coordinate boardCoordinateToViewCoordinate(Coordinate coordinate) {
+  public Coordinate gridCoordinateToViewCoordinate(Coordinate coordinate) {
     // TODO
     Coordinate viewCoordinate = new Coordinate(0, 0);
     float x = coordinate.getX();
     float y = coordinate.getY();
     float width = ((ChessView) chessView).getScreenWidth();
     float height = ((ChessView) chessView).getScreenHeight();
+    float inventoryX = ((ChessView) chessView).getInventoryX();
+    float inventoryY = ((ChessView) chessView).getInventoryY();
+    float inventoryWidth = ((ChessView) chessView).getInventoryWidth();
+    float inventoryHeight = ((ChessView) chessView).getInventoryHeight();
+    // For Board Coordinate to View Coordinate to draw.
     if (x == 1 && y == 1) {
       viewCoordinate.setXY(width * 0.32f, height * 0.46f);
     } else if (x == 1 && y == 2) {
@@ -74,12 +79,28 @@ public class ChessPresenter implements ChessContract.Presenter {
     } else if (x == 3 && y == 4) {
       viewCoordinate.setXY(width * 0.67f, height * 0.8f);
     }
+    // For inventory Coordinate To View Coordinate to draw.
+    else if (x == 10 && y == 10) {
+      viewCoordinate.setXY(inventoryX, inventoryY);
+    } else if (x == 10 && y == 20) {
+      viewCoordinate.setXY(inventoryX + inventoryWidth * 0.5f, inventoryY);
+    } else if (x == 20 && y == 10) {
+      viewCoordinate.setXY(inventoryX, inventoryY + inventoryHeight * 0.33f);
+    } else if (x == 20 && y == 20) {
+      viewCoordinate.setXY(
+          inventoryX + inventoryWidth * 0.5f, inventoryY + inventoryHeight * 0.33f);
+    } else if (x == 30 && y == 10) {
+      viewCoordinate.setXY(inventoryX, inventoryY + inventoryHeight * 0.66f);
+    } else if (x == 30 && y == 20) {
+      viewCoordinate.setXY(
+          inventoryX + inventoryWidth * 0.5f, inventoryY + inventoryHeight * 0.66f);
+    }
     return viewCoordinate;
   }
 
   @Override
-  public void placePlayerChess(Coordinate coordinate, String type) {
-    chessGame.placePlayerChess(coordinate.getX(), coordinate.getY(), type);
+  public void placePlayerChess(Coordinate coordinate) {
+    chessGame.placePlayerChessOnBoard(coordinate);
   }
 
   @Override
@@ -161,5 +182,10 @@ public class ChessPresenter implements ChessContract.Presenter {
       BoardCoordinate.setXY(3, 2);
     }
     return BoardCoordinate;
+  }
+
+  @Override
+  public void setSelectedChessPieceData(Coordinate coordinate) {
+    chessGame.setSelectedChessPieceData(coordinate);
   }
 }
