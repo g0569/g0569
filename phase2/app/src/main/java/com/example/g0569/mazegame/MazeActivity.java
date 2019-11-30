@@ -21,9 +21,10 @@ public class MazeActivity extends AppCompatActivity {
 
     private MazeView mazeView;
     private MazeContract.Presenter presenter;
-    private boolean isMenuVisible = true;
-    private boolean isInventoryVisible = true;
+    private boolean isMenuVisible = false;
+    private boolean isInventoryVisible = false;
     private Bundle bundle;
+    InventoryFragment inventoryView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class MazeActivity extends AppCompatActivity {
         bundle = getIntent().getExtras();
         final Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
 
-        InventoryFragment inventoryView =
+        inventoryView =
                 (InventoryFragment) getSupportFragmentManager().findFragmentById(R.id.ContentFrame);
         if (inventoryView == null) {
             inventoryView = new InventoryFragment(inventory);
@@ -61,10 +62,10 @@ public class MazeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (isMenuVisible) {
                     isMenuVisible = false;
-                    menuLayout.setVisibility(View.VISIBLE);
-                } else {
-                    isMenuVisible = true;
                     menuLayout.setVisibility(View.GONE);
+                } else {
+                    isMenuVisible = false;
+                    menuLayout.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -74,14 +75,19 @@ public class MazeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (isInventoryVisible){
                     isInventoryVisible = false;
-                    inventoryLayout.setVisibility(View.VISIBLE);
+                    inventoryLayout.setVisibility(View.GONE);
                 } else {
                     isInventoryVisible = true;
-                    inventoryLayout.setVisibility(View.GONE);
+                    inventoryLayout.setVisibility(View.VISIBLE);
+                    updateNpcData();
                 }
             }
         });
 
+    }
+
+    private void updateNpcData() {
+        inventoryView.updateNpcData();
     }
 
     /**
