@@ -42,7 +42,7 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
     protected Thread thread;
     protected Activity activity;
 
-    private HashMap<String, Bitmap> typeLookUpMap;
+    private HashMap<String, Bitmap> typeLookUpTable;
 
     private Bitmap npc1;
     private Bitmap npc2;
@@ -80,12 +80,12 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
         npc6 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l6);
     }
 
-    public HashMap<String, Bitmap> getTypeLookUpMap() {
-        return typeLookUpMap;
+    public HashMap<String, Bitmap> getTypeLookUpTable() {
+        return typeLookUpTable;
     }
 
-    public void setTypeLookUpMap(HashMap<String, Bitmap> typeLookUpMap) {
-        this.typeLookUpMap = typeLookUpMap;
+    public void setTypeLookUpTable(HashMap<String, Bitmap> typeLookUpTable) {
+        this.typeLookUpTable = typeLookUpTable;
     }
 
     protected Bitmap getNpc1() {

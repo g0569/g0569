@@ -1,5 +1,9 @@
 package com.example.g0569.utils;
 
+import com.example.g0569.R;
+
+import java.util.HashMap;
+
 public interface Constants {
   int TO_MENU_VIEW = 0;
   String TO_LOGIN_VIEW = "1";
@@ -38,5 +42,22 @@ public interface Constants {
   String BUNDLE_INVENTORY_KEY = "BUNDLE_INVENTORY_KEY";
   String BUNDLE_SELECTEDNPC_KEY = "BUNDLE_SELECTEDNPC_KEY";
 
+  HashMap<String, Integer> NPCIMAGELOOKUPTABLE = new HashMap<String, Integer>(){{
+    put("type1", R.drawable.npc_l1);
+    put("type2", R.drawable.npc_l2);
+    put("type3", R.drawable.npc_l3);
+    put("type4", R.drawable.npc_l4);
+    put("type5", R.drawable.npc_l5);
+    put("type6", R.drawable.npc_l6);
+  }};
+//
+  HashMap<String, Integer> NONSELECTEDNPCIMAGELOOKUPTABLE = new HashMap<String, Integer>(){{
+    put("type1", R.drawable.npc_l1_nonselected);
+    put("type2", R.drawable.npc_l2_nonselected);
+    put("type3", R.drawable.npc_l3_nonselected);
+    put("type4", R.drawable.npc_l4_nonselected);
+    put("type5", R.drawable.npc_l5_nonselected);
+    put("type6", R.drawable.npc_l6_nonselected);
+  }};
 
 }
