@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -34,14 +35,12 @@ public class Utils {
     ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
     ObjectOutputStream objOut = new ObjectOutputStream(byteOut);
     objOut.writeObject(obj);
-    String str = byteOut.toString("ISO-8859-1");
-    return str;
+    return byteOut.toString("ISO-8859-1");
   }
 
   public static Object deserializeToObject(String str) throws Exception{
-    ByteArrayInputStream byteIn = new ByteArrayInputStream(str.getBytes("ISO-8859-1"));
+    ByteArrayInputStream byteIn = new ByteArrayInputStream(str.getBytes(StandardCharsets.ISO_8859_1));
     ObjectInputStream objIn = new ObjectInputStream(byteIn);
-    Object obj =objIn.readObject();
-    return obj;
+    return objIn.readObject();
   }
 }

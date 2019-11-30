@@ -5,6 +5,7 @@ import com.example.g0569.utils.Utils;
 
 import java.util.Date;
 
+/** A single Save game stored in the database. */
 public class SaveGame {
   private Date createdTime;
   private int saveId;
@@ -13,15 +14,35 @@ public class SaveGame {
   private Inventory inventory;
   private boolean isNewGame;
 
-  public SaveGame(Date createdTime, int saveId, int progress, String inventoryData, int uid) {
+  /**
+   * create a new Save game from the database.
+   *
+   * @param createdTime the created time of this save
+   * @param saveId the save id in the database
+   * @param progress the progress of current save game
+   * @param inventoryData the serialized inventory data
+   * @param uid the uid of the user who has this save game
+   */
+  SaveGame(Date createdTime, int saveId, int progress, String inventoryData, int uid)
+      throws Exception {
     this.createdTime = createdTime;
     this.saveId = saveId;
     this.progress = progress;
     this.uid = uid;
     this.isNewGame = false;
+    this.inventory = (Inventory) Utils.deserializeToObject(inventoryData);
   }
 
-  public SaveGame(Date createdTime, int saveId, int progress, int uid, boolean isNewGame) {
+  /**
+   * Instantiates a new Save game with the flag indicating if this is a new save game.
+   *
+   * @param createdTime the created time of this save
+   * @param saveId the save id in the database
+   * @param progress the progress of current save game
+   * @param uid the uid of the user who has this save game
+   * @param isNewGame indicates if this is a new save game
+   */
+  SaveGame(Date createdTime, int saveId, int progress, int uid, boolean isNewGame) {
     this.createdTime = createdTime;
     this.saveId = saveId;
     this.progress = progress;
@@ -29,59 +50,118 @@ public class SaveGame {
     this.isNewGame = isNewGame;
   }
 
+  /**
+   * Gets the created time of this save game.
+   *
+   * @return the created time
+   */
   public Date getCreatedTime() {
     return createdTime;
   }
 
-  public void setCreatedTime(Date createdTime) {
+  /**
+   * Sets the created time of this save game.
+   *
+   * @param createdTime the created time
+   */
+  void setCreatedTime(Date createdTime) {
     this.createdTime = createdTime;
   }
 
-  public int getSaveId() {
+  /**
+   * Gets save id.
+   *
+   * @return the save id
+   */
+  int getSaveId() {
     return saveId;
   }
 
-  public void setSaveId(int saveId) {
+  /**
+   * Sets save id.
+   *
+   * @param saveId the save id
+   */
+  void setSaveId(int saveId) {
     this.saveId = saveId;
   }
 
+  /**
+   * Gets inventory.
+   *
+   * @return the inventory
+   */
   public Inventory getInventory() {
     return inventory;
   }
 
+  /**
+   * Sets inventory.
+   *
+   * @param inventory the inventory
+   */
   public void setInventory(Inventory inventory) {
     this.inventory = inventory;
   }
 
-  public String getStringInventory() {
+  /**
+   * Gets string inventory.
+   *
+   * @return the string inventory
+   */
+  String getStringInventory() {
     String serializedInventory = null;
     try {
       serializedInventory = Utils.serializeToString(this);
     } catch (Exception e) {
       e.printStackTrace();
-    }
-    finally{
+    } finally {
       return serializedInventory;
     }
   }
 
+  /**
+   * Gets progress.
+   *
+   * @return the progress
+   */
   public int getProgress() {
     return progress;
   }
 
-  public void setProgress(int progress) {
+  /**
+   * Sets progress.
+   *
+   * @param progress the progress
+   */
+  void setProgress(int progress) {
     this.progress = progress;
   }
 
-  public int getUid() {
+  /**
+   * Gets uid.
+   *
+   * @return the uid
+   */
+  int getUid() {
     return uid;
   }
 
+  /**
+   * Is new game boolean.
+   *
+   * @return the boolean
+   */
   public boolean isNewGame() {
     return isNewGame;
   }
 
-  public void setNewGame(boolean newGame) {
+  /**
+   * Sets new game.
+   *
+   * @param newGame the new game
+   */
+  void setNewGame(boolean newGame) {
     isNewGame = newGame;
   }
 }

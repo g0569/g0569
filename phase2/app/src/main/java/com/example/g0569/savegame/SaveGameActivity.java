@@ -9,12 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.g0569.R;
 import com.example.g0569.mazegame.MazeActivity;
-import com.example.g0569.savegame.model.SaveGameSQLiteAccesser;
+import com.example.g0569.savegame.model.SaveGameSQLiteAccessor;
 import com.example.g0569.utils.SQLiteHelper;
 
+/** The Save game activity. */
 public class SaveGameActivity extends AppCompatActivity {
 
   SQLiteHelper sqLitehelper = new SQLiteHelper(this, "g0569");
+
   private SaveGamePresenter presenter;
 
   @Override
@@ -34,16 +36,21 @@ public class SaveGameActivity extends AppCompatActivity {
     Bundle bundle = getIntent().getExtras();
 
     if (mView == null) {
-      mView = mView.newInstance();
+      mView = SaveGameFragment.newInstance();
       getSupportFragmentManager().beginTransaction().replace(R.id.ContentFrame, mView).commit();
     }
 
     presenter = new SaveGamePresenter(mView, bundle);
-    SaveGameSQLiteAccesser saveGameSQLiteAccesser = new SaveGameSQLiteAccesser();
-    saveGameSQLiteAccesser.setSQLiteHelper(sqLitehelper);
-    presenter.setSaveGameSQLiteAccesser(saveGameSQLiteAccesser);
+    SaveGameSQLiteAccessor saveGameSQLiteAccessor = new SaveGameSQLiteAccessor();
+    saveGameSQLiteAccessor.setSQLiteHelper(sqLitehelper);
+    presenter.setSaveGameSQLiteAccessor(saveGameSQLiteAccessor);
   }
 
+  /**
+   * Start the maze game with the bundle.
+   *
+   * @param bundle the bundle that need to pass to MazeActivity
+   */
   public void startMazeGame(Bundle bundle) {
     Intent intent = new Intent(this, MazeActivity.class);
     intent.putExtras(bundle);
