@@ -29,6 +29,11 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
   private View view;
   private InventoryGridAdapter inventoryGridAdapter;
 
+  /**
+   * Instantiates a new Inventory fragment.
+   *
+   * @param inventory the inventory
+   */
   public InventoryFragment(Inventory inventory) {
     this.inventory = inventory;
   }
@@ -48,28 +53,35 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
         new InventoryGridAdapter(
             getActivity(), inventory.getCollectedItem(), inventory.getAvailableItem(), this);
     inventoryGridView.setAdapter(inventoryGridAdapter);
-    view.findViewById(R.id.inventory_tochessgame_btn).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            NPC selectedNPC = inventoryGridAdapter.getCurrentNPC();
-            if (selectedNPC == null) {
-                Toast.makeText(getActivity(), "Please select a NPC you want", Toast.LENGTH_LONG).show();
-            }else {
-                ((MazeActivity) getActivity()).toChessGame(selectedNPC);
-            }
-        }
-    });
-    view.findViewById(R.id.inventory_tobossgame_btn).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            ((MazeActivity) getActivity()).toBossGame();
-        }
-    });
+    view.findViewById(R.id.inventory_tochessgame_btn)
+        .setOnClickListener(
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                NPC selectedNPC = inventoryGridAdapter.getCurrentNPC();
+                if (selectedNPC == null) {
+                  Toast.makeText(getActivity(), "Please select a NPC you want", Toast.LENGTH_LONG)
+                      .show();
+                } else {
+                  ((MazeActivity) getActivity()).toChessGame(selectedNPC);
+                }
+              }
+            });
+    view.findViewById(R.id.inventory_tobossgame_btn)
+        .setOnClickListener(
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                ((MazeActivity) getActivity()).toBossGame();
+              }
+            });
     return view;
   }
 
+  /** Update npc data. */
   public void updateNpcData() {
-      inventoryGridAdapter.updateInventory(inventory.getCollectedItem(), inventory.getAvailableItem());
+    inventoryGridAdapter.updateInventory(
+        inventory.getCollectedItem(), inventory.getAvailableItem());
     ImageView npcAvatar = view.findViewById(R.id.inventory_npc_avatar);
     TextView npcName = view.findViewById(R.id.inventory_npc_name);
     TextView npcDamage = view.findViewById(R.id.inventory_npc_damage);

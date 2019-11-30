@@ -1,7 +1,6 @@
 package com.example.g0569.mazegame;
 
 import com.example.g0569.mazegame.model.MazeGame;
-import com.example.g0569.mazegame.model.MazeStopWatch;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.NPC;
@@ -10,6 +9,7 @@ public class MazePresenter implements MazeContract.Presenter {
   private MazeContract.View mazeView;
   private MazeGame mazeGame;
   private Inventory inventory;
+
   public MazePresenter(MazeContract.View mazeView, Inventory inventory) {
     this.mazeView = mazeView;
     this.mazeView.setPresenter(this);
@@ -19,7 +19,7 @@ public class MazePresenter implements MazeContract.Presenter {
 
   @Override
   public void start() {
-//    mazeView.drawMaze(mazeGame.getMazeGrid());
+    //    mazeView.drawMaze(mazeGame.getMazeGrid());
     mazeGame.onStart();
   }
 
@@ -37,7 +37,7 @@ public class MazePresenter implements MazeContract.Presenter {
 
   @Override
   public void stopMove() {
-    mazeGame.movePlayer(Coordinate.create(0,0));
+    mazeGame.movePlayer(Coordinate.create(0, 0));
   }
 
   @Override
@@ -51,25 +51,23 @@ public class MazePresenter implements MazeContract.Presenter {
   }
 
   @Override
-  public NPC addItemToMazeItem(int x, int y){
-   return mazeGame.addItemToMazeItem(x, y);
+  public NPC addItemToMazeItem(int x, int y) {
+    return mazeGame.addItemToMazeItem(x, y);
   }
 
   @Override
   public Coordinate getPlayerCoor() {
-    Coordinate playerCoor = Coordinate.create(0,0);;
-    try{
+    Coordinate playerCoor = Coordinate.create(0, 0);
+    try {
       playerCoor = mazeGame.getMazePlayer().getCoordinate();
-    }
-    catch (NullPointerException e) {
-    }
-    finally{
+    } catch (NullPointerException e) {
+    } finally {
       return playerCoor;
     }
   }
 
   @Override
-  public void addCollectedNPC(NPC npc){
+  public void addCollectedNPC(NPC npc) {
     inventory.addCollectedItem(npc);
   }
 
@@ -94,29 +92,28 @@ public class MazePresenter implements MazeContract.Presenter {
   }
 
   @Override
-  public int getRemainTime(){
-//    System.out.println(mazeGame.getStopWatch().toString());
+  public int getRemainTime() {
+    //    System.out.println(mazeGame.getStopWatch().toString());
     return mazeGame.getStopWatch().getRemainTime();
-
   }
 
   @Override
-  public void pauseStopWatch(){
+  public void pauseStopWatch() {
     mazeGame.getStopWatch().pause();
   }
 
   @Override
-  public void resumeStopWatch(){
+  public void resumeStopWatch() {
     mazeGame.getStopWatch().resume();
   }
 
   @Override
-  public void pause(){
+  public void pause() {
     mazeGame.pause();
   }
 
   @Override
-  public void resume(){
+  public void resume() {
     mazeGame.load();
   }
 }
