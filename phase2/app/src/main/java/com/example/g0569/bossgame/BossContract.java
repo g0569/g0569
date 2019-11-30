@@ -7,8 +7,11 @@ import com.example.g0569.utils.Coordinate;
 public interface BossContract {
   interface View extends BaseView<Presenter> {
     void initView();
+
     void drawBossPlayer();
+
     void drawEnemy();
+
     void drawHealthBar();
 
     void setThrown(boolean b);
@@ -20,11 +23,15 @@ public interface BossContract {
     int getWidth();
 
     void end(boolean end);
+
+    void setCurrentNPCBitmap(String name);
   }
 
   interface Presenter extends BasePresenter {
     void pause();
+
     void shoot();
+
     void showMenu();
 
     void update();

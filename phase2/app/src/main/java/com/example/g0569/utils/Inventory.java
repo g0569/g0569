@@ -37,6 +37,10 @@ public class Inventory implements Serializable {
         }
     }
 
+    public List<NPC> getAvailableItem(){
+        return availableItem;
+    }
+
     /**
      * do when initiating the project.
      * @param e

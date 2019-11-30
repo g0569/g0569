@@ -6,6 +6,9 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.g0569.utils.Constants;
+import com.example.g0569.utils.Inventory;
+
 /** The type Boss activity. */
 public class BossActivity extends AppCompatActivity {
 
@@ -23,9 +26,13 @@ public class BossActivity extends AppCompatActivity {
     if (bossView == null) {
       bossView = new BossView(this);
     }
-    presenter = new BossPresenter(bossView);
+
     setContentView(bossView);
+    Bundle bundle = getIntent().getExtras();
+    Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
+    presenter = new BossPresenter(bossView, inventory);
   }
+
 
   @Override
   protected void onStart() {

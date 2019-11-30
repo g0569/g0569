@@ -28,6 +28,7 @@ public class BossView extends GameView implements BossContract.View {
   private Bitmap switchButton;
   private Bitmap shootButton;
   private Bitmap healthBar;
+  private Bitmap NPC;
   private Coordinate switchButtonCoordinates;
   private Coordinate healthBarHolderCoordinate;
   private Coordinate menuButtonCoordinates;
@@ -41,6 +42,7 @@ public class BossView extends GameView implements BossContract.View {
   private Coordinate healthBarCoordinate;
   private Coordinate currentProjectileCoordinate;
   private int enemyDirection;
+  private Coordinate NPCCoordinate;
 
   /**
    * Instantiates a new Bossview.
@@ -128,14 +130,26 @@ public class BossView extends GameView implements BossContract.View {
           switchButton.getWidth(),
           switchButton.getHeight())) {
         System.out.println("switch team");
+        bossPresenter.switchTeam();
+        resetCurrentProjectile();
         Toast.makeText(activity, "Switch", Toast.LENGTH_SHORT).show();
 
         //        bossPresenter.switchTeam();
-      }
-      else if (inRange(x,y, pauseButtonCoordinates.getX(), pauseButtonCoordinates.getY(), pauseButton.getWidth(), pauseButton.getHeight())){
+      } else if (inRange(
+          x,
+          y,
+          pauseButtonCoordinates.getX(),
+          pauseButtonCoordinates.getY(),
+          pauseButton.getWidth(),
+          pauseButton.getHeight())) {
         Toast.makeText(activity, "Paused", Toast.LENGTH_SHORT).show();
-      }
-      else if(inRange(x,y,menuButtonCoordinates.getX(),menuButtonCoordinates.getY(), menuButton.getWidth(),menuButton.getHeight())){
+      } else if (inRange(
+          x,
+          y,
+          menuButtonCoordinates.getX(),
+          menuButtonCoordinates.getY(),
+          menuButton.getWidth(),
+          menuButton.getHeight())) {
         Toast.makeText(activity, "Menu", Toast.LENGTH_SHORT).show();
       }
     }
@@ -168,13 +182,19 @@ public class BossView extends GameView implements BossContract.View {
 
     background = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_background_2);
     pauseButton = BitmapFactory.decodeResource(getResources(), R.drawable.pause);
-    pauseButton = Bitmap.createScaledBitmap(pauseButton, (int) (getWidth()*0.08f), (int)(getHeight()*0.10f), false);
+    pauseButton =
+        Bitmap.createScaledBitmap(
+            pauseButton, (int) (getWidth() * 0.08f), (int) (getHeight() * 0.10f), false);
     menuButton = BitmapFactory.decodeResource(getResources(), R.drawable.homebutton);
-    menuButton = Bitmap.createScaledBitmap(menuButton, (int) (getWidth()*0.08f), (int)(getHeight()*0.11f), false);
+    menuButton =
+        Bitmap.createScaledBitmap(
+            menuButton, (int) (getWidth() * 0.08f), (int) (getHeight() * 0.11f), false);
     bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_component_aim);
+
     healthBar = BitmapFactory.decodeResource(getResources(), R.drawable.redbar);
     healthBar = Bitmap.createScaledBitmap(healthBar, getWidth() / 3, getHeight() / 3, false);
-    healthBarHolder = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_component_bar);
+    healthBarHolder =
+        BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_component_bar);
     healthBarHolder =
         Bitmap.createScaledBitmap(healthBarHolder, getWidth() / 3, getHeight() / 3, false);
     scalex = screenWidth / background.getWidth();
@@ -190,7 +210,8 @@ public class BossView extends GameView implements BossContract.View {
         Bitmap.createScaledBitmap(
             enemyLeft, (int) (getWidth() * 0.20f), (int) (getHeight() * 0.25f), false);
     enemyAppearance = enemyRight;
-    //    bossPlayer = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_component_aim);
+    //    bossPlayer = BitmapFactory.decodeResource(getResources(),
+    // R.drawable.bossgame_component_aim);
     bossPlayer =
         Bitmap.createScaledBitmap(
             bossPlayer, (int) (getWidth() * 0.25f), (int) (getHeight() * 0.30f), false);
@@ -219,17 +240,19 @@ public class BossView extends GameView implements BossContract.View {
     int unitY = (int) (screenHeight * 0.13 / 3);
     shootButtonCoordinate = new Coordinate(screenWidth - 4 * unitX, screenHeight - 5 * unitY);
     switchButtonCoordinates = new Coordinate(screenWidth - 7 * unitX, screenHeight - 5 * unitY);
-    pauseButtonCoordinates = new Coordinate(screenWidth*0.01f, screenHeight*0.01f);
-    menuButtonCoordinates = new Coordinate(screenWidth*0.01f, screenHeight*0.11f);
+    pauseButtonCoordinates = new Coordinate(screenWidth * 0.01f, screenHeight * 0.01f);
+    menuButtonCoordinates = new Coordinate(screenWidth * 0.01f, screenHeight * 0.11f);
     bossPlayerCoordinate.setXY(
         screenWidth / 2 - screenWidth * 0.10f, screenHeight / 2 - screenHeight * 0.20f);
     enemyCoordinate.setXY(0, screenHeight / 2 - screenHeight * 0.20f);
     healthBarCoordinate.setXY(
         screenWidth / 2 - screenWidth * 0.15f, screenHeight / 2 - screenHeight * 0.50f);
-    currentProjectileCoordinate.setXY(
-        screenWidth / 2, (float) (screenHeight / 2 + screenHeight * 0.5));
+
     healthBarHolderCoordinate.setXY(
         screenWidth / 2 - screenWidth * 0.15f, screenHeight / 2 - (screenHeight * 0.50f));
+    currentProjectileCoordinate.setXY(
+        screenWidth / 2, (float) (screenHeight / 2 + screenHeight * 0.5));
+    NPCCoordinate.setXY(screenWidth / 2, screenHeight / 2 + screenHeight * 0.5f);
   }
 
   @Override
@@ -284,8 +307,10 @@ public class BossView extends GameView implements BossContract.View {
     int unitY = (int) (screenHeight * 0.13 / 3);
     canvas.drawBitmap(shootButton, screenWidth - 4 * unitX, screenHeight - 5 * unitY, paint);
     canvas.drawBitmap(switchButton, screenWidth - 7 * unitX, screenHeight - 5 * unitY, paint);
-    canvas.drawBitmap(pauseButton, pauseButtonCoordinates.getX(), pauseButtonCoordinates.getY(), paint);
-    canvas.drawBitmap(menuButton, menuButtonCoordinates.getX(), menuButtonCoordinates.getY(), paint);
+    canvas.drawBitmap(
+        pauseButton, pauseButtonCoordinates.getX(), pauseButtonCoordinates.getY(), paint);
+    canvas.drawBitmap(
+        menuButton, menuButtonCoordinates.getX(), menuButtonCoordinates.getY(), paint);
   }
 
   /**
@@ -315,8 +340,8 @@ public class BossView extends GameView implements BossContract.View {
   }
 
   /**
-   * Updates the healthbar based on the ratio of the health left. Simply multiply the health bossgame_component_bar
-   * size with the ratio to determine new size
+   * Updates the healthbar based on the ratio of the health left. Simply multiply the health
+   * bossgame_component_bar size with the ratio to determine new size
    *
    * @param ratio of the health left to health total
    */
@@ -333,6 +358,9 @@ public class BossView extends GameView implements BossContract.View {
     canvas.drawText("YOU WIN!!!", screenWidth / 2, screenHeight / 2, paint);
   }
 
+  @Override
+  public void setCurrentNPCBitmap(String name) {}
+
   // TODO
 
   /** Changes the movement of a projectile */
@@ -341,8 +369,7 @@ public class BossView extends GameView implements BossContract.View {
     int xDirection = (int) (screenWidth / 2 - (screenWidth / 12) / 2);
     if (thrown) {
       currentProjectileCoordinate.setXY(
-          currentProjectileCoordinate.getX() + xDirection,
-          currentProjectileCoordinate.getY() + yDirection);
+          currentProjectileCoordinate.getX(), currentProjectileCoordinate.getY() + yDirection);
     }
   }
 
@@ -364,39 +391,59 @@ public class BossView extends GameView implements BossContract.View {
         && itemY > rangeY
         && itemY < rangeY + rangeDy);
   }
-  // TODO
-  //  public void detectCollision() {
-  //    if (inRange(
-  //        bossCoordinate.getX(),
-  //        bossCoordinate.getY(),
-  //        currentProjectileCoordinate.getX(),
-  //        currentProjectileCoordinate.getY(),
-  //        chessgame_component_star.getWidth(),
-  //        chessgame_component_star.getHeight())) {
-  //      bossPresenter.attackBoss();
-  //    }
-  //  }
 
   public void setThrown(boolean thrown) {
     this.thrown = thrown;
+  }
+
+  public void resetCurrentProjectile() {
+    thrown = false;
+    currentProjectileCoordinate.setXY(
+        screenWidth / 2, (float) (screenHeight / 2 + screenHeight * 0.5));
   }
 
   @Override
   public void setCurrentProjectileBitmap(String typeProjectile) {
     // use hashtable to find appropriate image
     // then set it properly
+    if (typeProjectile == "ice") {
+      currentProjectile = BitmapFactory.decodeResource(getResources(), R.drawable.icespell);
+      currentProjectile =
+          Bitmap.createScaledBitmap(
+              currentProjectile, (int) (getWidth() * 0.13f), (int) (getHeight() * 0.13f), false);
+    }
   }
 
   public void drawCurrentProjectile() {
-    if (currentProjectile != null) {
-
-      //            canvas.drawBitmap(currentProjectile);
+    try {
+      canvas.drawBitmap(
+          currentProjectile,
+          currentProjectileCoordinate.getX(),
+          currentProjectileCoordinate.getY(),
+          paint);
+    } catch (NullPointerException e) {
+      System.out.println(e.toString());
     }
   }
 
   public void update() {
     updateMovementEnemy();
     updateMovementProjectile();
-    //    detectCollision();
+    detectCollision();
+  }
+
+  private void detectCollision() {
+    if (inRange(
+        enemyCoordinate.getX(),
+        enemyCoordinate.getY(),
+        currentProjectileCoordinate.getX(),
+        currentProjectileCoordinate.getY(),
+        currentProjectile.getWidth(),
+        currentProjectile.getHeight())) {
+      bossPresenter.attackBoss();
+      resetCurrentProjectile();
+    } else if (currentProjectileCoordinate.getY() < 0) {
+      resetCurrentProjectile();
+    }
   }
 }

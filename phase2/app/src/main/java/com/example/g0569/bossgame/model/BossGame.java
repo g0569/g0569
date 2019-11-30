@@ -1,6 +1,7 @@
 package com.example.g0569.bossgame.model;
 
 import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.NPC;
 import java.util.List;
 
@@ -88,47 +89,6 @@ public class BossGame extends BaseGame {
         && item_y < range_y + range_dy);
   }
 
-  //  public void touch(float x, float y) {
-  //    if (enemy.getHealth() > 0 && items >= 1) {
-  //      if (inRange(x, y, shootButton.getX(), shootButton.getY(), shootButton.getR())) {
-  //        Toast.makeText(getGameManager().getMainActivity(), "Throw!!!!",
-  // Toast.LENGTH_SHORT).show();
-  //        this.hit();
-  //        // If we press the button on top is changes the color of the button
-  //      } else if (inRange(x, y, 50, 50, getGameManager().getScreenWidth() / 20)) {
-  //        shootButton.changeColor();
-  //      } else if (inRange(
-  //          x,
-  //          y,
-  //          pauseButton.getX(),
-  //          pauseButton.getY(),
-  //          pauseButton.getWidth(),
-  //          pauseButton.getHeight())) {
-  //        // Pauses the game if anywhere else is paused. Update later to include a pause button
-  // for
-  //        // all games
-  //        pause();
-  //      } else if (inRange(
-  //          x,
-  //          y,
-  //          menuButton.getX(),
-  //          menuButton.getY(),
-  //          menuButton.getWidth(),
-  //          menuButton.getHeight())) {
-  //        List<String> statistic = new ArrayList<String>();
-  //        getGameManager().showStatistic(statistic);
-  //      }
-  //    } else if (enemy.getHealth() <= 0) {
-  //      List<String> statistic = new ArrayList<String>();
-  //      statistic.add("YOU WON!!!");
-  //      getGameManager().showStatistic(statistic);
-  //    } else if (items < 1) {
-  //      List<String> statistic = new ArrayList<String>();
-  //      statistic.add("YOU LOSE!!!");
-  //      getGameManager().showStatistic(statistic);
-  //    }
-  //  }
-
   /**
    * Attacks the boss and changes it's health accordingly Might want it to return something later so
    * that healthbar is not needed later
@@ -149,7 +109,7 @@ public class BossGame extends BaseGame {
    *
    * @return the npc that is next to attack
    */
-  public NPC getNextProjectile() {
+  public NPC getNextNPC() {
     if (bossTeam.size() != 0) {
       currentTeam++;
       if (currentTeam > bossTeam.size()) {
@@ -157,6 +117,10 @@ public class BossGame extends BaseGame {
       }
       currentNPC = (NPC) bossTeam.get(currentTeam);
     }
+    return currentNPC;
+  }
+
+  public NPC getCurrentNPC(){
     return currentNPC;
   }
 
