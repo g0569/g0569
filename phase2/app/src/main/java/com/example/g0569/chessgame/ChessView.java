@@ -135,13 +135,13 @@ public class ChessView extends GameView implements ChessContract.View {
 
     Bitmap npc6 = Bitmap.createScaledBitmap(getNpc6(), 80, 80, false);
 
-    setTypeLookUpMap(new HashMap<String, Bitmap>());
-    getTypeLookUpMap().put("type1", npc1);
-    getTypeLookUpMap().put("type2", npc2);
-    getTypeLookUpMap().put("type3", npc3);
-    getTypeLookUpMap().put("type4", npc4);
-    getTypeLookUpMap().put("type5", npc5);
-    getTypeLookUpMap().put("type6", npc6);
+    setTypeLookUpTable(new HashMap<String, Bitmap>());
+    getTypeLookUpTable().put("type1", npc1);
+    getTypeLookUpTable().put("type2", npc2);
+    getTypeLookUpTable().put("type3", npc3);
+    getTypeLookUpTable().put("type4", npc4);
+    getTypeLookUpTable().put("type5", npc5);
+    getTypeLookUpTable().put("type6", npc6);
   }
 
   public void drawButton() {
@@ -177,7 +177,7 @@ public class ChessView extends GameView implements ChessContract.View {
   public void drawChessPiece(Coordinate coordinate, String type) {
     Coordinate viewCoordinate = presenter.gridCoordinateToViewCoordinate(coordinate);
     canvas.drawBitmap(
-        Objects.requireNonNull(getTypeLookUpMap().get(type)),
+        Objects.requireNonNull(getTypeLookUpTable().get(type)),
         viewCoordinate.getX(),
         viewCoordinate.getY(),
         paint);
