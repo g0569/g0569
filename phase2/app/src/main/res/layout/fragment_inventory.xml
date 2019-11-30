@@ -108,6 +108,7 @@
         android:id="@+id/inventory_npc_grid"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:columnWidth="70dp"
         android:horizontalSpacing="10dp"
         android:numColumns="4"
         android:padding="8dp"

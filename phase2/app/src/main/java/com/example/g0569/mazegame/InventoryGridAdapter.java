@@ -74,15 +74,6 @@ public class InventoryGridAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = layoutInflater.inflate(
                     R.layout.adapter_inventory_item, null);
-            GridView.LayoutParams params = (GridView.LayoutParams) convertView.getLayoutParams();
-            if (params == null) {
-                params = new GridView.LayoutParams(parent.getWidth() / 4,
-                        parent.getHeight() / 3);
-                convertView.setLayoutParams(params);
-            } else {
-                params.height = parent.getWidth() / 4;
-                params.width = parent.getHeight() / 3;
-            }
             viewHolder = new ViewHolder();
             viewHolder.npcAvatar = convertView.findViewById(R.id.inventory_item_npc_avatar);
             viewHolder.backGround = convertView.findViewById(R.id.inventory_item);
