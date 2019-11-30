@@ -231,7 +231,7 @@ public class BossView extends GameView implements BossContract.View {
             switchButton, (int) (getWidth() * 0.13f), (int) (getHeight() * 0.20f), false);
     NPC =
         Bitmap.createScaledBitmap(
-            NPC, (int) (getWidth() * 0.2f), (int) (getHeight() * 0.2f), false);
+            NPC, (int) (getWidth() * 0.20f), (int) (getHeight() * 0.2f), false);
     initCoordinates();
   }
 
@@ -264,7 +264,7 @@ public class BossView extends GameView implements BossContract.View {
     //        screenWidth / 2, (float) (screenHeight / 2 + screenHeight * 0.5));
     currentProjectileCoordinate.setXY(
         screenWidth / 2 - screenWidth * 0.05f, screenHeight - 5 * unitY);
-    NPCCoordinate.setXY(screenWidth / 2, screenHeight - 5 * unitY);
+    NPCCoordinate.setXY(screenWidth / 2 - screenWidth * 0.20f, screenHeight - 5 * unitY);
   }
 
   @Override
@@ -358,8 +358,12 @@ public class BossView extends GameView implements BossContract.View {
    *
    * @param ratio of the health left to health total
    */
-  public void updateMovementHealthBar(double ratio) {
-    healthBar.setWidth((int) (healthBarWidth * ratio));
+  public void updateMovementHealthBar(float ratio, float remainingHealth) {
+    if (ratio == 0) {
+      end(true);
+    } else {
+      healthBar = Bitmap.createScaledBitmap(healthBar, (int) (healthBarWidth * ratio), 1, false);
+    }
   }
 
   @Override
@@ -406,7 +410,7 @@ public class BossView extends GameView implements BossContract.View {
           Bitmap.createScaledBitmap(
               NPC, (int) (getWidth() * 0.2f), (int) (getHeight() * 0.2f), false);
       canvas.drawBitmap(NPC, NPCCoordinate.getX(), NPCCoordinate.getY(), paint);
-      System.out.println("drawing npc");
+      //      System.out.println("drawing npc");
     } catch (NullPointerException e) {
       System.out.println(e.toString());
     }
@@ -436,10 +440,10 @@ public class BossView extends GameView implements BossContract.View {
    */
   private boolean inRange(
       float itemX, float itemY, float rangeX, float rangeY, float rangeDx, float rangeDy) {
-    return (itemX > rangeX
-        && itemX < rangeX + rangeDx
-        && itemY > rangeY
-        && itemY < rangeY + rangeDy);
+    return (itemX >= rangeX
+        && itemX <= rangeX + rangeDx
+        && itemY >= rangeY
+        && itemY <= rangeY + rangeDy);
   }
 
   public void setThrown(boolean thrown) {
@@ -457,7 +461,7 @@ public class BossView extends GameView implements BossContract.View {
   public void setCurrentProjectileBitmap(String typeProjectile) {
     // use hashtable to find appropriate image
     // then set it properly
-    if (typeProjectile == "ice") {
+    if (typeProjectile.equals("ice")) {
       currentProjectile = BitmapFactory.decodeResource(getResources(), R.drawable.icespell);
       //      currentProjectile =
       //          Bitmap.createScaledBitmap(
@@ -489,17 +493,20 @@ public class BossView extends GameView implements BossContract.View {
     if (inRange(
             enemyCoordinate.getX(),
             enemyCoordinate.getY(),
-            currentProjectileCoordinate.getX(),
+            currentProjectileCoordinate.getX()
+                + (currentProjectileCoordinate.getX() + currentProjectile.getWidth() / 2f),
             currentProjectileCoordinate.getY(),
             currentProjectile.getWidth(),
             currentProjectile.getHeight())
         || inRange(
-            currentProjectileCoordinate.getX(),
+            currentProjectileCoordinate.getX()
+                + (currentProjectileCoordinate.getX() + currentProjectile.getWidth()),
             currentProjectileCoordinate.getY(),
             enemyCoordinate.getX(),
             enemyCoordinate.getY(),
             enemyAppearance.getWidth(),
             enemyAppearance.getHeight())) {
+      System.out.println("HIT");
       bossPresenter.attackBoss();
       resetCurrentProjectile();
     } else if (currentProjectileCoordinate.getY() < 0) {

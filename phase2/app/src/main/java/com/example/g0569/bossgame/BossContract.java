@@ -18,7 +18,7 @@ public interface BossContract {
 
     void setCurrentProjectileBitmap(String typeProjectile);
 
-    void updateMovementHealthBar(double ratio);
+    void updateMovementHealthBar(float ratio, float healthRemaining);
 
     int getWidth();
 

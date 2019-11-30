@@ -5,6 +5,8 @@ import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.NPC;
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 //TODO set classes to private or public
 
 public class BossGame extends BaseGame {
@@ -163,6 +165,14 @@ public class BossGame extends BaseGame {
    */
   public boolean determineEnd() {
     return enemy.getHealth() <= 0;
+  }
+
+  public float getRatioOfHealth() {
+    return enemy.getRatioOfHealth();
+  }
+
+  public float getHealth() {
+    return enemy.getHealth();
   }
 
   //  public NPC initNPC() {

@@ -82,7 +82,7 @@ public class BossPresenter implements BossContract.Presenter {
     // if there is contact, set the map to nothing
     //    bossView.setCurrentProjectileBitmap("null");
 
-    bossView.updateMovementHealthBar(bossGame.getHealthBar().getHealthRatio());
+    bossView.updateMovementHealthBar(bossGame.getRatioOfHealth(), bossGame.getHealth());
     boolean end = bossGame.determineEnd();
     bossView.end(end);
   }
