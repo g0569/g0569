@@ -31,8 +31,7 @@ public class ChessActivity extends AppCompatActivity {
         NPC selectedNPC = (NPC) bundle.getSerializable(Constants.BUNDLE_SELECTEDNPC_KEY);
         setContentView(R.layout.activity_chessgame);
         chessView = findViewById(R.id.chessview);
-        NPC npc = new NPC(6, "test_npc_6", 20, "fire", "hard", "type5", "type1,1,3.type2,2,3.type3,2,4");
-        presenter = new ChessPresenter(chessView, inventory, npc);
+        presenter = new ChessPresenter(chessView, inventory, selectedNPC);
 
         final LinearLayout menuLayout = findViewById(R.id.menu_layout);
         menuLayout.setVisibility(View.GONE);
