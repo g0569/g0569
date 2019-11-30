@@ -51,6 +51,7 @@ public class MazeGame extends BaseGame {
             Constants.GRID_HEIGHT, Constants.GRID_WIDTH, inventory.getNonCollectedItem().size());
     stopWatch = new MazeStopWatch(60);
     //    Button = new BaseButton(this)
+    getStopWatch().start();
   }
 
   @Override
@@ -77,10 +78,18 @@ public class MazeGame extends BaseGame {
 
   public void update() {
     mazePlayer.update();
+    getStopWatch().update();
+    if (getStopWatch().getRemainTime() == -1){
+      timeReach();
+    }
   }
 
-  public void stopMove() {
-    mazePlayer.setDirection(Coordinate.create(0, 0));
+  //TODO show inventory page
+  public void timeReach(){
+
+      getStopWatch().stop();
+      presenter.stopView();
+
   }
 
   //  public void showStatistic() {
@@ -114,8 +123,8 @@ public class MazeGame extends BaseGame {
   public NPC addItemToMazeItem(int x, int y) {
       unbuiltNPC -= 1;
       if (unbuiltNPC == -1) unbuiltNPC = inventory.getNonCollectedItem().size() - 1;
-      if (inventory.getNonCollectedItem().size() == 1) System.out.println(this.getInventory().getNonCollectedItem().get(unbuiltNPC).getType());
-    System.out.println(unbuiltNPC);
+//      if (inventory.getNonCollectedItem().size() == 1) System.out.println(this.getInventory().getNonCollectedItem().get(unbuiltNPC).getType());
+//    System.out.println(unbuiltNPC);
     this.getMyMazeItem()[y][x] = this.getInventory().getNonCollectedItem().get(unbuiltNPC);
 //    System.out.println(this.getInventory().getNonCollectedItem().get(unbuiltNPC - 1));
     return this.getInventory().getNonCollectedItem().get(unbuiltNPC);

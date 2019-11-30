@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.g0569.R;
+import com.example.g0569.chessgame.ChessActivity;
 import com.example.g0569.mazegame.MazeActivity;
 import com.example.g0569.savegame.model.SaveGameSQLiteAccessor;
 import com.example.g0569.utils.SQLiteHelper;

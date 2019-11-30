@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.widget.Toast;
@@ -57,6 +58,12 @@ public class BossView extends GameView implements BossContract.View {
    */
   public BossView(Context context) {
     super(context);
+    paint.setTextSize(40);
+    thread = new Thread(this);
+  }
+
+  public BossView(Context context, AttributeSet attrs) {
+    super(context, attrs);
     paint.setTextSize(40);
     thread = new Thread(this);
   }

@@ -16,6 +16,8 @@ public interface MazeContract {
     Coordinate getPlayerDimensions();
 
     void deleteGridItem(int x, int y, int[][] mazeGrid);
+
+    void stopView();
   }
 
   interface Presenter extends BasePresenter {
@@ -46,6 +48,12 @@ public interface MazeContract {
 
     Inventory getInventory();
 
-    String getRemainTime();
+    int getRemainTime();
+
+    void pauseStopWatch();
+
+    void resumeStopWatch();
+
+    void stopView();
   }
 }

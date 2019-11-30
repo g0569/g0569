@@ -66,12 +66,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     List<String> testDataList =
             new ArrayList<>(
                     Arrays.asList(
-                            "INSERT INTO npc_data (npc_id, npc_name, damage, power, chess_layout, difficulty, type) VALUES (1, 'test_npc_1', 10, 'fire', 'star,1,3', 'easy', 'type1');",
-                            "INSERT INTO npc_data (npc_id, npc_name, damage, power, chess_layout, difficulty, type) VALUES (2, 'test_npc_2', 10, 'fire', 'triangle,1,3', 'easy', 'type2');",
-                            "INSERT INTO npc_data (npc_id, npc_name, damage, power, chess_layout, difficulty, type) VALUES (3, 'test_npc_3', 15, 'fire', 'triangle,1,3.star.2,3', 'hard', 'type3');",
-                            "INSERT INTO npc_data (npc_id, npc_name, damage, power, chess_layout, difficulty, type) VALUES (4, 'test_npc_4', 15, 'fire', 'triangle,1,3.star,1,4', 'hard', 'type4');",
-                            "INSERT INTO npc_data (npc_id, npc_name, damage, power, chess_layout, difficulty, type) VALUES (5, 'test_npc_5', 20, 'fire', 'star,1,3.circle,2,3.circle,2,4', 'insane', 'type5');",
-                            "INSERT INTO npc_data (npc_id, npc_name, damage, power, chess_layout, difficulty, type) VALUES (6, 'test_npc_6', 20, 'fire', 'star,1,3.triangle,2,3.circle,2,4', 'insane', 'type6');"));
+                            "INSERT INTO npc_data (npc_id, npc_name, damage, power, chess_layout, difficulty, type) VALUES (1, 'test_npc_1', 10, 'fire', 'type1,1,3', 'easy', 'type1');",
+                            "INSERT INTO npc_data (npc_id, npc_name, damage, power, chess_layout, difficulty, type) VALUES (2, 'test_npc_2', 10, 'fire', 'type2,1,3', 'easy', 'type2');",
+                            "INSERT INTO npc_data (npc_id, npc_name, damage, power, chess_layout, difficulty, type) VALUES (3, 'test_npc_3', 15, 'fire', 'type2,1,3.type1.2,3', 'hard', 'type3');",
+                            "INSERT INTO npc_data (npc_id, npc_name, damage, power, chess_layout, difficulty, type) VALUES (4, 'test_npc_4', 15, 'fire', 'type2,1,3.type1,1,4', 'hard', 'type4');",
+                            "INSERT INTO npc_data (npc_id, npc_name, damage, power, chess_layout, difficulty, type) VALUES (5, 'test_npc_5', 20, 'fire', 'type1,1,3.type3,2,3.type3,2,4', 'insane', 'type5');",
+                            "INSERT INTO npc_data (npc_id, npc_name, damage, power, chess_layout, difficulty, type) VALUES (6, 'test_npc_6', 20, 'fire', 'type1,1,3.type2,2,3.type3,2,4', 'insane', 'type6');"));
     for (String testData :testDataList ) {
       db.execSQL(testData);
     }

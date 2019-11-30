@@ -1,6 +1,8 @@
 package com.example.g0569.mazegame.model;
 
 import com.example.g0569.base.model.Item;
+import java.util.concurrent.TimeUnit;
+
 
 public class MazeStopWatch extends Item {
     private long totalTime;
@@ -9,11 +11,12 @@ public class MazeStopWatch extends Item {
     private long startTime;
     private long pauseTime;
     private long pauseEnd;
+    private boolean isPaused;
 
 
     MazeStopWatch(int time){
         super();
-        totalTime = convertSecondToNano(time);
+        totalTime = time;
         running = false;
     }
     /**
@@ -22,9 +25,14 @@ public class MazeStopWatch extends Item {
     @Override
     public void update() {
     if (running) {
-      long period = System.nanoTime() - startTime - pauseTime;
+//        System.out.println(System.nanoTime());
+//        System.out.println(startTime);
+      long period = Math.abs(System.nanoTime() - startTime - pauseTime);
       setElapsedTime(period);
         }
+    if (getRemainTime() == 0){
+
+    }
     }
 
     public long getStartTime() {
@@ -48,11 +56,14 @@ public class MazeStopWatch extends Item {
     }
 
     private int convertNanoToSecond(long time){
-        return (int)time/1000000000;
+//        return (int)TimeUnit.SECONDS.convert(time, TimeUnit.NANOSECONDS);
+        return (int)(time/1000000000);
     }
 
     public int getRemainTime(){
-        return convertNanoToSecond((totalTime - elapsedTime));
+//        System.out.println(totalTime);
+//        System.out.println(convertNanoToSecond(elapsedTime));
+        return (int) (totalTime - convertNanoToSecond(elapsedTime));
     }
 
     public void start(){
@@ -74,14 +85,17 @@ public class MazeStopWatch extends Item {
      * TODO call when doing save and pause
      */
     public void pause(){
-        running = false;
-        pauseEnd = System.nanoTime();
+    if (!isPaused) {
+      running = false;
+      pauseEnd = System.nanoTime();
+        }
     }
 
     public void resume(){
-        running = true;
-        pauseTime += System.nanoTime() - pauseEnd;
-
+    if (isPaused) {
+      running = true;
+      pauseTime += System.nanoTime() - pauseEnd;
+}
     }
 
     public String toString() {

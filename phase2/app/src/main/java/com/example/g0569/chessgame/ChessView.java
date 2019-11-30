@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.widget.Toast;
@@ -27,14 +28,8 @@ public class ChessView extends GameView implements ChessContract.View {
   private float buttonY;
   private float inventoryX;
   private float inventoryY;
-  private Bitmap npc1;
-  private Bitmap npc2;
-  private Bitmap npc3;
-  private Bitmap npc4;
-  private Bitmap npc5;
-  private Bitmap npc6;
   private ChessContract.Presenter presenter;
-  private  HashMap<String, Bitmap> TYPELOOKUPMAP = new HashMap<String, Bitmap>();;
+//  private HashMap<String, Bitmap> TYPELOOKUPMAP = new HashMap<String, Bitmap>();
 
   /**
    * Instantiates a new Chess view.
@@ -43,6 +38,12 @@ public class ChessView extends GameView implements ChessContract.View {
    */
   public ChessView(Context context) {
     super(context);
+    paint.setTextSize(40);
+    thread = new Thread(this);
+  }
+
+  public ChessView(Context context, AttributeSet attrs) {
+    super(context, attrs);
     paint.setTextSize(40);
     thread = new Thread(this);
   }
@@ -122,32 +123,25 @@ public class ChessView extends GameView implements ChessContract.View {
         BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_iteminventory);
     inventory = Bitmap.createScaledBitmap(inventory, 200, 300, false);
 
-    npc1 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l1);
-    npc1 = Bitmap.createScaledBitmap(npc1, 80, 80, false);
+    Bitmap npc1 = Bitmap.createScaledBitmap(getNpc1(), 80, 80, false);
 
-    npc2 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l2);
-    npc2 = Bitmap.createScaledBitmap(npc2, 80, 80, false);
+    Bitmap npc2 = Bitmap.createScaledBitmap(getNpc2(), 80, 80, false);
 
-        npc3 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l3);
-    npc3 = Bitmap.createScaledBitmap(npc2, 80, 80, false);
+    Bitmap npc3 = Bitmap.createScaledBitmap(getNpc3(), 80, 80, false);
 
-        npc4 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l4);
-    npc4 = Bitmap.createScaledBitmap(npc2, 80, 80, false);
+    Bitmap npc4 = Bitmap.createScaledBitmap(getNpc4(), 80, 80, false);
 
-        npc5 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l5);
-    npc5 = Bitmap.createScaledBitmap(npc2, 80, 80, false);
+    Bitmap npc5 = Bitmap.createScaledBitmap(getNpc5(), 80, 80, false);
 
-    npc6 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l6);
-    npc6 = Bitmap.createScaledBitmap(npc2, 80, 80, false);
+    Bitmap npc6 = Bitmap.createScaledBitmap(getNpc6(), 80, 80, false);
 
-
-
-      TYPELOOKUPMAP.put("type1", npc1);
-      TYPELOOKUPMAP.put("type2", npc2);
-      TYPELOOKUPMAP.put("type3", npc3);
-      TYPELOOKUPMAP.put("type4", npc4);
-      TYPELOOKUPMAP.put("type5", npc5);
-      TYPELOOKUPMAP.put("type6", npc6);
+    setTypeLookUpTable(new HashMap<String, Bitmap>());
+    getTypeLookUpTable().put("type1", npc1);
+    getTypeLookUpTable().put("type2", npc2);
+    getTypeLookUpTable().put("type3", npc3);
+    getTypeLookUpTable().put("type4", npc4);
+    getTypeLookUpTable().put("type5", npc5);
+    getTypeLookUpTable().put("type6", npc6);
   }
 
   public void drawButton() {
@@ -182,8 +176,11 @@ public class ChessView extends GameView implements ChessContract.View {
   @Override
   public void drawChessPiece(Coordinate coordinate, String type) {
     Coordinate viewCoordinate = presenter.gridCoordinateToViewCoordinate(coordinate);
-    canvas.drawBitmap(Objects.requireNonNull(TYPELOOKUPMAP.get(type)),viewCoordinate.getX(),viewCoordinate.getY(),paint );
-
+    canvas.drawBitmap(
+        Objects.requireNonNull(getTypeLookUpTable().get(type)),
+        viewCoordinate.getX(),
+        viewCoordinate.getY(),
+        paint);
   }
 
   @Override
