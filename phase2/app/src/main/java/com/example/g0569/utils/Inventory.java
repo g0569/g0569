@@ -63,12 +63,12 @@ public class Inventory implements Serializable {
 
     public void deleteNoneCollectedItem(NPC e){
         nonCollectedItem.remove(e);
-        collectedItem.add(e);
+//        collectedItem.add(e);
     }
 
     public void deleteCollectedItem(NPC e){
         collectedItem.remove(e);
-        availableItem.add(e);
+//        availableItem.add(e);
     }
 
 }
