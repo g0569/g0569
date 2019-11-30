@@ -1,5 +1,6 @@
 package com.example.g0569.mazegame;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,8 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.g0569.R;
+import com.example.g0569.chessgame.ChessActivity;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
+import com.example.g0569.utils.NPC;
 
 public class MazeActivity extends AppCompatActivity {
 
@@ -19,6 +22,7 @@ public class MazeActivity extends AppCompatActivity {
     private MazeContract.Presenter presenter;
     private boolean isMenuVisible = true;
     private boolean isInventoryVisible = true;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +33,7 @@ public class MazeActivity extends AppCompatActivity {
 //        }
         setContentView(R.layout.activity_mazegame);
         mazeView = findViewById(R.id.mazeview);
-        Bundle bundle = getIntent().getExtras();
+        bundle = getIntent().getExtras();
         final Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
 
         InventoryFragment inventoryView =
@@ -83,5 +87,13 @@ public class MazeActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         presenter.start();
+    }
+
+    public void toChessGame(NPC selectedNPC) {
+        bundle.putSerializable(Constants.BUNDLE_SELECTEDNPC_KEY, selectedNPC);
+        Intent intent = new Intent(this, ChessActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 }

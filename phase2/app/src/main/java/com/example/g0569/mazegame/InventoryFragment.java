@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -47,7 +48,17 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
         new InventoryGridAdapter(
             getActivity(), inventory.getNonCollectedItem(), inventory.getAvailableItem(), this);
     inventoryGridView.setAdapter(inventoryGridAdapter);
-
+    view.findViewById(R.id.inventory_tochessgame_btn).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            NPC selectedNPC = inventoryGridAdapter.getCurrentNPC();
+            if (selectedNPC == null) {
+                Toast.makeText(getActivity(), "Please select a NPC you want", Toast.LENGTH_LONG).show();
+            }else {
+                ((MazeActivity) getActivity()).toChessGame(selectedNPC);
+            }
+        }
+    });
     return view;
   }
 

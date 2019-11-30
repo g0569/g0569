@@ -47,5 +47,6 @@ public interface MazeContract {
     Inventory getInventory();
 
     String getRemainTime();
+
   }
 }

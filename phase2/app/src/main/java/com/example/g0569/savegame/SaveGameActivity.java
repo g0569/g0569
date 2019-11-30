@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.g0569.R;
 import com.example.g0569.chessgame.ChessActivity;
+import com.example.g0569.mazegame.MazeActivity;
 import com.example.g0569.savegame.model.SaveGameSQLiteAccessor;
 import com.example.g0569.utils.SQLiteHelper;
 
@@ -52,7 +53,7 @@ public class SaveGameActivity extends AppCompatActivity {
    * @param bundle the bundle that need to pass to MazeActivity
    */
   public void startMazeGame(Bundle bundle) {
-    Intent intent = new Intent(this, ChessActivity.class);
+    Intent intent = new Intent(this, MazeActivity.class);
     intent.putExtras(bundle);
     startActivity(intent);
   }

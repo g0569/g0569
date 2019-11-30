@@ -97,4 +97,5 @@ public class MazePresenter implements MazeContract.Presenter {
   public String getRemainTime(){
     return mazeGame.getStopWatch().toString();
   }
+
 }
