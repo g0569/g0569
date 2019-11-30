@@ -25,18 +25,7 @@ public class ChessView extends GameView implements ChessContract.View {
   private float inventoryX;
   private float inventoryY;
   private Bitmap triangle;
-  //  private float triangleX;
-  //  private float triangleY;
-  //  private Bitmap triangle2;
-  //  private float triangle2X;
-  //  private float triangle2Y;
   private Bitmap star;
-  //  private float starX;
-  //  private float starY;
-  //  private Bitmap star2;
-  //  private float star2X;
-  //  private float star2Y;
-
   private ChessContract.Presenter presenter;
 
   /**

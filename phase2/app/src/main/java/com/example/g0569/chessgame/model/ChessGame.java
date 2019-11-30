@@ -34,7 +34,6 @@ public class ChessGame extends BaseGame {
   }
 
   public void onStart() {
-    //    l2player = new LevelTwoPlayer();
     this.chessPieceFactory = new ChessPieceFactory();
     decodeNPCData();
     placePlayerChess();
@@ -44,14 +43,14 @@ public class ChessGame extends BaseGame {
   private void decodeNPCData() {
     String chessString =
         selectedNPC
-            .getChessLayout(); // get data before the chessgame_component_start of each round.
+            .getChessLayout(); // get data from NPC from level one.
     String[] chessDataList = chessString.split("."); // suppose we are getting string
-    // like"chessgame_component_star,1,1.circle,1,2.circle,1,3.nochess,2,1"
+    // like"type1,1,1.type3,1,2.circle,1,3.type2,2,1"
     int count = 0;
     int loopLimit = chessDataList.length;
     while (count < loopLimit) {
       String[] currentChess =
-          chessDataList[count].split(","); // for example:["chessgame_component_star","1","1"]
+          chessDataList[count].split(","); // for example:["type2","1","1"]
       String type = currentChess[0];
       float x = Float.parseFloat(currentChess[1]);
       float y = Float.parseFloat(currentChess[2]);
@@ -117,13 +116,6 @@ public class ChessGame extends BaseGame {
       }
     }
   }
-  //  public String typeGetter(ChessPiece chessPiece) {
-  //    if (chessPiece instanceof StarChessPiece) {
-  //      return "star";
-  //    } else if (chessPiece instanceof TriangleChessPiece) {
-  //      return "triangle";
-  //    } else return "circle";
-  //  }
 
   public List<NPC> getNPCChessPieceData() {
     return NPCChessPieceData;
