@@ -15,7 +15,8 @@ public class ChessGame extends BaseGame {
   private ChessContract.Presenter presenter;
   private Inventory inventory;
   private NPC selectedNPC;
-  private String difficulty = "hard"; // might be "easy", "hard", or "insane" // TODO Need to be implemented.
+  private String difficulty =
+      "hard"; // might be "easy", "hard", or "insane" // TODO Need to be implemented.
   private ChessPieceFactory chessPieceFactory;
   private List<NPC> NPCChessPieceData = new ArrayList<>();
   private List<NPC> playerChessPieceData = new ArrayList<>();
@@ -41,16 +42,13 @@ public class ChessGame extends BaseGame {
   }
 
   private void decodeNPCData() {
-    String chessString =
-        selectedNPC
-            .getChessLayout(); // get data from NPC from level one.
-    String[] chessDataList = chessString.split("."); // suppose we are getting string
+    String chessString = selectedNPC.getChessLayout(); // get data from NPC from level one.
+    String[] chessDataList = chessString.split("\\."); // suppose we are getting string
     // like"type1,1,1.type3,1,2.circle,1,3.type2,2,1"
     int count = 0;
     int loopLimit = chessDataList.length;
     while (count < loopLimit) {
-      String[] currentChess =
-          chessDataList[count].split(","); // for example:["type2","1","1"]
+      String[] currentChess = chessDataList[count].split(","); // for example:["type2","1","1"]
       String type = currentChess[0];
       float x = Float.parseFloat(currentChess[1]);
       float y = Float.parseFloat(currentChess[2]);
@@ -70,25 +68,46 @@ public class ChessGame extends BaseGame {
   private void placePlayerChess() {
     // This method place the player chess piece to the inventory.
     playerChessPieceData.addAll(inventory.getAvailableItem());
-    ChessPiece c1 =
-        chessPieceFactory.getChessPiece(10, 10, inventory.getAvailableItem().get(0).getType());
-    inventory.getAvailableItem().get(0).setBehavior(c1);
-    ChessPiece c2 =
-        chessPieceFactory.getChessPiece(10, 20, inventory.getAvailableItem().get(1).getType());
-    inventory.getAvailableItem().get(1).setBehavior(c2);
-    ChessPiece c3 =
-        chessPieceFactory.getChessPiece(20, 10, inventory.getAvailableItem().get(2).getType());
-    inventory.getAvailableItem().get(2).setBehavior(c3);
-    ChessPiece c4 =
-        chessPieceFactory.getChessPiece(20, 20, inventory.getAvailableItem().get(3).getType());
-    inventory.getAvailableItem().get(3).setBehavior(c4);
-    ChessPiece c5 =
-        chessPieceFactory.getChessPiece(30, 10, inventory.getAvailableItem().get(4).getType());
-    inventory.getAvailableItem().get(4).setBehavior(c5);
-    ChessPiece c6 =
-        chessPieceFactory.getChessPiece(30, 20, inventory.getAvailableItem().get(5).getType());
-    inventory.getAvailableItem().get(5).setBehavior(c6);
+
+    // TODO
+    List<Coordinate> inventoryCoordinateList = new ArrayList<>();
+    inventoryCoordinateList.add(new Coordinate(10, 10));
+    inventoryCoordinateList.add(new Coordinate(10, 20));
+    inventoryCoordinateList.add(new Coordinate(20, 10));
+    inventoryCoordinateList.add(new Coordinate(20, 20));
+    inventoryCoordinateList.add(new Coordinate(30, 10));
+    inventoryCoordinateList.add(new Coordinate(30, 20));
+
+    int index = 0;
+    while (index < playerChessPieceData.size()) {
+      ChessPiece chessPiece =
+          chessPieceFactory.getChessPiece(
+              inventoryCoordinateList.get(index).getX(),
+              inventoryCoordinateList.get(index).getY(),
+              playerChessPieceData.get(index).getType());
+      inventory.getAvailableItem().get(index).setBehavior(chessPiece);
+      index++;
+    }
   }
+  //    ChessPiece c1 =
+  //        chessPieceFactory.getChessPiece(10, 10, inventory.getAvailableItem().get(0).getType());
+  //    inventory.getAvailableItem().get(0).setBehavior(c1);
+  //    ChessPiece c2 =
+  //        chessPieceFactory.getChessPiece(10, 20, inventory.getAvailableItem().get(1).getType());
+  //    inventory.getAvailableItem().get(1).setBehavior(c2);
+  //    ChessPiece c3 =
+  //        chessPieceFactory.getChessPiece(20, 10, inventory.getAvailableItem().get(2).getType());
+  //    inventory.getAvailableItem().get(2).setBehavior(c3);
+  //    ChessPiece c4 =
+  //        chessPieceFactory.getChessPiece(20, 20, inventory.getAvailableItem().get(3).getType());
+  //    inventory.getAvailableItem().get(3).setBehavior(c4);
+  //    ChessPiece c5 =
+  //        chessPieceFactory.getChessPiece(30, 10, inventory.getAvailableItem().get(4).getType());
+  //    inventory.getAvailableItem().get(4).setBehavior(c5);
+  //    ChessPiece c6 =
+  //        chessPieceFactory.getChessPiece(30, 20, inventory.getAvailableItem().get(5).getType());
+  //    inventory.getAvailableItem().get(5).setBehavior(c6);
+  //  }
 
   public void placePlayerChessOnBoard(Coordinate coordinate) {
     // This method place the Player Chess Piece on the Board.
