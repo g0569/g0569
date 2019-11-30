@@ -9,8 +9,11 @@ import com.example.g0569.utils.NPC;
 public interface MazeContract {
   interface View extends BaseView<Presenter> {
     void initView();
+
     void drawMaze(int[][] mazeGrid);
+
     void drawPlayer(Coordinate coor);
+
     void drawNPC(Coordinate coor, NPC npc);
 
     Coordinate getPlayerDimensions();
@@ -43,9 +46,7 @@ public interface MazeContract {
 
     MazeContract.View getMazeView();
 
-    /**
-    add item to maze item.
-     */
+    /** add item to maze item. */
     NPC addItemToMazeItem(int x, int y);
 
     Inventory getInventory();

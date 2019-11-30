@@ -23,7 +23,8 @@ public class BossPresenter implements BossContract.Presenter {
     bossGame = new BossGame();
     bossGame.onStart();
     bossGame.setEnemyMovement(bossView.getWidth());
-    this.inventory = inventory;
+    this.inventory = inventory
+    ;
   }
 
   @Override
@@ -34,8 +35,8 @@ public class BossPresenter implements BossContract.Presenter {
     bossGame.setBossTeam(this.inventory.getAvailableItem());
     String currentNPC = bossGame.getCurrentNPC().getType();
     String currentPower = bossGame.getCurrentNPC().getPower();
-    bossView.setCurrentNPCBitmap("npc1");
-    bossView.setCurrentProjectileBitmap("ice");
+    bossView.setCurrentNPCBitmap(currentNPC);
+    bossView.setCurrentProjectileBitmap(currentPower);
     //    bossView.setCurrentProjectileBitmap(inventory.getAvailableItem().get(0).getType());
     //    bossView.setCurrentNPCBitmap(inventory.getAvailableItem().get(0).getName());
     //    bossView.setCurrentProjectileBitmap("ice");

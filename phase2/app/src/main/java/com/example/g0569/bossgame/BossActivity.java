@@ -10,6 +10,10 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.g0569.R;
+import com.example.g0569.utils.Constants;
+import com.example.g0569.utils.Inventory;
+
+import java.util.ArrayList;
 
 /** The type Boss activity. */
 public class BossActivity extends AppCompatActivity {
@@ -29,9 +33,11 @@ public class BossActivity extends AppCompatActivity {
 //    if (bossView == null) {
 //      bossView = new BossView(this);
 //    }
+    Bundle bundle = getIntent().getExtras();
+    Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
     setContentView(R.layout.activity_bossgame);
     bossView = findViewById(R.id.bossview);
-    presenter = new BossPresenter(bossView);
+    presenter = new BossPresenter(bossView, inventory);
 
     final LinearLayout menuLayout = findViewById(R.id.menu_layout);
     menuLayout.setVisibility(View.GONE);

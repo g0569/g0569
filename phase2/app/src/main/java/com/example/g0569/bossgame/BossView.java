@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.example.g0569.R;
 import com.example.g0569.base.GameView;
 import com.example.g0569.utils.Coordinate;
+
+import java.util.HashMap;
 // TODO use factory method to determine which npc
 // TODO find out how to input npc
 // TODO implement a timer for VIEW
@@ -33,6 +35,9 @@ public class BossView extends GameView implements BossContract.View {
   private Bitmap NPC;
   private Bitmap healthBarHolder;
   private Bitmap currentProjectile;
+
+  private Bitmap ice;
+  private Bitmap fire;
 
   private int healthBarWidth;
 
@@ -243,6 +248,14 @@ public class BossView extends GameView implements BossContract.View {
     NPC =
         Bitmap.createScaledBitmap(
             NPC, (int) (getWidth() * 0.20f), (int) (getHeight() * 0.2f), false);
+
+    ice = BitmapFactory.decodeResource(getResources(), R.drawable.icespell);
+    fire = BitmapFactory.decodeResource(getResources(), R.drawable.firespell);
+    fire = Bitmap.createScaledBitmap(fire, (int) (getWidth() *0.13f), (int)(getHeight()*0.20f), false);
+    setTypeLookUpTable(new HashMap<String, Bitmap>());
+    getTypeLookUpTable().put("fire", fire);
+    getTypeLookUpTable().put("ice", ice);
+
     initCoordinates();
   }
 

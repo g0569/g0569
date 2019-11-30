@@ -3,16 +3,15 @@ package com.example.g0569.mazegame.model;
 import com.example.g0569.base.model.Item;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
+
 import java.util.ArrayList;
-import java.util.Stack;
 import java.util.Random;
+import java.util.Stack;
 
+// TODO: 2019-11-27 maze in a dead end; NPC wrong placing
 /** The type Maze generator. */
-class MazeGenerator {
+public class MazeGenerator {
 
-  private static int n;
-  private static int m;
-  private static int npcNum;
   /**
    * Generate a n by m maze represented in List.
    *
@@ -21,7 +20,6 @@ class MazeGenerator {
    * @return the list of the maze
    */
   private Stack<Coordinate> stack = new Stack<>();
-
 
   private int[][] maze;
   private Item[][] mazeItem;
@@ -36,23 +34,19 @@ class MazeGenerator {
   }
 
   public static int[][] generate(int n, int m, int npcNum) {
-    MazeGenerator.n = n;
-    MazeGenerator.m = m;
-    MazeGenerator.npcNum = npcNum;
     MazeGenerator newMaze = new MazeGenerator(Constants.GRID_WIDTH, Constants.GRID_HEIGHT);
 
-      newMaze.getStack().push(new Coordinate(0, 0));
-      while (!newMaze.getStack().empty()) {
-        Coordinate next = newMaze.getStack().pop();
-        if (newMaze.validNextNode(next)) {
-          newMaze.getMaze()[next.getIntY()][next.getIntX()] = 1;
-          ArrayList<Coordinate> neighbors = newMaze.findNeighbors(next);
-          newMaze.randomlyAddNodesToStack(neighbors);
-        }
-
+    newMaze.getStack().push(new Coordinate(0, 0));
+    while (!newMaze.getStack().empty()) {
+      Coordinate next = newMaze.getStack().pop();
+      if (newMaze.validNextNode(next)) {
+        newMaze.getMaze()[next.getIntY()][next.getIntX()] = 1;
+        ArrayList<Coordinate> neighbors = newMaze.findNeighbors(next);
+        newMaze.randomlyAddNodesToStack(neighbors);
+      }
     }
-      newMaze.updateNPCMaze(newMaze.maze, newMaze.mazeItem, npcNum);
-//      System.out.println(int[][] newMaze.maze);
+    newMaze.updateNPCMaze(newMaze.maze, newMaze.mazeItem, npcNum);
+    //      System.out.println(int[][] newMaze.maze);
     return newMaze.getMaze();
   }
 
@@ -61,24 +55,24 @@ class MazeGenerator {
     } else {
       int i = 0;
       while (i < npcNum) {
-        int y = (int)(Math.random() * Constants.GRID_HEIGHT);
-        int x = (int)(Math.random() * Constants.GRID_WIDTH);
+        int y = (int) (Math.random() * Constants.GRID_HEIGHT);
+        int x = (int) (Math.random() * Constants.GRID_WIDTH);
         if (mazeGrid[y][x] == 1) {
-//          System.out.println(mazeGrid[y][x]);
+          //          System.out.println(mazeGrid[y][x]);
           i += 1;
           mazeGrid[y][x] = 2;
 
-//          System.out.println(mazeGrid[y][x]);
+          //          System.out.println(mazeGrid[y][x]);
         }
       }
-//      System.out.println(mazeGrid);
+      //      System.out.println(mazeGrid);
     }
   }
 
   private boolean validNextNode(Coordinate coor) {
     int numNeighboringOnes = 0;
     for (int y = coor.getIntY() - 1; y < coor.getIntY() + 2; y++) {
-      for (int x = coor.getIntX() - 1; x <  coor.getIntX() + 2; x++) {
+      for (int x = coor.getIntX() - 1; x < coor.getIntX() + 2; x++) {
         if (pointOnGrid(x, y) && pointNotCoor(coor, x, y) && maze[y][x] == 1) {
           numNeighboringOnes++;
         }
@@ -95,16 +89,15 @@ class MazeGenerator {
     return (x == coor.getIntX() || y == coor.getIntY());
   }
 
-  private Boolean pointNotCoor (Coordinate coor, int x, int y) {
+  private Boolean pointNotCoor(Coordinate coor, int x, int y) {
     return !(x == coor.getIntX() && y == coor.getIntY());
   }
 
   private ArrayList<Coordinate> findNeighbors(Coordinate coor) {
     ArrayList<Coordinate> neighbors = new ArrayList<>();
-    for (int y = coor.getIntY()-1; y < coor.getIntY()+2; y++) {
-      for (int x = coor.getIntX()-1; x < coor.getIntX()+2; x++) {
-        if (pointOnGrid(x, y) && pointNotCorner(coor, x, y)
-                && pointNotCoor(coor, x, y)) {
+    for (int y = coor.getIntY() - 1; y < coor.getIntY() + 2; y++) {
+      for (int x = coor.getIntX() - 1; x < coor.getIntX() + 2; x++) {
+        if (pointOnGrid(x, y) && pointNotCorner(coor, x, y) && pointNotCoor(coor, x, y)) {
           neighbors.add(new Coordinate(x, y));
         }
       }
