@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#004961">
+
+    <TextView
+        android:id="@+id/inventory_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Inventory"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/NPC1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/inventory_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inventory_title"
+        tools:srcCompat="@tools:sample/avatars[0]" />
+
+    <ImageButton
+        android:id="@+id/NPC2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/NPC1"
+        app:layout_constraintTop_toBottomOf="@id/inventory_title"
+        tools:srcCompat="@tools:sample/avatars[1]" />
+
+    <ImageButton
+        android:id="@+id/NPC3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/NPC2"
+        app:layout_constraintTop_toBottomOf="@id/inventory_title"
+        tools:srcCompat="@tools:sample/avatars[2]" />
+
+    <ImageButton
+        android:id="@+id/NPC4"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/NPC3"
+        app:layout_constraintTop_toBottomOf="@id/inventory_title"
+        tools:srcCompat="@tools:sample/avatars[3]" />
+
+    <ImageButton
+        android:id="@+id/NPC5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toEndOf="@id/inventory_title"
+        app:layout_constraintTop_toBottomOf="@id/NPC1"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/NPC6"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toEndOf="@id/NPC5"
+        app:layout_constraintTop_toBottomOf="@id/NPC2"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/imageButton7"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/inventory_title"
+        app:layout_constraintTop_toBottomOf="@id/inventory_title"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/imageButton8"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/inventory_title"
+        app:layout_constraintTop_toBottomOf="@id/inventory_title"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/imageButton9"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/inventory_title"
+        app:layout_constraintTop_toBottomOf="@id/inventory_title"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/imageButton10"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/inventory_title"
+        app:layout_constraintTop_toBottomOf="@id/inventory_title"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/imageButton11"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/inventory_title"
+        app:layout_constraintTop_toBottomOf="@id/inventory_title"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/imageButton12"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/inventory_title"
+        app:layout_constraintTop_toBottomOf="@id/inventory_title"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/imageButton13"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/inventory_title"
+        app:layout_constraintTop_toBottomOf="@id/inventory_title"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/imageButton14"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/inventory_title"
+        app:layout_constraintTop_toBottomOf="@id/inventory_title"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/imageButton15"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/inventory_title"
+        app:layout_constraintTop_toBottomOf="@id/inventory_title"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/imageButton16"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/inventory_title"
+        app:layout_constraintTop_toBottomOf="@id/inventory_title"
+        tools:srcCompat="@tools:sample/avatars" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
