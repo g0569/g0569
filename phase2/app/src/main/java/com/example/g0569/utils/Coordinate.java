@@ -1,5 +1,7 @@
 package com.example.g0569.utils;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -111,6 +113,12 @@ public class Coordinate implements Serializable {
     if (this.equals(o)) return true;
     Coordinate that = o;
     return Math.abs(that.x - x) <= unit && Math.abs(that.y - y) <= unit;
+  }
+
+  @NonNull
+  @Override
+  public String toString() {
+    return "(" + String.valueOf(this.x) + "," + String.valueOf(this.y) + ")";
   }
 
   @Override

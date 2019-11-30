@@ -72,7 +72,7 @@ public class MazeView extends GameView implements MazeContract.View {
   public void draw() {
     try {
       canvas = sfh.lockCanvas();
-      canvas.drawColor(Color.rgb(246, 216, 115));
+      canvas.drawColor(Color.BLACK);
       //      canvas.drawColor(
       //          Color.rgb(
       //              (int) (Math.random() * 255),
@@ -216,6 +216,8 @@ public class MazeView extends GameView implements MazeContract.View {
           } else if (mazeGrid[j][i] == 0) {
             drawWall(gridNum2Coor(i, j));
           } else if (mazeGrid[j][i] == 2) {
+            paint.setColor(Color.RED);
+            canvas.drawText(Coordinate.create(i, j).toString(), gridNum2Coor(i, j).getX() - 10f, gridNum2Coor(i, j).getY() - 10f, paint);
             drawNPC(gridNum2Coor(i, j), presenter.addItemToMazeItem(i, j));
           }
         }
@@ -253,7 +255,7 @@ public class MazeView extends GameView implements MazeContract.View {
     String type = presenter.getNPCType(npc);
     if (presenter.getNPCType(npc).equals("type1")) {
       canvas.drawBitmap(npc1, coor.getX(), coor.getY(), paint);
-    } else if (presenter.getNPCType(npc) == "type2") {
+    } else if (presenter.getNPCType(npc).equals("type2")) {
       canvas.drawBitmap(npc2, coor.getX(), coor.getY(), paint);
     } else if (presenter.getNPCType(npc).equals("type3")) {
       canvas.drawBitmap(npc3, coor.getX(), coor.getY(), paint);
