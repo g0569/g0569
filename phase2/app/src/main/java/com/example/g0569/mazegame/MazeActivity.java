@@ -1,10 +1,9 @@
 package com.example.g0569.mazegame;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-import com.example.g0569.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
 

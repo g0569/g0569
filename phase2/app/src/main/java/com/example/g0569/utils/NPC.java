@@ -10,8 +10,8 @@ public class NPC extends Item implements Serializable {
   private String name;
   private int damage;
   private String power;
-  private Coordinate throwDirection;
-  private DoBehavior behavior;
+  private Coordinate coordinate;
+  private InterchangeableBehavior behavior;
   private String difficulty;
   private String type;
   private String chessLayout;
@@ -50,11 +50,19 @@ public class NPC extends Item implements Serializable {
     return type;
   }
 
-  public Coordinate getThrowDirection() {
-    return throwDirection;
+  public String getChessLayout() {
+    return chessLayout;
   }
 
-  public void setBehavior(DoBehavior behavior) {
+  public Coordinate getCoordinate() {
+    return behavior.getCoordinate();
+  }
+
+  public void action(){
+    behavior.action();
+  }
+
+  public void setBehavior(InterchangeableBehavior behavior) {
     this.behavior = behavior;
   }
 

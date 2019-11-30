@@ -15,6 +15,7 @@ import com.example.g0569.R;
 import com.example.g0569.auth.model.AuthInteractor;
 import com.example.g0569.utils.Constants;
 
+/** The type Sign up fragment. */
 public class SignUpFragment extends Fragment implements AuthContract.View {
 
   private AuthContract.Presenter authPresenter;
@@ -23,6 +24,7 @@ public class SignUpFragment extends Fragment implements AuthContract.View {
   private TextView password;
   private TextView username;
 
+  /** Instantiates a new Sign up fragment. */
   public SignUpFragment() {
     // Required empty public constructor
   }
@@ -33,8 +35,7 @@ public class SignUpFragment extends Fragment implements AuthContract.View {
    * @return A new instance of fragment SignUpFragment.
    */
   public static SignUpFragment newInstance() {
-    SignUpFragment fragment = new SignUpFragment();
-    return fragment;
+    return new SignUpFragment();
   }
 
   @Override

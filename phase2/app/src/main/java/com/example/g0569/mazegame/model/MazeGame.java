@@ -4,7 +4,6 @@ import com.example.g0569.base.BaseButton;
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.base.model.Item;
 import com.example.g0569.mazegame.MazeContract;
-import com.example.g0569.mazegame.model.MazeStopWatch;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Inventory;

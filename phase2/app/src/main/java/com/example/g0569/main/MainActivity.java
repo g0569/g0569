@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.g0569.R;
 
+/** The MainActivity. */
 public class MainActivity extends AppCompatActivity {
 
   private MainPresenter mainPresenter;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     // initialize and set up then presenter & view here
     if (mainFragment == null) {
-      mainFragment = mainFragment.newInstance();
+      mainFragment = MainFragment.newInstance();
       getSupportFragmentManager()
           .beginTransaction()
           .replace(R.id.ContentFrame, mainFragment)

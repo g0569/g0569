@@ -10,9 +10,7 @@ public class Inventory implements Serializable {
     private ArrayList<NPC> availableItem = new ArrayList<>();
 
     public Inventory(ArrayList<NPC> defaultNPC) {
-        for (int i = 0; i < defaultNPC.size(); i++){
-            availableItem.add(defaultNPC.get(i));
-        }
+        availableItem.addAll(defaultNPC);
     }
 
     public Inventory(List<NPC> avaliableItem, List<NPC> nonCollectedItem) {

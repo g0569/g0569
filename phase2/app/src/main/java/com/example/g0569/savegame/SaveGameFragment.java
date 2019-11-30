@@ -17,12 +17,13 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment must implement the Use
- * the {@link SaveGameFragment#newInstance} factory method to create an instance of this fr agment.
+ * the {@link SaveGameFragment#newInstance} factory method to create an instance of this fragment.
  */
 public class SaveGameFragment extends Fragment implements SaveGameContract.View {
 
   private SaveGameContract.Presenter presenter;
 
+  /** Instantiates a new Save game fragment. */
   public SaveGameFragment() {}
 
   /**
@@ -44,12 +45,12 @@ public class SaveGameFragment extends Fragment implements SaveGameContract.View 
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_savegame, container, false);
-    ListView saveGameListView = (ListView) view.findViewById(R.id.savegame_listview);
+    ListView saveGameListView = view.findViewById(R.id.savegame_listview);
     final List<SaveGame> saveGames = presenter.getSaveGames();
     final SaveGameListAdapter adapter = new SaveGameListAdapter(getActivity(), saveGames);
     saveGameListView.setAdapter(adapter);
     saveGameListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-    Button loadBtn = (Button) view.findViewById(R.id.savegame_load);
+    Button loadBtn = view.findViewById(R.id.savegame_load);
     loadBtn.setOnClickListener(
         new View.OnClickListener() {
           @Override
@@ -81,7 +82,7 @@ public class SaveGameFragment extends Fragment implements SaveGameContract.View 
   }
 
   @Override
-  public void startGmae(Bundle bundle) {
+  public void startGame(Bundle bundle) {
     ((SaveGameActivity) getActivity()).startMazeGame(bundle);
   }
 }
