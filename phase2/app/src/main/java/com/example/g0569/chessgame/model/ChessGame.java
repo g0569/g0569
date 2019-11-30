@@ -15,7 +15,7 @@ public class ChessGame extends BaseGame {
   private ChessContract.Presenter presenter;
   private Inventory inventory;
   private NPC selectedNPC;
-  private String difficulty = "hard"; // might be "easy", "hard", or "insane"
+  private String difficulty = "hard"; // might be "easy", "hard", or "insane" // TODO Need to be implemented.
   private ChessPieceFactory chessPieceFactory;
   private List<NPC> NPCChessPieceData = new ArrayList<>();
   private List<NPC> playerChessPieceData = new ArrayList<>();

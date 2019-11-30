@@ -12,6 +12,9 @@ import com.example.g0569.R;
 import com.example.g0569.base.GameView;
 import com.example.g0569.utils.Coordinate;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 /** The ChessView for the autoChessGame. */
 public class ChessView extends GameView implements ChessContract.View {
   // The indicator whether the player choose the chessPiece(false) or place the chessPiece(true).
@@ -24,9 +27,14 @@ public class ChessView extends GameView implements ChessContract.View {
   private float buttonY;
   private float inventoryX;
   private float inventoryY;
-  private Bitmap triangle;
-  private Bitmap star;
+  private Bitmap npc1;
+  private Bitmap npc2;
+  private Bitmap npc3;
+  private Bitmap npc4;
+  private Bitmap npc5;
+  private Bitmap npc6;
   private ChessContract.Presenter presenter;
+  private  HashMap<String, Bitmap> TYPELOOKUPMAP = new HashMap<String, Bitmap>();;
 
   /**
    * Instantiates a new Chess view.
@@ -114,12 +122,32 @@ public class ChessView extends GameView implements ChessContract.View {
         BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_iteminventory);
     inventory = Bitmap.createScaledBitmap(inventory, 200, 300, false);
 
-    triangle =
-        BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_triangle);
-    triangle = Bitmap.createScaledBitmap(triangle, 80, 80, false);
+    npc1 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l1);
+    npc1 = Bitmap.createScaledBitmap(npc1, 80, 80, false);
 
-    star = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_star);
-    star = Bitmap.createScaledBitmap(star, 80, 80, false);
+    npc2 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l2);
+    npc2 = Bitmap.createScaledBitmap(npc2, 80, 80, false);
+
+        npc3 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l3);
+    npc3 = Bitmap.createScaledBitmap(npc2, 80, 80, false);
+
+        npc4 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l4);
+    npc4 = Bitmap.createScaledBitmap(npc2, 80, 80, false);
+
+        npc5 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l5);
+    npc5 = Bitmap.createScaledBitmap(npc2, 80, 80, false);
+
+    npc6 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l6);
+    npc6 = Bitmap.createScaledBitmap(npc2, 80, 80, false);
+
+
+
+      TYPELOOKUPMAP.put("type1", npc1);
+      TYPELOOKUPMAP.put("type2", npc2);
+      TYPELOOKUPMAP.put("type3", npc3);
+      TYPELOOKUPMAP.put("type4", npc4);
+      TYPELOOKUPMAP.put("type5", npc5);
+      TYPELOOKUPMAP.put("type6", npc6);
   }
 
   public void drawButton() {
@@ -154,10 +182,8 @@ public class ChessView extends GameView implements ChessContract.View {
   @Override
   public void drawChessPiece(Coordinate coordinate, String type) {
     Coordinate viewCoordinate = presenter.gridCoordinateToViewCoordinate(coordinate);
-    if (type.equals("chessgame_component_star"))
-      canvas.drawBitmap(star, viewCoordinate.getX(), viewCoordinate.getY(), paint);
-    else if (type.equals("chessgame_component_triangle"))
-      canvas.drawBitmap(triangle, viewCoordinate.getX(), viewCoordinate.getY(), paint);
+    canvas.drawBitmap(Objects.requireNonNull(TYPELOOKUPMAP.get(type)),viewCoordinate.getX(),viewCoordinate.getY(),paint );
+
   }
 
   @Override
@@ -168,7 +194,7 @@ public class ChessView extends GameView implements ChessContract.View {
       canvas.save();
       canvas.scale(scalex, scaley, 0, 0);
       canvas.drawBitmap(background, 0, 0, paint);
-      //      canvas.drawBitmap(star, screenWidth * 3, screenHeight * 3, paint);
+      //      canvas.drawBitmap(npc1, screenWidth * 3, screenHeight * 3, paint);
       canvas.restore();
       initView();
     } catch (Exception err) {
