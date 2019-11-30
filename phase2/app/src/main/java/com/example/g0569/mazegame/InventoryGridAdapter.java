@@ -108,6 +108,14 @@ public class InventoryGridAdapter extends BaseAdapter {
         }
     }
 
+    public void updateInventory(List<NPC> nonCollectedNPCs, List<NPC> availableNPCs){
+        this.nonCollectedNPCs = nonCollectedNPCs;
+        this.availableNPCs = availableNPCs;
+        this.allNPCs = new ArrayList<>();
+        this.allNPCs.addAll(availableNPCs);
+        this.allNPCs.addAll(nonCollectedNPCs);
+    }
+
     class ViewHolder {
         ImageView npcAvatar;
         ConstraintLayout backGround;

@@ -69,6 +69,7 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
   }
 
   public void updateNpcData() {
+      inventoryGridAdapter.updateInventory(inventory.getCollectedItem(), inventory.getAvailableItem());
     ImageView npcAvatar = view.findViewById(R.id.inventory_npc_avatar);
     TextView npcName = view.findViewById(R.id.inventory_npc_name);
     TextView npcDamage = view.findViewById(R.id.inventory_npc_damage);

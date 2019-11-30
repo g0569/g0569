@@ -78,8 +78,8 @@ public class HealthBar extends Item implements Observer {
    * @param totalHealth the health it started off with
    */
   public void action(int healthRemaining, int totalHealth) {
-    int health = determineHealth(healthRemaining, totalHealth);
-    healthRect.right = healthRect.right - health;
+//    int health = determineHealth(healthRemaining, totalHealth);
+//    healthRect.right = healthRect.right - health;
   }
 
   public void action() {}
@@ -91,17 +91,17 @@ public class HealthBar extends Item implements Observer {
   /**
    * Determines how much health the boss should have left based on the ratio of his health with the
    * bossgame_component_bar length
-   *
-   * @param health of the boss
-   * @param totalHealth of the boss
-   * @return the health we should take away
+//   *
+//   * @param health of the boss
+//   * @param totalHealth of the boss
+//   * @return the health we should take away
    */
-  private int determineHealth(int health, int totalHealth) {
-    // Determine the health of the bossgame_component_bar relative to the health and totalHealth of the Boss
-    int totalBar = getSize();
-    int healthToDraw = health * totalBar / totalHealth;
-    return totalBar - healthToDraw;
-  }
+//  private int determineHealth(int health, int totalHealth) {
+//    // Determine the health of the bossgame_component_bar relative to the health and totalHealth of the Boss
+//    int totalBar = getSize();
+//    int healthToDraw = health * totalBar / totalHealth;
+//    return totalBar - healthToDraw;
+//  }
 
   @Override
   public void update() {

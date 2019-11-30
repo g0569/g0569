@@ -1,16 +1,6 @@
 package com.example.g0569.bossgame.model;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
-
-import com.example.g0569.R;
 import com.example.g0569.base.model.Item;
-import com.example.g0569.utils.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +9,8 @@ public class Enemy extends Item implements Observable {
 
   private List<Observer> observers = new ArrayList<Observer>();
   // The health and initial health of the Enemy
-  private int health;
-  private int initialHealth;
+  private float health;
+  private float initialHealth;
   private boolean resistFire;
   private boolean resistWater;
   private boolean resistLightning;
@@ -28,6 +18,7 @@ public class Enemy extends Item implements Observable {
   // The direction it moves
   private int xDirection;
   private int yDirection;
+  private float ratioOfHealth;
 
   public Enemy() {
     super();
@@ -37,7 +28,7 @@ public class Enemy extends Item implements Observable {
     yDirection = 0;
 
     // Sets the health of the boss
-    health = 30;
+    health = 100;
     initialHealth = health;
   }
 
@@ -91,8 +82,9 @@ public class Enemy extends Item implements Observable {
     } else {
 
       health -= damageTaken;
-      setState(health - damageTaken);
+      setState((int) (health - damageTaken));
     }
+
   }
 
   //  public boolean isAttacked(float coordinateX, float coordinateY) {
@@ -116,7 +108,7 @@ public class Enemy extends Item implements Observable {
    *
    * @return the current health
    */
-  public int getHealth() {
+  public float getHealth() {
     return health;
   }
 
@@ -125,13 +117,13 @@ public class Enemy extends Item implements Observable {
    *
    * @return the initial Health
    */
-  public int getInitialHealth() {
+  public float getInitialHealth() {
     return initialHealth;
   }
 
   @Override
   public int getState() {
-    return getHealth();
+    return (int) getHealth();
   }
 
   @Override
@@ -147,7 +139,7 @@ public class Enemy extends Item implements Observable {
   }
 
   public int getInitialState() {
-    return getInitialHealth();
+    return (int) getInitialHealth();
   }
 
   @Override
@@ -159,4 +151,10 @@ public class Enemy extends Item implements Observable {
 
   @Override
   public void update() {}
+
+  public float getRatioOfHealth(){
+    ratioOfHealth = health/initialHealth;
+    return ratioOfHealth;
+  }
 }
+
