@@ -38,7 +38,7 @@ public class MazeGenerator {
     gridHeight = y;
   }
 
-  public static int[][] generate(int n, int m) {
+  public static int[][] generate(int n, int m, int npcNum) {
     MazeGenerator newMaze = new MazeGenerator(Constants.GRID_WIDTH, Constants.GRID_HEIGHT);
 
       newMaze.getStack().push(new Coordinate(0, 0));
@@ -51,16 +51,16 @@ public class MazeGenerator {
         }
 
     }
-      newMaze.updateNPCMaze(newMaze.maze, newMaze.mazeItem);
+      newMaze.updateNPCMaze(newMaze.maze, newMaze.mazeItem, npcNum);
 //      System.out.println(int[][] newMaze.maze);
     return newMaze.getMaze();
   }
 
-  private void updateNPCMaze(int[][] mazeGrid, Item[][] mazeItem) {
+  private void updateNPCMaze(int[][] mazeGrid, Item[][] mazeItem, int npcNum) {
     if (mazeGrid == null) {
     } else {
       int i = 0;
-      while (i < Constants.NPC_NUM) {
+      while (i < npcNum) {
         int y = (int)(Math.random() * Constants.GRID_HEIGHT);
         int x = (int)(Math.random() * Constants.GRID_WIDTH);
         if (mazeGrid[y][x] == 1) {

@@ -99,7 +99,6 @@ public class MazePlayer extends Player {
   }
 
   /**
-   * TODO build a mazeitem 2d array.
    * Detect the NPCs around the player.
    */
   private void getNPCAround() {

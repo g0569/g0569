@@ -22,22 +22,22 @@ public class MazeGame extends BaseGame {
   private int[][] mazeGrid;
   private MazePlayer mazePlayer;
   private BaseButton Button;
-  private int unbuiltNPC = Constants.NPC_NUM;
+  private int unbuiltNPC;
   private MazeStopWatch stopWatch;
 
-    public MazeContract.Presenter getPresenter() {
-        return presenter;
-    }
+  public MazeContract.Presenter getPresenter() {
+    return presenter;
+  }
 
-    public MazeContract.View getView() {
-        return view;
-    }
+  public MazeContract.View getView() {
+    return view;
+  }
 
-    public MazeGame(MazeContract.Presenter presenter, Inventory inventory) {
+  public MazeGame(MazeContract.Presenter presenter, Inventory inventory) {
     super();
     this.presenter = presenter;
     this.inventory = inventory;
-
+    this.unbuiltNPC = inventory.getNonCollectedItem().size();
   }
 
   public MazePlayer getMazePlayer() {
@@ -47,9 +47,11 @@ public class MazeGame extends BaseGame {
   public void onStart() {
     startpoint = Coordinate.create(0, 0);
     mazePlayer = new MazePlayer(this);
-    mazeGrid = MazeGenerator.generate(Constants.GRID_HEIGHT, Constants.GRID_WIDTH);
+    mazeGrid =
+        MazeGenerator.generate(
+            Constants.GRID_HEIGHT, Constants.GRID_WIDTH, inventory.getNonCollectedItem().size());
     stopWatch = new MazeStopWatch(60);
-//    Button = new BaseButton(this)
+    //    Button = new BaseButton(this)
   }
 
   @Override
@@ -58,21 +60,19 @@ public class MazeGame extends BaseGame {
   @Override
   public void load() {}
 
-
-
   public Coordinate getStartPoint() {
     return this.startpoint;
   }
 
   public void setMyMazeItem() {
-//    MazeHelper.loadMaze(myMazeItem, this);
+    //    MazeHelper.loadMaze(myMazeItem, this);
   }
 
-    public MazeStopWatch getStopWatch() {
-        return stopWatch;
-    }
+  public MazeStopWatch getStopWatch() {
+    return stopWatch;
+  }
 
-    public Item[][] getMyMazeItem() {
+  public Item[][] getMyMazeItem() {
     return myMazeItem;
   }
 
@@ -81,25 +81,25 @@ public class MazeGame extends BaseGame {
   }
 
   public void stopMove() {
-    mazePlayer.setDirection(Coordinate.create(0,0));
+    mazePlayer.setDirection(Coordinate.create(0, 0));
   }
 
-//  public void showStatistic() {
-//    // TODO
-//    List<String> statistic = new ArrayList<String>();
-//    statistic.add("Number of NPCs You catch: 1");
-//    getGameManager().showStatistic(statistic);
-//  }
+  //  public void showStatistic() {
+  //    // TODO
+  //    List<String> statistic = new ArrayList<String>();
+  //    statistic.add("Number of NPCs You catch: 1");
+  //    getGameManager().showStatistic(statistic);
+  //  }
 
   public int[][] getMazeGrid() {
     return mazeGrid;
   }
 
-    public Inventory getInventory() {
-        return inventory;
-    }
+  public Inventory getInventory() {
+    return inventory;
+  }
 
-    public Coordinate getPlayerDimensions() {
+  public Coordinate getPlayerDimensions() {
     return presenter.getPlayerDimensions();
   }
 
@@ -107,22 +107,18 @@ public class MazeGame extends BaseGame {
     getMazePlayer().setDirection(coordinate);
   }
 
-    /**
-     * @param x
-     * @param y
-     * @return
-     */
-  public NPC addItemToMazeItem(int x, int y){
-        this.getMyMazeItem()[y][x] = this.getInventory().getNonCollectedItem().get(unbuiltNPC);
-        unbuiltNPC -= 1;
-        return this.getInventory().getNonCollectedItem().get(unbuiltNPC);
+  /**
+   * @param x
+   * @param y
+   * @return
+   */
+  public NPC addItemToMazeItem(int x, int y) {
+    this.getMyMazeItem()[y][x] = this.getInventory().getNonCollectedItem().get(unbuiltNPC - 1);
+    return this.getInventory().getNonCollectedItem().get(unbuiltNPC - 1);
   }
 
-    /**
-     * TODO delete from 2d array mazeItem; check the default value of Item
-
-     */
-  public void deleteItem(int x, int y){
-        this.getMyMazeItem()[y][x] = null;
+  /** TODO delete from 2d array mazeItem; check the default value of Item */
+  public void deleteItem(int x, int y) {
+    this.getMyMazeItem()[y][x] = null;
   }
 }
