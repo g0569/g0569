@@ -7,7 +7,7 @@ import java.util.List;
 public class Inventory implements Serializable {
     private ArrayList<NPC> collectedItem = new ArrayList<>();;
     private ArrayList<NPC> nonCollectedItem = new ArrayList<>();;
-    private ArrayList<NPC> availableItem;
+    private ArrayList<NPC> availableItem = new ArrayList<>();
 
     public Inventory(ArrayList<NPC> defaultNPC) {
         for (int i = 0; i < defaultNPC.size(); i++){
@@ -15,8 +15,8 @@ public class Inventory implements Serializable {
         }
     }
 
-    public Inventory(List<NPC> collectedItem, List<NPC> nonCollectedItem) {
-        this.collectedItem.addAll(collectedItem);
+    public Inventory(List<NPC> avaliableItem, List<NPC> nonCollectedItem) {
+        this.availableItem.addAll(avaliableItem);
         this.nonCollectedItem.addAll(nonCollectedItem);
     }
 
