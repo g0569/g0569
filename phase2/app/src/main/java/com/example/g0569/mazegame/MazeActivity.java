@@ -26,12 +26,13 @@ public class MazeActivity extends AppCompatActivity {
 //        }
         setContentView(R.layout.activity_mazegame);
         mazeView = findViewById(R.id.mazeview);
-        final LinearLayout menuLayout = findViewById(R.id.menu_layout);
-        menuLayout.setVisibility(View.GONE);
-        Button menuBtn = findViewById(R.id.meny_btn);
         Bundle bundle = getIntent().getExtras();
         Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
         presenter = new MazePresenter(mazeView, inventory);
+
+        final LinearLayout menuLayout = findViewById(R.id.menu_layout);
+        menuLayout.setVisibility(View.GONE);
+        Button menuBtn = findViewById(R.id.meny_btn);
 
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
