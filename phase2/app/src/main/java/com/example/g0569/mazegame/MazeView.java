@@ -299,6 +299,11 @@ public class MazeView extends GameView implements MazeContract.View {
         ableMove = false;
     }
 
+    @Override
+    public void resumeView(){
+        ableMove = false;
+    }
+
     /*
     detecting the moving direction (sth for button to do.)
      */
