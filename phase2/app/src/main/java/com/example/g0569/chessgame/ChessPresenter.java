@@ -1,7 +1,6 @@
 package com.example.g0569.chessgame;
 
 import com.example.g0569.chessgame.model.ChessGame;
-import com.example.g0569.chessgame.model.ChessPiece;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.NPC;
@@ -31,7 +30,7 @@ public class ChessPresenter implements ChessContract.Presenter {
     chessPieceToDraw.addAll(chessGame.getPlayerChessPiece());
     chessPieceToDraw.addAll(chessGame.getNPCChessPieceData());
     for (NPC chessPiece : chessPieceToDraw) {
-      chessView.drawChessPiece(chessPiece.getCoordinate(), chessGame.typeGetter(chessPiece));
+      chessView.drawChessPiece(chessPiece.getCoordinate(), chessPiece.getType());
     }
   }
 

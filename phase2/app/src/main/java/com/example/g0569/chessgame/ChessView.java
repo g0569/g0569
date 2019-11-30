@@ -223,7 +223,7 @@ public class ChessView extends GameView implements ChessContract.View {
             && y > screenHeight * 0.44f
             && y < screenHeight) {
           // Place a chess piece that has been chosen.
-          presenter.placePlayerChess(BoardCoordinate); // TODO unfinished part!
+          presenter.placePlayerChess(BoardCoordinate);
           placeChess = false;
         }
       } else {

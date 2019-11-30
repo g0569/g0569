@@ -1,7 +1,6 @@
 package com.example.g0569.chessgame.model;
 
 import com.example.g0569.base.model.BaseGame;
-import com.example.g0569.base.model.Item;
 import com.example.g0569.chessgame.ChessContract;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Inventory;
@@ -16,7 +15,7 @@ public class ChessGame extends BaseGame {
   private ChessContract.Presenter presenter;
   private Inventory inventory;
   private NPC selectedNPC;
-  //  private String difficulty; // might be "easy", "hard", or "insane"
+  private String difficulty = "hard"; // might be "easy", "hard", or "insane"
   private ChessPieceFactory chessPieceFactory;
   private List<NPC> NPCChessPieceData = new ArrayList<>();
   private List<NPC> playerChessPieceData = new ArrayList<>();
@@ -130,24 +129,20 @@ public class ChessGame extends BaseGame {
     return NPCChessPieceData;
   }
 
-  public List<ChessPiece> getPlayerChessPiece() {
-    List<ChessPiece> playerChessPieceList = new ArrayList<>();
-    for (Item chessPiece : l2player.getInventory()) {
-      playerChessPieceList.add((ChessPiece) chessPiece);
-    }
-    return playerChessPieceList;
+  public List<NPC> getPlayerChessPiece() {
+    return playerChessPieceData;
   }
 
   private int powerCalculator(String side, int row) {
     // TODO This method need to be improved!
     int rowPower = 0;
-    List<ChessPiece> requiredInventory = new ArrayList<>();
+    List<NPC> requiredInventory = new ArrayList<>();
     if (side.equals("player")) {
       requiredInventory.addAll(getPlayerChessPiece());
     } else if (side.equals("NPC")) {
       requiredInventory.addAll(NPCChessPieceData);
     }
-    for (ChessPiece currentChess : requiredInventory) {
+    for (NPC currentChess : requiredInventory) {
       if (currentChess.getCoordinate().getX() == row) {
         rowPower += currentChess.getDamage();
       }
