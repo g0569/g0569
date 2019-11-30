@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.g0569.R;
+import com.example.g0569.bossgame.BossActivity;
 import com.example.g0569.chessgame.ChessActivity;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
@@ -116,6 +117,13 @@ public class MazeActivity extends AppCompatActivity {
     public void toChessGame(NPC selectedNPC) {
         bundle.putSerializable(Constants.BUNDLE_SELECTEDNPC_KEY, selectedNPC);
         Intent intent = new Intent(this, ChessActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
+    }
+
+    public void toBossGame() {
+        Intent intent = new Intent(this, BossActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();

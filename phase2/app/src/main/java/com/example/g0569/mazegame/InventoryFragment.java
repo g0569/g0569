@@ -46,7 +46,7 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
     GridView inventoryGridView = view.findViewById(R.id.inventory_npc_grid);
     inventoryGridAdapter =
         new InventoryGridAdapter(
-            getActivity(), inventory.getNonCollectedItem(), inventory.getAvailableItem(), this);
+            getActivity(), inventory.getCollectedItem(), inventory.getAvailableItem(), this);
     inventoryGridView.setAdapter(inventoryGridAdapter);
     view.findViewById(R.id.inventory_tochessgame_btn).setOnClickListener(new View.OnClickListener() {
         @Override
@@ -57,6 +57,12 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
             }else {
                 ((MazeActivity) getActivity()).toChessGame(selectedNPC);
             }
+        }
+    });
+    view.findViewById(R.id.inventory_tobossgame_btn).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            ((MazeActivity) getActivity()).toBossGame();
         }
     });
     return view;
