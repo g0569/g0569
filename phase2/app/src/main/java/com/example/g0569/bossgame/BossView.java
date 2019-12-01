@@ -34,9 +34,8 @@ public class BossView extends GameView implements BossContract.View {
   private Bitmap currentProjectile;
   private Bitmap healthBar;
   private Bitmap healthBarHolder;
-  private Bitmap ice;
-  private Bitmap fire;
-  private Map powerMap;
+  private Bitmap ice = BitmapFactory.decodeResource(getResources(), R.drawable.icespell);
+  private Bitmap fire = BitmapFactory.decodeResource(getResources(), R.drawable.fire_spell);
 
   private Coordinate switchButtonCoordinates;
   private Coordinate menuButtonCoordinates;
@@ -60,7 +59,19 @@ public class BossView extends GameView implements BossContract.View {
   private int NPCSize;
   private int healthBarSize;
   private int healthBarHolderSize;
-
+  private boolean end;
+  Map<String, Bitmap> powerTable = new HashMap<String, Bitmap>() {{
+    put("ice", ice);
+    put("fire", fire);
+  }};
+  Map<String, Bitmap> typeTable = new HashMap<String, Bitmap>() {{
+    put("type1", getNpc1());
+    put("type2", getNpc2());
+    put("type3", getNpc3());
+    put("type4", getNpc4());
+    put("type5", getNpc5());
+    put("type6", getNpc6());
+  }};
   private boolean thrown;
 
   private int enemyDirection;
@@ -74,20 +85,12 @@ public class BossView extends GameView implements BossContract.View {
     super(context);
     paint.setTextSize(40);
     thread = new Thread(this);
-    //    setTypeLookUpTable(new HashMap<String, Bitmap>());
-    powerMap = new HashMap<String, Bitmap>();
-    ice = BitmapFactory.decodeResource(getResources(), R.drawable.icespell);
-    fire = BitmapFactory.decodeResource(getResources(), R.drawable.fire);
-    powerMap.put("fire", fire);
-    powerMap.put("ice", ice);
   }
 
   public BossView(Context context, AttributeSet attrs) {
     super(context, attrs);
     paint.setTextSize(40);
     thread = new Thread(this);
-    //    setTypeLookUpTable(new HashMap<String, Bitmap>());
-    Map<String, String> mymap = new HashMap<String, String>();
   }
 
   @Override
@@ -95,13 +98,8 @@ public class BossView extends GameView implements BossContract.View {
   public void surfaceCreated(SurfaceHolder holder) {
     super.surfaceCreated(holder);
     initBitmaps();
-
-    //    initView();
-
     scalex = screenWidth / background.getWidth();
     scaley = screenHeight / background.getHeight();
-    //    bossGame = (BossGame) mainActivity.getGameManager().getCurrentGame();
-    //    bossGame.createItems(getResources());
     if (thread.isAlive()) {
       thread.start();
     } else {
@@ -130,7 +128,6 @@ public class BossView extends GameView implements BossContract.View {
       canvas.scale(scalex, scaley, 0, 0);
       canvas.drawBitmap(background, 0, 0, paint);
       canvas.restore();
-      // this should technically be called updateView()
       initView();
     } catch (Exception err) {
       err.printStackTrace();
@@ -159,8 +156,8 @@ public class BossView extends GameView implements BossContract.View {
           y,
           shootButtonCoordinate.getX(),
           shootButtonCoordinate.getY(),
-          shootButton.getWidth(),
-          shootButton.getHeight())) {
+          shootButtonSize,
+          shootButtonSize)) {
         if (!pause) {
           System.out.println("shoot out");
           Toast.makeText(activity, "Throw", Toast.LENGTH_SHORT).show();
@@ -171,22 +168,20 @@ public class BossView extends GameView implements BossContract.View {
           y,
           switchButtonCoordinates.getX(),
           switchButtonCoordinates.getY(),
-          switchButton.getWidth(),
-          switchButton.getHeight())) {
+          switchButtonSize,
+          switchButtonSize)) {
         if (!pause) {
-          System.out.println("switch team");
           bossPresenter.switchTeam();
           resetCurrentProjectile();
           Toast.makeText(activity, "Switch", Toast.LENGTH_SHORT).show();
         }
-        //        bossPresenter.switchTeam();
       } else if (inRange(
           x,
           y,
           pauseButtonCoordinates.getX(),
           pauseButtonCoordinates.getY(),
-          pauseButton.getWidth(),
-          pauseButton.getHeight())) {
+          pauseButtonSize,
+          pauseButtonSize)) {
         Toast.makeText(activity, "Paused", Toast.LENGTH_SHORT).show();
         pause();
       } else if (inRange(
@@ -194,8 +189,8 @@ public class BossView extends GameView implements BossContract.View {
           y,
           menuButtonCoordinates.getX(),
           menuButtonCoordinates.getY(),
-          menuButton.getWidth(),
-          menuButton.getHeight())) {
+          menuButtonSize,
+          menuButtonSize)) {
         Toast.makeText(activity, "Menu", Toast.LENGTH_SHORT).show();
       }
     }
@@ -212,8 +207,6 @@ public class BossView extends GameView implements BossContract.View {
       } catch (NullPointerException e) {
         System.out.println(e);
       }
-      //      bossGame.update();
-      //      bossPresenter.update();
       long endTime = System.currentTimeMillis();
       try {
         if (endTime - startTime < 100) Thread.sleep(100 - (endTime - startTime));
@@ -255,24 +248,7 @@ public class BossView extends GameView implements BossContract.View {
     switchButton =
         Bitmap.createScaledBitmap(switchButton, switchButtonSize, switchButtonSize, false);
     NPCFrame = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_component_frame);
-    NPCFrame = Bitmap.createScaledBitmap(NPCFrame, (int) NPCSize, (int) NPCSize, false);
-    //    NPC =
-    //        Bitmap.createScaledBitmap(
-    //            NPC, (int) (getWidth() * 0.20f), (int) (getHeight() * 0.2f), false);
-
-    //    fire = Bitmap.createScaledBitmap(fire, (int) (getWidth() *0.13f),
-    // (int)(getHeight()*0.20f), false);
-    //    currentProjectile = Bitmap.createScaledBitmap(currentProjectile, (int) (getWidth()
-    // *0.20f), (int) (getHeight()*0.20f), false);
-
-    //    setTypeLookUpTable(new HashMap<String, Bitmap>());
-    //    getTypeLookUpTable().put("type1", npc1);
-    //    getTypeLookUpTable().put("type2", npc2);
-    //    getTypeLookUpTable().put("type3", npc3);
-    //    getTypeLookUpTable().put("type4", npc4);
-    //    getTypeLookUpTable().put("type5", npc5);
-    //    getTypeLookUpTable().put("type6", npc6);
-
+    NPCFrame = Bitmap.createScaledBitmap(NPCFrame, NPCSize, NPCSize, false);
     initCoordinates();
   }
 
@@ -320,8 +296,6 @@ public class BossView extends GameView implements BossContract.View {
 
   @Override
   public void initView() {
-    //  initBitmaps();
-
     drawEnemy();
     drawAim();
     drawHealthBarHolder();
@@ -408,6 +382,10 @@ public class BossView extends GameView implements BossContract.View {
 
   public void updateMovementHealthBar(float initialHealth, float remainingHealth) {
     if (remainingHealth == 0) {
+      healthBar = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_component_bar);
+      healthBar =
+          Bitmap.createScaledBitmap(
+              healthBarHolder, healthBarHolderSize, healthBarHolderSize, false);
       end(true);
     } else {
       healthBar =
@@ -423,35 +401,24 @@ public class BossView extends GameView implements BossContract.View {
    well.
   */
   public void end(boolean end) {
-    paint.setColor(Color.RED);
-    paint.setTextSize(600);
-    canvas.drawText("YOU WIN!!!", screenWidth / 2, screenHeight / 2, paint);
-    pause();
+    if (end) {
+      this.end = true;
+      paint.setColor(Color.RED);
+      paint.setTextSize(600);
+      canvas.drawText("YOU WIN!!!", screenWidth / 2, screenHeight / 2, paint);
+      pause();
+      }
+    }
+
+  public int getFinalScore(){
+    if (end){
+    return bossPresenter.getScore();
   }
+    return 0;
+    }
 
   public void setCurrentNPCBitmap(String name) {
-    if (name.equals("type1")) {
-      NPC = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l1);
-      System.out.println("npc bitmap stored");
-      //      canvas.drawBitmap(NPC, NPCCoordinate.getX(), NPCCoordinate.getY(),paint);
-    } else if (name.equals("type2")) {
-      NPC = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l2);
-      //      canvas.drawBitmap(NPC, NPCCoordinate.getX(), NPCCoordinate.getY(),paint);
-    } else if (name.equals("type3")) {
-      NPC = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l3);
-      //      canvas.drawBitmap(NPC, NPCCoordinate.getX(), NPCCoordinate.getY(),paint);
-    } else if (name.equals("type4")) {
-      NPC = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l4);
-      //      canvas.drawBitmap(NPC, NPCCoordinate.getX(), NPCCoordinate.getY(),paint);
-    } else if (name.equals("type5")) {
-      NPC = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l5);
-      //      canvas.drawBitmap(NPC, NPCCoordinate.getX(), NPCCoordinate.getY(),paint);
-    } else if (name.equals("type6")) {
-      NPC = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l6);
-      //      canvas.drawBitmap(NPC, NPCCoordinate.getX(), NPCCoordinate.getY(),paint);
-    }
-    //        NPC = Bitmap.createScaledBitmap(NPC, (int)(getWidth()*0.2f), (int)(getHeight()*0.2f),
-    //     false);
+    NPC = typeTable.get(name);
   }
 
   public void drawStats() {
@@ -465,14 +432,11 @@ public class BossView extends GameView implements BossContract.View {
   public void drawNPC() {
     try {
       NPC = Bitmap.createScaledBitmap(NPC, NPCSize, NPCSize, false);
-
       canvas.drawBitmap(NPC, NPCCoordinate.getX(), NPCCoordinate.getY(), paint);
-      //      System.out.println("drawing npc");
     } catch (NullPointerException e) {
       System.out.println(e.toString());
     }
   }
-  // TODO
 
   /** Changes the movement of a projectile */
   public void updateMovementProjectile() {
@@ -515,12 +479,7 @@ public class BossView extends GameView implements BossContract.View {
 
   @Override
   public void setCurrentProjectileBitmap(String typeProjectile) {
-    //    currentProjectile = (Bitmap) powerMap.get(typeProjectile);
-    if (typeProjectile.equals("fire")) {
-      currentProjectile = BitmapFactory.decodeResource(getResources(), R.drawable.fire);
-    } else if (typeProjectile.equals("ice")) {
-      currentProjectile = BitmapFactory.decodeResource(getResources(), R.drawable.icespell);
-    }
+    currentProjectile =  powerTable.get(typeProjectile);
   }
 
   public void drawCurrentProjectile() {

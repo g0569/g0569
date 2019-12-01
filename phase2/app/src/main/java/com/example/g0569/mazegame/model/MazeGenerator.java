@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
+// TODO: 2019-11-27 maze in a dead end; NPC wrong placing
 /** The type Maze generator. */
-class MazeGenerator {
+public class MazeGenerator {
 
   /**
    * Generate a n by m maze represented in List.
@@ -21,16 +22,18 @@ class MazeGenerator {
   private Stack<Coordinate> stack = new Stack<>();
 
   private int[][] maze;
+  private Item[][] mazeItem;
   private int gridWidth;
   private int gridHeight;
 
-  private MazeGenerator(int x, int y) {
+  MazeGenerator(int x, int y) {
     maze = new int[y][x];
+    mazeItem = new Item[y][x];
     gridWidth = x;
     gridHeight = y;
   }
 
-   static int[][] generate(int npcNum) {
+  public static int[][] generate(int n, int m, int npcNum) {
     MazeGenerator newMaze = new MazeGenerator(Constants.GRID_WIDTH, Constants.GRID_HEIGHT);
 
     newMaze.getStack().push(new Coordinate(0, 0));
@@ -42,12 +45,12 @@ class MazeGenerator {
         newMaze.randomlyAddNodesToStack(neighbors);
       }
     }
-    newMaze.updateNPCMaze(newMaze.maze, npcNum);
+    newMaze.updateNPCMaze(newMaze.maze, newMaze.mazeItem, npcNum);
     //      System.out.println(int[][] newMaze.maze);
     return newMaze.getMaze();
   }
 
-  private void updateNPCMaze(int[][] mazeGrid, int npcNum) {
+  private void updateNPCMaze(int[][] mazeGrid, Item[][] mazeItem, int npcNum) {
     if (mazeGrid == null) {
     } else {
       int i = 0;
@@ -111,11 +114,11 @@ class MazeGenerator {
     }
   }
 
-  private int[][] getMaze() {
+  public int[][] getMaze() {
     return maze;
   }
 
-  private Stack<Coordinate> getStack() {
+  public Stack<Coordinate> getStack() {
     return stack;
   }
 }

@@ -24,6 +24,7 @@ import static com.example.g0569.utils.Constants.NPCIMAGELOOKUPTABLE;
 public class InventoryGridAdapter extends BaseAdapter {
 
   private int selected = -1;
+  private List<NPC> nonCollectedNPCs;
   private List<NPC> availableNPCs;
   private List<NPC> allNPCs = new ArrayList<>();
   private Context context;
@@ -38,12 +39,13 @@ public class InventoryGridAdapter extends BaseAdapter {
    * @param availableNPCs the available NPCs
    * @param inventoryFragment the inventory fragment
    */
-  InventoryGridAdapter(
-          Context context,
-          List<NPC> nonCollectedNPCs,
-          List<NPC> availableNPCs,
-          InventoryFragment inventoryFragment) {
+  public InventoryGridAdapter(
+      Context context,
+      List<NPC> nonCollectedNPCs,
+      List<NPC> availableNPCs,
+      InventoryFragment inventoryFragment) {
     this.context = context;
+    this.nonCollectedNPCs = nonCollectedNPCs;
     this.availableNPCs = availableNPCs;
     this.allNPCs.addAll(availableNPCs);
     this.allNPCs.addAll(nonCollectedNPCs);
@@ -55,7 +57,7 @@ public class InventoryGridAdapter extends BaseAdapter {
    *
    * @return the current npc
    */
-  NPC getCurrentNPC() {
+  public NPC getCurrentNPC() {
     try{
       currentNPC = allNPCs.get(selected);
     } catch (ArrayIndexOutOfBoundsException e) {
@@ -84,7 +86,7 @@ public class InventoryGridAdapter extends BaseAdapter {
    *
    * @return the selected
    */
-  int getSelected() {
+  public int getSelected() {
     return selected;
   }
 
@@ -138,7 +140,8 @@ public class InventoryGridAdapter extends BaseAdapter {
    * @param nonCollectedNPCs the non collected NPCs
    * @param availableNPCs the available NPCs
    */
-  void updateInventory(List<NPC> nonCollectedNPCs, List<NPC> availableNPCs) {
+  public void updateInventory(List<NPC> nonCollectedNPCs, List<NPC> availableNPCs) {
+    this.nonCollectedNPCs = nonCollectedNPCs;
     this.availableNPCs = availableNPCs;
     this.allNPCs = new ArrayList<>();
     this.allNPCs.addAll(availableNPCs);

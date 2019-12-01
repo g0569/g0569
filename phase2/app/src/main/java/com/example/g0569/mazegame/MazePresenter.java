@@ -60,8 +60,7 @@ public class MazePresenter implements MazeContract.Presenter {
     Coordinate playerCoor = Coordinate.create(0, 0);
     try {
       playerCoor = mazeGame.getMazePlayer().getCoordinate();
-    }
-    catch (NullPointerException ignored) {
+    } catch (NullPointerException e) {
     } finally {
       return playerCoor;
     }
@@ -80,6 +79,11 @@ public class MazePresenter implements MazeContract.Presenter {
   @Override
   public Inventory getInventory() {
     return inventory;
+  }
+
+  @Override
+  public String getNPCName(NPC npc) {
+    return npc.getName();
   }
 
   @Override

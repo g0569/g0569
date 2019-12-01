@@ -12,7 +12,7 @@ public class HeartChessPiece extends ChessPiece {
     public Integer[][] createTargetList() {
         Integer[][] target = new Integer[3][2];
         float column = this.getCoordinate().getX();
-        if(column == 1 || column == 2){
+        if(column == (1 | 2)){
             target[0][0] = 3;
             target[1][0] = 3;
             target[2][0] = 3;

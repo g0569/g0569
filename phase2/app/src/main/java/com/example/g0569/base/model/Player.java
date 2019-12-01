@@ -8,10 +8,7 @@ public abstract class Player extends Item {
 
   private List<Item> inventory = new ArrayList<>();
 
-  /**
-   * Instantiates a new Player.
-   *
-   */
+  /** Instantiates a new Player. */
   public Player() {
     super();
   }

@@ -21,8 +21,9 @@ import java.util.List;
  */
 public class SaveGameFragment extends Fragment implements SaveGameContract.View {
 
+  List<SaveGame> saveGames;
+  private SaveGameListAdapter adapter;
   private SaveGameContract.Presenter presenter;
-
   /** Instantiates a new Save game fragment. */
   public SaveGameFragment() {}
 
@@ -46,8 +47,8 @@ public class SaveGameFragment extends Fragment implements SaveGameContract.View 
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_savegame, container, false);
     ListView saveGameListView = view.findViewById(R.id.savegame_listview);
-    final List<SaveGame> saveGames = presenter.getSaveGames();
-    final SaveGameListAdapter adapter = new SaveGameListAdapter(getActivity(), saveGames);
+    saveGames = presenter.getSaveGames();
+    adapter = new SaveGameListAdapter(getActivity(), saveGames);
     saveGameListView.setAdapter(adapter);
     saveGameListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
     Button loadBtn = view.findViewById(R.id.savegame_load);
@@ -64,6 +65,13 @@ public class SaveGameFragment extends Fragment implements SaveGameContract.View 
           }
         });
     return view;
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    saveGames = presenter.getSaveGames();
+    adapter.setSaveGames(saveGames);
   }
 
   @Override

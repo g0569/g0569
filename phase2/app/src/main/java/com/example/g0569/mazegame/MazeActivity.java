@@ -42,7 +42,6 @@ public class MazeActivity extends AppCompatActivity {
     setContentView(R.layout.activity_mazegame);
     mazeView = findViewById(R.id.mazeview);
     bundle = getIntent().getExtras();
-    assert bundle != null;
     final SaveGame saveGame = (SaveGame) bundle.getSerializable(Constants.BUNDLE_SAVEGAME_KEY);
   try{
     Boolean fromChessGame =
