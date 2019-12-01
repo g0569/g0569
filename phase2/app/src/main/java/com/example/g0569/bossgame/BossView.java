@@ -408,6 +408,10 @@ public class BossView extends GameView implements BossContract.View {
 
   public void updateMovementHealthBar(float initialHealth, float remainingHealth) {
     if (remainingHealth == 0) {
+        healthBar =
+                BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_component_bar);
+        healthBar =
+                Bitmap.createScaledBitmap(healthBarHolder, healthBarHolderSize, healthBarHolderSize, false);
       end(true);
     } else {
       healthBar =
