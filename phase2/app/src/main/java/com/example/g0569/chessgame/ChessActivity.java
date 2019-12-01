@@ -22,7 +22,7 @@ public class ChessActivity extends AppCompatActivity {
     private boolean isMenuVisible = false;
     private Bundle bundle;
     private ConstraintLayout dialogue;
-
+    private LinearLayout menuLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +40,7 @@ public class ChessActivity extends AppCompatActivity {
 
         dialogue = findViewById(R.id.dialogue);
 
-        final LinearLayout menuLayout = findViewById(R.id.menu_layout);
+        menuLayout = findViewById(R.id.menu_layout);
         menuLayout.setVisibility(View.GONE);
         Button menuBtn = findViewById(R.id.meny_btn);
 
@@ -86,9 +86,12 @@ public class ChessActivity extends AppCompatActivity {
             }
         });
         Button dialogueButton2 = dialogue.findViewById(R.id.dialogue_btn_2);
-        dialogueButton.setOnClickListener(new View.OnClickListener() {
+        dialogueButton2.setText("Restart the Chess Game");
+        dialogueButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isMenuVisible = true;
+                menuLayout.setVisibility(View.GONE);
                 presenter.resetChessPiece();
             }
         });

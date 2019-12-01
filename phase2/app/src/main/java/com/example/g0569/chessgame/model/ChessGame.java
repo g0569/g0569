@@ -166,7 +166,7 @@ public class ChessGame extends BaseGame {
             int enemyDmg = enemyChess.getDamage();
             int ourDmg = currentChess.getDamage();
             if((currentChess.getBehavior()) instanceof TriangleChessPiece){
-              ourDmg = 2*currentChess.getDamage();
+              ourDmg = 5*currentChess.getDamage();
             }
             if(ourDmg >= enemyDmg){characterScore += 1;}
           }
