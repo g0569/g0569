@@ -103,6 +103,7 @@ public class MazeActivity extends AppCompatActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
+            saveGame.setInventory(inventory);
             saveGameSQLiteAccessor.updateSaveGame(saveGame);
             if (isInventoryVisible) {
               isInventoryVisible = false;

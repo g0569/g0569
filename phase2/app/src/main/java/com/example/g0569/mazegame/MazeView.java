@@ -18,6 +18,8 @@ import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.NPC;
 
+import java.util.HashMap;
+
 /** The Maze view. */
 public class MazeView extends GameView implements MazeContract.View, SensorEventListener {
 
@@ -71,11 +73,7 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     gridHeight = getHeight() / Constants.GRID_HEIGHT;
     gridWidth = getWidth() / Constants.GRID_WIDTH;
     sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-    enableSensor =
-        sensorManager.registerListener(
-            this,
-            sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-            SensorManager.SENSOR_DELAY_UI);
+    enableSensor = false;
     initBitmaps();
     if (thread.isAlive()) {
       thread.start();
@@ -172,31 +170,39 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     moveButtons =
         Bitmap.createScaledBitmap(
             moveButtons, (int) (getWidth() * 0.13f), (int) (getHeight() * 0.13f), false);
-    npc1 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l1);
+//    npc1 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l1);
     npc1 =
         Bitmap.createScaledBitmap(
-            npc1, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-    npc2 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l2);
+            getNpc1(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+//    npc2 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l2);
     npc2 =
         Bitmap.createScaledBitmap(
-            npc2, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-    npc3 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l3);
+            getNpc2(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+//    npc3 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l3);
     npc3 =
         Bitmap.createScaledBitmap(
-            npc3, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-    npc4 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l4);
+            getNpc3(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+//    npc4 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l4);
     npc4 =
         Bitmap.createScaledBitmap(
-            npc4, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-    npc5 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l5);
+            getNpc4(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+//    npc5 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l5);
     npc5 =
         Bitmap.createScaledBitmap(
-            npc5, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-    npc6 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l6);
+            getNpc5(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+//    npc6 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l6);
     npc6 =
         Bitmap.createScaledBitmap(
-            npc6, getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+            getNpc6(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+    setTypeLookUpTable(new HashMap<String, Bitmap>());
+    getTypeLookUpTable().put("type1", npc1);
+    getTypeLookUpTable().put("type2", npc2);
+    getTypeLookUpTable().put("type3", npc3);
+    getTypeLookUpTable().put("type4", npc4);
+    getTypeLookUpTable().put("type5", npc5);
+    getTypeLookUpTable().put("type6", npc6);
   }
+
 
   @Override
   public void initView() {
@@ -285,19 +291,20 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     paint.setColor(Color.GRAY);
     paint.setTextSize(70);
     //        String type = presenter.getNPCType(npc);
-    if (presenter.getNPCType(npc).equals("type1")) {
-      canvas.drawBitmap(npc1, coor.getX(), coor.getY(), paint);
-    } else if (presenter.getNPCType(npc).equals("type2")) {
-      canvas.drawBitmap(npc2, coor.getX(), coor.getY(), paint);
-    } else if (presenter.getNPCType(npc).equals("type3")) {
-      canvas.drawBitmap(npc3, coor.getX(), coor.getY(), paint);
-    } else if (presenter.getNPCType(npc).equals("type4")) {
-      canvas.drawBitmap(npc4, coor.getX(), coor.getY(), paint);
-    } else if (presenter.getNPCType(npc).equals("type5")) {
-      canvas.drawBitmap(npc5, coor.getX(), coor.getY(), paint);
-    } else if (presenter.getNPCType(npc).equals("type6")) {
-      canvas.drawBitmap(npc6, coor.getX(), coor.getY(), paint);
-    }
+//    if (presenter.getNPCType(npc).equals("type1")) {
+//      canvas.drawBitmap(npc1, coor.getX(), coor.getY(), paint);
+//    } else if (presenter.getNPCType(npc).equals("type2")) {
+//      canvas.drawBitmap(npc2, coor.getX(), coor.getY(), paint);
+//    } else if (presenter.getNPCType(npc).equals("type3")) {
+//      canvas.drawBitmap(npc3, coor.getX(), coor.getY(), paint);
+//    } else if (presenter.getNPCType(npc).equals("type4")) {
+//      canvas.drawBitmap(npc4, coor.getX(), coor.getY(), paint);
+//    } else if (presenter.getNPCType(npc).equals("type5")) {
+//      canvas.drawBitmap(npc5, coor.getX(), coor.getY(), paint);
+//    } else if (presenter.getNPCType(npc).equals("type6")) {
+//      canvas.drawBitmap(npc6, coor.getX(), coor.getY(), paint);
+//    }
+    canvas.drawBitmap(getTypeLookUpTable().get(presenter.getNPCType(npc)), coor.getX(), coor.getY(), paint);
   }
 
   @Override
