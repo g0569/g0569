@@ -85,6 +85,13 @@ public class ChessActivity extends AppCompatActivity {
                 toMazeGame();
             }
         });
+        Button dialogueButton2 = dialogue.findViewById(R.id.dialogue_btn_2);
+        dialogueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.resetChessPiece();
+            }
+        });
         dialogue.setVisibility(View.VISIBLE);
 
     }
