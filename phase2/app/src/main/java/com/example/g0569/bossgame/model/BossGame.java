@@ -142,14 +142,6 @@ public class BossGame extends BaseGame {
     return enemy.getHealth() <= 0;
   }
 
-  /**
-   * Returns the ratio of the health that the boss has left
-   *
-   * @return ratio of boss health
-   */
-  public float getRatioOfHealth() {
-    return enemy.getRatioOfHealth();
-  }
 
   /**
    * Gets the current health of the enemy.
@@ -157,6 +149,12 @@ public class BossGame extends BaseGame {
    * @return health of enemy
    */
   public float getHealth() {
+
     return enemy.getHealth();
+
+  }
+
+  public float getInitialHealth(){
+    return enemy.getInitialHealth();
   }
 }

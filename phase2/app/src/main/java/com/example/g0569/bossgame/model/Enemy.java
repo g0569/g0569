@@ -57,8 +57,9 @@ public class Enemy extends Item implements Observable {
       health -= damageTaken / 2;
     } else {
       health -= damageTaken;
-      setState((int) (health - damageTaken));
     }
+    health = Math.max(0.0f, health);
+    setState((int) health);
   }
 
   String getResist() {
@@ -110,7 +111,7 @@ public class Enemy extends Item implements Observable {
    *
    * @return the initial Health
    */
-  private float getInitialHealth() {
+  public float getInitialHealth() {
     return initialHealth;
   }
 
