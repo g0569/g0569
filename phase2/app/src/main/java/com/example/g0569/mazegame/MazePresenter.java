@@ -1,6 +1,7 @@
 package com.example.g0569.mazegame;
 
 import com.example.g0569.mazegame.model.MazeGame;
+import com.example.g0569.mazegame.model.SaveMaze;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.NPC;
@@ -10,10 +11,10 @@ public class MazePresenter implements MazeContract.Presenter {
   private MazeGame mazeGame;
   private Inventory inventory;
 
-  public MazePresenter(MazeContract.View mazeView, Inventory inventory) {
+  public MazePresenter(MazeContract.View mazeView, Inventory inventory, SaveMaze saveMaze) {
     this.mazeView = mazeView;
     this.mazeView.setPresenter(this);
-    this.mazeGame = new MazeGame(this, inventory);
+    this.mazeGame = new MazeGame(this, inventory, saveMaze);
     this.inventory = inventory;
   }
 
@@ -60,7 +61,7 @@ public class MazePresenter implements MazeContract.Presenter {
     Coordinate playerCoor = Coordinate.create(0, 0);
     try {
       playerCoor = mazeGame.getMazePlayer().getCoordinate();
-    } catch (NullPointerException e) {
+    } catch (NullPointerException ignored) {
     } finally {
       return playerCoor;
     }
@@ -79,11 +80,6 @@ public class MazePresenter implements MazeContract.Presenter {
   @Override
   public Inventory getInventory() {
     return inventory;
-  }
-
-  @Override
-  public String getNPCName(NPC npc) {
-    return npc.getName();
   }
 
   @Override
@@ -113,7 +109,12 @@ public class MazePresenter implements MazeContract.Presenter {
   }
 
   @Override
-  public void load() {
-    mazeGame.load();
+  public SaveMaze save() {
+    return mazeGame.save();
+  }
+
+  @Override
+  public void load(SaveMaze saveMaze) {
+    mazeGame.load(saveMaze);
   }
 }

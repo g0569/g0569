@@ -1,6 +1,5 @@
 package com.example.g0569.mazegame.model;
 
-import com.example.g0569.base.BaseButton;
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.base.model.Item;
 import com.example.g0569.mazegame.MazeContract;
@@ -13,24 +12,21 @@ public class MazeGame extends BaseGame {
 
   private MazeContract.Presenter presenter;
   private MazeContract.View view;
-  private float gridWidth;
-  private float gridHeight;
   private Coordinate startpoint;
   private Inventory inventory;
   private Item[][] myMazeItem = new Item[Constants.GRID_HEIGHT][Constants.GRID_WIDTH];
   private int[][] mazeGrid;
   private MazePlayer mazePlayer;
-  private BaseButton Button;
   private int unbuiltNPC;
   private MazeStopWatch stopWatch;
   private SaveMaze save;
 
-  public MazeGame(MazeContract.Presenter presenter, Inventory inventory) {
+  public MazeGame(MazeContract.Presenter presenter, Inventory inventory, SaveMaze saveMaze) {
     super();
     this.presenter = presenter;
     this.inventory = inventory;
     this.unbuiltNPC = inventory.getNonCollectedItem().size();
-    this.save = new SaveMaze();
+    this.save = saveMaze;
   }
 
   public MazeContract.Presenter getPresenter() {
@@ -48,12 +44,15 @@ public class MazeGame extends BaseGame {
   public void onStart() {
     startpoint = Coordinate.create(0, 0);
     mazePlayer = new MazePlayer(this);
-    mazeGrid =
-        MazeGenerator.generate(
-            Constants.GRID_HEIGHT, Constants.GRID_WIDTH, inventory.getNonCollectedItem().size());
     stopWatch = new MazeStopWatch(Constants.MAZETIMER);
-    //    Button = new BaseButton(this)
-    getStopWatch().start();
+    if (save.isEmpty()) {
+      mazeGrid = MazeGenerator.generate(inventory.getNonCollectedItem().size());
+      //    Button = new BaseButton(this)
+      getStopWatch().start();
+      this.save();
+    } else {
+      this.load();
+    }
   }
 
   @Override
@@ -62,20 +61,36 @@ public class MazeGame extends BaseGame {
     presenter.getMazeView().stopView();
     save.setMazeGrid(mazeGrid);
     save.setPlayerCoordinate(mazePlayer.getCoordinate());
-    save.setStopWatch(stopWatch);
+    save.setRemainTime(stopWatch.getRemainTime());
   }
 
-  @Override
-  public void load() {
-//    stopWatch.resume();
+  public void load(SaveMaze saveMaze) {
+    //    stopWatch.resume();
+    this.save = saveMaze;
     presenter.getMazeView().resumeView();
-    mazeGrid = save.getMazeGrid();
-    mazePlayer.setCoordinate(save.getPlayerCoordinate());
-    stopWatch = save.getStopWatch();
+    mazeGrid = saveMaze.getMazeGrid();
+    mazePlayer.setCoordinate(saveMaze.getPlayerCoordinate());
+    stopWatch.setRemainTime(saveMaze.getRemainTime());
     stopWatch.resume();
   }
 
-  public Coordinate getStartPoint() {
+  public void load() {
+    //    stopWatch.resume();
+    presenter.getMazeView().resumeView();
+    mazeGrid = save.getMazeGrid();
+    mazePlayer.setCoordinate(save.getPlayerCoordinate());
+    stopWatch.setRemainTime(save.getRemainTime());
+    stopWatch.resume();
+  }
+
+  public SaveMaze save() {
+    save.setPlayerCoordinate(mazePlayer.getCoordinate());
+    save.setRemainTime(stopWatch.getRemainTime());
+    save.setMazeGrid(mazeGrid);
+    return save;
+  }
+
+  Coordinate getStartPoint() {
     return this.startpoint;
   }
 

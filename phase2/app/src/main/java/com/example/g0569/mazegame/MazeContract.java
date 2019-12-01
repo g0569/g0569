@@ -2,6 +2,7 @@ package com.example.g0569.mazegame;
 
 import com.example.g0569.base.BasePresenter;
 import com.example.g0569.base.BaseView;
+import com.example.g0569.mazegame.model.SaveMaze;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.NPC;
@@ -40,8 +41,6 @@ public interface MazeContract {
 
     void addCollectedNPC(NPC npc);
 
-    String getNPCName(NPC npc);
-
     String getNPCType(NPC npc);
 
     MazeContract.View getMazeView();
@@ -59,6 +58,8 @@ public interface MazeContract {
 
     void pause();
 
-    void load();
+    SaveMaze save();
+
+    void load(SaveMaze saveMaze);
   }
 }

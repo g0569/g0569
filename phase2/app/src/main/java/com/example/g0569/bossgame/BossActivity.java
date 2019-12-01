@@ -1,5 +1,6 @@
 package com.example.g0569.bossgame;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.g0569.R;
 import com.example.g0569.base.BaseActivity;
+import com.example.g0569.scoreboard.ScoreBoardActivity;
+import com.example.g0569.utils.ActivityManager;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
 
@@ -38,23 +41,7 @@ public class BossActivity extends BaseActivity {
     bossView = findViewById(R.id.bossview);
     presenter = new BossPresenter(bossView, inventory);
 
-    final LinearLayout menuLayout = findViewById(R.id.menu_layout);
-    menuLayout.setVisibility(View.GONE);
     Button menuBtn = findViewById(R.id.meny_btn);
-
-    menuBtn.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            if (isMenuVisible) {
-              isMenuVisible = false;
-              menuLayout.setVisibility(View.VISIBLE);
-            } else {
-              isMenuVisible = true;
-              menuLayout.setVisibility(View.GONE);
-            }
-          }
-        });
   }
 
   @Override
@@ -65,6 +52,10 @@ public class BossActivity extends BaseActivity {
 
   public void toScoreBoard(){
     int bossScore = presenter.getScore();
-    //TODO
+    bundle.putInt(Constants.BUNDLE_BOSSSCORE_KEY, bossScore);
+    Intent intent = new Intent(this, ScoreBoardActivity.class);
+    intent.putExtras(bundle);
+    ActivityManager.getInstance().finishAllActivity();
+    startActivity(intent);
   }
 }

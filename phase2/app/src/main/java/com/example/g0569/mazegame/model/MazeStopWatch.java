@@ -46,7 +46,7 @@ public class MazeStopWatch extends Item implements Serializable {
     this.elapsedTime = elapsedTime;
   }
 
-  private long convertSecondToNano(int time) {
+  private long convertSecondToNano(long time) {
     return time * 1000000000;
   }
 
@@ -59,6 +59,12 @@ public class MazeStopWatch extends Item implements Serializable {
     //        System.out.println(totalTime);
     //        System.out.println(convertNanoToSecond(elapsedTime));
     return (int) (totalTime - convertNanoToSecond(elapsedTime));
+  }
+
+  public void setRemainTime(int time) {
+    this.startTime = System.nanoTime() - convertSecondToNano(totalTime) + convertSecondToNano(time);
+    this.elapsedTime = convertSecondToNano(totalTime) - convertSecondToNano(time);
+    this.running = true;
   }
 
   public void start() {

@@ -33,7 +33,7 @@ public class MazeGenerator {
     gridHeight = y;
   }
 
-  public static int[][] generate(int n, int m, int npcNum) {
+  public static int[][] generate(int npcNum) {
     MazeGenerator newMaze = new MazeGenerator(Constants.GRID_WIDTH, Constants.GRID_HEIGHT);
 
     newMaze.getStack().push(new Coordinate(0, 0));
