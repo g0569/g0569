@@ -32,6 +32,7 @@ public class BossPresenter implements BossContract.Presenter {
     //    bossView.initView();
     //    String npc = bossGame.initBossTeam().getName();
     //    bossView.setCurrentProjectileBitmap(npc);
+//      bossView.initView();
     bossGame.setBossTeam(this.inventory.getAvailableItem());
     String currentNPC = bossGame.getCurrentNPC().getType();
     String currentPower = bossGame.getCurrentNPC().getPower();
@@ -54,10 +55,11 @@ public class BossPresenter implements BossContract.Presenter {
   @Override
   public void switchTeam() {
     // TODO may want to use getCurrentNPC instead, segregate methods
-    String nextType = bossGame.getNextNPC().getType();
-    String nextNPC = bossGame.getNextNPC().getName();
-    bossView.setCurrentProjectileBitmap("ice");
-    bossView.setCurrentNPCBitmap("npc1");
+    bossGame.getNextNPC();
+    String nextType = bossGame.getCurrentNPC().getPower();
+    String nextNPC = bossGame.getCurrentNPC().getType();
+    bossView.setCurrentProjectileBitmap(nextType);
+    bossView.setCurrentNPCBitmap(nextNPC);
     //    String typeProjectile = bossGame.getNextNPC().getType();
     //    bossView.setCurrentProjectileBitmap(typeProjectile);
   }
