@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -363,7 +364,6 @@ public class BossView extends GameView implements BossContract.View {
     drawStats();
   }
 
-  @Override
   public void drawAim() {
     try {
       canvas.drawBitmap(
@@ -373,7 +373,6 @@ public class BossView extends GameView implements BossContract.View {
     }
   }
 
-  @Override
   public void drawEnemy() {
     try {
       canvas.drawBitmap(enemyAppearance, enemyCoordinate.getX(), enemyCoordinate.getY(), paint);
@@ -382,7 +381,6 @@ public class BossView extends GameView implements BossContract.View {
     }
   }
 
-  @Override
   public void drawHealthBar() {
     try {
       canvas.drawBitmap(healthBar, healthBarCoordinate.getX(), healthBarCoordinate.getY(), paint);
@@ -483,7 +481,6 @@ public class BossView extends GameView implements BossContract.View {
 //     false);
   }
 
-  @Override
   public void drawStats() {
     String resist = bossPresenter.getResistance();
     paint.setTextSize(50);
@@ -595,4 +592,5 @@ public class BossView extends GameView implements BossContract.View {
       resetCurrentProjectile();
     }
   }
+
 }
