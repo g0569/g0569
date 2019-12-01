@@ -254,7 +254,7 @@ public class ChessView extends GameView implements ChessContract.View {
           showEndingDialogue(
               "Chess Game Is Over!",
               "You " + (winGame ? "Win " : "Lose ") + "the Game!",
-              "Go Back TO Inventory");
+              "Go Back To Maze");
           presenter.setGameOverResult(winGame);
         } else if (x > inventoryX
             && x < inventoryX + inventory.getWidth()
