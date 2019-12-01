@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.g0569.R;
 import com.example.g0569.auth.model.AuthInteractor;
+import com.example.g0569.utils.ActivityManager;
+import com.example.g0569.main.MainActivity;
 import com.example.g0569.savegame.SaveGameActivity;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.SQLiteHelper;
@@ -30,6 +32,7 @@ public class AuthActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityManager.getInstance().addActivity(this);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow()
                 .setFlags(
@@ -92,6 +95,7 @@ public class AuthActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SaveGameActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
+        ActivityManager.getInstance().finishActivity(MainActivity.class);
         finish();
     }
 }
