@@ -30,5 +30,7 @@ public interface ChessContract {
 
     void setGameOverResult(boolean winGame);
 
+    boolean getPositionHasBeenTaken(Coordinate coordinate);
+
   }
 }

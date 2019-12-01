@@ -97,7 +97,7 @@ public class ChessGame extends BaseGame {
 
   public String getChessPieceType(Coordinate coordinate) {
     String result = "";
-    for (NPC chessPiece : NPCChessPieceData) {
+    for (NPC chessPiece : playerChessPieceData) {
       if (chessPiece.getCoordinate().equals(coordinate)) {
         result = chessPiece.getType();
       }
@@ -186,6 +186,15 @@ public class ChessGame extends BaseGame {
     if (winGame && !inventory.getAvailableItem().contains(selectedNPC)) {
       inventory.addAvailableItem(selectedChessPiece);
     }
+  }
+
+  public boolean getPositionHasBeenTaken(Coordinate coordinate){
+    boolean findInSamePosition = false;
+    for ( NPC npc: playerChessPieceData ) {
+      if (npc.getCoordinate().equals(coordinate))
+        findInSamePosition = true;
+    }
+    return findInSamePosition;
   }
 
   @Override

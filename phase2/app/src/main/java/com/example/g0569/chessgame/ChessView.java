@@ -29,7 +29,7 @@ public class ChessView extends GameView implements ChessContract.View {
   private float inventoryX;
   private float inventoryY;
   private ChessContract.Presenter presenter;
-//  private HashMap<String, Bitmap> TYPELOOKUPMAP = new HashMap<String, Bitmap>();
+  //  private HashMap<String, Bitmap> TYPELOOKUPMAP = new HashMap<String, Bitmap>();
 
   /**
    * Instantiates a new Chess view.
@@ -225,18 +225,24 @@ public class ChessView extends GameView implements ChessContract.View {
       Coordinate viewCoordinate = new Coordinate(x, y);
       Coordinate inventoryCoordinate =
           presenter.viewCoordinateToInventoryCoordinate(viewCoordinate);
-      Coordinate BoardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);
+      Coordinate boardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);
       String type = presenter.InventoryCoordinateToChessType(inventoryCoordinate);
       System.out.println(String.valueOf(x) + " " + String.valueOf(y));
       if (placeChess) {
-        // Place Chess Piece now.
-        if (x > screenWidth * 0.3f
-            && x < screenWidth * 0.5f
-            && y > screenHeight * 0.44f
-            && y < screenHeight) {
-          // Place a chess piece that has been chosen.
-          presenter.placePlayerChess(BoardCoordinate);
-          placeChess = false;
+        boolean positionHasBeenTaken = presenter.getPositionHasBeenTaken(boardCoordinate);
+        if (positionHasBeenTaken) {
+          Toast.makeText(
+                  activity,
+                  "This position already been taken by a chess piece! ",
+                  Toast.LENGTH_SHORT)
+              .show();
+        } else {
+          // Place Chess Piece now.
+          if (boardCoordinate.getIntX() != 0 | boardCoordinate.getIntY() != 0) {
+            // Place a chess piece that has been chosen.
+            presenter.placePlayerChess(boardCoordinate);
+            placeChess = false;
+          }
         }
       } else {
         // Either start the game or choose a chess piece from inventory.
