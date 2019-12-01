@@ -15,7 +15,6 @@ import com.example.g0569.utils.Coordinate;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /** The Bossview for the bossgame. */
 public class BossView extends GameView implements BossContract.View {

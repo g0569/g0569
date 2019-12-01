@@ -86,7 +86,8 @@ public class ChessActivity extends AppCompatActivity {
             }
         });
         Button dialogueButton2 = dialogue.findViewById(R.id.dialogue_btn_2);
-        dialogueButton.setOnClickListener(new View.OnClickListener() {
+        dialogueButton2.setText("Restart the Chess Game");
+        dialogueButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.resetChessPiece();
