@@ -1,13 +1,18 @@
 package com.example.g0569.chessgame.model;
 
-public class DiamondChessPiece extends ChessPiece {
+import com.example.g0569.utils.Coordinate;
+
+import java.util.ArrayList;
+
+public class CircleChessPiece extends ChessPiece {
     /**
-     * @param x The x coordinate for chess piece.
-     * @param y The y coordinate for chess piece.
+     * @param x      The x coordinate for chess piece.
+     * @param y      The y coordinate for chess piece.
      */
-    DiamondChessPiece(float x, float y) {
+    CircleChessPiece(float x, float y) {
         super(x, y);
     }
+
     @Override
     public Integer[][] createTargetList() {
         Integer[][] target = new Integer[1][2];

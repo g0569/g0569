@@ -1,6 +1,7 @@
 package com.example.g0569.chessgame.model;
 
 import com.example.g0569.base.model.BaseGame;
+import com.example.g0569.base.model.Player;
 import com.example.g0569.chessgame.ChessContract;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Inventory;
@@ -125,43 +126,34 @@ public class ChessGame extends BaseGame {
     return playerChessPieceData;
   }
 
-  private int powerCalculator(String side, int row) {
-    // TODO This method need to be improved!
-    int rowPower = 0;
-    List<NPC> requiredInventory = new ArrayList<>();
-    if (side.equals("player")) {
-      requiredInventory.addAll(getPlayerChessPiece());
-    } else if (side.equals("NPC")) {
-      requiredInventory.addAll(NPCChessPieceData);
+  private int characterAttack(String character){
+    int characterScore = 0;
+    List<NPC> friendlyInventory = new ArrayList<>();
+    List<NPC> opponentInventory = new ArrayList<>();
+    if (character.equals("player")) {
+      friendlyInventory.addAll(getPlayerChessPiece());
+      opponentInventory.addAll(NPCChessPieceData);
     }
-    for (NPC currentChess : requiredInventory) {
-      if (currentChess.getCoordinate().getX() == row) {
-        rowPower += currentChess.getDamage();
+    else if (character.equals("NPC")) {
+      friendlyInventory.addAll(NPCChessPieceData);
+      opponentInventory.addAll(getPlayerChessPiece());
+    }
+    for (NPC currentChess : friendlyInventory) {
+      Integer[][] targetList = ((ChessPiece)currentChess).createTargetList();
+      int count = 0;
+      boolean enemyFound = false;
+      while(!enemyFound && count < targetList.length){
+        for(NPC enemyChess: opponentInventory){
+          if(!enemyFound && ((ChessPiece)enemyChess).matchCoordinate(targetList[count])){
+            enemyFound = true;
+            if(currentChess.getDamage() >= enemyChess.getDamage()){characterScore += 1;}
+          }
+        }
+        count ++;
       }
+      if(!enemyFound){characterScore += 1;}
     }
-    return rowPower;
-  }
-
-  private boolean singleRowFight(int row) {
-    boolean playerWin = false;
-    int playerPower = powerCalculator("player", row);
-    int NPCPower = powerCalculator("NPC", row);
-    if (difficulty.equals("easy")) {
-      playerWin =
-          (playerPower
-              >= NPCPower); // player under easy mode can win a row with power equal to NPC.
-    } else if (difficulty.equals("hard")) {
-      playerWin = (playerPower > NPCPower); // now player can only win a row with more power.
-    } else if (difficulty.equals("insane")) {
-      playerWin =
-          (playerPower > NPCPower
-              & playerPower
-                  > powerCalculator(
-                      "NPC",
-                      1)); // insane NPC at row 1 gains ability to fight other chess pieces on other
-      // rows.
-    }
-    return playerWin;
+    return characterScore;
   }
 
   /**
@@ -170,15 +162,10 @@ public class ChessGame extends BaseGame {
    * @return whether player win the game.
    */
   public boolean autoFight() {
-    int winNumbers = 0;
-    int row = 1;
-    while (row <= 3) {
-      if (singleRowFight(row)) {
-        winNumbers += 1;
-      }
-      row++;
-    }
-    return (winNumbers >= 2);
+    int playerScore = 0;
+    playerScore += characterAttack("Player");
+    playerScore -= characterAttack("NPC");
+    return (playerScore >= 0);
     // TODO Need to be implemented.
   }
 
