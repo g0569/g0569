@@ -8,7 +8,7 @@ public interface BossContract {
   interface View extends BaseView<Presenter> {
     void initView();
 
-    void drawBossPlayer();
+    void drawAim();
 
     void drawEnemy();
 
