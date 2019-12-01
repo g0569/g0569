@@ -119,7 +119,7 @@ public class MazeGame extends BaseGame {
    * @return the startPoint of the maze
    */
   Coordinate getStartPoint() {
-    return this.startpoint;
+    return this.startPoint;
   }
 
   /**

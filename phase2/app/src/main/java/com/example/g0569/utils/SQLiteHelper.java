@@ -68,7 +68,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                     + "  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                     + "  uid INTEGER NOT NULL,"
                     + "  score INTEGER NOT NULL,"
-                    + "  created_time DATE NOT NULL"
+                    + "  created_time DATE NOT NULL,"
+                    + "  username TEXT NOT NULL"
                     + ");";
     db.execSQL(createScoreBoard);
 

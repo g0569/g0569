@@ -29,19 +29,12 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
   private Bitmap wall;
   private Bitmap moveButtons;
   private Bitmap player;
-  private Bitmap npc1;
-  private Bitmap npc2;
-  private Bitmap npc3;
-  private Bitmap npc4;
-  private Bitmap npc5;
-  private Bitmap npc6;
 
   private float gridWidth;
   private float gridHeight;
 
   private boolean ableMove;
 
-  private SensorManager sensorManager;
   private boolean enableSensor;
 
   /**
@@ -72,8 +65,12 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     super.surfaceCreated(holder);
     gridHeight = getHeight() / Constants.GRID_HEIGHT;
     gridWidth = getWidth() / Constants.GRID_WIDTH;
-    sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+    SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
     enableSensor = false;
+    sensorManager.registerListener(
+        this,
+        sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+        SensorManager.SENSOR_DELAY_UI);
     initBitmaps();
     if (thread.isAlive()) {
       thread.start();
@@ -156,24 +153,42 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     moveButtons =
         Bitmap.createScaledBitmap(
             moveButtons, (int) (getWidth() * 0.13f), (int) (getHeight() * 0.13f), false);
-    npc1 =
+    Bitmap npc1 =
         Bitmap.createScaledBitmap(
-            getNpc1(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-    npc2 =
+            getNpc1(),
+            getWidth() / Constants.GRID_WIDTH,
+            getHeight() / Constants.GRID_HEIGHT,
+            false);
+    Bitmap npc2 =
         Bitmap.createScaledBitmap(
-            getNpc2(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-            npc3 =
+            getNpc2(),
+            getWidth() / Constants.GRID_WIDTH,
+            getHeight() / Constants.GRID_HEIGHT,
+            false);
+    Bitmap npc3 =
         Bitmap.createScaledBitmap(
-            getNpc3(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-    npc4 =
+            getNpc3(),
+            getWidth() / Constants.GRID_WIDTH,
+            getHeight() / Constants.GRID_HEIGHT,
+            false);
+    Bitmap npc4 =
         Bitmap.createScaledBitmap(
-            getNpc4(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-    npc5 =
+            getNpc4(),
+            getWidth() / Constants.GRID_WIDTH,
+            getHeight() / Constants.GRID_HEIGHT,
+            false);
+    Bitmap npc5 =
         Bitmap.createScaledBitmap(
-            getNpc5(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-    npc6 =
+            getNpc5(),
+            getWidth() / Constants.GRID_WIDTH,
+            getHeight() / Constants.GRID_HEIGHT,
+            false);
+    Bitmap npc6 =
         Bitmap.createScaledBitmap(
-            getNpc6(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
+            getNpc6(),
+            getWidth() / Constants.GRID_WIDTH,
+            getHeight() / Constants.GRID_HEIGHT,
+            false);
     setTypeLookUpTable(new HashMap<String, Bitmap>());
     getTypeLookUpTable().put("type1", npc1);
     getTypeLookUpTable().put("type2", npc2);
@@ -270,21 +285,8 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
   public void drawNPC(Coordinate coor, NPC npc) {
     paint.setColor(Color.GRAY);
     paint.setTextSize(70);
-    //        String type = presenter.getNPCType(npc);
-//    if (presenter.getNPCType(npc).equals("type1")) {
-//      canvas.drawBitmap(npc1, coor.getX(), coor.getY(), paint);
-//    } else if (presenter.getNPCType(npc).equals("type2")) {
-//      canvas.drawBitmap(npc2, coor.getX(), coor.getY(), paint);
-//    } else if (presenter.getNPCType(npc).equals("type3")) {
-//      canvas.drawBitmap(npc3, coor.getX(), coor.getY(), paint);
-//    } else if (presenter.getNPCType(npc).equals("type4")) {
-//      canvas.drawBitmap(npc4, coor.getX(), coor.getY(), paint);
-//    } else if (presenter.getNPCType(npc).equals("type5")) {
-//      canvas.drawBitmap(npc5, coor.getX(), coor.getY(), paint);
-//    } else if (presenter.getNPCType(npc).equals("type6")) {
-//      canvas.drawBitmap(npc6, coor.getX(), coor.getY(), paint);
-//    }
-    canvas.drawBitmap(getTypeLookUpTable().get(presenter.getNPCType(npc)), coor.getX(), coor.getY(), paint);
+    canvas.drawBitmap(
+        getTypeLookUpTable().get(presenter.getNPCType(npc)), coor.getX(), coor.getY(), paint);
   }
 
   @Override
@@ -303,7 +305,7 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
 
   @Override
   public void resumeView() {
-    ableMove = false;
+    ableMove = true;
   }
 
   /*
@@ -358,10 +360,10 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
         float accY = event.values[1];
         float accZ = event.values[2];
         Coordinate coordinate = Coordinate.create(0, 0);
-        if (accY > 1f && accZ < 9.7f) coordinate.offsetXY(0.5f, 0);
-        if (accY < -1f && accZ < 9.7f) coordinate.offsetXY(-0.5f, 0);
-        if (accX < -1f && accZ < 9.7f) coordinate.offsetXY(0, -0.5f);
-        if (accX > 1f && accZ < 9.7f) coordinate.offsetXY(0, 0.5f);
+        if (accY > 1f && accZ < 9.7f) coordinate.offsetXY(0.1f, 0);
+        if (accY < -1f && accZ < 9.7f) coordinate.offsetXY(-0.1f, 0);
+        if (accX < -1f && accZ < 9.7f) coordinate.offsetXY(0, -0.2f);
+        if (accX > 1f && accZ < 9.7f) coordinate.offsetXY(0, 0.2f);
         presenter.movePlayer(coordinate);
       }
     }
