@@ -71,11 +71,7 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     gridHeight = getHeight() / Constants.GRID_HEIGHT;
     gridWidth = getWidth() / Constants.GRID_WIDTH;
     sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-    enableSensor =
-        sensorManager.registerListener(
-            this,
-            sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-            SensorManager.SENSOR_DELAY_UI);
+    enableSensor = false;
     initBitmaps();
     if (thread.isAlive()) {
       thread.start();
