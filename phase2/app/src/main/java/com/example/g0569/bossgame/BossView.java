@@ -423,10 +423,12 @@ public class BossView extends GameView implements BossContract.View {
    well.
   */
   public void end(boolean end) {
-    paint.setColor(Color.RED);
-    paint.setTextSize(600);
-    canvas.drawText("YOU WIN!!!", screenWidth / 2, screenHeight / 2, paint);
-    pause();
+    if (end) {
+      paint.setColor(Color.RED);
+      paint.setTextSize(600);
+      canvas.drawText("YOU WIN!!!", screenWidth / 2, screenHeight / 2, paint);
+      pause();
+    }
   }
 
   public void setCurrentNPCBitmap(String name) {
