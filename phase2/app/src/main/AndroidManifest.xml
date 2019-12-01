@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".scoreboard.ScoreBoardActivity"></activity>
         <activity
             android:name=".savegame.SaveGameActivity"
             android:screenOrientation="landscape" />
@@ -33,6 +34,7 @@
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
