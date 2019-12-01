@@ -58,7 +58,7 @@ public class Enemy extends Item implements Observable {
     } else {
       health -= damageTaken;
     }
-    health = Math.max(0, health);
+    health = Math.max(0.0f, health);
     setState((int) health);
   }
 

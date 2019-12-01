@@ -1,6 +1,5 @@
 package com.example.g0569.mazegame;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,8 +18,6 @@ import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.NPC;
 
-import java.util.Objects;
-
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment must implement the to
  * handle interaction events.
@@ -37,7 +34,7 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
    *
    * @param inventory the inventory
    */
-  InventoryFragment(Inventory inventory) {
+  public InventoryFragment(Inventory inventory) {
     this.inventory = inventory;
   }
 
@@ -66,8 +63,7 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
                   Toast.makeText(getActivity(), "Please select a NPC you want", Toast.LENGTH_LONG)
                       .show();
                 } else {
-                  ((MazeActivity) Objects.requireNonNull(getActivity())).
-                          toChessGame(selectedIndex);
+                  ((MazeActivity) getActivity()).toChessGame(selectedIndex);
                 }
               }
             });
@@ -83,8 +79,7 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
   }
 
   /** Update npc data. */
-  @SuppressLint("SetTextI18n")
-  void updateNpcData() {
+  public void updateNpcData() {
     inventoryGridAdapter.updateInventory(
         inventory.getCollectedItem(), inventory.getAvailableItem());
     ImageView npcAvatar = view.findViewById(R.id.inventory_npc_avatar);
@@ -97,7 +92,7 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
       npcDamage.setText(String.valueOf(selectedNpc.getDamage()));
       npcPower.setText(selectedNpc.getPower());
       npcAvatar.setImageDrawable(
-          Objects.requireNonNull(getActivity()).getDrawable(Constants.NPCIMAGELOOKUPTABLE.get(selectedNpc.getType())));
+          getActivity().getDrawable(Constants.NPCIMAGELOOKUPTABLE.get(selectedNpc.getType())));
     } catch (NullPointerException e) {
       npcName.setText("Please select an NPC");
       npcDamage.setText("0");

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow
+        android:id="@+id/sb_table_row"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/sb_rank"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Rank"
+            android:textAlignment="textStart"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/sb_username"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Username"
+            android:textAlignment="textStart"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/sb_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Score"
+            android:textAlignment="viewStart"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/sb_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Time"
+            android:textAlignment="textEnd"
+            android:textColor="#FFFFFF" />
+    </TableRow>
+</LinearLayout>

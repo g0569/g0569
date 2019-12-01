@@ -13,10 +13,9 @@ public class MazeStopWatch extends Item implements Serializable {
   private long pauseEnd;
   private boolean isPaused;
 
-  MazeStopWatch(int time, boolean isPaused) {
+  MazeStopWatch(int time) {
     super();
     totalTime = time;
-    this.isPaused = isPaused;
     running = false;
   }
   /** Update */
@@ -28,14 +27,27 @@ public class MazeStopWatch extends Item implements Serializable {
       long period = Math.abs(System.nanoTime() - startTime - pauseTime);
       setElapsedTime(period);
     }
+    if (getRemainTime() == 0) {}
   }
 
-  private void setStartTime(long startTime) {
+  public long getStartTime() {
+    return startTime;
+  }
+
+  public void setStartTime(long startTime) {
     this.startTime = startTime;
+  }
+
+  public long getElapsedTime() {
+    return elapsedTime;
   }
 
   public void setElapsedTime(long elapsedTime) {
     this.elapsedTime = elapsedTime;
+  }
+
+  private long convertSecondToNano(long time) {
+    return time * 1000000000;
   }
 
   private int convertNanoToSecond(long time) {
@@ -49,17 +61,28 @@ public class MazeStopWatch extends Item implements Serializable {
     return (int) (totalTime - convertNanoToSecond(elapsedTime));
   }
 
+  public void setRemainTime(int time) {
+    this.startTime = System.nanoTime() - convertSecondToNano(totalTime) + convertSecondToNano(time);
+    this.elapsedTime = convertSecondToNano(totalTime) - convertSecondToNano(time);
+    this.running = true;
+  }
+
   public void start() {
     running = true;
     setStartTime(System.nanoTime());
   }
 
-  void stop() {
+  public void stop() {
     running = false;
     setElapsedTime(0);
     setStartTime(0);
   }
 
+  public boolean isRunning() {
+    return running;
+  }
+
+  /** TODO call when doing save and pause */
   public void pause() {
     if (!isPaused) {
       running = false;
@@ -74,4 +97,7 @@ public class MazeStopWatch extends Item implements Serializable {
     }
   }
 
+  public String toString() {
+    return (getRemainTime()) + " Seconds";
+  }
 }

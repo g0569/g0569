@@ -21,9 +21,9 @@ import java.util.List;
  */
 public class SaveGameFragment extends Fragment implements SaveGameContract.View {
 
+  List<SaveGame> saveGames;
   private SaveGameListAdapter adapter;
   private SaveGameContract.Presenter presenter;
-  List<SaveGame> saveGames;
   /** Instantiates a new Save game fragment. */
   public SaveGameFragment() {}
 

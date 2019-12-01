@@ -2,35 +2,38 @@ package com.example.g0569.mazegame.model;
 
 import com.example.g0569.utils.Coordinate;
 
-
 import java.io.Serializable;
 
 public class SaveMaze implements Serializable {
-    private int[][] mazeGrid;
-    private Coordinate playerCoordinate;
-    private MazeStopWatch stopWatch;
+  private int[][] mazeGrid;
+  private Coordinate playerCoordinate;
+  private int remainTime;
 
-    void setMazeGrid(int[][] mazeGrid) {
+  int[][] getMazeGrid() {
+    return mazeGrid;
+  }
+
+  void setMazeGrid(int[][] mazeGrid) {
     this.mazeGrid = mazeGrid;
-    }
+  }
 
-    void setPlayerCoordinate(Coordinate playerCoordinate) {
-        this.playerCoordinate = playerCoordinate;
-    }
+  Coordinate getPlayerCoordinate() {
+    return playerCoordinate;
+  }
 
-    void setStopWatch(MazeStopWatch stopWatch) {
-        this.stopWatch = stopWatch;
-    }
+  void setPlayerCoordinate(Coordinate playerCoordinate) {
+    this.playerCoordinate = playerCoordinate;
+  }
 
-    int[][] getMazeGrid() {
-        return mazeGrid;
-    }
+  boolean isEmpty() {
+    return mazeGrid == null;
+  }
 
-    Coordinate getPlayerCoordinate() {
-        return playerCoordinate;
-    }
+  public int getRemainTime() {
+    return this.remainTime;
+  }
 
-    MazeStopWatch getStopWatch() {
-        return stopWatch;
-    }
+  public void setRemainTime(int remainTime) {
+    this.remainTime = remainTime;
+  }
 }

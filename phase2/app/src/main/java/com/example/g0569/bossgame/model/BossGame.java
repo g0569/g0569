@@ -43,10 +43,6 @@ public class BossGame extends BaseGame {
     paused = !paused;
   }
 
-  /** Loads teh game after it has been saved */
-  @Override
-  public void load() {}
-
   /**
    * Attacks the boss and changes it's health accordingly Might want it to return something later so
    * that healthbar is not needed later
@@ -139,7 +135,8 @@ public class BossGame extends BaseGame {
    * @return whether or not the enemy is dead
    */
   public boolean determineEnd() {
-    return enemy.getHealth() <= 0;
+//    System.out.println(enemy.getHealth() <= 0.0f);
+    return enemy.getHealth() <= 0.0f;
   }
 
 
@@ -149,7 +146,9 @@ public class BossGame extends BaseGame {
    * @return health of enemy
    */
   public float getHealth() {
+
     return enemy.getHealth();
+
   }
 
   public float getInitialHealth(){
