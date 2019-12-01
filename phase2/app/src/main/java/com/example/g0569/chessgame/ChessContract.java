@@ -9,6 +9,8 @@ public interface ChessContract {
     void initView();
 
     void drawChessPiece(Coordinate coordinate, String type);
+
+    void showEndingDialogue(String title, String text, String buttonHint);
   }
 
   interface Presenter extends BasePresenter {

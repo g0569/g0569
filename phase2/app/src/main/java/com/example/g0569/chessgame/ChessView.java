@@ -184,6 +184,11 @@ public class ChessView extends GameView implements ChessContract.View {
   }
 
   @Override
+  public void showEndingDialogue(String title, String text, String buttonHint) {
+    ((ChessActivity) activity).showEndingDialogue(title, text, buttonHint);
+  }
+
+  @Override
   public void draw() {
     try {
       canvas = sfh.lockCanvas();
