@@ -98,15 +98,7 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     try {
       canvas = sfh.lockCanvas();
       canvas.drawColor(Color.BLACK);
-      //      canvas.drawColor(
-      //          Color.rgb(
-      //              (int) (Math.random() * 255),
-      //              (int) (Math.random() * 255),
-      //              (int) (Math.random() * 255)));
       canvas.save();
-      //      canvas.scale(scalex, scaley, 0, 0);
-      //      canvas.drawBitmap(background, 0, 0, paint);
-      //      canvas.restore();
       initView();
     } catch (Exception err) {
       System.out.println(err);
@@ -133,8 +125,6 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     }
   }
 
-  //  public int[] inRange()
-
   @Override
   public boolean onTouchEvent(MotionEvent event) {
     if (event.getAction() == MotionEvent.ACTION_DOWN && event.getPointerCount() == 1) {
@@ -154,10 +144,6 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
   }
 
   public void initBitmaps() {
-    //    background = BitmapFactory.decodeResource(getResources(), R.drawable.maze_background);
-    //    scalex = screenWidth / background.getWidth();
-    //    scaley = screenHeight / background.getHeight();
-
     wall = BitmapFactory.decodeResource(getResources(), R.drawable.mazegame_component_tile);
     wall =
         Bitmap.createScaledBitmap(
@@ -170,27 +156,21 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     moveButtons =
         Bitmap.createScaledBitmap(
             moveButtons, (int) (getWidth() * 0.13f), (int) (getHeight() * 0.13f), false);
-//    npc1 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l1);
     npc1 =
         Bitmap.createScaledBitmap(
             getNpc1(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-//    npc2 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l2);
     npc2 =
         Bitmap.createScaledBitmap(
             getNpc2(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-//    npc3 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l3);
-    npc3 =
+            npc3 =
         Bitmap.createScaledBitmap(
             getNpc3(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-//    npc4 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l4);
     npc4 =
         Bitmap.createScaledBitmap(
             getNpc4(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-//    npc5 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l5);
     npc5 =
         Bitmap.createScaledBitmap(
             getNpc5(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
-//    npc6 = BitmapFactory.decodeResource(getResources(), R.drawable.npc_l6);
     npc6 =
         Bitmap.createScaledBitmap(
             getNpc6(), getWidth() / Constants.GRID_WIDTH, getHeight() / Constants.GRID_HEIGHT, false);
@@ -296,12 +276,10 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
   @Override
   public Coordinate getPlayerDimensions() {
     Coordinate coordinate = Coordinate.create(0, 0);
-    try {
+    if (player != null){
       coordinate = Coordinate.create(player.getWidth(), player.getHeight());
-    } catch (NullPointerException e) {
-    } finally {
-      return coordinate;
     }
+    return coordinate;
   }
 
   @Override
@@ -320,7 +298,6 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
   private void moveDetect(float x, float y) {
     int unitX = (int) (screenWidth * 0.13 / 3);
     int unitY = (int) (screenHeight * 0.13 / 3);
-    System.out.println(ableMove);
     if (ableMove) {
       Coordinate coor = new Coordinate(0f, 0f);
       if (x >= screenWidth - 2 * unitX
@@ -351,13 +328,8 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
           && y <= screenHeight) {
         //                presenter.movePlayer(Coordinate.create(0f, 0.5f));
         coor.setXY(0f, 0.5f);
-      } else {
       }
-      System.out.println(coor.getX());
-      System.out.println(coor.getY());
       presenter.movePlayer(coor);
-    } else {
-
     }
   }
 
