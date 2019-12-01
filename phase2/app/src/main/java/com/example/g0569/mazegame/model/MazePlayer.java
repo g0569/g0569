@@ -54,15 +54,6 @@ public class MazePlayer extends Player {
   }
 
   /**
-   * Gets direction.
-   *
-   * @return the direction
-   */
-  public Coordinate getDirection() {
-    return direction;
-  }
-
-  /**
    * Sets direction.
    *
    * @param direction the direction
@@ -74,7 +65,6 @@ public class MazePlayer extends Player {
   /** Move the player around (left and right) Detect the wall and NPCs. */
   private void move() {
     int[] border = new int[2];
-    /** fix the inconsistent in player size and coordinate. */
     if (direction.getX() > 0f) {
       border[0] = 1;
     }
@@ -127,14 +117,14 @@ public class MazePlayer extends Player {
   }
 
   /**
-   * Todo 1. add to inventory: access from presenter; get from MazeActivity Bundle and be a
    * presentor constructor parameter 2. delete from the maze 3. move in inventory collect NPC in the
    * inventory
    *
    * @param npc the npc
    * @return boolean
    */
-  public void collectedNPC(NPC npc) {
+
+  private void collectedNPC(NPC npc) {
 
     this.game.getPresenter().addCollectedNPC(npc);
   }

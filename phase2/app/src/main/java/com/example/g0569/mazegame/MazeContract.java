@@ -40,8 +40,6 @@ public interface MazeContract {
 
     void addCollectedNPC(NPC npc);
 
-    String getNPCName(NPC npc);
-
     String getNPCType(NPC npc);
 
     MazeContract.View getMazeView();

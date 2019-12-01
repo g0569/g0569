@@ -1,6 +1,6 @@
 package com.example.g0569.mazegame.model;
 
-import com.example.g0569.base.BaseButton;
+
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.base.model.Item;
 import com.example.g0569.mazegame.MazeContract;
@@ -13,14 +13,11 @@ public class MazeGame extends BaseGame {
 
   private MazeContract.Presenter presenter;
   private MazeContract.View view;
-  private float gridWidth;
-  private float gridHeight;
   private Coordinate startpoint;
   private Inventory inventory;
   private Item[][] myMazeItem = new Item[Constants.GRID_HEIGHT][Constants.GRID_WIDTH];
   private int[][] mazeGrid;
   private MazePlayer mazePlayer;
-  private BaseButton Button;
   private int unbuiltNPC;
   private MazeStopWatch stopWatch;
   private SaveMaze save;
@@ -49,9 +46,8 @@ public class MazeGame extends BaseGame {
     startpoint = Coordinate.create(0, 0);
     mazePlayer = new MazePlayer(this);
     mazeGrid =
-        MazeGenerator.generate(
-            Constants.GRID_HEIGHT, Constants.GRID_WIDTH, inventory.getNonCollectedItem().size());
-    stopWatch = new MazeStopWatch(Constants.MAZETIMER);
+        MazeGenerator.generate(inventory.getNonCollectedItem().size());
+    stopWatch = new MazeStopWatch(Constants.MAZETIMER, false);
     //    Button = new BaseButton(this)
     getStopWatch().start();
   }
@@ -75,19 +71,15 @@ public class MazeGame extends BaseGame {
     stopWatch.resume();
   }
 
-  public Coordinate getStartPoint() {
+  Coordinate getStartPoint() {
     return this.startpoint;
-  }
-
-  public void setMyMazeItem() {
-    //    MazeHelper.loadMaze(myMazeItem, this);
   }
 
   public MazeStopWatch getStopWatch() {
     return stopWatch;
   }
 
-  public Item[][] getMyMazeItem() {
+  Item[][] getMyMazeItem() {
     return myMazeItem;
   }
 
@@ -100,7 +92,7 @@ public class MazeGame extends BaseGame {
   }
 
   // TODO show inventory page
-  public void timeReach() {
+  private void timeReach() {
 
     getStopWatch().stop();
     presenter.getMazeView().stopView();
@@ -121,7 +113,7 @@ public class MazeGame extends BaseGame {
     return inventory;
   }
 
-  public Coordinate getPlayerDimensions() {
+  Coordinate getPlayerDimensions() {
     return presenter.getPlayerDimensions();
   }
 
@@ -137,16 +129,11 @@ public class MazeGame extends BaseGame {
   public NPC addItemToMazeItem(int x, int y) {
     unbuiltNPC -= 1;
     if (unbuiltNPC == -1) unbuiltNPC = inventory.getNonCollectedItem().size() - 1;
-    //      if (inventory.getNonCollectedItem().size() == 1)
-    // System.out.println(this.getInventory().getNonCollectedItem().get(unbuiltNPC).getType());
-    //    System.out.println(unbuiltNPC);
     this.getMyMazeItem()[y][x] = this.getInventory().getNonCollectedItem().get(unbuiltNPC);
-    //    System.out.println(this.getInventory().getNonCollectedItem().get(unbuiltNPC - 1));
     return this.getInventory().getNonCollectedItem().get(unbuiltNPC);
   }
 
-  /** TODO delete from 2d array mazeItem; check the default value of Item */
-  public void deleteItem(int x, int y, NPC npc) {
+  void deleteItem(int x, int y, NPC npc) {
     this.getMyMazeItem()[y][x] = null;
     this.inventory.deleteNoneCollectedItem(npc);
   }
