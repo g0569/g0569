@@ -24,8 +24,8 @@ public interface Constants {
   int AT_TOP_BOUNDARY = 1;
   int AT_BOTTOM_BOUNDARY = -1;
 
-  int GRID_WIDTH = 20;
-  int GRID_HEIGHT = 20;
+  int GRID_WIDTH = 10;
+  int GRID_HEIGHT = 10;
 
   int TO_DEMO_VIEW = 999;
 
@@ -61,6 +61,6 @@ public interface Constants {
     put("type6", R.drawable.npc_l6_nonselected);
   }};
 
+    String BUNDLE_SAVEGAME_KEY = "BUNDLE_SAVEGAME_KEY";
   int MAZETIMER = 90;
-
 }

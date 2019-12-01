@@ -67,6 +67,7 @@ public class SaveGamePresenter implements SaveGameContract.Presenter, BaseView {
     saveGame.setInventory(inventory);
     saveGame = saveGameSQLiteAccessor.saveNewGame(saveGame);
     bundle.putSerializable(Constants.BUNDLE_INVENTORY_KEY, inventory);
+    bundle.putSerializable(Constants.BUNDLE_SAVEGAME_KEY, saveGame);
     System.out.println("Starting New Game");
     mView.startGame(bundle);
   }
@@ -75,6 +76,7 @@ public class SaveGamePresenter implements SaveGameContract.Presenter, BaseView {
   public void loadGame(SaveGame saveGame) {
     Inventory inventory = saveGame.getInventory();
     bundle.putSerializable(Constants.BUNDLE_INVENTORY_KEY, inventory);
+    bundle.putSerializable(Constants.BUNDLE_SAVEGAME_KEY, saveGame);
     mView.startGame(bundle);
   }
 }

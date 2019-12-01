@@ -31,7 +31,7 @@ public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
     Cursor cursor =
         db.query(
             "users_saves",
-            new String[] {"save_id", "inventory_data", "created_time", "progress"},
+            new String[] {"save_id", "inventory_data", "created_time", "progress", "level1_data"},
             "uid=?",
             new String[] {String.valueOf(uid)},
             null,
@@ -49,8 +49,9 @@ public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
         createdTime = new Date();
       }
       int progress = cursor.getInt(3);
+      String saveMazeData = cursor.getString(4);
       try {
-        saveGames.add(new SaveGame(createdTime, saveId, progress, inventoryData, uid));
+        saveGames.add(new SaveGame(createdTime, saveId, progress, inventoryData, uid, saveMazeData));
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -69,9 +70,16 @@ public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
       contentValues.put("uid", saveGame.getUid());
       contentValues.put("progress", 0);
       contentValues.put("inventory_data", saveGame.getStringInventory());
-      contentValues.put("created_time", dateFormat.format(saveGame.getCreatedTime()));
+        contentValues.put("created_time", dateFormat.format(saveGame.getCreatedTime()));
+        contentValues.put("level1_data", saveGame.getStringMazeSave());
       db.insert("users_saves", null, contentValues);
-
+      String sql = "select last_insert_rowid() from users_saves";
+      Cursor cursor = db.rawQuery(sql, null);
+      int latestIndex = -1;
+      if(cursor.moveToFirst()){
+        latestIndex = cursor.getInt(0);
+      }
+      saveGame.setSaveId(latestIndex);
     } catch (Exception ignored) {
     } finally {
       db.close();
@@ -110,6 +118,22 @@ public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
     cursor.close();
     db.close();
     return allNPC;
+  }
+
+  @Override
+  public void updateSaveGame(SaveGame saveGame) {
+    SQLiteDatabase db = sqliteHelper.getWritableDatabase();
+    try{
+        ContentValues cv = new ContentValues();
+        cv.put("level_data", saveGame.getStringMazeSave());
+        cv.put("inventory_data", saveGame.getStringInventory());
+        cv.put("progress", saveGame.getProgress());
+        String[] args = {String.valueOf(saveGame.getSaveId())};
+        db.update("users_saves", cv, "save_id=?",args);
+    } catch (Exception ignored) {
+    } finally{
+        db.close();
+    }
   }
 
   @Override

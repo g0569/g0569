@@ -30,9 +30,9 @@ public class BossActivity extends AppCompatActivity {
         .setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-//    if (bossView == null) {
-//      bossView = new BossView(this);
-//    }
+    //    if (bossView == null) {
+    //      bossView = new BossView(this);
+    //    }
     Bundle bundle = getIntent().getExtras();
     Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
     setContentView(R.layout.activity_bossgame);
@@ -43,19 +43,19 @@ public class BossActivity extends AppCompatActivity {
     menuLayout.setVisibility(View.GONE);
     Button menuBtn = findViewById(R.id.meny_btn);
 
-    menuBtn.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        if (isMenuVisible) {
-          isMenuVisible = false;
-          menuLayout.setVisibility(View.VISIBLE);
-        } else {
-          isMenuVisible = true;
-          menuLayout.setVisibility(View.GONE);
-        }
-
-      }
-    });
+    menuBtn.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            if (isMenuVisible) {
+              isMenuVisible = false;
+              menuLayout.setVisibility(View.VISIBLE);
+            } else {
+              isMenuVisible = true;
+              menuLayout.setVisibility(View.GONE);
+            }
+          }
+        });
   }
 
   @Override
@@ -63,6 +63,4 @@ public class BossActivity extends AppCompatActivity {
     super.onStart();
     presenter.start();
   }
-
-
 }

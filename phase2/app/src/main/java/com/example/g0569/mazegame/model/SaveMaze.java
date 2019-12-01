@@ -4,9 +4,10 @@ import com.example.g0569.mazegame.MazeContract;
 import com.example.g0569.utils.Coordinate;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SaveMaze {
+public class SaveMaze implements Serializable {
     private int[][] mazeGrid;
     private Coordinate playerCoordinate;
     private MazeStopWatch stopWatch;
