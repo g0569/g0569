@@ -21,25 +21,37 @@ public class ChessGame extends BaseGame {
   private List<NPC> NPCChessPieceData = new ArrayList<>();
   private List<NPC> playerChessPieceData = new ArrayList<>();
   private NPC selectedChessPiece;
+//  private List<NPC> NPCChessPieceBackUps;
+//  private List<NPC> playerChessPieceBackUPs;
+
 
   /**
    * Initialize a game manager for ChessGame.
    *
    * @param presenter the presenter
    */
-  public ChessGame(ChessContract.Presenter presenter, Inventory inventory, NPC selectedNPC) {
+  public ChessGame(ChessContract.Presenter presenter, Inventory inventory, int selectedIndex) {
     super();
     this.presenter = presenter;
     this.inventory = inventory;
-    this.selectedNPC = selectedNPC;
+    List<NPC> allNPCs = new ArrayList<>();
+    allNPCs.addAll(inventory.getAvailableItem());
+    allNPCs.addAll(inventory.getCollectedItem());
+    this.selectedNPC = allNPCs.get(selectedIndex);
   }
 
   public void onStart() {
     this.chessPieceFactory = new ChessPieceFactory();
     decodeNPCData();
     placePlayerChess();
+//    makeBackUp();
     // TODO should place the player's Chess Piece in inventory.
   }
+
+//  private void makeBackUp(){
+//    playerChessPieceBackUPs = new ArrayList<>(playerChessPieceData);
+//    NPCChessPieceBackUps = new ArrayList<>(NPCChessPieceData);
+//  }
 
   private void decodeNPCData() {
     String chessString = selectedNPC.getChessLayout(); // get data from NPC from level one.
@@ -65,6 +77,12 @@ public class ChessGame extends BaseGame {
     NPCChessPieceData.add(npc);
   }
 
+  public void resetChessPiece(){
+    for (NPC npc : playerChessPieceData ) {
+      ((ChessPiece)npc.getBehavior()).resetCoordinate();
+    }
+  }
+
   private void placePlayerChess() {
     // This method place the player chess piece to the inventory.
     playerChessPieceData.addAll(inventory.getAvailableItem());
@@ -79,7 +97,7 @@ public class ChessGame extends BaseGame {
     inventoryCoordinateList.add(new Coordinate(30, 20));
 
     int index = 0;
-    while (index < playerChessPieceData.size()) {
+    while (index < playerChessPieceData.size() && index < 6) {
       ChessPiece chessPiece =
           chessPieceFactory.getChessPiece(
               inventoryCoordinateList.get(index).getX(),
@@ -89,25 +107,6 @@ public class ChessGame extends BaseGame {
       index++;
     }
   }
-  //    ChessPiece c1 =
-  //        chessPieceFactory.getChessPiece(10, 10, inventory.getAvailableItem().get(0).getType());
-  //    inventory.getAvailableItem().get(0).setBehavior(c1);
-  //    ChessPiece c2 =
-  //        chessPieceFactory.getChessPiece(10, 20, inventory.getAvailableItem().get(1).getType());
-  //    inventory.getAvailableItem().get(1).setBehavior(c2);
-  //    ChessPiece c3 =
-  //        chessPieceFactory.getChessPiece(20, 10, inventory.getAvailableItem().get(2).getType());
-  //    inventory.getAvailableItem().get(2).setBehavior(c3);
-  //    ChessPiece c4 =
-  //        chessPieceFactory.getChessPiece(20, 20, inventory.getAvailableItem().get(3).getType());
-  //    inventory.getAvailableItem().get(3).setBehavior(c4);
-  //    ChessPiece c5 =
-  //        chessPieceFactory.getChessPiece(30, 10, inventory.getAvailableItem().get(4).getType());
-  //    inventory.getAvailableItem().get(4).setBehavior(c5);
-  //    ChessPiece c6 =
-  //        chessPieceFactory.getChessPiece(30, 20, inventory.getAvailableItem().get(5).getType());
-  //    inventory.getAvailableItem().get(5).setBehavior(c6);
-  //  }
 
   public void placePlayerChessOnBoard(Coordinate coordinate) {
     // This method place the Player Chess Piece on the Board.
@@ -116,7 +115,7 @@ public class ChessGame extends BaseGame {
 
   public String getChessPieceType(Coordinate coordinate) {
     String result = "";
-    for (NPC chessPiece : NPCChessPieceData) {
+    for (NPC chessPiece : playerChessPieceData) {
       if (chessPiece.getCoordinate().equals(coordinate)) {
         result = chessPiece.getType();
       }
@@ -144,43 +143,39 @@ public class ChessGame extends BaseGame {
     return playerChessPieceData;
   }
 
-  private int powerCalculator(String side, int row) {
-    // TODO This method need to be improved!
-    int rowPower = 0;
-    List<NPC> requiredInventory = new ArrayList<>();
-    if (side.equals("player")) {
-      requiredInventory.addAll(getPlayerChessPiece());
-    } else if (side.equals("NPC")) {
-      requiredInventory.addAll(NPCChessPieceData);
+  private int characterAttack(String character){
+    int characterScore = 0;
+    List<NPC> friendlyInventory = new ArrayList<>();
+    List<NPC> opponentInventory = new ArrayList<>();
+    if (character.equals("player")) {
+      friendlyInventory.addAll(getPlayerChessPiece());
+      opponentInventory.addAll(NPCChessPieceData);
     }
-    for (NPC currentChess : requiredInventory) {
-      if (currentChess.getCoordinate().getX() == row) {
-        rowPower += currentChess.getDamage();
+    else if (character.equals("NPC")) {
+      friendlyInventory.addAll(NPCChessPieceData);
+      opponentInventory.addAll(getPlayerChessPiece());
+    }
+    for (NPC currentChess : friendlyInventory) {
+      Integer[][] targetList = ((ChessPiece)currentChess.getBehavior()).createTargetList();
+      int count = 0;
+      boolean enemyFound = false;
+      while(!enemyFound && count < targetList.length){
+        for(NPC enemyChess: opponentInventory){
+          if(!enemyFound && ((ChessPiece)enemyChess.getBehavior()).matchCoordinate(targetList[count])){
+            enemyFound = true;
+            int enemyDmg = enemyChess.getDamage();
+            int ourDmg = currentChess.getDamage();
+            if((currentChess.getBehavior()) instanceof TriangleChessPiece){
+              ourDmg = 2*currentChess.getDamage();
+            }
+            if(ourDmg >= enemyDmg){characterScore += 1;}
+          }
+        }
+        count ++;
       }
+      if(!enemyFound){characterScore += 1;}
     }
-    return rowPower;
-  }
-
-  private boolean singleRowFight(int row) {
-    boolean playerWin = false;
-    int playerPower = powerCalculator("player", row);
-    int NPCPower = powerCalculator("NPC", row);
-    if (difficulty.equals("easy")) {
-      playerWin =
-          (playerPower
-              >= NPCPower); // player under easy mode can win a row with power equal to NPC.
-    } else if (difficulty.equals("hard")) {
-      playerWin = (playerPower > NPCPower); // now player can only win a row with more power.
-    } else if (difficulty.equals("insane")) {
-      playerWin =
-          (playerPower > NPCPower
-              & playerPower
-                  > powerCalculator(
-                      "NPC",
-                      1)); // insane NPC at row 1 gains ability to fight other chess pieces on other
-      // rows.
-    }
-    return playerWin;
+    return characterScore;
   }
 
   /**
@@ -189,16 +184,26 @@ public class ChessGame extends BaseGame {
    * @return whether player win the game.
    */
   public boolean autoFight() {
-    int winNumbers = 0;
-    int row = 1;
-    while (row <= 3) {
-      if (singleRowFight(row)) {
-        winNumbers += 1;
-      }
-      row++;
-    }
-    return (winNumbers >= 2);
+    int playerScore = 0;
+    playerScore += characterAttack("Player");
+    playerScore -= characterAttack("NPC");
+    return (playerScore >= 0);
     // TODO Need to be implemented.
+  }
+
+  public void setGameOverResult(boolean winGame) {
+    if (winGame && !inventory.getAvailableItem().contains(selectedNPC)) {
+      inventory.addAvailableItem(selectedNPC);
+    }
+  }
+
+  public boolean getPositionHasBeenTaken(Coordinate coordinate){
+    boolean findInSamePosition = false;
+    for ( NPC npc: playerChessPieceData ) {
+      if (npc.getCoordinate().equals(coordinate))
+        findInSamePosition = true;
+    }
+    return findInSamePosition;
   }
 
   @Override

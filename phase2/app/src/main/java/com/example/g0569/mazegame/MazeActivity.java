@@ -4,18 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.example.g0569.R;
 import com.example.g0569.bossgame.BossActivity;
 import com.example.g0569.chessgame.ChessActivity;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
-import com.example.g0569.utils.NPC;
 
 /** The type Maze activity. */
 public class MazeActivity extends AppCompatActivity {
@@ -45,6 +45,16 @@ public class MazeActivity extends AppCompatActivity {
     if (inventoryView == null) {
       inventoryView = new InventoryFragment(inventory);
     }
+    ((Switch) findViewById(R.id.maze_enable_acc)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked){
+          mazeView.setEnableSensor(true);
+        }else {
+          mazeView.setEnableSensor(false);
+        }
+    }});
+
     getSupportFragmentManager()
         .beginTransaction()
         .replace(R.id.ContentFrame, inventoryView)
@@ -121,10 +131,10 @@ public class MazeActivity extends AppCompatActivity {
   /**
    * To chess game.
    *
-   * @param selectedNPC the selected npc
+   * @param selectedIndex the index of the selected npc
    */
-  public void toChessGame(NPC selectedNPC) {
-    bundle.putSerializable(Constants.BUNDLE_SELECTEDNPC_KEY, selectedNPC);
+  public void toChessGame(int selectedIndex) {
+    bundle.putInt(Constants.BUNDLE_SELECTEDNPC_KEY, selectedIndex);
     Intent intent = new Intent(this, ChessActivity.class);
     intent.putExtras(bundle);
     startActivity(intent);

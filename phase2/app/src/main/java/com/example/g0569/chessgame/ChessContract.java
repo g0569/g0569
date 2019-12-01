@@ -9,10 +9,11 @@ public interface ChessContract {
     void initView();
 
     void drawChessPiece(Coordinate coordinate, String type);
+
+    void showEndingDialogue(String title, String text, String buttonHint);
   }
 
   interface Presenter extends BasePresenter {
-//    void drawChessPiece(ChessPiece chessPiece);
     void drawChessPiece();
 
     boolean startAutoFight();
@@ -28,6 +29,12 @@ public interface ChessContract {
     Coordinate viewCoordinateToBoardCoordinate(Coordinate coordinate);
 
     void setSelectedChessPieceData(Coordinate coordinate);
+
+    void setGameOverResult(boolean winGame);
+
+    boolean getPositionHasBeenTaken(Coordinate coordinate);
+
+    void resetChessPiece();
 
   }
 }

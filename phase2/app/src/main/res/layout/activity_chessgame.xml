@@ -6,7 +6,7 @@
     <com.example.g0569.chessgame.ChessView
         android:id="@+id/chessview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.example.g0569.chessgame.ChessView>
+        android:layout_height="match_parent" />
 
     <include
         layout="@layout/menu_layout"
@@ -17,6 +17,18 @@
         android:layout_alignParentTop="false"
         android:layout_alignParentEnd="false"
         android:layout_alignParentRight="false"
-        android:layout_alignParentBottom="false"></include>
+        android:layout_alignParentBottom="false" />
+
+    <include
+            layout="@layout/layout_dialogue"
+            android:layout_width="309dp"
+            android:layout_height="124dp"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="148dp"
+            android:background="#FFFFFF"
+            android:visibility="gone"></include>
 
 </RelativeLayout>

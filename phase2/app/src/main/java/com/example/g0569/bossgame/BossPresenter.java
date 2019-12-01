@@ -3,8 +3,6 @@ package com.example.g0569.bossgame;
 import com.example.g0569.bossgame.model.BossGame;
 import com.example.g0569.utils.Inventory;
 
-import java.util.Currency;
-
 /** The type Boss presenter. */
 public class BossPresenter implements BossContract.Presenter {
   private BossContract.View bossView;
@@ -32,6 +30,7 @@ public class BossPresenter implements BossContract.Presenter {
     //    bossView.initView();
     //    String npc = bossGame.initBossTeam().getName();
     //    bossView.setCurrentProjectileBitmap(npc);
+//      bossView.initView();
     bossGame.setBossTeam(this.inventory.getAvailableItem());
     String currentNPC = bossGame.getCurrentNPC().getType();
     String currentPower = bossGame.getCurrentNPC().getPower();
@@ -54,18 +53,30 @@ public class BossPresenter implements BossContract.Presenter {
   @Override
   public void switchTeam() {
     // TODO may want to use getCurrentNPC instead, segregate methods
-    String nextType = bossGame.getNextNPC().getType();
-    String nextNPC = bossGame.getNextNPC().getName();
-    bossView.setCurrentProjectileBitmap("ice");
-    bossView.setCurrentNPCBitmap("npc1");
+    bossGame.getNextNPC();
+    String nextType = bossGame.getCurrentNPC().getPower();
+    String nextNPC = bossGame.getCurrentNPC().getType();
+    bossView.setCurrentProjectileBitmap(nextType);
+    bossView.setCurrentNPCBitmap(nextNPC);
     //    String typeProjectile = bossGame.getNextNPC().getType();
     //    bossView.setCurrentProjectileBitmap(typeProjectile);
   }
 
-  @Override
-  public void pause() {}
+  public String getResistance(){
+    String resist = bossGame.getEnemyResistance();
+    if (resist == null){
+      return "none";
+    }
+    return resist;
+  }
 
-  public void update() {}
+  @Override
+  public void pause() {
+  }
+
+  public void update() {
+    bossGame.update();
+  }
 
   @Override
   public void shoot() {

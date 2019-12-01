@@ -41,6 +41,7 @@ public interface Constants {
   String BUNDLE_USER_KEY = "BUNDLE_USER_KEY";
   String BUNDLE_INVENTORY_KEY = "BUNDLE_INVENTORY_KEY";
   String BUNDLE_SELECTEDNPC_KEY = "BUNDLE_SELECTEDNPC_KEY";
+  String CHESS_GAME_OVER = "CHESS_GAME_OVER";
 
   HashMap<String, Integer> NPCIMAGELOOKUPTABLE = new HashMap<String, Integer>(){{
     put("type1", R.drawable.npc_l1);

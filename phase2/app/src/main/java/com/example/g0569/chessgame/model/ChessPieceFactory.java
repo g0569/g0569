@@ -10,7 +10,7 @@ class ChessPieceFactory {
     } else if (type.equals(Constants.TRIANGLE_TYPE)) {
       return new TriangleChessPiece(x, y);
     } else if (type.equals(Constants.CIRCLE_TYPE)) {
-      return new CirecleChessPiece(x, y);
+      return new CircleChessPiece(x, y);
     } else if (type.equals(Constants.DIAMOND_TYPE)) {
       return new DiamondChessPiece(x, y);
     } else if (type.equals(Constants.HEART_TYPE)) {
