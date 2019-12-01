@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.g0569.R;
 import com.example.g0569.mazegame.MazeActivity;
@@ -20,6 +22,7 @@ public class ChessActivity extends AppCompatActivity {
     private ChessContract.Presenter presenter;
     private boolean isMenuVisible = false;
     private Bundle bundle;
+    private ConstraintLayout dialogue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,8 @@ public class ChessActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chessgame);
         chessView = findViewById(R.id.chessview);
         presenter = new ChessPresenter(chessView, inventory, selectedNPC);
+
+        dialogue = findViewById(R.id.dialogue);
 
         final LinearLayout menuLayout = findViewById(R.id.menu_layout);
         menuLayout.setVisibility(View.GONE);
@@ -69,4 +74,19 @@ public class ChessActivity extends AppCompatActivity {
     finish();
     // TODO
   }
+
+    public void showEndingDialogue(String title, String text, String buttonHint) {
+        ((TextView) dialogue.findViewById(R.id.dialogue_title)).setText(title);
+        ((TextView) dialogue.findViewById(R.id.dialogue_text)).setText(text);
+        Button dialogueButton = dialogue.findViewById(R.id.dialogue_btn_1);
+        dialogueButton.setText(buttonHint);
+        dialogueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toMazeGame();
+            }
+        });
+        dialogue.setVisibility(View.VISIBLE);
+
+    }
 }
