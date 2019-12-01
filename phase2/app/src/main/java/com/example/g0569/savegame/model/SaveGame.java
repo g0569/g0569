@@ -26,7 +26,13 @@ public class SaveGame implements Serializable {
    * @param uid the uid of the user who has this save game
    * @throws Exception the exception
    */
-  SaveGame(Date createdTime, int saveId, int progress, String inventoryData, int uid, String saveMazeData)
+  SaveGame(
+      Date createdTime,
+      int saveId,
+      int progress,
+      String inventoryData,
+      int uid,
+      String saveMazeData)
       throws Exception {
     this.createdTime = createdTime;
     this.saveId = saveId;
@@ -53,6 +59,14 @@ public class SaveGame implements Serializable {
     this.uid = uid;
     this.isNewGame = isNewGame;
     this.saveMaze = new SaveMaze();
+  }
+
+  public SaveMaze getSaveMaze() {
+    return saveMaze;
+  }
+
+  public void setSaveMaze(SaveMaze saveMaze) {
+    this.saveMaze = saveMaze;
   }
 
   /**

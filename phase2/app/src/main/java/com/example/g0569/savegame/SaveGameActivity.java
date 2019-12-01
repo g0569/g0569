@@ -5,16 +5,14 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.g0569.R;
-import com.example.g0569.chessgame.ChessActivity;
+import com.example.g0569.base.BaseActivity;
 import com.example.g0569.mazegame.MazeActivity;
 import com.example.g0569.savegame.model.SaveGameSQLiteAccessor;
 import com.example.g0569.utils.SQLiteHelper;
 
 /** The Save game activity. */
-public class SaveGameActivity extends AppCompatActivity {
+public class SaveGameActivity extends BaseActivity {
 
   SQLiteHelper sqLitehelper = new SQLiteHelper(this, "g0569");
 

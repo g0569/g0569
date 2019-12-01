@@ -11,16 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.g0569.R;
+import com.example.g0569.base.BaseActivity;
 import com.example.g0569.mazegame.MazeActivity;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
 
-public class ChessActivity extends AppCompatActivity {
+public class ChessActivity extends BaseActivity {
 
     private ChessView chessView;
     private ChessContract.Presenter presenter;
-    private boolean isMenuVisible = false;
-    private Bundle bundle;
     private ConstraintLayout dialogue;
     private LinearLayout menuLayout;
     @Override
@@ -43,18 +42,16 @@ public class ChessActivity extends AppCompatActivity {
         menuLayout = findViewById(R.id.menu_layout);
         menuLayout.setVisibility(View.GONE);
         Button menuBtn = findViewById(R.id.meny_btn);
-
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isMenuVisible) {
-                    isMenuVisible = false;
-                    menuLayout.setVisibility(View.VISIBLE);
-                } else {
-                    isMenuVisible = true;
-                    menuLayout.setVisibility(View.GONE);
-                }
-
+                showMenu(menuLayout);
+            }
+        });
+        findViewById(R.id.menu_load_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toLoadPage();
             }
         });
     }

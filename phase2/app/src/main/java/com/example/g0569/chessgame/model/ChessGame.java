@@ -15,15 +15,12 @@ public class ChessGame extends BaseGame {
   private ChessContract.Presenter presenter;
   private Inventory inventory;
   private NPC selectedNPC;
-  private String difficulty =
-      "hard"; // might be "easy", "hard", or "insane" // TODO Need to be implemented.
   private ChessPieceFactory chessPieceFactory;
   private List<NPC> NPCChessPieceData = new ArrayList<>();
   private List<NPC> playerChessPieceData = new ArrayList<>();
   private NPC selectedChessPiece;
-//  private List<NPC> NPCChessPieceBackUps;
-//  private List<NPC> playerChessPieceBackUPs;
-
+  //  private List<NPC> NPCChessPieceBackUps;
+  //  private List<NPC> playerChessPieceBackUPs;
 
   /**
    * Initialize a game manager for ChessGame.
@@ -44,14 +41,8 @@ public class ChessGame extends BaseGame {
     this.chessPieceFactory = new ChessPieceFactory();
     decodeNPCData();
     placePlayerChess();
-//    makeBackUp();
     // TODO should place the player's Chess Piece in inventory.
   }
-
-//  private void makeBackUp(){
-//    playerChessPieceBackUPs = new ArrayList<>(playerChessPieceData);
-//    NPCChessPieceBackUps = new ArrayList<>(NPCChessPieceData);
-//  }
 
   private void decodeNPCData() {
     String chessString = selectedNPC.getChessLayout(); // get data from NPC from level one.
@@ -77,9 +68,9 @@ public class ChessGame extends BaseGame {
     NPCChessPieceData.add(npc);
   }
 
-  public void resetChessPiece(){
-    for (NPC npc : playerChessPieceData ) {
-      ((ChessPiece)npc.getBehavior()).resetCoordinate();
+  public void resetChessPiece() {
+    for (NPC npc : playerChessPieceData) {
+      ((ChessPiece) npc.getBehavior()).resetCoordinate();
     }
   }
 
@@ -143,37 +134,42 @@ public class ChessGame extends BaseGame {
     return playerChessPieceData;
   }
 
-  private int characterAttack(String character){
+  private List<NPC> addChessPieceToFightList(List<NPC> NPCList) {
+    List<NPC> fightList = new ArrayList<>();
+    for (NPC npc : NPCList) {
+      if (npc.getCoordinate().getIntX() < 10 && npc.getCoordinate().getIntY() < 10) {
+        fightList.add(npc);
+      }
+    }
+    return fightList;
+  }
+
+  private int characterAttack(List<NPC> friendlyInventory, List<NPC> opponentInventory) {
     int characterScore = 0;
-    List<NPC> friendlyInventory = new ArrayList<>();
-    List<NPC> opponentInventory = new ArrayList<>();
-    if (character.equals("player")) {
-      friendlyInventory.addAll(getPlayerChessPiece());
-      opponentInventory.addAll(NPCChessPieceData);
-    }
-    else if (character.equals("NPC")) {
-      friendlyInventory.addAll(NPCChessPieceData);
-      opponentInventory.addAll(getPlayerChessPiece());
-    }
     for (NPC currentChess : friendlyInventory) {
-      Integer[][] targetList = ((ChessPiece)currentChess.getBehavior()).createTargetList();
+      Integer[][] targetList = ((ChessPiece) currentChess.getBehavior()).createTargetList();
       int count = 0;
       boolean enemyFound = false;
-      while(!enemyFound && count < targetList.length){
-        for(NPC enemyChess: opponentInventory){
-          if(!enemyFound && ((ChessPiece)enemyChess.getBehavior()).matchCoordinate(targetList[count])){
+      while (!enemyFound && count < targetList.length) {
+        for (NPC enemyChess : opponentInventory) {
+          if (!enemyFound
+              && ((ChessPiece) enemyChess.getBehavior()).matchCoordinate(targetList[count])) {
             enemyFound = true;
             int enemyDmg = enemyChess.getDamage();
             int ourDmg = currentChess.getDamage();
-            if((currentChess.getBehavior()) instanceof TriangleChessPiece){
-              ourDmg = 5*currentChess.getDamage();
+            if ((currentChess.getBehavior()) instanceof TriangleChessPiece) {
+              ourDmg = 2 * currentChess.getDamage();
             }
-            if(ourDmg >= enemyDmg){characterScore += 1;}
+            if (ourDmg >= enemyDmg) {
+              characterScore += 1;
+            }
           }
         }
-        count ++;
+        count++;
       }
-      if(!enemyFound){characterScore += 1;}
+      if (!enemyFound) {
+        characterScore += 1;
+      }
     }
     return characterScore;
   }
@@ -185,9 +181,10 @@ public class ChessGame extends BaseGame {
    */
   public boolean autoFight() {
     int playerScore = 0;
-    playerScore += characterAttack("Player");
-    playerScore -= characterAttack("NPC");
-    return (playerScore >= 0);
+    List<NPC> playerFightList = addChessPieceToFightList(playerChessPieceData);
+    playerScore += characterAttack(playerFightList, NPCChessPieceData);
+    playerScore -= characterAttack(NPCChessPieceData, playerFightList);
+    return (playerScore > 0);
     // TODO Need to be implemented.
   }
 
@@ -197,18 +194,14 @@ public class ChessGame extends BaseGame {
     }
   }
 
-  public boolean getPositionHasBeenTaken(Coordinate coordinate){
+  public boolean getPositionHasBeenTaken(Coordinate coordinate) {
     boolean findInSamePosition = false;
-    for ( NPC npc: playerChessPieceData ) {
-      if (npc.getCoordinate().equals(coordinate))
-        findInSamePosition = true;
+    for (NPC npc : playerChessPieceData) {
+      if (npc.getCoordinate().equals(coordinate)) findInSamePosition = true;
     }
     return findInSamePosition;
   }
 
   @Override
   public void pause() {}
-
-  @Override
-  public void load() {}
 }

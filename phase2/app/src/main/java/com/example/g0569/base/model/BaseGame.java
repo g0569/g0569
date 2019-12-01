@@ -21,8 +21,5 @@ public abstract class BaseGame {
   /** Pause. */
   public abstract void pause();
 
-  /** Load. */
-  public abstract void load();
-
   public void showStatistic() {}
 }
