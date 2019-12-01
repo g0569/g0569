@@ -1,6 +1,5 @@
 package com.example.g0569.mazegame;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,12 +7,10 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Switch;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.example.g0569.R;
-import com.example.g0569.bossgame.BossActivity;
-import com.example.g0569.chessgame.ChessActivity;
+import com.example.g0569.base.BaseActivity;
 import com.example.g0569.mazegame.model.SaveMaze;
 import com.example.g0569.savegame.model.SaveGame;
 import com.example.g0569.savegame.model.SaveGameSQLiteAccessor;
@@ -21,56 +18,45 @@ import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.SQLiteHelper;
 
+import java.util.Objects;
+
 /** The type Maze activity. */
-public class MazeActivity extends AppCompatActivity {
+public class MazeActivity extends BaseActivity {
 
   /** The Inventory view. */
-  InventoryFragment inventoryView;
+  private InventoryFragment inventoryView;
 
   private MazeView mazeView;
   private MazeContract.Presenter presenter;
-  private boolean isMenuVisible = false;
   private boolean isInventoryVisible = false;
-  private Bundle bundle;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    //        if (mazeView == null) {
-    //            mazeView = new MazeView(this);
-    //        }
     setContentView(R.layout.activity_mazegame);
     mazeView = findViewById(R.id.mazeview);
     bundle = getIntent().getExtras();
     assert bundle != null;
+
     final SaveGame saveGame = (SaveGame) bundle.getSerializable(Constants.BUNDLE_SAVEGAME_KEY);
-    try {
-      Boolean fromChessGame =
-          getIntent().getStringExtra(Constants.CHESS_GAME_OVER).equals(Constants.CHESS_GAME_OVER);
-    } catch (NullPointerException e) {
-      Boolean fromChessGame = false;
-    }
     final Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
-    final SaveMaze saveMaze = (SaveMaze) saveGame.getSaveMaze();
+    final SaveMaze saveMaze = Objects.requireNonNull(saveGame).getSaveMaze();
+    final SaveGameSQLiteAccessor saveGameSQLiteAccessor = new SaveGameSQLiteAccessor();
+    saveGameSQLiteAccessor.setSQLiteHelper(new SQLiteHelper(this, "g0569"));
+
     inventoryView =
         (InventoryFragment) getSupportFragmentManager().findFragmentById(R.id.ContentFrame);
     if (inventoryView == null) {
       inventoryView = new InventoryFragment(inventory);
     }
-    final SaveGameSQLiteAccessor saveGameSQLiteAccessor = new SaveGameSQLiteAccessor();
-    saveGameSQLiteAccessor.setSQLiteHelper(new SQLiteHelper(this, "g0569"));
 
     ((Switch) findViewById(R.id.maze_enable_acc))
         .setOnCheckedChangeListener(
             new CompoundButton.OnCheckedChangeListener() {
               @Override
               public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                  mazeView.setEnableSensor(true);
-                } else {
-                  mazeView.setEnableSensor(false);
-                }
+                switchAccelerometer(isChecked);
               }
             });
 
@@ -88,17 +74,26 @@ public class MazeActivity extends AppCompatActivity {
     inventoryLayout.setVisibility(View.GONE);
     Button menuBtn = findViewById(R.id.meny_btn);
     Button inventoryBtn = findViewById(R.id.mazegame_inventory_btn);
+    findViewById(R.id.menu_load_btn)
+        .setOnClickListener(
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                toLoadPage();
+              }
+            });
+    findViewById(R.id.menu_save_btn).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        saveGame.setSaveMaze(presenter.save());
+        saveGameSQLiteAccessor.updateSaveGame(saveGame);
+      }
+    });
     menuBtn.setOnClickListener(
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-            if (isMenuVisible) {
-              isMenuVisible = false;
-              menuLayout.setVisibility(View.GONE);
-            } else {
-              isMenuVisible = false;
-              menuLayout.setVisibility(View.VISIBLE);
-            }
+            showMenu(menuLayout);
           }
         });
     inventoryBtn.setOnClickListener(
@@ -108,16 +103,28 @@ public class MazeActivity extends AppCompatActivity {
             saveGame.setInventory(inventory);
             saveGame.setSaveMaze(presenter.save());
             saveGameSQLiteAccessor.updateSaveGame(saveGame);
-            if (isInventoryVisible) {
-              isInventoryVisible = false;
-              inventoryLayout.setVisibility(View.GONE);
-            } else {
-              isInventoryVisible = true;
-              inventoryLayout.setVisibility(View.VISIBLE);
-              updateNpcData();
-            }
+            showInventory(inventoryLayout);
           }
         });
+  }
+
+  private void showInventory(FrameLayout inventoryLayout) {
+    if (isInventoryVisible) {
+      isInventoryVisible = false;
+      inventoryLayout.setVisibility(View.GONE);
+    } else {
+      isInventoryVisible = true;
+      inventoryLayout.setVisibility(View.VISIBLE);
+      updateNpcData();
+    }
+  }
+
+  private void switchAccelerometer(boolean isChecked) {
+    if (isChecked) {
+      mazeView.setEnableSensor(true);
+    } else {
+      mazeView.setEnableSensor(false);
+    }
   }
 
   private void updateNpcData() {
@@ -141,26 +148,5 @@ public class MazeActivity extends AppCompatActivity {
   protected void onStart() {
     super.onStart();
     presenter.start();
-  }
-
-  /**
-   * To chess game.
-   *
-   * @param selectedIndex the index of the selected npc
-   */
-  public void toChessGame(int selectedIndex) {
-    bundle.putInt(Constants.BUNDLE_SELECTEDNPC_KEY, selectedIndex);
-    Intent intent = new Intent(this, ChessActivity.class);
-    intent.putExtras(bundle);
-    startActivity(intent);
-    finish();
-  }
-
-  /** To boss game. */
-  public void toBossGame() {
-    Intent intent = new Intent(this, BossActivity.class);
-    intent.putExtras(bundle);
-    startActivity(intent);
-    finish();
   }
 }

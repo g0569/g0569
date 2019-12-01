@@ -11,6 +11,7 @@ import com.example.g0569.R;
 import com.example.g0569.chessgame.ChessActivity;
 import com.example.g0569.mazegame.MazeActivity;
 import com.example.g0569.savegame.model.SaveGameSQLiteAccessor;
+import com.example.g0569.utils.ActivityManager;
 import com.example.g0569.utils.SQLiteHelper;
 
 /** The Save game activity. */
@@ -23,6 +24,7 @@ public class SaveGameActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    ActivityManager.getInstance().addActivity(this);
     this.requestWindowFeature(Window.FEATURE_NO_TITLE);
     this.getWindow()
         .setFlags(
