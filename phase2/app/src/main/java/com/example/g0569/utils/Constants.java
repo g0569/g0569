@@ -60,4 +60,6 @@ public interface Constants {
     put("type6", R.drawable.npc_l6_nonselected);
   }};
 
+  int MAZETIMER = 90;
+
 }

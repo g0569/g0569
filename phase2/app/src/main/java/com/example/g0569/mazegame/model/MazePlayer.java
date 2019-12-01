@@ -7,7 +7,7 @@ import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.NPC;
 
 /** The type Maze player. */
-// TODO START POINT
+
 public class MazePlayer extends Player {
 
   private Coordinate direction;
@@ -42,6 +42,10 @@ public class MazePlayer extends Player {
    */
   public Coordinate getCoordinate() {
     return coordinate;
+  }
+
+  public void setCoordinate(Coordinate coordinate) {
+    this.coordinate = coordinate;
   }
 
   public void update() {

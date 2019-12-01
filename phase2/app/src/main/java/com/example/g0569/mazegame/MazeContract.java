@@ -59,6 +59,6 @@ public interface MazeContract {
 
     void pause();
 
-    void resume();
+    void load();
   }
 }
