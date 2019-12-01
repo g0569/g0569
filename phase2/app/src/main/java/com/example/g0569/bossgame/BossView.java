@@ -15,7 +15,6 @@ import com.example.g0569.utils.Coordinate;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /** The Bossview for the bossgame. */
 public class BossView extends GameView implements BossContract.View {
@@ -132,6 +131,9 @@ public class BossView extends GameView implements BossContract.View {
     }
   }
 
+  /**
+   * Draws the amount of times a projectile has been thrown
+   */
   public void drawScore() {
     paint.setTextSize(60);
     paint.setColor(Color.DKGRAY);
@@ -326,15 +328,17 @@ public class BossView extends GameView implements BossContract.View {
     drawEnemy();
     drawBossPlayer();
     drawHealthBar();
-    drawShootButton();
+    drawButton();
     drawCurrentProjectile();
     drawNPC();
     drawScore();
     drawStats();
   }
 
-  @Override
-  public void drawBossPlayer() {
+  /**
+   * Draws the player which is a target in the game
+   */
+  private void drawBossPlayer() {
     try {
       canvas.drawBitmap(
           bossPlayer, bossPlayerCoordinate.getX(), bossPlayerCoordinate.getY(), paint);
@@ -343,8 +347,10 @@ public class BossView extends GameView implements BossContract.View {
     }
   }
 
-  @Override
-  public void drawEnemy() {
+  /**
+   * Draws the enemy in the game
+   */
+  private void drawEnemy() {
     try {
       canvas.drawBitmap(enemyAppearance, enemyCoordinate.getX(), enemyCoordinate.getY(), paint);
     } catch (NullPointerException e) {
@@ -352,8 +358,10 @@ public class BossView extends GameView implements BossContract.View {
     }
   }
 
-  @Override
-  public void drawHealthBar() {
+  /**
+   * Draws the healthbar in the game
+   */
+  private void drawHealthBar() {
     try {
       canvas.drawBitmap(
           healthBarHolder, healthBarHolderCoordinate.getX(), healthBarCoordinate.getY(), paint);
@@ -364,7 +372,10 @@ public class BossView extends GameView implements BossContract.View {
     }
   }
 
-  public void drawShootButton() {
+  /**
+   * Draws all the buttons needed in the game
+   */
+  private void drawButton() {
     int unitX = (int) (screenWidth * 0.13 / 3);
     int unitY = (int) (screenHeight * 0.13 / 3);
     canvas.drawBitmap(shootButton, screenWidth - 4 * unitX, screenHeight - 5 * unitY, paint);
@@ -453,8 +464,10 @@ public class BossView extends GameView implements BossContract.View {
 //     false);
   }
 
-  @Override
-  public void drawStats() {
+  /**
+   * Draws the current resistance of the boss to let player know
+   */
+  private void drawStats() {
     String resist = bossPresenter.getResistance();
     paint.setTextSize(50);
     paint.setColor(Color.DKGRAY);
@@ -462,6 +475,9 @@ public class BossView extends GameView implements BossContract.View {
         "Current Resistance:" + resist, screenWidth * 0.4f, screenHeight * 0.70f, paint);
   }
 
+  /**
+   * Draws the NPC that the game is currently being used
+   */
   public void drawNPC() {
     try {
       NPC =
