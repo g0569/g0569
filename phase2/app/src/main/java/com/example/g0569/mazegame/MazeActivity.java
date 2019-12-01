@@ -22,6 +22,7 @@ public class MazeActivity extends AppCompatActivity {
 
   /** The Inventory view. */
   InventoryFragment inventoryView;
+
   private MazeView mazeView;
   private MazeContract.Presenter presenter;
   private boolean isMenuVisible = false;
@@ -38,6 +39,8 @@ public class MazeActivity extends AppCompatActivity {
     setContentView(R.layout.activity_mazegame);
     mazeView = findViewById(R.id.mazeview);
     bundle = getIntent().getExtras();
+    Boolean fromChessGame =
+            getIntent().getStringExtra(Constants.CHESS_GAME_OVER).equals(Constants.CHESS_GAME_OVER);
     final Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
 
     inventoryView =
@@ -45,15 +48,18 @@ public class MazeActivity extends AppCompatActivity {
     if (inventoryView == null) {
       inventoryView = new InventoryFragment(inventory);
     }
-    ((Switch) findViewById(R.id.maze_enable_acc)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-      @Override
-      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked){
-          mazeView.setEnableSensor(true);
-        }else {
-          mazeView.setEnableSensor(false);
-        }
-    }});
+    ((Switch) findViewById(R.id.maze_enable_acc))
+        .setOnCheckedChangeListener(
+            new CompoundButton.OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                  mazeView.setEnableSensor(true);
+                } else {
+                  mazeView.setEnableSensor(false);
+                }
+              }
+            });
 
     getSupportFragmentManager()
         .beginTransaction()

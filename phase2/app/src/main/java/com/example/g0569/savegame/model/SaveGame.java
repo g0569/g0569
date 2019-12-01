@@ -3,10 +3,11 @@ package com.example.g0569.savegame.model;
 import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.Utils;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** A single Save game stored in the database. */
-public class SaveGame {
+public class SaveGame implements Serializable {
   private Date createdTime;
   private int saveId;
   private int progress;

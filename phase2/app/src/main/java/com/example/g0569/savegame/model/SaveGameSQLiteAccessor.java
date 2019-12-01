@@ -71,7 +71,13 @@ public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
       contentValues.put("inventory_data", saveGame.getStringInventory());
       contentValues.put("created_time", dateFormat.format(saveGame.getCreatedTime()));
       db.insert("users_saves", null, contentValues);
-
+      String sql = "select last_insert_rowid() from users_saves";
+      Cursor cursor = db.rawQuery(sql, null);
+      int latestIndex = -1;
+      if(cursor.moveToFirst()){
+        latestIndex = cursor.getInt(0);
+      }
+      saveGame.setSaveId(latestIndex);
     } catch (Exception ignored) {
     } finally {
       db.close();
@@ -110,6 +116,18 @@ public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
     cursor.close();
     db.close();
     return allNPC;
+  }
+
+  @Override
+  public void updateSaveGame(SaveGame saveGame) {
+    SQLiteDatabase db = sqliteHelper.getWritableDatabase();
+    ContentValues cv = new ContentValues();
+    cv.put("level_data", classId);
+    cv.put("inventory_data", saveGame.getStringInventory());
+    cv.put("progress", saveGame.getProgress());
+    String[] args = {String.valueOf(photoId)};
+    return db.update(mTUserPhoto, cv, "photoId=?",args);
+    Cursor cursor = db.update("users_saves", )
   }
 
   @Override

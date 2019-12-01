@@ -61,6 +61,6 @@ public interface Constants {
     put("type6", R.drawable.npc_l6_nonselected);
   }};
 
+    String BUNDLE_SAVEGAME_KEY = "BUNDLE_SAVEGAME_KEY";
   int MAZETIMER = 90;
-
 }

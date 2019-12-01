@@ -29,4 +29,6 @@ public interface SaveGameSQLiteAccessInterface extends SQLiteAccessInterface {
    * @return the available np cs
    */
   List<NPC> getAvailableNPCs();
+
+  void updateSaveGame(SaveGame saveGame);
 }
