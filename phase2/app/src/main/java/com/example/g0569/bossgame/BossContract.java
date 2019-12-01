@@ -47,5 +47,7 @@ public interface BossContract {
     void switchTeam();
 
     String getResistance();
+
+    int getScore();
   }
 }

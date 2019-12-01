@@ -13,20 +13,13 @@ public class Enemy extends Item implements Observable {
   private float initialHealth;
   private boolean resistFire;
   private boolean resistWater;
-  private boolean resistLightning;
 
   // The direction it moves
   private int xDirection;
-  private int yDirection;
-  private float ratioOfHealth;
   private int counterToUpdate;
 
-  public Enemy() {
+  Enemy() {
     super();
-
-    // Sets the direction of the Enemy
-    //    xDirection = (int) this.screenWidth / 100;
-    yDirection = 0;
 
     // Sets the health of the boss
     health = 100;
@@ -34,51 +27,30 @@ public class Enemy extends Item implements Observable {
   }
 
   /** Moves the Boss around based on its position */
-  public void action() {
+  void action() {
     if (counterToUpdate == 100) {
       double d = Math.random();
       if (d > 0.7) {
         resistFire = true;
-        resistLightning = false;
         resistWater = false;
       } else if (d > 0.5) {
         resistFire = false;
-        resistLightning = true;
         resistWater = false;
       } else if (d > 0.3) {
         resistFire = false;
-        resistLightning = false;
         resistWater = true;
       } else {
         resistFire = false;
-        resistLightning = false;
         resistWater = false;
       }
       counterToUpdate = 0;
-    } else{
-      counterToUpdate ++;
+    } else {
+      counterToUpdate++;
     }
-    //    if (health > 0) {
-    //      if (coordinate.getX() <= 0) {
-    //        xDirection = Math.abs(xDirection);
-    //        appearance = BitmapFactory.decodeResource(resource, R.drawable.bossgame_enemy_r);
-    //      } else if (coordinate.getX() >= screen_width - size) {
-    //        xDirection = -Math.abs(xDirection);
-    //        appearance = BitmapFactory.decodeResource(resource, R.drawable.bossgame_enemy_l);
-    //      }
-    //      //        action();
-    //    }
   }
 
-  /**
-   * Draws the Enemy
-   *
-   * @param canvas of the Enemy being drawn on
-   * @param paint the style of the enemy
-   */
-
   /** Decreases the health of the enemy when Item hits it */
-  public void attacked(int damageTaken, String attackType) {
+  void attacked(int damageTaken, String attackType) {
     if (resistFire && attackType.equals("fire")) {
       health -= damageTaken / 2;
     } else if (resistWater && attackType.equals("ice")) {
@@ -87,15 +59,14 @@ public class Enemy extends Item implements Observable {
       health -= damageTaken;
       setState((int) (health - damageTaken));
     }
-
   }
 
-  public String getResist(){
-    if (resistWater){
+  String getResist() {
+    if (resistWater) {
       return "ice";
-    }else if(resistFire){
+    } else if (resistFire) {
       return "fire";
-    }else{
+    } else {
       return null;
     }
   }
@@ -108,20 +79,29 @@ public class Enemy extends Item implements Observable {
   ////    }
   //    return false;
   //  }
-  public void setxDirection(int directionMovement) {
+
+  /**
+   * Sets the direction x factor of the enemy depending on the screen size of the android device being used.
+   * @param directionMovement the screen size and based on that decides amount of movmement
+   */
+  void setxDirection(int directionMovement) {
     this.xDirection = directionMovement / 100;
   }
 
-  public int getXDirection() {
+  /**
+   * Returns the amount it moves in the x direction
+   * @return movement in x direction
+   */
+  int getXDirection() {
     return this.xDirection;
   }
 
-  /**a
-   * Getter for the health
+  /**
+   * a Getter for the health
    *
    * @return the current health
    */
-  public float getHealth() {
+  float getHealth() {
     return health;
   }
 
@@ -130,7 +110,7 @@ public class Enemy extends Item implements Observable {
    *
    * @return the initial Health
    */
-  public float getInitialHealth() {
+  private float getInitialHealth() {
     return initialHealth;
   }
 
@@ -165,9 +145,7 @@ public class Enemy extends Item implements Observable {
   @Override
   public void update() {}
 
-  public float getRatioOfHealth(){
-    ratioOfHealth = health/initialHealth;
-    return ratioOfHealth;
+  float getRatioOfHealth() {
+    return health / initialHealth;
   }
 }
-

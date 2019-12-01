@@ -1,25 +1,16 @@
 package com.example.g0569.bossgame.model;
 
 import com.example.g0569.base.model.BaseGame;
-import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.NPC;
 import java.util.List;
 
-import static java.lang.Math.abs;
-
-//TODO set classes to private or public
-
 public class BossGame extends BaseGame {
-  private BossPlayer bossPlayer;
   private Enemy enemy;
-  //  MenuButton menuButton;
-  //  PauseButton pauseButton;
-  //  ShootButton shootButton;
-  private HealthBar healthBar;
   private boolean paused;
   private List bossTeam;
   private int currentTeam;
   private NPC currentNPC;
+  private int score;
 
   public BossGame() {
     super();
@@ -32,33 +23,20 @@ public class BossGame extends BaseGame {
    */
   public void onStart() {
 
-    bossPlayer = new BossPlayer();
+    //    BossPlayer bossPlayer = new BossPlayer();
     enemy = new Enemy();
-    healthBar = new HealthBar(enemy);
+    //    HealthBar healthBar = new HealthBar(enemy);
   }
 
   /**
-   * Returns the healthbar instance of the game. Should prob not need to use this later
+   * Returns what the enemy is currently resistant against
    *
-   * @return healthbar of the game
+   * @return the element the enemy is resisting at the moment
    */
-  public HealthBar getHealthBar() {
-    return healthBar;
-  }
-
-  //  public Enemy getEnemy() {
-  //    return enemy;
-  //  }
-
-  //  public BossPlayer getBossPlayer() {
-  //    return bossPlayer;
-  //  }
-
-  //  public void action() {}
-
-  public String getEnemyResistance(){
+  public String getEnemyResistance() {
     return enemy.getResist();
   }
+
   /** Pauses the game or unpauses the game depending on the state it is in */
   @Override
   public void pause() {
@@ -70,31 +48,6 @@ public class BossGame extends BaseGame {
   public void load() {}
 
   /**
-   * Checks to see if its within the range
-   *
-   * @param item_x of the item
-   * @param item_y of the item
-   * @param range_x of the item
-   * @param range_y of the item
-   * @param range_r of the item
-   * @return true or false
-   */
-  private boolean inRange(float item_x, float item_y, float range_x, float range_y, float range_r) {
-    return (item_x > range_x - range_r
-        && item_x < range_x + range_r
-        && item_y > range_y - range_r
-        && item_y < range_y + range_r);
-  }
-
-  private boolean inRange(
-      float item_x, float item_y, float range_x, float range_y, float range_dx, float range_dy) {
-    return (item_x > range_x
-        && item_x < range_x + range_dx
-        && item_y > range_y
-        && item_y < range_y + range_dy);
-  }
-
-  /**
    * Attacks the boss and changes it's health accordingly Might want it to return something later so
    * that healthbar is not needed later
    */
@@ -102,19 +55,11 @@ public class BossGame extends BaseGame {
     enemy.attacked(currentNPC.getDamage(), currentNPC.getPower());
   }
 
-//  /** Throws the projectile, this logic should become useless later on */
-//  public void throwProjectile() {
-//    ThrownItems projectile = (ThrownItems) bossPlayer.getInventory().get(0);
-//    projectile.thrown();
-//  }
-
   /**
    * Switches the npc currently being used to attack the boss in the game Since it is rotational, if
-   * it gets to the size then we reset to the first npc
-   *
-   * @return the npc that is next to attack
+   * it gets to the size then we reset to the first npc. then restart iterating through that.
    */
-  public NPC getNextNPC() {
+  public void loadNextNPC() {
     if (bossTeam.size() != 0) {
       currentTeam++;
       if (currentTeam >= bossTeam.size()) {
@@ -122,10 +67,14 @@ public class BossGame extends BaseGame {
       }
       currentNPC = (NPC) bossTeam.get(currentTeam);
     }
-    return currentNPC;
   }
 
-  public NPC getCurrentNPC(){
+  /**
+   * gets the current npc that the game is using.
+   *
+   * @return the npc that is being used.
+   */
+  public NPC getCurrentNPC() {
     return currentNPC;
   }
 
@@ -161,8 +110,27 @@ public class BossGame extends BaseGame {
     if (bossTeam != null) currentNPC = (NPC) bossTeam.get(0);
   }
 
-  public void update(){
+  /**
+   * Updates the game logic. This only consists of calling action on the enemy since it is the only
+   * element of the game which is dynamic in the sense of updating constantly since it's resistance
+   * changes.
+   */
+  public void update() {
     enemy.action();
+  }
+
+  /** Adds onto the amount of the a shot was fired. */
+  public void shotFired() {
+    score++;
+  }
+
+  /**
+   * Returns the score that the player has at the end of the game. The least amount is the best.
+   *
+   * @return the score
+   */
+  public int getScore() {
+    return score;
   }
 
   /**
@@ -174,16 +142,21 @@ public class BossGame extends BaseGame {
     return enemy.getHealth() <= 0;
   }
 
+  /**
+   * Returns the ratio of the health that the boss has left
+   *
+   * @return ratio of boss health
+   */
   public float getRatioOfHealth() {
     return enemy.getRatioOfHealth();
   }
 
+  /**
+   * Gets the current health of the enemy.
+   *
+   * @return health of enemy
+   */
   public float getHealth() {
     return enemy.getHealth();
   }
-
-  //  public NPC initNPC() {
-  //    if (bossTeam != null){
-  //    return bossTeam.get(currentTeam);
-  //  }}
 }

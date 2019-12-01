@@ -41,6 +41,7 @@ public class BossPresenter implements BossContract.Presenter {
     //    bossView.setCurrentProjectileBitmap("ice");
   }
 
+
   public int getEnemyMovement() {
     return bossGame.getEnemyMovement();
   }
@@ -53,7 +54,7 @@ public class BossPresenter implements BossContract.Presenter {
   @Override
   public void switchTeam() {
     // TODO may want to use getCurrentNPC instead, segregate methods
-    bossGame.getNextNPC();
+    bossGame.loadNextNPC();
     String nextType = bossGame.getCurrentNPC().getPower();
     String nextNPC = bossGame.getCurrentNPC().getType();
     bossView.setCurrentProjectileBitmap(nextType);
@@ -70,6 +71,10 @@ public class BossPresenter implements BossContract.Presenter {
     return resist;
   }
 
+  public int getScore(){
+    return bossGame.getScore();
+  }
+
   @Override
   public void pause() {
   }
@@ -84,6 +89,7 @@ public class BossPresenter implements BossContract.Presenter {
 //    String typeProjectile = bossGame.getNextNPC().toString();
 //    bossView.setCurrentProjectileBitmap(typeProjectile);
     bossView.setThrown(true);
+    bossGame.shotFired();
   }
 
   @Override
