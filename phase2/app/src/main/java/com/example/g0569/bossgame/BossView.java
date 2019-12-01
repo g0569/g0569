@@ -521,4 +521,9 @@ public class BossView extends GameView implements BossContract.View {
       resetCurrentProjectile();
     }
   }
+
+  @Override
+  public void toScoreBoard(){
+    ((BossActivity) activity).toScoreBoard();
+  }
 }

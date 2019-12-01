@@ -62,4 +62,9 @@ public class BossActivity extends BaseActivity {
     super.onStart();
     presenter.start();
   }
+
+  public void toScoreBoard(){
+    int bossScore = presenter.getScore();
+    //TODO
+  }
 }
