@@ -14,10 +14,10 @@ public class ChessPresenter implements ChessContract.Presenter {
   private ChessContract.View chessView;
   private ChessGame chessGame;
 
-  ChessPresenter(ChessContract.View chessView, Inventory inventory, NPC selectedNPC) {
+  ChessPresenter(ChessContract.View chessView, Inventory inventory, int selectedIndex) {
     this.chessView = chessView;
     this.chessView.setPresenter(this);
-    this.chessGame = new ChessGame(this, inventory, selectedNPC);
+    this.chessGame = new ChessGame(this, inventory, selectedIndex);
   }
 
   @Override
@@ -174,5 +174,10 @@ public class ChessPresenter implements ChessContract.Presenter {
   @Override
   public boolean getPositionHasBeenTaken(Coordinate coordinate) {
     return chessGame.getPositionHasBeenTaken(coordinate);
+  }
+
+  @Override
+  public void resetChessPiece() {
+    chessGame.resetChessPiece();
   }
 }

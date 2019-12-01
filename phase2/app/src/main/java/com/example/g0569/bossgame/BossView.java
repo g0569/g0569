@@ -37,6 +37,7 @@ public class BossView extends GameView implements BossContract.View {
   private Bitmap healthBarHolder;
   private Bitmap currentProjectile;
 
+  private int score;
   private Bitmap ice;
   private Bitmap fire;
 
@@ -130,6 +131,12 @@ public class BossView extends GameView implements BossContract.View {
     }
   }
 
+  public void drawScore(){
+    paint.setTextSize(60);
+    paint.setColor(Color.DKGRAY);
+    canvas.drawText("Shots Fired:" + score, getWidth()/2, getHeight()*0.3f, paint);
+  }
+
   @Override
   public boolean onTouchEvent(MotionEvent event) {
     if (event.getAction() == MotionEvent.ACTION_DOWN && event.getPointerCount() == 1) {
@@ -147,6 +154,7 @@ public class BossView extends GameView implements BossContract.View {
           System.out.println("shoot out");
           Toast.makeText(activity, "Throw", Toast.LENGTH_SHORT).show();
           bossPresenter.shoot();
+          score ++;
         }
       } else if (inRange(
           x,
@@ -198,7 +206,7 @@ public class BossView extends GameView implements BossContract.View {
       bossPresenter.update();
       long endTime = System.currentTimeMillis();
       try {
-        if (endTime - startTime < 1) Thread.sleep(1 - (endTime - startTime));
+        if (endTime - startTime < 100) Thread.sleep(100 - (endTime - startTime));
       } catch (InterruptedException err) {
         err.printStackTrace();
       }
@@ -296,7 +304,7 @@ public class BossView extends GameView implements BossContract.View {
     //        screenWidth / 2, (float) (screenHeight / 2 + screenHeight * 0.5));
     currentProjectileCoordinate.setXY(
         screenWidth / 2 - screenWidth * 0.05f, screenHeight - 5 * unitY);
-    NPCCoordinate.setXY(screenWidth / 2 - screenWidth * 0.20f, screenHeight - 5 * unitY);
+    NPCCoordinate.setXY(screenWidth / 2 - screenWidth * 0.27f, screenHeight - 5 * unitY);
   }
 
   @Override
@@ -314,6 +322,8 @@ public class BossView extends GameView implements BossContract.View {
     drawShootButton();
     drawCurrentProjectile();
     drawNPC();
+    drawScore();
+    drawStats();
   }
 
   @Override
@@ -404,8 +414,8 @@ public class BossView extends GameView implements BossContract.View {
    well.
   */
   public void end(boolean end) {
-    paint.setColor(Color.DKGRAY);
-    paint.setTextSize(30);
+    paint.setColor(Color.RED);
+    paint.setTextSize(600);
     canvas.drawText("YOU WIN!!!", screenWidth / 2, screenHeight / 2, paint);
   }
 
@@ -434,6 +444,14 @@ public class BossView extends GameView implements BossContract.View {
     //    NPC = Bitmap.createScaledBitmap(NPC, (int)(getWidth()*0.2f), (int)(getHeight()*0.2f),
     // false);
 
+  }
+
+  @Override
+  public void drawStats() {
+    String resist = bossPresenter.getResistance();
+    paint.setTextSize(50);
+    paint.setColor(Color.DKGRAY);
+    canvas.drawText("Current Resistance:" + resist, screenWidth*0.4f, screenHeight*0.70f, paint);
   }
 
   public void drawNPC() {
@@ -535,19 +553,9 @@ public class BossView extends GameView implements BossContract.View {
   }
 
   private void detectCollision() {
-    // TODO fix the ranges for collisions
     if (inRange(
-            enemyCoordinate.getX(),
-            enemyCoordinate.getY(),
-            currentProjectileCoordinate.getX()
-                + (currentProjectileCoordinate.getX() + currentProjectile.getWidth() / 2f),
-            currentProjectileCoordinate.getY(),
-            currentProjectile.getWidth(),
-            currentProjectile.getHeight())
-        || inRange(
-            currentProjectileCoordinate.getX()
-                + (currentProjectileCoordinate.getX() + currentProjectile.getWidth()),
-            currentProjectileCoordinate.getY(),
+            currentProjectileCoordinate.getX() + currentProjectile.getWidth() / 2f,
+            currentProjectileCoordinate.getY() + currentProjectile.getHeight() / 2f,
             enemyCoordinate.getX(),
             enemyCoordinate.getY(),
             enemyAppearance.getWidth(),

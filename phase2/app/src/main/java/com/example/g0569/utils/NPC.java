@@ -71,6 +71,10 @@ public class NPC extends Item implements Serializable {
     this.behavior = behavior;
   }
 
+  public InterchangeableBehavior getBehavior() {
+    return behavior;
+  }
+
   /** Update */
   @Override
   public void update() {}

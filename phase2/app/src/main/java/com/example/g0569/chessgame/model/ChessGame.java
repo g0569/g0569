@@ -22,25 +22,37 @@ public class ChessGame extends BaseGame {
   private List<NPC> NPCChessPieceData = new ArrayList<>();
   private List<NPC> playerChessPieceData = new ArrayList<>();
   private NPC selectedChessPiece;
+//  private List<NPC> NPCChessPieceBackUps;
+//  private List<NPC> playerChessPieceBackUPs;
+
 
   /**
    * Initialize a game manager for ChessGame.
    *
    * @param presenter the presenter
    */
-  public ChessGame(ChessContract.Presenter presenter, Inventory inventory, NPC selectedNPC) {
+  public ChessGame(ChessContract.Presenter presenter, Inventory inventory, int selectedIndex) {
     super();
     this.presenter = presenter;
     this.inventory = inventory;
-    this.selectedNPC = selectedNPC;
+    List<NPC> allNPCs = new ArrayList<>();
+    allNPCs.addAll(inventory.getAvailableItem());
+    allNPCs.addAll(inventory.getCollectedItem());
+    this.selectedNPC = allNPCs.get(selectedIndex);
   }
 
   public void onStart() {
     this.chessPieceFactory = new ChessPieceFactory();
     decodeNPCData();
     placePlayerChess();
+//    makeBackUp();
     // TODO should place the player's Chess Piece in inventory.
   }
+
+//  private void makeBackUp(){
+//    playerChessPieceBackUPs = new ArrayList<>(playerChessPieceData);
+//    NPCChessPieceBackUps = new ArrayList<>(NPCChessPieceData);
+//  }
 
   private void decodeNPCData() {
     String chessString = selectedNPC.getChessLayout(); // get data from NPC from level one.
@@ -66,6 +78,12 @@ public class ChessGame extends BaseGame {
     NPCChessPieceData.add(npc);
   }
 
+  public void resetChessPiece(){
+    for (NPC npc : playerChessPieceData ) {
+      ((ChessPiece)npc.getBehavior()).resetCoordinate();
+    }
+  }
+
   private void placePlayerChess() {
     // This method place the player chess piece to the inventory.
     playerChessPieceData.addAll(inventory.getAvailableItem());
@@ -80,7 +98,7 @@ public class ChessGame extends BaseGame {
     inventoryCoordinateList.add(new Coordinate(30, 20));
 
     int index = 0;
-    while (index < playerChessPieceData.size()) {
+    while (index < playerChessPieceData.size() && index < 6) {
       ChessPiece chessPiece =
           chessPieceFactory.getChessPiece(
               inventoryCoordinateList.get(index).getX(),
@@ -171,7 +189,7 @@ public class ChessGame extends BaseGame {
 
   public void setGameOverResult(boolean winGame) {
     if (winGame && !inventory.getAvailableItem().contains(selectedNPC)) {
-      inventory.addAvailableItem(selectedChessPiece);
+      inventory.addAvailableItem(selectedNPC);
     }
   }
 

@@ -3,8 +3,6 @@ package com.example.g0569.bossgame;
 import com.example.g0569.bossgame.model.BossGame;
 import com.example.g0569.utils.Inventory;
 
-import java.util.Currency;
-
 /** The type Boss presenter. */
 public class BossPresenter implements BossContract.Presenter {
   private BossContract.View bossView;
@@ -64,10 +62,21 @@ public class BossPresenter implements BossContract.Presenter {
     //    bossView.setCurrentProjectileBitmap(typeProjectile);
   }
 
-  @Override
-  public void pause() {}
+  public String getResistance(){
+    String resist = bossGame.getEnemyResistance();
+    if (resist == null){
+      return "none";
+    }
+    return resist;
+  }
 
-  public void update() {}
+  @Override
+  public void pause() {
+  }
+
+  public void update() {
+    bossGame.update();
+  }
 
   @Override
   public void shoot() {

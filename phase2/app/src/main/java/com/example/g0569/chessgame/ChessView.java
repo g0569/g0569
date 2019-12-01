@@ -22,10 +22,13 @@ public class ChessView extends GameView implements ChessContract.View {
   private boolean placeChess;
   private Bitmap background;
   private Bitmap inventory;
-  private Bitmap button;
+  private Bitmap startButton;
+  private Bitmap resetButton;
   //  private Bitmap l2npc; // TODO
-  private float buttonX;
-  private float buttonY;
+  private float startButtonX;
+  private float startButtonY;
+  private float resetButtonX;
+  private float resetButtonY;
   private float inventoryX;
   private float inventoryY;
   private ChessContract.Presenter presenter;
@@ -68,22 +71,6 @@ public class ChessView extends GameView implements ChessContract.View {
     return screenWidth;
   }
 
-  protected float getButtonX() {
-    return buttonX;
-  }
-
-  protected float getButtonY() {
-    return buttonY;
-  }
-
-  protected float getButtonWidth() {
-    return button.getWidth();
-  }
-
-  protected float getButtonHeight() {
-    return button.getHeight();
-  }
-
   protected float getInventoryX() {
     return inventoryX;
   }
@@ -116,8 +103,12 @@ public class ChessView extends GameView implements ChessContract.View {
     scalex = screenWidth / background.getWidth();
     scaley = screenHeight / background.getHeight();
 
-    button = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_start);
-    button = Bitmap.createScaledBitmap(button, 150, 150, false);
+    startButton =
+        BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_start);
+    startButton = Bitmap.createScaledBitmap(startButton, 150, 150, false);
+
+    resetButton = BitmapFactory.decodeResource(getResources(), R.drawable.chess_game_reset_button);
+    resetButton = Bitmap.createScaledBitmap(resetButton, 80, 80, false);
 
     inventory =
         BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_iteminventory);
@@ -145,9 +136,12 @@ public class ChessView extends GameView implements ChessContract.View {
   }
 
   public void drawButton() {
-    buttonX = screenWidth * 0.9f;
-    buttonY = screenHeight * 0.7f;
-    canvas.drawBitmap(button, buttonX, buttonY, paint);
+    startButtonX = screenWidth * 0.9f;
+    startButtonY = screenHeight * 0.7f;
+    resetButtonX = screenWidth * 0.055f;
+    resetButtonY = screenHeight * 0.58f;
+    canvas.drawBitmap(startButton, startButtonX, startButtonY, paint);
+    canvas.drawBitmap(resetButton, resetButtonX, resetButtonY, paint);
   }
 
   public void drawInventory() {
@@ -250,14 +244,17 @@ public class ChessView extends GameView implements ChessContract.View {
           }
         }
       } else {
-        // Either start the game or choose a chess piece from inventory.
-        if (x > buttonX
-            && x < buttonX + button.getWidth()
-            && y > buttonY
-            && y < buttonY + button.getHeight()) {
+        // Either start the game or reset the game or choose a chess piece from inventory.
+        if (x > startButtonX
+            && x < startButtonX + startButton.getWidth()
+            && y > startButtonY
+            && y < startButtonY + startButton.getHeight()) {
           Toast.makeText(activity, "Start the game.", Toast.LENGTH_SHORT).show();
           boolean winGame = presenter.startAutoFight();
-          showEndingDialogue("Chess Game Is Over!","You"+ (winGame? "Win" : "Lose") + "the Game!","Go Back TO Inventory" );
+          showEndingDialogue(
+              "Chess Game Is Over!",
+              "You " + (winGame ? "Win " : "Lose ") + "the Game!",
+              "Go Back TO Inventory");
           presenter.setGameOverResult(winGame);
         } else if (x > inventoryX
             && x < inventoryX + inventory.getWidth()
@@ -268,6 +265,12 @@ public class ChessView extends GameView implements ChessContract.View {
           presenter.setSelectedChessPieceData(inventoryCoordinate);
           // TODO To highlight the chess has been chosen.
           placeChess = true;
+        } else if (x > resetButtonX
+            && x < resetButtonX + resetButton.getWidth()
+            && y > resetButtonY
+            && y < resetButtonY + resetButton.getHeight()) {
+          Toast.makeText(activity, "Reset the Chess Piece back to inventory!", Toast.LENGTH_SHORT).show();
+          presenter.resetChessPiece();
         }
         return true;
       }

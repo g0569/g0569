@@ -25,6 +25,8 @@ public interface BossContract {
     void end(boolean end);
 
     void setCurrentNPCBitmap(String name);
+
+      void drawStats();
   }
 
   interface Presenter extends BasePresenter {
@@ -43,5 +45,7 @@ public interface BossContract {
     void setEnemyMovement(float screenWidth);
 
     void switchTeam();
+
+    String getResistance();
   }
 }
