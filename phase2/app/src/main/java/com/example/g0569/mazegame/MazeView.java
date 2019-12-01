@@ -245,12 +245,6 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
           } else if (mazeGrid[j][i] == 0) {
             drawWall(gridNum2Coor(i, j));
           } else if (mazeGrid[j][i] == 2) {
-            paint.setColor(Color.RED);
-            canvas.drawText(
-                Coordinate.create(i, j).toString(),
-                gridNum2Coor(i, j).getX() - 10f,
-                gridNum2Coor(i, j).getY() - 10f,
-                paint);
             drawNPC(gridNum2Coor(i, j), presenter.addItemToMazeItem(i, j));
           }
         }
