@@ -1,5 +1,6 @@
 package com.example.g0569.savegame.model;
 
+import com.example.g0569.mazegame.model.SaveMaze;
 import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.Utils;
 
@@ -14,7 +15,7 @@ public class SaveGame implements Serializable {
   private int uid;
   private Inventory inventory;
   private boolean isNewGame;
-
+  private SaveMaze saveMaze;
   /**
    * create a new Save game from the database.
    *
@@ -23,8 +24,9 @@ public class SaveGame implements Serializable {
    * @param progress the progress of current save game
    * @param inventoryData the serialized inventory data
    * @param uid the uid of the user who has this save game
+   * @throws Exception the exception
    */
-  SaveGame(Date createdTime, int saveId, int progress, String inventoryData, int uid)
+  SaveGame(Date createdTime, int saveId, int progress, String inventoryData, int uid, String saveMazeData)
       throws Exception {
     this.createdTime = createdTime;
     this.saveId = saveId;
@@ -32,6 +34,7 @@ public class SaveGame implements Serializable {
     this.uid = uid;
     this.isNewGame = false;
     this.inventory = (Inventory) Utils.deserializeToObject(inventoryData);
+    this.saveMaze = (SaveMaze) Utils.deserializeToObject(saveMazeData);
   }
 
   /**
@@ -118,6 +121,22 @@ public class SaveGame implements Serializable {
       e.printStackTrace();
     } finally {
       return serializedInventory;
+    }
+  }
+
+  /**
+   * Get string representative of maze save.
+   *
+   * @return the string
+   */
+  String getStringMazeSave() {
+    String serializedMazeData = null;
+    try {
+      serializedMazeData = Utils.serializeToString(this.saveMaze);
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      return serializedMazeData;
     }
   }
 

@@ -24,11 +24,16 @@ public interface SaveGameSQLiteAccessInterface extends SQLiteAccessInterface {
   SaveGame saveNewGame(SaveGame saveGame);
 
   /**
-   * Gets available np cs.
+   * Gets available NPCs.
    *
-   * @return the available np cs
+   * @return the available NPCs
    */
   List<NPC> getAvailableNPCs();
 
+  /**
+   * Update the save game in the database
+   *
+   * @param saveGame the save game
+   */
   void updateSaveGame(SaveGame saveGame);
 }
