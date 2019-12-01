@@ -21,8 +21,8 @@ public class ChessGame extends BaseGame {
   private List<NPC> NPCChessPieceData = new ArrayList<>();
   private List<NPC> playerChessPieceData = new ArrayList<>();
   private NPC selectedChessPiece;
-  private List<NPC> NPCChessPieceBackUps = new ArrayList<>();
-  private List<NPC> playerChessPieceBackUPs = new ArrayList<>();
+//  private List<NPC> NPCChessPieceBackUps;
+//  private List<NPC> playerChessPieceBackUPs;
 
 
   /**
@@ -44,14 +44,14 @@ public class ChessGame extends BaseGame {
     this.chessPieceFactory = new ChessPieceFactory();
     decodeNPCData();
     placePlayerChess();
-    makeBackUp();
+//    makeBackUp();
     // TODO should place the player's Chess Piece in inventory.
   }
 
-  private void makeBackUp(){
-    playerChessPieceBackUPs.addAll(playerChessPieceData);
-    NPCChessPieceBackUps.addAll(NPCChessPieceData);
-  }
+//  private void makeBackUp(){
+//    playerChessPieceBackUPs = new ArrayList<>(playerChessPieceData);
+//    NPCChessPieceBackUps = new ArrayList<>(NPCChessPieceData);
+//  }
 
   private void decodeNPCData() {
     String chessString = selectedNPC.getChessLayout(); // get data from NPC from level one.
@@ -78,10 +78,9 @@ public class ChessGame extends BaseGame {
   }
 
   public void resetChessPiece(){
-    playerChessPieceData.clear();
-    playerChessPieceData.addAll(playerChessPieceBackUPs);
-    NPCChessPieceData.clear();
-    NPCChessPieceData.addAll(NPCChessPieceBackUps);
+    for (NPC npc : playerChessPieceData ) {
+      ((ChessPiece)npc.getBehavior()).resetCoordinate();
+    }
   }
 
   private void placePlayerChess() {
@@ -98,7 +97,7 @@ public class ChessGame extends BaseGame {
     inventoryCoordinateList.add(new Coordinate(30, 20));
 
     int index = 0;
-    while (index < playerChessPieceData.size()) {
+    while (index < playerChessPieceData.size() && index < 6) {
       ChessPiece chessPiece =
           chessPieceFactory.getChessPiece(
               inventoryCoordinateList.get(index).getX(),

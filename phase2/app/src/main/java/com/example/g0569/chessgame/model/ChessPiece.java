@@ -7,6 +7,7 @@ import com.example.g0569.utils.InterchangeableBehavior;
 /** The chess piece on the chess board. */
 public class ChessPiece extends Item implements InterchangeableBehavior {
   private Coordinate coordinate;
+  private Coordinate coordinateBackUp;
 
   /**
    * @param x The x coordinate for chess piece.
@@ -15,8 +16,8 @@ public class ChessPiece extends Item implements InterchangeableBehavior {
   ChessPiece(float x, float y) {
     super();
     this.coordinate = new Coordinate(x, y);
+    this.coordinateBackUp = new Coordinate(x, y);
   }
-
 
   @Override
   public Coordinate getCoordinate() {
@@ -28,13 +29,13 @@ public class ChessPiece extends Item implements InterchangeableBehavior {
     this.coordinate = coordinate;
   }
 
-
-  @Override
-  public void update() {
-
+  void resetCoordinate() {
+    this.coordinate.setXY(coordinateBackUp.getX(), coordinateBackUp.getY());
   }
 
   @Override
-  public void action() {
-  }
+  public void update() {}
+
+  @Override
+  public void action() {}
 }
