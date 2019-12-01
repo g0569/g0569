@@ -134,26 +134,18 @@ public class ChessGame extends BaseGame {
     return playerChessPieceData;
   }
 
-  private void addNPCToFightList(List<NPC> NPCList, List<NPC> fightList) {
+  private List<NPC> addChessPieceToFightList(List<NPC> NPCList) {
+    List<NPC> fightList = new ArrayList<>();
     for (NPC npc : NPCList) {
       if (npc.getCoordinate().getIntX() < 10 && npc.getCoordinate().getIntY() < 10) {
         fightList.add(npc);
       }
     }
+    return fightList;
   }
 
-  private int characterAttack(String character) {
+  private int characterAttack(List<NPC> friendlyInventory, List<NPC> opponentInventory) {
     int characterScore = 0;
-    List<NPC> friendlyInventory = new ArrayList<>();
-    List<NPC> opponentInventory = new ArrayList<>();
-    if (character.equals("player")) {
-
-      addNPCToFightList(getPlayerChessPiece(), friendlyInventory);
-      addNPCToFightList(NPCChessPieceData, opponentInventory);
-    } else if (character.equals("NPC")) {
-      addNPCToFightList(NPCChessPieceData, friendlyInventory);
-      addNPCToFightList(getPlayerChessPiece(), opponentInventory);
-    }
     for (NPC currentChess : friendlyInventory) {
       Integer[][] targetList = ((ChessPiece) currentChess.getBehavior()).createTargetList();
       int count = 0;
@@ -189,8 +181,9 @@ public class ChessGame extends BaseGame {
    */
   public boolean autoFight() {
     int playerScore = 0;
-    playerScore += characterAttack("player");
-    playerScore -= characterAttack("NPC");
+    List<NPC> playerFightList = addChessPieceToFightList(playerChessPieceData);
+    playerScore += characterAttack(playerFightList, NPCChessPieceData);
+    playerScore -= characterAttack(NPCChessPieceData, playerFightList);
     return (playerScore > 0);
     // TODO Need to be implemented.
   }
