@@ -249,7 +249,7 @@ public class ChessView extends GameView implements ChessContract.View {
             && y < startButtonY + startButton.getHeight()) {
           Toast.makeText(activity, "Start the game.", Toast.LENGTH_SHORT).show();
           boolean winGame = presenter.startAutoFight();
-          showEndingDialogue(
+           showEndingDialogue(
               "Chess Game Is Over!",
               "You " + (winGame ? "Win " : "Lose ") + "the Game!",
               "Go Back To Maze");

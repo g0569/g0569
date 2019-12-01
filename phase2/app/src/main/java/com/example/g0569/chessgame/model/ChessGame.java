@@ -15,8 +15,6 @@ public class ChessGame extends BaseGame {
   private ChessContract.Presenter presenter;
   private Inventory inventory;
   private NPC selectedNPC;
-  private String difficulty =
-      "hard"; // might be "easy", "hard", or "insane" // TODO Need to be implemented.
   private ChessPieceFactory chessPieceFactory;
   private List<NPC> NPCChessPieceData = new ArrayList<>();
   private List<NPC> playerChessPieceData = new ArrayList<>();
@@ -166,7 +164,7 @@ public class ChessGame extends BaseGame {
             int enemyDmg = enemyChess.getDamage();
             int ourDmg = currentChess.getDamage();
             if((currentChess.getBehavior()) instanceof TriangleChessPiece){
-              ourDmg = 5*currentChess.getDamage();
+              ourDmg = 2*currentChess.getDamage();
             }
             if(ourDmg >= enemyDmg){characterScore += 1;}
           }
@@ -185,9 +183,9 @@ public class ChessGame extends BaseGame {
    */
   public boolean autoFight() {
     int playerScore = 0;
-    playerScore += characterAttack("Player");
+    playerScore += characterAttack("player");
     playerScore -= characterAttack("NPC");
-    return (playerScore >= 0);
+    return (playerScore > 0);
     // TODO Need to be implemented.
   }
 
