@@ -256,15 +256,8 @@ public class ChessView extends GameView implements ChessContract.View {
             && y > buttonY
             && y < buttonY + button.getHeight()) {
           Toast.makeText(activity, "Start the game.", Toast.LENGTH_SHORT).show();
-          // Call method to chessgame_component_start the game.
           boolean winGame = presenter.startAutoFight();
-          if (winGame) {
-            Toast.makeText(activity, "You win the game!", Toast.LENGTH_SHORT).show();
-            //          autoChessGame.showStatistic(true); // Win and get 2 cards.
-          } else {
-            //          autoChessGame.showStatistic(false); // Lose and get 0 cards.
-            Toast.makeText(activity, "You lose the game!", Toast.LENGTH_SHORT).show();
-          }
+          showEndingDialogue("Chess Game Is Over!","You"+ (winGame? "Win" : "Lose") + "the Game!","Go Back TO Inventory" );
           presenter.setGameOverResult(winGame);
         } else if (x > inventoryX
             && x < inventoryX + inventory.getWidth()
