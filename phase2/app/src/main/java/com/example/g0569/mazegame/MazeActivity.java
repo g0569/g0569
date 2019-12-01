@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,6 +45,16 @@ public class MazeActivity extends AppCompatActivity {
     if (inventoryView == null) {
       inventoryView = new InventoryFragment(inventory);
     }
+    ((Switch) findViewById(R.id.maze_enable_acc)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked){
+          mazeView.setEnableSensor(true);
+        }else {
+          mazeView.setEnableSensor(false);
+        }
+    }});
+
     getSupportFragmentManager()
         .beginTransaction()
         .replace(R.id.ContentFrame, inventoryView)

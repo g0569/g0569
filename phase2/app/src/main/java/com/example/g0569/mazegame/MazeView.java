@@ -4,6 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -15,7 +19,7 @@ import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.NPC;
 
 /** The Maze view. */
-public class MazeView extends GameView implements MazeContract.View {
+public class MazeView extends GameView implements MazeContract.View, SensorEventListener {
 
   private Bitmap background;
   private MazeContract.Presenter presenter;
@@ -34,6 +38,10 @@ public class MazeView extends GameView implements MazeContract.View {
   private float gridHeight;
 
   private boolean ableMove;
+
+  private SensorManager sensorManager;
+  private boolean enableSensor;
+
   /**
    * Instantiates a new Maze view.
    *
@@ -53,11 +61,21 @@ public class MazeView extends GameView implements MazeContract.View {
     ableMove = true;
   }
 
+  public void setEnableSensor(boolean enableSensor) {
+    this.enableSensor = enableSensor;
+  }
+
   @Override
   public void surfaceCreated(SurfaceHolder holder) {
     super.surfaceCreated(holder);
     gridHeight = getHeight() / Constants.GRID_HEIGHT;
     gridWidth = getWidth() / Constants.GRID_WIDTH;
+    sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+    enableSensor =
+        sensorManager.registerListener(
+            this,
+            sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+            SensorManager.SENSOR_DELAY_UI);
     initBitmaps();
     if (thread.isAlive()) {
       thread.start();
@@ -349,4 +367,27 @@ public class MazeView extends GameView implements MazeContract.View {
 
     }
   }
+
+  @Override
+  public void onSensorChanged(SensorEvent event) {
+    if (event.sensor == null) {
+      return;
+    }
+    if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+      if (enableSensor) {
+        float accX = event.values[0];
+        float accY = event.values[1];
+        float accZ = event.values[2];
+        Coordinate coordinate = Coordinate.create(0, 0);
+        if (accY > 1f && accZ < 9.7f) coordinate.offsetXY(-0.5f, 0);
+        if (accY < -1f && accZ < 9.7f) coordinate.offsetXY(0.5f, 0);
+        if (accX < -1f && accZ < 9.7f) coordinate.offsetXY(0, 0.5f);
+        if (accX > 1f && accZ < 9.7f) coordinate.offsetXY(0, -0.5f);
+        presenter.movePlayer(coordinate);
+      }
+    }
+  }
+
+  @Override
+  public void onAccuracyChanged(Sensor sensor, int accuracy) {}
 }
