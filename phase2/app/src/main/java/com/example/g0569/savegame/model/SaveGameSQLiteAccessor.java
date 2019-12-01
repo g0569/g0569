@@ -125,12 +125,14 @@ public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
     SQLiteDatabase db = sqliteHelper.getWritableDatabase();
     try{
         ContentValues cv = new ContentValues();
-        cv.put("level_data", saveGame.getStringMazeSave());
+        cv.put("level1_data", saveGame.getStringMazeSave());
         cv.put("inventory_data", saveGame.getStringInventory());
         cv.put("progress", saveGame.getProgress());
+        cv.put("created_time", dateFormat.format(new Date()));
         String[] args = {String.valueOf(saveGame.getSaveId())};
         db.update("users_saves", cv, "save_id=?",args);
-    } catch (Exception ignored) {
+    } catch (Exception e) {
+      e.printStackTrace();
     } finally{
         db.close();
     }
