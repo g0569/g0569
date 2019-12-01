@@ -9,6 +9,14 @@
         android:layout_height="match_parent"
         android:visibility="visible"></com.example.g0569.mazegame.MazeView>
 
+    <Switch
+        android:id="@+id/maze_enable_acc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="59dp" />
+
     <FrameLayout
         android:id="@+id/ContentFrame"
         android:visibility="gone"

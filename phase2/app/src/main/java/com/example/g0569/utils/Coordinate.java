@@ -94,6 +94,17 @@ public class Coordinate implements Serializable {
     this.y = y;
   }
 
+  /**
+   * Offset x and y.
+   *
+   * @param x the x
+   * @param y the y
+   */
+  public void offsetXY(float x, float y) {
+    this.x += x;
+    this.y += y;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
