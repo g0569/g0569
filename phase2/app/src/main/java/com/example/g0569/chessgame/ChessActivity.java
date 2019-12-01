@@ -91,7 +91,7 @@ public class ChessActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isMenuVisible = true;
-                menuLayout.setVisibility(View.GONE);
+                dialogue.setVisibility(View.GONE);
                 presenter.resetChessPiece();
             }
         });
