@@ -135,7 +135,8 @@ public class BossGame extends BaseGame {
    * @return whether or not the enemy is dead
    */
   public boolean determineEnd() {
-    return enemy.getHealth() <= 0;
+//    System.out.println(enemy.getHealth() <= 0.0f);
+    return enemy.getHealth() <= 0.0f;
   }
 
 

@@ -63,6 +63,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                     + ");";
     db.execSQL(createUserSaves);
 
+    String createScoreBoard =
+            "CREATE TABLE if not exists scoreboard ("
+                    + "  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+                    + "  uid INTEGER NOT NULL,"
+                    + "  score INTEGER NOT NULL,"
+                    + "  created_time DATE NOT NULL"
+                    + ");";
+    db.execSQL(createScoreBoard);
+
     List<String> testDataList =
             new ArrayList<>(
                     Arrays.asList(

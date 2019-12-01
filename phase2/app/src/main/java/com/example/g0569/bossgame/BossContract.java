@@ -47,6 +47,8 @@ public interface BossContract {
      * @param name of the npc it is being switched to
      */
     void setCurrentNPCBitmap(String name);
+
+      void toScoreBoard();
   }
 
   interface Presenter extends BasePresenter {

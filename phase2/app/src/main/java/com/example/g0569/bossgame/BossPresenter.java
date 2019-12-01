@@ -106,6 +106,7 @@ public class BossPresenter implements BossContract.Presenter {
     bossView.updateMovementHealthBar(bossGame.getInitialHealth(), bossGame.getHealth());
     System.out.println(bossGame.getHealth());
     boolean end = bossGame.determineEnd();
+    System.out.println(end);
     bossView.end(end);
   }
 }
