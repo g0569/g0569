@@ -13,9 +13,9 @@ public class BossPresenter implements BossContract.Presenter {
    * Instantiates a new Boss presenter.
    *
    * @param bossView the boss view
-   * @param inventory
+   * @param inventory from the last levels, inventory is everything collected from mazeGame and chessGame
    */
-  public BossPresenter(BossContract.View bossView, Inventory inventory) {
+  BossPresenter(BossContract.View bossView, Inventory inventory) {
     this.bossView = bossView;
     bossView.setPresenter(this);
     bossGame = new BossGame();
@@ -27,21 +27,18 @@ public class BossPresenter implements BossContract.Presenter {
 
   @Override
   public void start() {
-    //    bossView.initView();
-    //    String npc = bossGame.initBossTeam().getName();
-    //    bossView.setCurrentProjectileBitmap(npc);
-//      bossView.initView();
     bossGame.setBossTeam(this.inventory.getAvailableItem());
     String currentNPC = bossGame.getCurrentNPC().getType();
     String currentPower = bossGame.getCurrentNPC().getPower();
     bossView.setCurrentNPCBitmap(currentNPC);
     bossView.setCurrentProjectileBitmap(currentPower);
-    //    bossView.setCurrentProjectileBitmap(inventory.getAvailableItem().get(0).getType());
-    //    bossView.setCurrentNPCBitmap(inventory.getAvailableItem().get(0).getName());
-    //    bossView.setCurrentProjectileBitmap("ice");
   }
 
 
+  /**
+   * Returns how much the enemy should move based on the screen size, decides the speed.
+   * @return the unit amount the enemy moves on the screen.
+   */
   public int getEnemyMovement() {
     return bossGame.getEnemyMovement();
   }
@@ -53,16 +50,17 @@ public class BossPresenter implements BossContract.Presenter {
 
   @Override
   public void switchTeam() {
-    // TODO may want to use getCurrentNPC instead, segregate methods
     bossGame.loadNextNPC();
     String nextType = bossGame.getCurrentNPC().getPower();
     String nextNPC = bossGame.getCurrentNPC().getType();
     bossView.setCurrentProjectileBitmap(nextType);
     bossView.setCurrentNPCBitmap(nextNPC);
-    //    String typeProjectile = bossGame.getNextNPC().getType();
-    //    bossView.setCurrentProjectileBitmap(typeProjectile);
   }
 
+  /**
+   * Gives the current resistance of the enemy, which affects how much health it loses
+   * @return the current resistance of the enemy
+   */
   public String getResistance(){
     String resist = bossGame.getEnemyResistance();
     if (resist == null){
@@ -71,6 +69,11 @@ public class BossPresenter implements BossContract.Presenter {
     return resist;
   }
 
+  /**
+   * Returns the score of the game, which is calculated based on how many moves was taken. The least
+   * the better.
+   * @return how many times a projectile was shot out.
+   */
   public int getScore(){
     return bossGame.getScore();
   }
@@ -79,15 +82,15 @@ public class BossPresenter implements BossContract.Presenter {
   public void pause() {
   }
 
+  /**
+   * Updates the bossGame, which allows components to update.
+   */
   public void update() {
     bossGame.update();
   }
 
   @Override
   public void shoot() {
-//    bossGame.throwProjectile();
-//    String typeProjectile = bossGame.getNextNPC().toString();
-//    bossView.setCurrentProjectileBitmap(typeProjectile);
     bossView.setThrown(true);
     bossGame.shotFired();
   }
@@ -95,11 +98,12 @@ public class BossPresenter implements BossContract.Presenter {
   @Override
   public void showMenu() {}
 
+  /**
+   * Decreases the health of the boss based on which projectile and NPC was being used while shooting out
+   * Also updates the healthbar in bossView and checks whether the boss has zero health left.
+   */
   public void attackBoss() {
     bossGame.attackBoss();
-    // if there is contact, set the map to nothing
-    //    bossView.setCurrentProjectileBitmap("null");
-
     bossView.updateMovementHealthBar(bossGame.getRatioOfHealth(), bossGame.getHealth());
     boolean end = bossGame.determineEnd();
     bossView.end(end);
