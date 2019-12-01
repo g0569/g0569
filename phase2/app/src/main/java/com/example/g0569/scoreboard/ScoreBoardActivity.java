@@ -6,6 +6,8 @@ import android.view.WindowManager;
 
 import com.example.g0569.R;
 import com.example.g0569.base.BaseActivity;
+import com.example.g0569.utils.Constants;
+import com.example.g0569.utils.Inventory;
 
 public class ScoreBoardActivity extends BaseActivity {
 
@@ -21,6 +23,9 @@ public class ScoreBoardActivity extends BaseActivity {
     ScoreBoardFragment scoreBoardFragment =
         (ScoreBoardFragment) getSupportFragmentManager().findFragmentById(R.id.ContentFrame);
 
+    Bundle bundle = getIntent().getExtras();
+    int bossScore = bundle.getInt(Constants.BUNDLE_BOSSSCORE_KEY);
+    Inventory inventory = (Inventory)  bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
     if (scoreBoardFragment == null) {
       scoreBoardFragment = ScoreBoardFragment.newInstance();
       getSupportFragmentManager()
@@ -29,6 +34,6 @@ public class ScoreBoardActivity extends BaseActivity {
           .commit();
     }
 
-    presenter = new ScoreBoardPresenter(scoreBoardFragment);
+    presenter = new ScoreBoardPresenter(scoreBoardFragment, bossScore, inventory);
   }
 }
