@@ -70,7 +70,8 @@ public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
       contentValues.put("uid", saveGame.getUid());
       contentValues.put("progress", 0);
       contentValues.put("inventory_data", saveGame.getStringInventory());
-      contentValues.put("created_time", dateFormat.format(saveGame.getCreatedTime()));
+        contentValues.put("created_time", dateFormat.format(saveGame.getCreatedTime()));
+        contentValues.put("level1_data", saveGame.getStringMazeSave());
       db.insert("users_saves", null, contentValues);
       String sql = "select last_insert_rowid() from users_saves";
       Cursor cursor = db.rawQuery(sql, null);

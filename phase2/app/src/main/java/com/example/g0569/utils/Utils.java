@@ -39,7 +39,7 @@ public class Utils {
   }
 
   public static Object deserializeToObject(String str) throws Exception{
-    ByteArrayInputStream byteIn = new ByteArrayInputStream(str.getBytes(StandardCharsets.ISO_8859_1));
+    ByteArrayInputStream byteIn = new ByteArrayInputStream(str.getBytes("ISO-8859-1"));
     ObjectInputStream objIn = new ObjectInputStream(byteIn);
     return objIn.readObject();
   }

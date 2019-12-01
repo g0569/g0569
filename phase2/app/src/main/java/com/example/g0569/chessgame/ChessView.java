@@ -24,7 +24,6 @@ public class ChessView extends GameView implements ChessContract.View {
   private Bitmap inventory;
   private Bitmap startButton;
   private Bitmap resetButton;
-  //  private Bitmap l2npc; // TODO
   private float startButtonX;
   private float startButtonY;
   private float resetButtonX;
@@ -190,7 +189,6 @@ public class ChessView extends GameView implements ChessContract.View {
       canvas.save();
       canvas.scale(scalex, scaley, 0, 0);
       canvas.drawBitmap(background, 0, 0, paint);
-      //      canvas.drawBitmap(npc1, screenWidth * 3, screenHeight * 3, paint);
       canvas.restore();
       initView();
     } catch (Exception err) {

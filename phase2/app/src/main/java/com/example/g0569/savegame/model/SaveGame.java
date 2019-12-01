@@ -52,6 +52,7 @@ public class SaveGame implements Serializable {
     this.progress = progress;
     this.uid = uid;
     this.isNewGame = isNewGame;
+    this.saveMaze = new SaveMaze();
   }
 
   /**
