@@ -31,7 +31,7 @@ public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
     Cursor cursor =
         db.query(
             "users_saves",
-            new String[] {"save_id", "inventory_data", "created_time", "progress"},
+            new String[] {"save_id", "inventory_data", "created_time", "progress", "level1_data"},
             "uid=?",
             new String[] {String.valueOf(uid)},
             null,
@@ -49,8 +49,9 @@ public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
         createdTime = new Date();
       }
       int progress = cursor.getInt(3);
+      String saveMazeData = cursor.getString(4);
       try {
-        saveGames.add(new SaveGame(createdTime, saveId, progress, inventoryData, uid));
+        saveGames.add(new SaveGame(createdTime, saveId, progress, inventoryData, uid, saveMazeData));
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -121,13 +122,17 @@ public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
   @Override
   public void updateSaveGame(SaveGame saveGame) {
     SQLiteDatabase db = sqliteHelper.getWritableDatabase();
-    ContentValues cv = new ContentValues();
-    cv.put("level_data", classId);
-    cv.put("inventory_data", saveGame.getStringInventory());
-    cv.put("progress", saveGame.getProgress());
-    String[] args = {String.valueOf(photoId)};
-    return db.update(mTUserPhoto, cv, "photoId=?",args);
-    Cursor cursor = db.update("users_saves", )
+    try{
+        ContentValues cv = new ContentValues();
+        cv.put("level_data", saveGame.getStringMazeSave());
+        cv.put("inventory_data", saveGame.getStringInventory());
+        cv.put("progress", saveGame.getProgress());
+        String[] args = {String.valueOf(saveGame.getSaveId())};
+        db.update("users_saves", cv, "save_id=?",args);
+    } catch (Exception ignored) {
+    } finally{
+        db.close();
+    }
   }
 
   @Override
