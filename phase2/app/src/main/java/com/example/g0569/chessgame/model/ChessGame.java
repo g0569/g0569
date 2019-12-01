@@ -21,8 +21,8 @@ public class ChessGame extends BaseGame {
   private List<NPC> NPCChessPieceData = new ArrayList<>();
   private List<NPC> playerChessPieceData = new ArrayList<>();
   private NPC selectedChessPiece;
-  private List<NPC> NPCChessPieceBackUps = new ArrayList<>();
-  private List<NPC> playerChessPieceBackUPs = new ArrayList<>();
+//  private List<NPC> NPCChessPieceBackUps;
+//  private List<NPC> playerChessPieceBackUPs;
 
 
   /**
@@ -30,25 +30,28 @@ public class ChessGame extends BaseGame {
    *
    * @param presenter the presenter
    */
-  public ChessGame(ChessContract.Presenter presenter, Inventory inventory, NPC selectedNPC) {
+  public ChessGame(ChessContract.Presenter presenter, Inventory inventory, int selectedIndex) {
     super();
     this.presenter = presenter;
     this.inventory = inventory;
-    this.selectedNPC = selectedNPC;
+    List<NPC> allNPCs = new ArrayList<>();
+    allNPCs.addAll(inventory.getAvailableItem());
+    allNPCs.addAll(inventory.getCollectedItem());
+    this.selectedNPC = allNPCs.get(selectedIndex);
   }
 
   public void onStart() {
     this.chessPieceFactory = new ChessPieceFactory();
     decodeNPCData();
     placePlayerChess();
-    makeBackUp();
+//    makeBackUp();
     // TODO should place the player's Chess Piece in inventory.
   }
 
-  private void makeBackUp(){
-    playerChessPieceBackUPs.addAll(playerChessPieceData);
-    NPCChessPieceBackUps.addAll(NPCChessPieceData);
-  }
+//  private void makeBackUp(){
+//    playerChessPieceBackUPs = new ArrayList<>(playerChessPieceData);
+//    NPCChessPieceBackUps = new ArrayList<>(NPCChessPieceData);
+//  }
 
   private void decodeNPCData() {
     String chessString = selectedNPC.getChessLayout(); // get data from NPC from level one.
@@ -75,10 +78,9 @@ public class ChessGame extends BaseGame {
   }
 
   public void resetChessPiece(){
-    playerChessPieceData.clear();
-    playerChessPieceData.addAll(playerChessPieceBackUPs);
-    NPCChessPieceData.clear();
-    NPCChessPieceData.addAll(NPCChessPieceBackUps);
+    for (NPC npc : playerChessPieceData ) {
+      ((ChessPiece)npc.getBehavior()).resetCoordinate();
+    }
   }
 
   private void placePlayerChess() {
@@ -95,7 +97,7 @@ public class ChessGame extends BaseGame {
     inventoryCoordinateList.add(new Coordinate(30, 20));
 
     int index = 0;
-    while (index < playerChessPieceData.size()) {
+    while (index < playerChessPieceData.size() && index < 6) {
       ChessPiece chessPiece =
           chessPieceFactory.getChessPiece(
               inventoryCoordinateList.get(index).getX(),
@@ -141,43 +143,39 @@ public class ChessGame extends BaseGame {
     return playerChessPieceData;
   }
 
-  private int powerCalculator(String side, int row) {
-    // TODO This method need to be improved!
-    int rowPower = 0;
-    List<NPC> requiredInventory = new ArrayList<>();
-    if (side.equals("player")) {
-      requiredInventory.addAll(getPlayerChessPiece());
-    } else if (side.equals("NPC")) {
-      requiredInventory.addAll(NPCChessPieceData);
+  private int characterAttack(String character){
+    int characterScore = 0;
+    List<NPC> friendlyInventory = new ArrayList<>();
+    List<NPC> opponentInventory = new ArrayList<>();
+    if (character.equals("player")) {
+      friendlyInventory.addAll(getPlayerChessPiece());
+      opponentInventory.addAll(NPCChessPieceData);
     }
-    for (NPC currentChess : requiredInventory) {
-      if (currentChess.getCoordinate().getX() == row) {
-        rowPower += currentChess.getDamage();
+    else if (character.equals("NPC")) {
+      friendlyInventory.addAll(NPCChessPieceData);
+      opponentInventory.addAll(getPlayerChessPiece());
+    }
+    for (NPC currentChess : friendlyInventory) {
+      Integer[][] targetList = ((ChessPiece)currentChess.getBehavior()).createTargetList();
+      int count = 0;
+      boolean enemyFound = false;
+      while(!enemyFound && count < targetList.length){
+        for(NPC enemyChess: opponentInventory){
+          if(!enemyFound && ((ChessPiece)enemyChess.getBehavior()).matchCoordinate(targetList[count])){
+            enemyFound = true;
+            int enemyDmg = enemyChess.getDamage();
+            int ourDmg = currentChess.getDamage();
+            if((currentChess.getBehavior()) instanceof TriangleChessPiece){
+              ourDmg = 2*currentChess.getDamage();
+            }
+            if(ourDmg >= enemyDmg){characterScore += 1;}
+          }
+        }
+        count ++;
       }
+      if(!enemyFound){characterScore += 1;}
     }
-    return rowPower;
-  }
-
-  private boolean singleRowFight(int row) {
-    boolean playerWin = false;
-    int playerPower = powerCalculator("player", row);
-    int NPCPower = powerCalculator("NPC", row);
-    if (difficulty.equals("easy")) {
-      playerWin =
-          (playerPower
-              >= NPCPower); // player under easy mode can win a row with power equal to NPC.
-    } else if (difficulty.equals("hard")) {
-      playerWin = (playerPower > NPCPower); // now player can only win a row with more power.
-    } else if (difficulty.equals("insane")) {
-      playerWin =
-          (playerPower > NPCPower
-              & playerPower
-                  > powerCalculator(
-                      "NPC",
-                      1)); // insane NPC at row 1 gains ability to fight other chess pieces on other
-      // rows.
-    }
-    return playerWin;
+    return characterScore;
   }
 
   /**
@@ -186,21 +184,16 @@ public class ChessGame extends BaseGame {
    * @return whether player win the game.
    */
   public boolean autoFight() {
-    int winNumbers = 0;
-    int row = 1;
-    while (row <= 3) {
-      if (singleRowFight(row)) {
-        winNumbers += 1;
-      }
-      row++;
-    }
-    return (winNumbers >= 2);
+    int playerScore = 0;
+    playerScore += characterAttack("Player");
+    playerScore -= characterAttack("NPC");
+    return (playerScore >= 0);
     // TODO Need to be implemented.
   }
 
   public void setGameOverResult(boolean winGame) {
     if (winGame && !inventory.getAvailableItem().contains(selectedNPC)) {
-      inventory.addAvailableItem(selectedChessPiece);
+      inventory.addAvailableItem(selectedNPC);
     }
   }
 

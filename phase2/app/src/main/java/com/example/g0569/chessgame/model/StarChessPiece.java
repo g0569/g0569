@@ -5,4 +5,20 @@ class StarChessPiece extends ChessPiece {
   StarChessPiece(float x, float y) {
     super(x, y);
   }
+  @Override
+  public Integer[][] createTargetList() {
+    Integer[][] target = new Integer[2][2];
+    float column = this.getCoordinate().getX();
+    if(column == (1 | 2)){
+      target[0][0] = 3;
+      target[1][0] = 4;
+    }
+    else {
+      target[0][0] = 2;
+      target[1][0] = 1;
+    }
+    target[0][1] = this.getCoordinate().getIntY();
+    target[1][1] = this.getCoordinate().getIntY();
+    return target;
+  }
 }

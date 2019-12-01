@@ -4,23 +4,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.g0569.R;
 import com.example.g0569.bossgame.BossActivity;
 import com.example.g0569.chessgame.ChessActivity;
+import com.example.g0569.savegame.model.SaveGame;
+import com.example.g0569.savegame.model.SaveGameSQLiteAccessor;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
-import com.example.g0569.utils.NPC;
+import com.example.g0569.utils.SQLiteHelper;
 
 /** The type Maze activity. */
 public class MazeActivity extends AppCompatActivity {
 
   /** The Inventory view. */
   InventoryFragment inventoryView;
+
   private MazeView mazeView;
   private MazeContract.Presenter presenter;
   private boolean isMenuVisible = false;
@@ -37,6 +42,13 @@ public class MazeActivity extends AppCompatActivity {
     setContentView(R.layout.activity_mazegame);
     mazeView = findViewById(R.id.mazeview);
     bundle = getIntent().getExtras();
+    final SaveGame saveGame = (SaveGame) bundle.getSerializable(Constants.BUNDLE_SAVEGAME_KEY);
+  try{
+    Boolean fromChessGame =
+            getIntent().getStringExtra(Constants.CHESS_GAME_OVER).equals(Constants.CHESS_GAME_OVER);
+  } catch (NullPointerException e) {
+    Boolean fromChessGame = false;
+  }
     final Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
 
     inventoryView =
@@ -44,6 +56,22 @@ public class MazeActivity extends AppCompatActivity {
     if (inventoryView == null) {
       inventoryView = new InventoryFragment(inventory);
     }
+    final SaveGameSQLiteAccessor saveGameSQLiteAccessor = new SaveGameSQLiteAccessor();
+    saveGameSQLiteAccessor.setSQLiteHelper(new SQLiteHelper(this, "g0569"));
+
+    ((Switch) findViewById(R.id.maze_enable_acc))
+        .setOnCheckedChangeListener(
+            new CompoundButton.OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                  mazeView.setEnableSensor(true);
+                } else {
+                  mazeView.setEnableSensor(false);
+                }
+              }
+            });
+
     getSupportFragmentManager()
         .beginTransaction()
         .replace(R.id.ContentFrame, inventoryView)
@@ -75,6 +103,7 @@ public class MazeActivity extends AppCompatActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
+            saveGameSQLiteAccessor.updateSaveGame(saveGame);
             if (isInventoryVisible) {
               isInventoryVisible = false;
               inventoryLayout.setVisibility(View.GONE);
@@ -120,10 +149,10 @@ public class MazeActivity extends AppCompatActivity {
   /**
    * To chess game.
    *
-   * @param selectedNPC the selected npc
+   * @param selectedIndex the index of the selected npc
    */
-  public void toChessGame(NPC selectedNPC) {
-    bundle.putSerializable(Constants.BUNDLE_SELECTEDNPC_KEY, selectedNPC);
+  public void toChessGame(int selectedIndex) {
+    bundle.putInt(Constants.BUNDLE_SELECTEDNPC_KEY, selectedIndex);
     Intent intent = new Intent(this, ChessActivity.class);
     intent.putExtras(bundle);
     startActivity(intent);

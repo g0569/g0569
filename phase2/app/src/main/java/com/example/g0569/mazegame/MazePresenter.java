@@ -113,7 +113,7 @@ public class MazePresenter implements MazeContract.Presenter {
   }
 
   @Override
-  public void resume() {
+  public void load() {
     mazeGame.load();
   }
 }

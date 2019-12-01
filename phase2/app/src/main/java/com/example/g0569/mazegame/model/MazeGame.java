@@ -23,12 +23,14 @@ public class MazeGame extends BaseGame {
   private BaseButton Button;
   private int unbuiltNPC;
   private MazeStopWatch stopWatch;
+  private SaveMaze save;
 
   public MazeGame(MazeContract.Presenter presenter, Inventory inventory) {
     super();
     this.presenter = presenter;
     this.inventory = inventory;
     this.unbuiltNPC = inventory.getNonCollectedItem().size();
+    this.save = new SaveMaze();
   }
 
   public MazeContract.Presenter getPresenter() {
@@ -49,7 +51,7 @@ public class MazeGame extends BaseGame {
     mazeGrid =
         MazeGenerator.generate(
             Constants.GRID_HEIGHT, Constants.GRID_WIDTH, inventory.getNonCollectedItem().size());
-    stopWatch = new MazeStopWatch(60);
+    stopWatch = new MazeStopWatch(Constants.MAZETIMER);
     //    Button = new BaseButton(this)
     getStopWatch().start();
   }
@@ -58,12 +60,19 @@ public class MazeGame extends BaseGame {
   public void pause() {
     stopWatch.pause();
     presenter.getMazeView().stopView();
+    save.setMazeGrid(mazeGrid);
+    save.setPlayerCoordinate(mazePlayer.getCoordinate());
+    save.setStopWatch(stopWatch);
   }
 
   @Override
   public void load() {
-    stopWatch.resume();
+//    stopWatch.resume();
     presenter.getMazeView().resumeView();
+    mazeGrid = save.getMazeGrid();
+    mazePlayer.setCoordinate(save.getPlayerCoordinate());
+    stopWatch = save.getStopWatch();
+    stopWatch.resume();
   }
 
   public Coordinate getStartPoint() {
