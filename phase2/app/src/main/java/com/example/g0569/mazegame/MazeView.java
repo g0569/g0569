@@ -360,10 +360,10 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
         float accY = event.values[1];
         float accZ = event.values[2];
         Coordinate coordinate = Coordinate.create(0, 0);
-        if (accY > 1f && accZ < 9.7f) coordinate.offsetXY(0.1f, 0);
-        if (accY < -1f && accZ < 9.7f) coordinate.offsetXY(-0.1f, 0);
-        if (accX < -1f && accZ < 9.7f) coordinate.offsetXY(0, -0.2f);
-        if (accX > 1f && accZ < 9.7f) coordinate.offsetXY(0, 0.2f);
+        if (accY > 1f && accZ < 9.7f) coordinate.offsetXY(1f, 0);
+        if (accY < -1f && accZ < 9.7f) coordinate.offsetXY(-1f, 0);
+        if (accX < -1f && accZ < 9.7f) coordinate.offsetXY(0, -1f);
+        if (accX > 1f && accZ < 9.7f) coordinate.offsetXY(0, 1f);
         presenter.movePlayer(coordinate);
       }
     }
