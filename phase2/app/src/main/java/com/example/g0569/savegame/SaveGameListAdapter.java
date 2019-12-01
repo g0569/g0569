@@ -42,6 +42,11 @@ public class SaveGameListAdapter extends BaseAdapter {
     return isSelected;
   }
 
+  public void setSaveGames(List<SaveGame> beans) {
+    this.beans = beans;
+    notifyDataSetChanged();
+  }
+
   @Override
   public int getCount() {
     return beans.size();

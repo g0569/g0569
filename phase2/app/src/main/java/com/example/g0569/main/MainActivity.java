@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.g0569.R;
+import com.example.g0569.utils.ActivityManager;
 
 /** The MainActivity. */
 public class MainActivity extends AppCompatActivity {
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    ActivityManager.getInstance().addActivity(this);
 
     this.requestWindowFeature(Window.FEATURE_NO_TITLE);
     this.getWindow()
