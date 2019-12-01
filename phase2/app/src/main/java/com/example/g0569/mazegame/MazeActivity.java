@@ -14,7 +14,6 @@ import com.example.g0569.bossgame.BossActivity;
 import com.example.g0569.chessgame.ChessActivity;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
-import com.example.g0569.utils.NPC;
 
 /** The type Maze activity. */
 public class MazeActivity extends AppCompatActivity {
@@ -120,10 +119,10 @@ public class MazeActivity extends AppCompatActivity {
   /**
    * To chess game.
    *
-   * @param selectedNPC the selected npc
+   * @param selectedIndex the index of the selected npc
    */
-  public void toChessGame(NPC selectedNPC) {
-    bundle.putSerializable(Constants.BUNDLE_SELECTEDNPC_KEY, selectedNPC);
+  public void toChessGame(int selectedIndex) {
+    bundle.putInt(Constants.BUNDLE_SELECTEDNPC_KEY, selectedIndex);
     Intent intent = new Intent(this, ChessActivity.class);
     intent.putExtras(bundle);
     startActivity(intent);

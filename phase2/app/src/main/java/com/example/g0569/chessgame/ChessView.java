@@ -137,8 +137,8 @@ public class ChessView extends GameView implements ChessContract.View {
   public void drawButton() {
     startButtonX = screenWidth * 0.9f;
     startButtonY = screenHeight * 0.7f;
-    resetButtonX = screenWidth * 0.1f;
-    resetButtonY = screenHeight * 0.65f;
+    resetButtonX = screenWidth * 0.055f;
+    resetButtonY = screenHeight * 0.58f;
     canvas.drawBitmap(startButton, startButtonX, startButtonY, paint);
     canvas.drawBitmap(resetButton, resetButtonX, resetButtonY, paint);
   }
@@ -252,7 +252,7 @@ public class ChessView extends GameView implements ChessContract.View {
           boolean winGame = presenter.startAutoFight();
           showEndingDialogue(
               "Chess Game Is Over!",
-              "You" + (winGame ? "Win" : "Lose") + "the Game!",
+              "You " + (winGame ? "Win " : "Lose ") + "the Game!",
               "Go Back TO Inventory");
           presenter.setGameOverResult(winGame);
         } else if (x > inventoryX

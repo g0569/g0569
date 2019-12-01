@@ -14,7 +14,6 @@ import com.example.g0569.R;
 import com.example.g0569.mazegame.MazeActivity;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
-import com.example.g0569.utils.NPC;
 
 public class ChessActivity extends AppCompatActivity {
 
@@ -34,10 +33,10 @@ public class ChessActivity extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
-        NPC selectedNPC = (NPC) bundle.getSerializable(Constants.BUNDLE_SELECTEDNPC_KEY);
+        int selectedIndex = bundle.getInt(Constants.BUNDLE_SELECTEDNPC_KEY);
         setContentView(R.layout.activity_chessgame);
         chessView = findViewById(R.id.chessview);
-        presenter = new ChessPresenter(chessView, inventory, selectedNPC);
+        presenter = new ChessPresenter(chessView, inventory, selectedIndex);
 
         dialogue = findViewById(R.id.dialogue);
 

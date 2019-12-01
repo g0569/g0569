@@ -58,12 +58,12 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
             new View.OnClickListener() {
               @Override
               public void onClick(View v) {
-                NPC selectedNPC = inventoryGridAdapter.getCurrentNPC();
-                if (selectedNPC == null) {
+                int selectedIndex = inventoryGridAdapter.getSelected();
+                if (selectedIndex == -1) {
                   Toast.makeText(getActivity(), "Please select a NPC you want", Toast.LENGTH_LONG)
                       .show();
                 } else {
-                  ((MazeActivity) getActivity()).toChessGame(selectedNPC);
+                  ((MazeActivity) getActivity()).toChessGame(selectedIndex);
                 }
               }
             });

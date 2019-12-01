@@ -58,6 +58,11 @@ public class InventoryGridAdapter extends BaseAdapter {
    * @return the current npc
    */
   public NPC getCurrentNPC() {
+    try{
+      currentNPC = allNPCs.get(selected);
+    } catch (ArrayIndexOutOfBoundsException e) {
+      currentNPC = null;
+    }
     return currentNPC;
   }
 

@@ -30,11 +30,14 @@ public class ChessGame extends BaseGame {
    *
    * @param presenter the presenter
    */
-  public ChessGame(ChessContract.Presenter presenter, Inventory inventory, NPC selectedNPC) {
+  public ChessGame(ChessContract.Presenter presenter, Inventory inventory, int selectedIndex) {
     super();
     this.presenter = presenter;
     this.inventory = inventory;
-    this.selectedNPC = selectedNPC;
+    List<NPC> allNPCs = new ArrayList<>();
+    allNPCs.addAll(inventory.getAvailableItem());
+    allNPCs.addAll(inventory.getCollectedItem());
+    this.selectedNPC = allNPCs.get(selectedIndex);
   }
 
   public void onStart() {
@@ -200,7 +203,7 @@ public class ChessGame extends BaseGame {
 
   public void setGameOverResult(boolean winGame) {
     if (winGame && !inventory.getAvailableItem().contains(selectedNPC)) {
-      inventory.addAvailableItem(selectedChessPiece);
+      inventory.addAvailableItem(selectedNPC);
     }
   }
 
