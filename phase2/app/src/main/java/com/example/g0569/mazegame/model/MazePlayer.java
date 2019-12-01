@@ -11,7 +11,7 @@ import com.example.g0569.utils.NPC;
 public class MazePlayer extends Player {
 
   private Coordinate direction;
-  private Coordinate appearenceSize;
+  private Coordinate appearanceSize;
   private Coordinate coordinate;
   private MazeGame game;
   //  private ArrayList<NPC> collectedNPC;
@@ -27,7 +27,7 @@ public class MazePlayer extends Player {
     float x = this.getGame().getStartPoint().getX();
     float y = this.getGame().getStartPoint().getY();
     this.coordinate = new Coordinate(x, y);
-    appearenceSize = game.getPlayerDimensions();
+    appearanceSize = game.getPlayerDimensions();
     direction = Coordinate.create(0, 0);
   }
 
@@ -84,19 +84,20 @@ public class MazePlayer extends Player {
 
     float targetX = this.coordinate.getX() + direction.getX();
     float targetY = this.coordinate.getY() + direction.getY();
-    float playerWidth = appearenceSize.getX() / Constants.GRID_WIDTH;
-    float playerHeight = appearenceSize.getY() / Constants.GRID_HEIGHT;
+    float playerWidth = appearanceSize.getX() / Constants.GRID_WIDTH;
+    float playerHeight = appearanceSize.getY() / Constants.GRID_HEIGHT;
 
     int[][] mazeGrid = game.getMazeGrid();
-    try {
+    boolean inRangeY = ((int) (targetY + playerHeight * border[1])) <= (Constants.GRID_HEIGHT - 1) && ((int) (targetY + playerHeight * border[1])) >= 0;
+    boolean inRangeX = ((int) (targetX + playerWidth * border[0])) <= (Constants.GRID_WIDTH - 1) && ((int) (targetX + playerWidth * border[0])) >= 0 ;
+    if (inRangeX && inRangeY) {
       if (!(mazeGrid[(int) (targetY + playerHeight * border[1])][
               (int) (targetX + playerWidth * border[0])]
           == 0)) {
         this.coordinate.setX(targetX);
         this.coordinate.setY(targetY);
       }
-    } catch (ArrayIndexOutOfBoundsException ignored) {
-    }
+      }
     //    this.collectedNPC();
   }
 
@@ -104,21 +105,6 @@ public class MazePlayer extends Player {
   private void getNPCAround() {
     int currX = (int) this.coordinate.getX();
     int currY = (int) this.coordinate.getY();
-    //    for (int i = -2; i <= 2; i++) {
-    //      try{
-    //        currItemX = ((MazeGame) this.getGame()).getMyMazeItem()[currY][currX + i];
-    //        if (currItemX instanceof NPC) {
-    //          collectedNPC((NPC)currItemX);
-    //          deleteItem(currX+1, currY, ((MazeGame)this.getGame()).getMazeGrid());
-    //        }
-    //        currItemY = ((MazeGame) this.getGame()).getMyMazeItem()[currY + i][currX];
-    //        if (currItemY instanceof NPC) {
-    //          collectedNPC((NPC)currItemY);
-    //          deleteItem(currX, currY+1, ((MazeGame)this.getGame()).getMazeGrid());
-    //        }
-    //      }catch (ArrayIndexOutOfBoundsException ignored){
-    //
-    //      }
     Item currItem = this.getGame().getMyMazeItem()[currY][currX];
     if (currItem instanceof NPC) {
       collectedNPC((NPC) currItem);

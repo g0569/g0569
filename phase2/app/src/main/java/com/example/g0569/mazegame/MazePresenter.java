@@ -89,7 +89,6 @@ public class MazePresenter implements MazeContract.Presenter {
 
   @Override
   public int getRemainTime() {
-    //    System.out.println(mazeGame.getStopWatch().toString());
     return mazeGame.getStopWatch().getRemainTime();
   }
 
