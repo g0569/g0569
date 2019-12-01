@@ -34,5 +34,7 @@ public interface ChessContract {
 
     boolean getPositionHasBeenTaken(Coordinate coordinate);
 
+    void resetChessPiece();
+
   }
 }

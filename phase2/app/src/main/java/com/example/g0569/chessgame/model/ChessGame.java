@@ -21,6 +21,9 @@ public class ChessGame extends BaseGame {
   private List<NPC> NPCChessPieceData = new ArrayList<>();
   private List<NPC> playerChessPieceData = new ArrayList<>();
   private NPC selectedChessPiece;
+  private List<NPC> NPCChessPieceBackUps = new ArrayList<>();
+  private List<NPC> playerChessPieceBackUPs = new ArrayList<>();
+
 
   /**
    * Initialize a game manager for ChessGame.
@@ -38,7 +41,13 @@ public class ChessGame extends BaseGame {
     this.chessPieceFactory = new ChessPieceFactory();
     decodeNPCData();
     placePlayerChess();
+    makeBackUp();
     // TODO should place the player's Chess Piece in inventory.
+  }
+
+  private void makeBackUp(){
+    playerChessPieceBackUPs.addAll(playerChessPieceData);
+    NPCChessPieceBackUps.addAll(NPCChessPieceData);
   }
 
   private void decodeNPCData() {
@@ -63,6 +72,13 @@ public class ChessGame extends BaseGame {
     NPC npc = new NPC(type);
     npc.setBehavior(chessPiece);
     NPCChessPieceData.add(npc);
+  }
+
+  public void resetChessPiece(){
+    playerChessPieceData.clear();
+    playerChessPieceData.addAll(playerChessPieceBackUPs);
+    NPCChessPieceData.clear();
+    NPCChessPieceData.addAll(NPCChessPieceBackUps);
   }
 
   private void placePlayerChess() {

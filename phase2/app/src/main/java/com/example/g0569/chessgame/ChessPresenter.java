@@ -175,4 +175,9 @@ public class ChessPresenter implements ChessContract.Presenter {
   public boolean getPositionHasBeenTaken(Coordinate coordinate) {
     return chessGame.getPositionHasBeenTaken(coordinate);
   }
+
+  @Override
+  public void resetChessPiece() {
+    chessGame.resetChessPiece();
+  }
 }
