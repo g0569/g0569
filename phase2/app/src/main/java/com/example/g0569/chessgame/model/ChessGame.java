@@ -19,13 +19,13 @@ public class ChessGame extends BaseGame {
   private List<NPC> NPCChessPieceData = new ArrayList<>();
   private List<NPC> playerChessPieceData = new ArrayList<>();
   private NPC selectedChessPiece;
-  //  private List<NPC> NPCChessPieceBackUps;
-  //  private List<NPC> playerChessPieceBackUPs;
 
   /**
    * Initialize a game manager for ChessGame.
    *
    * @param presenter the presenter
+   * @param inventory the inventory
+   * @param selectedIndex the selected index
    */
   public ChessGame(ChessContract.Presenter presenter, Inventory inventory, int selectedIndex) {
     super();
@@ -37,13 +37,16 @@ public class ChessGame extends BaseGame {
     this.selectedNPC = allNPCs.get(selectedIndex);
   }
 
+  /** On start. */
   public void onStart() {
     this.chessPieceFactory = new ChessPieceFactory();
     decodeNPCData();
     placePlayerChess();
-    // TODO should place the player's Chess Piece in inventory.
   }
 
+  /**
+   * Decode the NPC data from SQLite database which has been read and stored in NPC.
+   */
   private void decodeNPCData() {
     String chessString = selectedNPC.getChessLayout(); // get data from NPC from level one.
     String[] chessDataList = chessString.split("\\."); // suppose we are getting string
@@ -58,9 +61,14 @@ public class ChessGame extends BaseGame {
       placeNPCChess(x, y, type);
       count++;
     }
-    // TODO when decoding the string, for each chess piece, call placeNPCChess(x, y, type).
   }
 
+  /**
+   * Place the NPC chess piece to the board.
+   * @param x the x coordinate
+   * @param y the y coordinate
+   * @param type the chess piece type.
+   */
   private void placeNPCChess(float x, float y, String type) {
     ChessPiece chessPiece = chessPieceFactory.getChessPiece(x, y, type);
     NPC npc = new NPC(type);
@@ -68,17 +76,17 @@ public class ChessGame extends BaseGame {
     NPCChessPieceData.add(npc);
   }
 
+  /** Reset chess piece. */
   public void resetChessPiece() {
     for (NPC npc : playerChessPieceData) {
       ((ChessPiece) npc.getBehavior()).resetCoordinate();
     }
   }
 
+  /** Place the player chess piece to the inventory. */
   private void placePlayerChess() {
-    // This method place the player chess piece to the inventory.
     playerChessPieceData.addAll(inventory.getAvailableItem());
 
-    // TODO
     List<Coordinate> inventoryCoordinateList = new ArrayList<>();
     inventoryCoordinateList.add(new Coordinate(10, 10));
     inventoryCoordinateList.add(new Coordinate(10, 20));
@@ -99,25 +107,26 @@ public class ChessGame extends BaseGame {
     }
   }
 
+  /**
+   * Place player chess on board.
+   *
+   * @param coordinate the coordinate
+   */
   public void placePlayerChessOnBoard(Coordinate coordinate) {
     // This method place the Player Chess Piece on the Board.
     selectedChessPiece.setCoordinate(coordinate);
   }
 
-//  public String getChessPieceType(Coordinate coordinate) {
-//    String result = "";
-//    for (NPC chessPiece : playerChessPieceData) {
-//      if (chessPiece.getCoordinate().equals(coordinate)) {
-//        result = chessPiece.getType();
-//      }
-//    }
-//    return result;
-//  }
-
   private void setSelectedChessPiece(NPC selectedChessPiece) {
     this.selectedChessPiece = selectedChessPiece;
   }
 
+  /**
+   * Sets selected chess piece data.
+   *
+   * @param coordinate the coordinate
+   * @return the selected chess piece data
+   */
   public String setSelectedChessPieceData(Coordinate coordinate) {
     for (NPC chessPiece : playerChessPieceData) {
       if (chessPiece.getCoordinate().equals(coordinate)) {
@@ -127,14 +136,28 @@ public class ChessGame extends BaseGame {
     return selectedNPC.getName();
   }
 
+  /**
+   * Gets npc chess piece data.
+   *
+   * @return the npc chess piece data
+   */
   public List<NPC> getNPCChessPieceData() {
     return NPCChessPieceData;
   }
 
+  /**
+   * Gets player chess piece.
+   *
+   * @return the player chess piece
+   */
   public List<NPC> getPlayerChessPiece() {
     return playerChessPieceData;
   }
 
+  /**
+   * Filter the Chess piece still in the player's inventory.
+   * Only put the Chess Piece on the board to fight list.
+   */
   private List<NPC> addChessPieceToFightList(List<NPC> NPCList) {
     List<NPC> fightList = new ArrayList<>();
     for (NPC npc : NPCList) {
@@ -145,6 +168,7 @@ public class ChessGame extends BaseGame {
     return fightList;
   }
 
+  // TODO Add some comments here.
   private int characterAttack(List<NPC> friendlyInventory, List<NPC> opponentInventory) {
     int characterScore = 0;
     for (NPC currentChess : friendlyInventory) {
@@ -186,15 +210,25 @@ public class ChessGame extends BaseGame {
     playerScore += characterAttack(playerFightList, NPCChessPieceData);
     playerScore -= characterAttack(NPCChessPieceData, playerFightList);
     return (playerScore > 0);
-    // TODO Need to be implemented.
   }
 
+  /**
+   * Sets game over result.
+   *
+   * @param winGame the win game
+   */
   public void setGameOverResult(boolean winGame) {
     if (winGame && !inventory.getAvailableItem().contains(selectedNPC)) {
       inventory.addAvailableItem(selectedNPC);
     }
   }
 
+  /**
+   * Gets position has been taken.
+   *
+   * @param coordinate the coordinate
+   * @return the position has been taken
+   */
   public boolean getPositionHasBeenTaken(Coordinate coordinate) {
     boolean findInSamePosition = false;
     for (NPC npc : playerChessPieceData) {
@@ -205,4 +239,22 @@ public class ChessGame extends BaseGame {
 
   @Override
   public void pause() {}
+
+  /**
+   * Gets presenter.
+   *
+   * @return the presenter
+   */
+  public ChessContract.Presenter getPresenter() {
+    return presenter;
+  }
+
+  /**
+   * Sets presenter.
+   *
+   * @param presenter the presenter
+   */
+  public void setPresenter(ChessContract.Presenter presenter) {
+    this.presenter = presenter;
+  }
 }
