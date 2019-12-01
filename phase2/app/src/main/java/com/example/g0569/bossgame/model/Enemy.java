@@ -19,6 +19,7 @@ public class Enemy extends Item implements Observable {
   private int xDirection;
   private int yDirection;
   private float ratioOfHealth;
+  private int counterToUpdate;
 
   public Enemy() {
     super();
@@ -34,23 +35,28 @@ public class Enemy extends Item implements Observable {
 
   /** Moves the Boss around based on its position */
   public void action() {
-    double d = Math.random();
-    if (d > 0.7) {
-      resistFire = true;
-      resistLightning = false;
-      resistWater = false;
-    } else if (d > 0.5) {
-      resistFire = false;
-      resistLightning = true;
-      resistWater = false;
-    } else if (d > 0.3) {
-      resistFire = false;
-      resistLightning = false;
-      resistWater = true;
-    } else {
-      resistFire = false;
-      resistLightning = false;
-      resistWater = false;
+    if (counterToUpdate == 100) {
+      double d = Math.random();
+      if (d > 0.7) {
+        resistFire = true;
+        resistLightning = false;
+        resistWater = false;
+      } else if (d > 0.5) {
+        resistFire = false;
+        resistLightning = true;
+        resistWater = false;
+      } else if (d > 0.3) {
+        resistFire = false;
+        resistLightning = false;
+        resistWater = true;
+      } else {
+        resistFire = false;
+        resistLightning = false;
+        resistWater = false;
+      }
+      counterToUpdate = 0;
+    } else{
+      counterToUpdate ++;
     }
     //    if (health > 0) {
     //      if (coordinate.getX() <= 0) {
@@ -73,18 +79,25 @@ public class Enemy extends Item implements Observable {
 
   /** Decreases the health of the enemy when Item hits it */
   public void attacked(int damageTaken, String attackType) {
-    if (resistFire && attackType == "fire") {
+    if (resistFire && attackType.equals("fire")) {
       health -= damageTaken / 2;
-    } else if (resistWater && attackType == "water") {
-      health -= damageTaken / 2;
-    } else if (resistLightning && attackType == "lightning") {
+    } else if (resistWater && attackType.equals("ice")) {
       health -= damageTaken / 2;
     } else {
-
       health -= damageTaken;
       setState((int) (health - damageTaken));
     }
 
+  }
+
+  public String getResist(){
+    if (resistWater){
+      return "ice";
+    }else if(resistFire){
+      return "fire";
+    }else{
+      return null;
+    }
   }
 
   //  public boolean isAttacked(float coordinateX, float coordinateY) {

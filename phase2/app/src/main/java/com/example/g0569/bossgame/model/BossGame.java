@@ -56,6 +56,9 @@ public class BossGame extends BaseGame {
 
   //  public void action() {}
 
+  public String getEnemyResistance(){
+    return enemy.getResist();
+  }
   /** Pauses the game or unpauses the game depending on the state it is in */
   @Override
   public void pause() {
@@ -156,6 +159,10 @@ public class BossGame extends BaseGame {
     currentTeam = 0;
     this.bossTeam = team;
     if (bossTeam != null) currentNPC = (NPC) bossTeam.get(0);
+  }
+
+  public void update(){
+    enemy.action();
   }
 
   /**
