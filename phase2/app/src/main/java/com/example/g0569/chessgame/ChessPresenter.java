@@ -170,4 +170,9 @@ public class ChessPresenter implements ChessContract.Presenter {
   public void setGameOverResult(boolean winGame) {
     chessGame.setGameOverResult(winGame);
   }
+
+  @Override
+  public boolean getPositionHasBeenTaken(Coordinate coordinate) {
+    return chessGame.getPositionHasBeenTaken(coordinate);
+  }
 }
