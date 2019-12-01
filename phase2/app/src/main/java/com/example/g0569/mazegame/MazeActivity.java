@@ -7,7 +7,6 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.example.g0569.R;
 import com.example.g0569.base.BaseActivity;
@@ -82,13 +81,15 @@ public class MazeActivity extends BaseActivity {
                 toLoadPage();
               }
             });
-    findViewById(R.id.menu_save_btn).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        saveGame.setSaveMaze(presenter.save());
-        saveGameSQLiteAccessor.updateSaveGame(saveGame);
-      }
-    });
+    findViewById(R.id.menu_save_btn)
+        .setOnClickListener(
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                saveGame.setSaveMaze(presenter.save());
+                saveGameSQLiteAccessor.updateSaveGame(saveGame);
+              }
+            });
     menuBtn.setOnClickListener(
         new View.OnClickListener() {
           @Override

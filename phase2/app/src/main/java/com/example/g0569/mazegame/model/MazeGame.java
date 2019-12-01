@@ -1,10 +1,8 @@
 package com.example.g0569.mazegame.model;
 
-
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.base.model.Item;
 import com.example.g0569.mazegame.MazeContract;
-import com.example.g0569.savegame.model.SaveGame;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Inventory;
@@ -52,8 +50,7 @@ public class MazeGame extends BaseGame {
       //    Button = new BaseButton(this)
       getStopWatch().start();
       this.save();
-      }
-    else {
+    } else {
       this.load();
     }
   }
@@ -68,7 +65,7 @@ public class MazeGame extends BaseGame {
   }
 
   public void load(SaveMaze saveMaze) {
-//    stopWatch.resume();
+    //    stopWatch.resume();
     this.save = saveMaze;
     presenter.getMazeView().resumeView();
     mazeGrid = saveMaze.getMazeGrid();
@@ -76,8 +73,9 @@ public class MazeGame extends BaseGame {
     stopWatch.setRemainTime(saveMaze.getRemainTime());
     stopWatch.resume();
   }
+
   public void load() {
-//    stopWatch.resume();
+    //    stopWatch.resume();
     presenter.getMazeView().resumeView();
     mazeGrid = save.getMazeGrid();
     mazePlayer.setCoordinate(save.getPlayerCoordinate());
@@ -85,7 +83,7 @@ public class MazeGame extends BaseGame {
     stopWatch.resume();
   }
 
-  public SaveMaze save(){
+  public SaveMaze save() {
     save.setPlayerCoordinate(mazePlayer.getCoordinate());
     save.setRemainTime(stopWatch.getRemainTime());
     save.setMazeGrid(mazeGrid);

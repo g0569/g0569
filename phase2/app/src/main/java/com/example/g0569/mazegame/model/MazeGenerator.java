@@ -1,6 +1,5 @@
 package com.example.g0569.mazegame.model;
 
-import com.example.g0569.base.model.Item;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
 
@@ -30,7 +29,7 @@ class MazeGenerator {
     gridHeight = y;
   }
 
-   static int[][] generate(int npcNum) {
+  static int[][] generate(int npcNum) {
     MazeGenerator newMaze = new MazeGenerator(Constants.GRID_WIDTH, Constants.GRID_HEIGHT);
 
     newMaze.getStack().push(new Coordinate(0, 0));

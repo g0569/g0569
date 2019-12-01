@@ -51,7 +51,8 @@ public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
       int progress = cursor.getInt(3);
       String saveMazeData = cursor.getString(4);
       try {
-        saveGames.add(new SaveGame(createdTime, saveId, progress, inventoryData, uid, saveMazeData));
+        saveGames.add(
+            new SaveGame(createdTime, saveId, progress, inventoryData, uid, saveMazeData));
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -70,13 +71,13 @@ public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
       contentValues.put("uid", saveGame.getUid());
       contentValues.put("progress", 0);
       contentValues.put("inventory_data", saveGame.getStringInventory());
-        contentValues.put("created_time", dateFormat.format(saveGame.getCreatedTime()));
-        contentValues.put("level1_data", saveGame.getStringMazeSave());
+      contentValues.put("created_time", dateFormat.format(saveGame.getCreatedTime()));
+      contentValues.put("level1_data", saveGame.getStringMazeSave());
       db.insert("users_saves", null, contentValues);
       String sql = "select last_insert_rowid() from users_saves";
       Cursor cursor = db.rawQuery(sql, null);
       int latestIndex = -1;
-      if(cursor.moveToFirst()){
+      if (cursor.moveToFirst()) {
         latestIndex = cursor.getInt(0);
       }
       saveGame.setSaveId(latestIndex);
@@ -123,18 +124,18 @@ public class SaveGameSQLiteAccessor implements SaveGameSQLiteAccessInterface {
   @Override
   public void updateSaveGame(SaveGame saveGame) {
     SQLiteDatabase db = sqliteHelper.getWritableDatabase();
-    try{
-        ContentValues cv = new ContentValues();
-        cv.put("level1_data", saveGame.getStringMazeSave());
-        cv.put("inventory_data", saveGame.getStringInventory());
-        cv.put("progress", saveGame.getProgress());
-        cv.put("created_time", dateFormat.format(new Date()));
-        String[] args = {String.valueOf(saveGame.getSaveId())};
-        db.update("users_saves", cv, "save_id=?",args);
+    try {
+      ContentValues cv = new ContentValues();
+      cv.put("level1_data", saveGame.getStringMazeSave());
+      cv.put("inventory_data", saveGame.getStringInventory());
+      cv.put("progress", saveGame.getProgress());
+      cv.put("created_time", dateFormat.format(new Date()));
+      String[] args = {String.valueOf(saveGame.getSaveId())};
+      db.update("users_saves", cv, "save_id=?", args);
     } catch (Exception e) {
       e.printStackTrace();
-    } finally{
-        db.close();
+    } finally {
+      db.close();
     }
   }
 

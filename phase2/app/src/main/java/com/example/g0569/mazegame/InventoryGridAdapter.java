@@ -39,10 +39,10 @@ public class InventoryGridAdapter extends BaseAdapter {
    * @param inventoryFragment the inventory fragment
    */
   InventoryGridAdapter(
-          Context context,
-          List<NPC> nonCollectedNPCs,
-          List<NPC> availableNPCs,
-          InventoryFragment inventoryFragment) {
+      Context context,
+      List<NPC> nonCollectedNPCs,
+      List<NPC> availableNPCs,
+      InventoryFragment inventoryFragment) {
     this.context = context;
     this.availableNPCs = availableNPCs;
     this.allNPCs.addAll(availableNPCs);
@@ -56,7 +56,7 @@ public class InventoryGridAdapter extends BaseAdapter {
    * @return the current npc
    */
   NPC getCurrentNPC() {
-    try{
+    try {
       currentNPC = allNPCs.get(selected);
     } catch (ArrayIndexOutOfBoundsException e) {
       currentNPC = null;

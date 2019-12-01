@@ -66,8 +66,7 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
                   Toast.makeText(getActivity(), "Please select a NPC you want", Toast.LENGTH_LONG)
                       .show();
                 } else {
-                  ((MazeActivity) Objects.requireNonNull(getActivity())).
-                          toChessGame(selectedIndex);
+                  ((MazeActivity) Objects.requireNonNull(getActivity())).toChessGame(selectedIndex);
                 }
               }
             });
@@ -97,7 +96,8 @@ public class InventoryFragment extends Fragment implements BaseView<MazeContract
       npcDamage.setText(String.valueOf(selectedNpc.getDamage()));
       npcPower.setText(selectedNpc.getPower());
       npcAvatar.setImageDrawable(
-          Objects.requireNonNull(getActivity()).getDrawable(Constants.NPCIMAGELOOKUPTABLE.get(selectedNpc.getType())));
+          Objects.requireNonNull(getActivity())
+              .getDrawable(Constants.NPCIMAGELOOKUPTABLE.get(selectedNpc.getType())));
     } catch (NullPointerException e) {
       npcName.setText("Please select an NPC");
       npcDamage.setText("0");

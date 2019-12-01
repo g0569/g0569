@@ -7,7 +7,6 @@ import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.NPC;
 
 /** The type Maze player. */
-
 public class MazePlayer extends Player {
 
   private Coordinate direction;
@@ -123,7 +122,6 @@ public class MazePlayer extends Player {
    * @param npc the npc
    * @return boolean
    */
-
   private void collectedNPC(NPC npc) {
 
     this.game.getPresenter().addCollectedNPC(npc);

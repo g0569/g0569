@@ -15,50 +15,50 @@ import com.example.g0569.utils.ActivityManager;
 import com.example.g0569.utils.Constants;
 
 public class BaseActivity extends AppCompatActivity {
-    public Bundle bundle;
-    public boolean isMenuVisible = false;
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ActivityManager.getInstance().addActivity(this);
-    }
+  public Bundle bundle;
+  public boolean isMenuVisible = false;
 
-    /**
-     * To chess game.
-     *
-     * @param selectedIndex the index of the selected npc
-     */
-    public void toChessGame(int selectedIndex) {
-        bundle.putInt(Constants.BUNDLE_SELECTEDNPC_KEY, selectedIndex);
-        Intent intent = new Intent(this, ChessActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        finish();
-    }
+  @Override
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    ActivityManager.getInstance().addActivity(this);
+  }
 
-    /** To boss game. */
-    public void toBossGame() {
-        Intent intent = new Intent(this, BossActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        finish();
-    }
+  /**
+   * To chess game.
+   *
+   * @param selectedIndex the index of the selected npc
+   */
+  public void toChessGame(int selectedIndex) {
+    bundle.putInt(Constants.BUNDLE_SELECTEDNPC_KEY, selectedIndex);
+    Intent intent = new Intent(this, ChessActivity.class);
+    intent.putExtras(bundle);
+    startActivity(intent);
+    finish();
+  }
 
-    public void toLoadPage(){
-        Intent intent = new Intent(this, SaveGameActivity.class);
-        intent.putExtras(bundle);
-        ActivityManager.getInstance().finishAllActivity();
-        startActivity(intent);
-    }
+  /** To boss game. */
+  public void toBossGame() {
+    Intent intent = new Intent(this, BossActivity.class);
+    intent.putExtras(bundle);
+    startActivity(intent);
+    finish();
+  }
 
-    public void showMenu(LinearLayout menuLayout) {
-        if (isMenuVisible) {
-            isMenuVisible = false;
-            menuLayout.setVisibility(View.GONE);
-        } else {
-            isMenuVisible = true;
-            menuLayout.setVisibility(View.VISIBLE);
-        }
-    }
+  public void toLoadPage() {
+    Intent intent = new Intent(this, SaveGameActivity.class);
+    intent.putExtras(bundle);
+    ActivityManager.getInstance().finishAllActivity();
+    startActivity(intent);
+  }
 
+  public void showMenu(LinearLayout menuLayout) {
+    if (isMenuVisible) {
+      isMenuVisible = false;
+      menuLayout.setVisibility(View.GONE);
+    } else {
+      isMenuVisible = true;
+      menuLayout.setVisibility(View.VISIBLE);
+    }
+  }
 }
