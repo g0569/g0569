@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.g0569.R;
 import com.example.g0569.bossgame.BossActivity;
 import com.example.g0569.chessgame.ChessActivity;
+import com.example.g0569.mazegame.model.SaveMaze;
 import com.example.g0569.savegame.model.SaveGame;
 import com.example.g0569.savegame.model.SaveGameSQLiteAccessor;
 import com.example.g0569.utils.Constants;
@@ -44,14 +45,14 @@ public class MazeActivity extends AppCompatActivity {
     bundle = getIntent().getExtras();
     assert bundle != null;
     final SaveGame saveGame = (SaveGame) bundle.getSerializable(Constants.BUNDLE_SAVEGAME_KEY);
-  try{
-    Boolean fromChessGame =
-            getIntent().getStringExtra(Constants.CHESS_GAME_OVER).equals(Constants.CHESS_GAME_OVER);
-  } catch (NullPointerException e) {
-    Boolean fromChessGame = false;
-  }
+    try {
+      Boolean fromChessGame =
+          getIntent().getStringExtra(Constants.CHESS_GAME_OVER).equals(Constants.CHESS_GAME_OVER);
+    } catch (NullPointerException e) {
+      Boolean fromChessGame = false;
+    }
     final Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
-
+    final SaveMaze saveMaze = (SaveMaze) saveGame.getSaveMaze();
     inventoryView =
         (InventoryFragment) getSupportFragmentManager().findFragmentById(R.id.ContentFrame);
     if (inventoryView == null) {
@@ -78,7 +79,7 @@ public class MazeActivity extends AppCompatActivity {
         .replace(R.id.ContentFrame, inventoryView)
         .commit();
 
-    presenter = new MazePresenter(mazeView, inventory);
+    presenter = new MazePresenter(mazeView, inventory, saveMaze);
 
     final LinearLayout menuLayout = findViewById(R.id.menu_layout);
     menuLayout.setVisibility(View.GONE);
@@ -105,6 +106,7 @@ public class MazeActivity extends AppCompatActivity {
           @Override
           public void onClick(View v) {
             saveGame.setInventory(inventory);
+            saveGame.setSaveMaze(presenter.save());
             saveGameSQLiteAccessor.updateSaveGame(saveGame);
             if (isInventoryVisible) {
               isInventoryVisible = false;

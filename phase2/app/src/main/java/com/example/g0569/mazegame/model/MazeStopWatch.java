@@ -74,4 +74,13 @@ public class MazeStopWatch extends Item implements Serializable {
     }
   }
 
-}
+  public void setRemainTime(int time) {
+    this.startTime = System.nanoTime() - convertSecondToNano(totalTime) + convertSecondToNano(time);
+    this.elapsedTime =convertSecondToNano(totalTime) - convertSecondToNano(time);
+    this.running = true;
+  }
+
+  private long convertSecondToNano(long time) {
+    //        return (int)TimeUnit.SECONDS.convert(time, TimeUnit.NANOSECONDS);
+    return time * 1000000000;
+  }}

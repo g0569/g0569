@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class SaveMaze implements Serializable {
     private int[][] mazeGrid;
     private Coordinate playerCoordinate;
-    private MazeStopWatch stopWatch;
+    private int remainTime;
 
     void setMazeGrid(int[][] mazeGrid) {
     this.mazeGrid = mazeGrid;
@@ -16,10 +16,6 @@ public class SaveMaze implements Serializable {
 
     void setPlayerCoordinate(Coordinate playerCoordinate) {
         this.playerCoordinate = playerCoordinate;
-    }
-
-    void setStopWatch(MazeStopWatch stopWatch) {
-        this.stopWatch = stopWatch;
     }
 
     int[][] getMazeGrid() {
@@ -30,7 +26,15 @@ public class SaveMaze implements Serializable {
         return playerCoordinate;
     }
 
-    MazeStopWatch getStopWatch() {
-        return stopWatch;
+    boolean isEmpty(){
+        return mazeGrid == null;
+    }
+
+    public int getRemainTime() {
+        return this.remainTime;
+    }
+
+    public void setRemainTime(int remainTime) {
+        this.remainTime = remainTime;
     }
 }

@@ -326,7 +326,7 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
 
   @Override
   public void resumeView() {
-    ableMove = false;
+    ableMove = true;
   }
 
   /*

@@ -55,6 +55,10 @@ public class SaveGame implements Serializable {
     this.saveMaze = new SaveMaze();
   }
 
+  public SaveMaze getSaveMaze() {
+    return saveMaze;
+  }
+
   /**
    * Gets the created time of this save game.
    *
@@ -89,6 +93,10 @@ public class SaveGame implements Serializable {
    */
   void setSaveId(int saveId) {
     this.saveId = saveId;
+  }
+
+  public void setSaveMaze(SaveMaze saveMaze) {
+    this.saveMaze = saveMaze;
   }
 
   /**

@@ -4,6 +4,7 @@ package com.example.g0569.mazegame.model;
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.base.model.Item;
 import com.example.g0569.mazegame.MazeContract;
+import com.example.g0569.savegame.model.SaveGame;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Inventory;
@@ -22,12 +23,12 @@ public class MazeGame extends BaseGame {
   private MazeStopWatch stopWatch;
   private SaveMaze save;
 
-  public MazeGame(MazeContract.Presenter presenter, Inventory inventory) {
+  public MazeGame(MazeContract.Presenter presenter, Inventory inventory, SaveMaze saveMaze) {
     super();
     this.presenter = presenter;
     this.inventory = inventory;
     this.unbuiltNPC = inventory.getNonCollectedItem().size();
-    this.save = new SaveMaze();
+    this.save = saveMaze;
   }
 
   public MazeContract.Presenter getPresenter() {
@@ -45,11 +46,16 @@ public class MazeGame extends BaseGame {
   public void onStart() {
     startpoint = Coordinate.create(0, 0);
     mazePlayer = new MazePlayer(this);
-    mazeGrid =
-        MazeGenerator.generate(inventory.getNonCollectedItem().size());
     stopWatch = new MazeStopWatch(Constants.MAZETIMER, false);
-    //    Button = new BaseButton(this)
-    getStopWatch().start();
+    if (save.isEmpty()) {
+      mazeGrid = MazeGenerator.generate(inventory.getNonCollectedItem().size());
+      //    Button = new BaseButton(this)
+      getStopWatch().start();
+      this.save();
+      }
+    else {
+      this.load();
+    }
   }
 
   @Override
@@ -58,17 +64,32 @@ public class MazeGame extends BaseGame {
     presenter.getMazeView().stopView();
     save.setMazeGrid(mazeGrid);
     save.setPlayerCoordinate(mazePlayer.getCoordinate());
-    save.setStopWatch(stopWatch);
+    save.setRemainTime(stopWatch.getRemainTime());
   }
 
-  @Override
+  public void load(SaveMaze saveMaze) {
+//    stopWatch.resume();
+    this.save = saveMaze;
+    presenter.getMazeView().resumeView();
+    mazeGrid = saveMaze.getMazeGrid();
+    mazePlayer.setCoordinate(saveMaze.getPlayerCoordinate());
+    stopWatch.setRemainTime(saveMaze.getRemainTime());
+    stopWatch.resume();
+  }
   public void load() {
 //    stopWatch.resume();
     presenter.getMazeView().resumeView();
     mazeGrid = save.getMazeGrid();
     mazePlayer.setCoordinate(save.getPlayerCoordinate());
-    stopWatch = save.getStopWatch();
+    stopWatch.setRemainTime(save.getRemainTime());
     stopWatch.resume();
+  }
+
+  public SaveMaze save(){
+    save.setPlayerCoordinate(mazePlayer.getCoordinate());
+    save.setRemainTime(stopWatch.getRemainTime());
+    save.setMazeGrid(mazeGrid);
+    return save;
   }
 
   Coordinate getStartPoint() {

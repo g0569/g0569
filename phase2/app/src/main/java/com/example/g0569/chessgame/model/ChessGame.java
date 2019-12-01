@@ -204,7 +204,4 @@ public class ChessGame extends BaseGame {
 
   @Override
   public void pause() {}
-
-  @Override
-  public void load() {}
 }

@@ -43,10 +43,6 @@ public class BossGame extends BaseGame {
     paused = !paused;
   }
 
-  /** Loads teh game after it has been saved */
-  @Override
-  public void load() {}
-
   /**
    * Attacks the boss and changes it's health accordingly Might want it to return something later so
    * that healthbar is not needed later
