@@ -21,6 +21,9 @@ public class ChessGame extends BaseGame {
   private List<NPC> NPCChessPieceData = new ArrayList<>();
   private List<NPC> playerChessPieceData = new ArrayList<>();
   private NPC selectedChessPiece;
+  private List<NPC> NPCChessPieceBackUps = new ArrayList<>();
+  private List<NPC> playerChessPieceBackUPs = new ArrayList<>();
+
 
   /**
    * Initialize a game manager for ChessGame.
@@ -38,7 +41,13 @@ public class ChessGame extends BaseGame {
     this.chessPieceFactory = new ChessPieceFactory();
     decodeNPCData();
     placePlayerChess();
+    makeBackUp();
     // TODO should place the player's Chess Piece in inventory.
+  }
+
+  private void makeBackUp(){
+    playerChessPieceBackUPs.addAll(playerChessPieceData);
+    NPCChessPieceBackUps.addAll(NPCChessPieceData);
   }
 
   private void decodeNPCData() {
@@ -63,6 +72,13 @@ public class ChessGame extends BaseGame {
     NPC npc = new NPC(type);
     npc.setBehavior(chessPiece);
     NPCChessPieceData.add(npc);
+  }
+
+  public void resetChessPiece(){
+    playerChessPieceData.clear();
+    playerChessPieceData.addAll(playerChessPieceBackUPs);
+    NPCChessPieceData.clear();
+    NPCChessPieceData.addAll(NPCChessPieceBackUps);
   }
 
   private void placePlayerChess() {
@@ -97,7 +113,7 @@ public class ChessGame extends BaseGame {
 
   public String getChessPieceType(Coordinate coordinate) {
     String result = "";
-    for (NPC chessPiece : NPCChessPieceData) {
+    for (NPC chessPiece : playerChessPieceData) {
       if (chessPiece.getCoordinate().equals(coordinate)) {
         result = chessPiece.getType();
       }
@@ -186,6 +202,15 @@ public class ChessGame extends BaseGame {
     if (winGame && !inventory.getAvailableItem().contains(selectedNPC)) {
       inventory.addAvailableItem(selectedChessPiece);
     }
+  }
+
+  public boolean getPositionHasBeenTaken(Coordinate coordinate){
+    boolean findInSamePosition = false;
+    for ( NPC npc: playerChessPieceData ) {
+      if (npc.getCoordinate().equals(coordinate))
+        findInSamePosition = true;
+    }
+    return findInSamePosition;
   }
 
   @Override

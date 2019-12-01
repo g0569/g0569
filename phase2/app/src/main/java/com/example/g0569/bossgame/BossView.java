@@ -553,19 +553,9 @@ public class BossView extends GameView implements BossContract.View {
   }
 
   private void detectCollision() {
-    // TODO fix the ranges for collisions
     if (inRange(
-            enemyCoordinate.getX(),
-            enemyCoordinate.getY(),
-            currentProjectileCoordinate.getX()
-                + (currentProjectileCoordinate.getX() + currentProjectile.getWidth() / 2f),
-            currentProjectileCoordinate.getY(),
-            currentProjectile.getWidth(),
-            currentProjectile.getHeight())
-        || inRange(
-            currentProjectileCoordinate.getX()
-                + (currentProjectileCoordinate.getX() + currentProjectile.getWidth()),
-            currentProjectileCoordinate.getY(),
+            currentProjectileCoordinate.getX() + currentProjectile.getWidth() / 2f,
+            currentProjectileCoordinate.getY() + currentProjectile.getHeight() / 2f,
             enemyCoordinate.getX(),
             enemyCoordinate.getY(),
             enemyAppearance.getWidth(),

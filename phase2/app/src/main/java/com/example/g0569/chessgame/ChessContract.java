@@ -9,6 +9,8 @@ public interface ChessContract {
     void initView();
 
     void drawChessPiece(Coordinate coordinate, String type);
+
+    void showEndingDialogue(String title, String text, String buttonHint);
   }
 
   interface Presenter extends BasePresenter {
@@ -29,6 +31,10 @@ public interface ChessContract {
     void setSelectedChessPieceData(Coordinate coordinate);
 
     void setGameOverResult(boolean winGame);
+
+    boolean getPositionHasBeenTaken(Coordinate coordinate);
+
+    void resetChessPiece();
 
   }
 }
