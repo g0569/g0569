@@ -31,12 +31,12 @@ public interface Constants {
 
   int NPC_NUM = 6;
 
-  String STAR_TYPE = "type1";
-  String TRIANGLE_TYPE = "type2";
-  String CIRCLE_TYPE = "type3";
-  String DIAMOND_TYPE = "type4";
-  String HEART_TYPE = "type5";
-  String SQUARE_TYPE = "type6";
+  String CIRCLE_TYPE = "type1";
+  String DIAMOND_TYPE = "type2";
+  String HEART_TYPE = "type3";
+  String SQUARE_TYPE = "type4";
+  String STAR_TYPE = "type5";
+  String TRIANGLE_TYPE = "type6";
 
   String BUNDLE_USER_KEY = "BUNDLE_USER_KEY";
   String BUNDLE_INVENTORY_KEY = "BUNDLE_INVENTORY_KEY";
