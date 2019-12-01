@@ -2,7 +2,9 @@ package com.example.g0569.mazegame.model;
 
 import com.example.g0569.base.model.Item;
 
-public class MazeStopWatch extends Item {
+import java.io.Serializable;
+
+public class MazeStopWatch extends Item implements Serializable {
   private long totalTime;
   private long elapsedTime;
   private boolean running;
