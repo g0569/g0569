@@ -12,7 +12,6 @@ public interface ChessContract {
   }
 
   interface Presenter extends BasePresenter {
-//    void drawChessPiece(ChessPiece chessPiece);
     void drawChessPiece();
 
     boolean startAutoFight();
@@ -28,6 +27,8 @@ public interface ChessContract {
     Coordinate viewCoordinateToBoardCoordinate(Coordinate coordinate);
 
     void setSelectedChessPieceData(Coordinate coordinate);
+
+    void setGameOverResult(boolean winGame);
 
   }
 }

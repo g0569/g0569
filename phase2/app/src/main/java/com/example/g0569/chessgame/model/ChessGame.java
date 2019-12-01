@@ -182,6 +182,12 @@ public class ChessGame extends BaseGame {
     // TODO Need to be implemented.
   }
 
+  public void setGameOverResult(boolean winGame) {
+    if (winGame && !inventory.getAvailableItem().contains(selectedNPC)) {
+      inventory.addAvailableItem(selectedChessPiece);
+    }
+  }
+
   @Override
   public void pause() {}
 

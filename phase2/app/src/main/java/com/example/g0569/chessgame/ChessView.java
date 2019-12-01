@@ -254,6 +254,7 @@ public class ChessView extends GameView implements ChessContract.View {
             //          autoChessGame.showStatistic(false); // Lose and get 0 cards.
             Toast.makeText(activity, "You lose the game!", Toast.LENGTH_SHORT).show();
           }
+          presenter.setGameOverResult(winGame);
         } else if (x > inventoryX
             && x < inventoryX + inventory.getWidth()
             && y > inventoryY

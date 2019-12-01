@@ -165,4 +165,9 @@ public class ChessPresenter implements ChessContract.Presenter {
   public void setSelectedChessPieceData(Coordinate coordinate) {
     chessGame.setSelectedChessPieceData(coordinate);
   }
+
+  @Override
+  public void setGameOverResult(boolean winGame) {
+    chessGame.setGameOverResult(winGame);
+  }
 }
