@@ -24,19 +24,19 @@ public class MazeGame extends BaseGame {
   private int unbuiltNPC;
   private MazeStopWatch stopWatch;
 
+  public MazeGame(MazeContract.Presenter presenter, Inventory inventory) {
+    super();
+    this.presenter = presenter;
+    this.inventory = inventory;
+    this.unbuiltNPC = inventory.getNonCollectedItem().size();
+  }
+
   public MazeContract.Presenter getPresenter() {
     return presenter;
   }
 
   public MazeContract.View getView() {
     return view;
-  }
-
-  public MazeGame(MazeContract.Presenter presenter, Inventory inventory) {
-    super();
-    this.presenter = presenter;
-    this.inventory = inventory;
-    this.unbuiltNPC = inventory.getNonCollectedItem().size();
   }
 
   public MazePlayer getMazePlayer() {
@@ -56,14 +56,14 @@ public class MazeGame extends BaseGame {
 
   @Override
   public void pause() {
-      stopWatch.pause();
-      presenter.getMazeView().stopView();
+    stopWatch.pause();
+    presenter.getMazeView().stopView();
   }
 
   @Override
   public void load() {
-      stopWatch.resume();
-      presenter.getMazeView().resumeView();
+    stopWatch.resume();
+    presenter.getMazeView().resumeView();
   }
 
   public Coordinate getStartPoint() {
@@ -85,17 +85,16 @@ public class MazeGame extends BaseGame {
   public void update() {
     mazePlayer.update();
     getStopWatch().update();
-    if (getStopWatch().getRemainTime() == -1){
+    if (getStopWatch().getRemainTime() == -1) {
       timeReach();
     }
   }
 
-  //TODO show inventory page
-  public void timeReach(){
+  // TODO show inventory page
+  public void timeReach() {
 
-      getStopWatch().stop();
-      presenter.getMazeView().stopView();
-
+    getStopWatch().stop();
+    presenter.getMazeView().stopView();
   }
 
   //  public void showStatistic() {
@@ -127,12 +126,13 @@ public class MazeGame extends BaseGame {
    * @return
    */
   public NPC addItemToMazeItem(int x, int y) {
-      unbuiltNPC -= 1;
-      if (unbuiltNPC == -1) unbuiltNPC = inventory.getNonCollectedItem().size() - 1;
-//      if (inventory.getNonCollectedItem().size() == 1) System.out.println(this.getInventory().getNonCollectedItem().get(unbuiltNPC).getType());
-//    System.out.println(unbuiltNPC);
+    unbuiltNPC -= 1;
+    if (unbuiltNPC == -1) unbuiltNPC = inventory.getNonCollectedItem().size() - 1;
+    //      if (inventory.getNonCollectedItem().size() == 1)
+    // System.out.println(this.getInventory().getNonCollectedItem().get(unbuiltNPC).getType());
+    //    System.out.println(unbuiltNPC);
     this.getMyMazeItem()[y][x] = this.getInventory().getNonCollectedItem().get(unbuiltNPC);
-//    System.out.println(this.getInventory().getNonCollectedItem().get(unbuiltNPC - 1));
+    //    System.out.println(this.getInventory().getNonCollectedItem().get(unbuiltNPC - 1));
     return this.getInventory().getNonCollectedItem().get(unbuiltNPC);
   }
 

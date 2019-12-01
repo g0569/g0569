@@ -89,25 +89,6 @@ public class ChessGame extends BaseGame {
       index++;
     }
   }
-  //    ChessPiece c1 =
-  //        chessPieceFactory.getChessPiece(10, 10, inventory.getAvailableItem().get(0).getType());
-  //    inventory.getAvailableItem().get(0).setBehavior(c1);
-  //    ChessPiece c2 =
-  //        chessPieceFactory.getChessPiece(10, 20, inventory.getAvailableItem().get(1).getType());
-  //    inventory.getAvailableItem().get(1).setBehavior(c2);
-  //    ChessPiece c3 =
-  //        chessPieceFactory.getChessPiece(20, 10, inventory.getAvailableItem().get(2).getType());
-  //    inventory.getAvailableItem().get(2).setBehavior(c3);
-  //    ChessPiece c4 =
-  //        chessPieceFactory.getChessPiece(20, 20, inventory.getAvailableItem().get(3).getType());
-  //    inventory.getAvailableItem().get(3).setBehavior(c4);
-  //    ChessPiece c5 =
-  //        chessPieceFactory.getChessPiece(30, 10, inventory.getAvailableItem().get(4).getType());
-  //    inventory.getAvailableItem().get(4).setBehavior(c5);
-  //    ChessPiece c6 =
-  //        chessPieceFactory.getChessPiece(30, 20, inventory.getAvailableItem().get(5).getType());
-  //    inventory.getAvailableItem().get(5).setBehavior(c6);
-  //  }
 
   public void placePlayerChessOnBoard(Coordinate coordinate) {
     // This method place the Player Chess Piece on the Board.
@@ -199,6 +180,12 @@ public class ChessGame extends BaseGame {
     }
     return (winNumbers >= 2);
     // TODO Need to be implemented.
+  }
+
+  public void setGameOverResult(boolean winGame) {
+    if (winGame && !inventory.getAvailableItem().contains(selectedNPC)) {
+      inventory.addAvailableItem(selectedChessPiece);
+    }
   }
 
   @Override
