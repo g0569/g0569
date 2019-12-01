@@ -10,11 +10,12 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.g0569.R;
+import com.example.g0569.base.BaseActivity;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
 
 /** The type Boss activity. */
-public class BossActivity extends AppCompatActivity {
+public class BossActivity extends BaseActivity {
 
   private BossView bossView;
   private BossContract.Presenter presenter;
