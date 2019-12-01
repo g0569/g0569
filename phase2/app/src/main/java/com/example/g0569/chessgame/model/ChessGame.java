@@ -1,7 +1,6 @@
 package com.example.g0569.chessgame.model;
 
 import com.example.g0569.base.model.BaseGame;
-import com.example.g0569.base.model.Player;
 import com.example.g0569.chessgame.ChessContract;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Inventory;
@@ -157,12 +156,12 @@ public class ChessGame extends BaseGame {
       opponentInventory.addAll(getPlayerChessPiece());
     }
     for (NPC currentChess : friendlyInventory) {
-      Integer[][] targetList = ((ChessPiece)currentChess).createTargetList();
+      Integer[][] targetList = ((ChessPiece)currentChess.getBehavior()).createTargetList();
       int count = 0;
       boolean enemyFound = false;
       while(!enemyFound && count < targetList.length){
         for(NPC enemyChess: opponentInventory){
-          if(!enemyFound && ((ChessPiece)enemyChess).matchCoordinate(targetList[count])){
+          if(!enemyFound && ((ChessPiece)enemyChess.getBehavior()).matchCoordinate(targetList[count])){
             enemyFound = true;
             if(currentChess.getDamage() >= enemyChess.getDamage()){characterScore += 1;}
           }
