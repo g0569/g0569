@@ -163,7 +163,12 @@ public class ChessGame extends BaseGame {
         for(NPC enemyChess: opponentInventory){
           if(!enemyFound && ((ChessPiece)enemyChess.getBehavior()).matchCoordinate(targetList[count])){
             enemyFound = true;
-            if(currentChess.getDamage() >= enemyChess.getDamage()){characterScore += 1;}
+            int enemyDmg = enemyChess.getDamage();
+            int ourDmg = currentChess.getDamage();
+            if((currentChess.getBehavior()) instanceof TriangleChessPiece){
+              ourDmg = 2*currentChess.getDamage();
+            }
+            if(ourDmg >= enemyDmg){characterScore += 1;}
           }
         }
         count ++;
