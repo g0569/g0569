@@ -13,8 +13,6 @@ import com.example.g0569.R;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
 
-import java.util.ArrayList;
-
 /** The type Boss activity. */
 public class BossActivity extends AppCompatActivity {
 
