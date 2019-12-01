@@ -22,13 +22,12 @@ public interface ChessContract {
 
     void placePlayerChess(Coordinate coordinate);
 
-    String InventoryCoordinateToChessType(Coordinate coordinate);
 
     Coordinate viewCoordinateToInventoryCoordinate(Coordinate coordinate);
 
     Coordinate viewCoordinateToBoardCoordinate(Coordinate coordinate);
 
-    void setSelectedChessPieceData(Coordinate coordinate);
+    String setSelectedChessPieceData(Coordinate coordinate);
 
     void setGameOverResult(boolean winGame);
 

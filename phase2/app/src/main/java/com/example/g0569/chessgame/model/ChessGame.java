@@ -104,26 +104,27 @@ public class ChessGame extends BaseGame {
     selectedChessPiece.setCoordinate(coordinate);
   }
 
-  public String getChessPieceType(Coordinate coordinate) {
-    String result = "";
-    for (NPC chessPiece : playerChessPieceData) {
-      if (chessPiece.getCoordinate().equals(coordinate)) {
-        result = chessPiece.getType();
-      }
-    }
-    return result;
-  }
+//  public String getChessPieceType(Coordinate coordinate) {
+//    String result = "";
+//    for (NPC chessPiece : playerChessPieceData) {
+//      if (chessPiece.getCoordinate().equals(coordinate)) {
+//        result = chessPiece.getType();
+//      }
+//    }
+//    return result;
+//  }
 
   private void setSelectedChessPiece(NPC selectedChessPiece) {
     this.selectedChessPiece = selectedChessPiece;
   }
 
-  public void setSelectedChessPieceData(Coordinate coordinate) {
+  public String setSelectedChessPieceData(Coordinate coordinate) {
     for (NPC chessPiece : playerChessPieceData) {
       if (chessPiece.getCoordinate().equals(coordinate)) {
         setSelectedChessPiece(chessPiece);
       }
     }
+    return selectedNPC.getName();
   }
 
   public List<NPC> getNPCChessPieceData() {

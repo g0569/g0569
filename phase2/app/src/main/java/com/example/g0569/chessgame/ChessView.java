@@ -223,7 +223,7 @@ public class ChessView extends GameView implements ChessContract.View {
       Coordinate inventoryCoordinate =
           presenter.viewCoordinateToInventoryCoordinate(viewCoordinate);
       Coordinate boardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);
-      String type = presenter.InventoryCoordinateToChessType(inventoryCoordinate);
+      //      String type = presenter.InventoryCoordinateToChessType(inventoryCoordinate);
       System.out.println(String.valueOf(x) + " " + String.valueOf(y));
       if (placeChess) {
         boolean positionHasBeenTaken = presenter.getPositionHasBeenTaken(boardCoordinate);
@@ -249,7 +249,7 @@ public class ChessView extends GameView implements ChessContract.View {
             && y < startButtonY + startButton.getHeight()) {
           Toast.makeText(activity, "Start the game.", Toast.LENGTH_SHORT).show();
           boolean winGame = presenter.startAutoFight();
-           showEndingDialogue(
+          showEndingDialogue(
               "Chess Game Is Over!",
               "You " + (winGame ? "Win " : "Lose ") + "the Game!",
               "Go Back To Maze");
@@ -259,15 +259,17 @@ public class ChessView extends GameView implements ChessContract.View {
             && y > inventoryY
             && y < inventoryY + inventory.getHeight()) {
           // Choose a chess piece from inventory.
+          String type = presenter.setSelectedChessPieceData(inventoryCoordinate);
           Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
-          presenter.setSelectedChessPieceData(inventoryCoordinate);
+
           // TODO To highlight the chess has been chosen.
           placeChess = true;
         } else if (x > resetButtonX
             && x < resetButtonX + resetButton.getWidth()
             && y > resetButtonY
             && y < resetButtonY + resetButton.getHeight()) {
-          Toast.makeText(activity, "Reset the Chess Piece back to inventory!", Toast.LENGTH_SHORT).show();
+          Toast.makeText(activity, "Reset the Chess Piece back to inventory!", Toast.LENGTH_SHORT)
+              .show();
           presenter.resetChessPiece();
         }
         return true;

@@ -24,7 +24,7 @@ public interface ChessGameCoordinateDataMaps {
     Coordinate inventoryRow3Col1 = new Coordinate(30, 10);
     Coordinate inventoryRow3Col2 = new Coordinate(30, 20);
 
-  HashMap<Integer, Pair> DRAW_CHESS_BOARD_LOOKUP_TABLE =
+  HashMap<Integer, Pair> DRAW_CHESS_GRID_LOOKUP_TABLE =
       new HashMap<Integer, Pair>() {
         {
           Pair pair1 = Pair.create(0.32f, 0.46f);
@@ -39,6 +39,12 @@ public interface ChessGameCoordinateDataMaps {
           Pair pair10 = Pair.create(0.395f, 0.8f);
           Pair pair11 = Pair.create(0.53f, 0.8f);
           Pair pair12 = Pair.create(0.67f, 0.8f);
+          Pair pair13 = Pair.create(0.0f, 0.0f);
+          Pair pair14 = Pair.create(0.5f, 0.0f);
+          Pair pair15 = Pair.create(0.0f, 0.33f);
+          Pair pair16 = Pair.create(0.5f, 0.33f);
+          Pair pair17 = Pair.create(0.0f, 0.66f);
+          Pair pair18 = Pair.create(0.5f, 0.66f);
           put(101, pair1);
           put(102, pair2);
           put(103, pair3);
@@ -51,18 +57,6 @@ public interface ChessGameCoordinateDataMaps {
           put(302, pair10);
           put(303, pair11);
           put(304, pair12);
-        }
-      };
-
-  HashMap<Integer, Pair> DRAW_CHESS_INVENTORY_LOOKUP_TABLE =
-      new HashMap<Integer, Pair>() {
-        {
-          Pair pair13 = Pair.create(0.0f, 0.0f);
-          Pair pair14 = Pair.create(0.5f, 0.0f);
-          Pair pair15 = Pair.create(0.0f, 0.33f);
-          Pair pair16 = Pair.create(0.5f, 0.33f);
-          Pair pair17 = Pair.create(0.0f, 0.66f);
-          Pair pair18 = Pair.create(0.5f, 0.66f);
           put(1010, pair13);
           put(1020, pair14);
           put(2010, pair15);
@@ -72,5 +66,13 @@ public interface ChessGameCoordinateDataMaps {
         }
       };
 
-  // TODO Need to encapsulate the reset value. 
+//  HashMap<Integer, Pair> DRAW_CHESS_INVENTORY_LOOKUP_TABLE =
+//      new HashMap<Integer, Pair>() {
+//        {
+//
+//
+//        }
+//      };
+
+  // TODO Need to encapsulate the reset value.
 }
