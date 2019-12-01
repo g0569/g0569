@@ -159,8 +159,8 @@ public class BossView extends GameView implements BossContract.View {
           y,
           shootButtonCoordinate.getX(),
           shootButtonCoordinate.getY(),
-          shootButton.getWidth(),
-          shootButton.getHeight())) {
+          shootButtonSize,
+          shootButtonSize)) {
         if (!pause) {
           System.out.println("shoot out");
           Toast.makeText(activity, "Throw", Toast.LENGTH_SHORT).show();
@@ -171,8 +171,8 @@ public class BossView extends GameView implements BossContract.View {
           y,
           switchButtonCoordinates.getX(),
           switchButtonCoordinates.getY(),
-          switchButton.getWidth(),
-          switchButton.getHeight())) {
+          switchButtonSize,
+          switchButtonSize)) {
         if (!pause) {
           System.out.println("switch team");
           bossPresenter.switchTeam();
@@ -185,8 +185,8 @@ public class BossView extends GameView implements BossContract.View {
           y,
           pauseButtonCoordinates.getX(),
           pauseButtonCoordinates.getY(),
-          pauseButton.getWidth(),
-          pauseButton.getHeight())) {
+          pauseButtonSize,
+          pauseButtonSize)) {
         Toast.makeText(activity, "Paused", Toast.LENGTH_SHORT).show();
         pause();
       } else if (inRange(
@@ -194,8 +194,8 @@ public class BossView extends GameView implements BossContract.View {
           y,
           menuButtonCoordinates.getX(),
           menuButtonCoordinates.getY(),
-          menuButton.getWidth(),
-          menuButton.getHeight())) {
+          menuButtonSize,
+          menuButtonSize)) {
         Toast.makeText(activity, "Menu", Toast.LENGTH_SHORT).show();
       }
     }
