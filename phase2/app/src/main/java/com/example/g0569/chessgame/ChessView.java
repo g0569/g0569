@@ -103,7 +103,8 @@ public class ChessView extends GameView implements ChessContract.View {
     scalex = screenWidth / background.getWidth();
     scaley = screenHeight / background.getHeight();
 
-    startButton = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_start);
+    startButton =
+        BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_component_start);
     startButton = Bitmap.createScaledBitmap(startButton, 150, 150, false);
 
     resetButton = BitmapFactory.decodeResource(getResources(), R.drawable.chess_game_reset_button);
@@ -243,7 +244,7 @@ public class ChessView extends GameView implements ChessContract.View {
           }
         }
       } else {
-        // Either start the game or choose a chess piece from inventory.
+        // Either start the game or reset the game or choose a chess piece from inventory.
         if (x > startButtonX
             && x < startButtonX + startButton.getWidth()
             && y > startButtonY
@@ -264,6 +265,12 @@ public class ChessView extends GameView implements ChessContract.View {
           presenter.setSelectedChessPieceData(inventoryCoordinate);
           // TODO To highlight the chess has been chosen.
           placeChess = true;
+        } else if (x > resetButtonX
+            && x < resetButtonX + resetButton.getWidth()
+            && y > resetButtonY
+            && y < resetButtonY + resetButton.getHeight()) {
+          Toast.makeText(activity, "Reset the Chess Piece back to inventory!", Toast.LENGTH_SHORT).show();
+          presenter.resetChessPiece();
         }
         return true;
       }
