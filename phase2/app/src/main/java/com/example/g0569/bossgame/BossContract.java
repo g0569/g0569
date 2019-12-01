@@ -28,15 +28,6 @@ public interface BossContract {
     void setCurrentProjectileBitmap(String typeProjectile);
 
     /**
-     * Updates the healthbar to know how much to draw each time it is drawn. This is dependent on
-     * the Boss's health and it's original health.
-     *
-     * @param ratio of the health/initial health
-     * @param healthRemaining the remaining health the enemy has.
-     */
-    void updateMovementHealthBar(float ratio, float healthRemaining);
-
-    /**
      * Get the width of the screen/view
      *
      * @return the width of the screen

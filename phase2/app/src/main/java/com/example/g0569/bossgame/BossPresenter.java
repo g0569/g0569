@@ -5,7 +5,7 @@ import com.example.g0569.utils.Inventory;
 
 /** The type Boss presenter. */
 public class BossPresenter implements BossContract.Presenter {
-  private BossContract.View bossView;
+  private BossView bossView;
   private BossGame bossGame;
   private Inventory inventory;
 
@@ -15,14 +15,13 @@ public class BossPresenter implements BossContract.Presenter {
    * @param bossView the boss view
    * @param inventory from the last levels, inventory is everything collected from mazeGame and chessGame
    */
-  BossPresenter(BossContract.View bossView, Inventory inventory) {
+  BossPresenter(BossView bossView, Inventory inventory) {
     this.bossView = bossView;
     bossView.setPresenter(this);
     bossGame = new BossGame();
     bossGame.onStart();
     bossGame.setEnemyMovement(bossView.getWidth());
-    this.inventory = inventory
-    ;
+    this.inventory = inventory;
   }
 
   @Override
@@ -104,7 +103,7 @@ public class BossPresenter implements BossContract.Presenter {
    */
   public void attackBoss() {
     bossGame.attackBoss();
-    bossView.updateMovementHealthBar(bossGame.getRatioOfHealth(), bossGame.getHealth());
+    bossView.updateMovementHealthBar(bossGame.getInitialHealth(), bossGame.getHealth());
     boolean end = bossGame.determineEnd();
     bossView.end(end);
   }
