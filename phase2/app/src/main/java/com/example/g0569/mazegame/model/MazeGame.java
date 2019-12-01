@@ -1,6 +1,5 @@
 package com.example.g0569.mazegame.model;
 
-import com.example.g0569.base.BaseButton;
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.base.model.Item;
 import com.example.g0569.mazegame.MazeContract;
@@ -13,14 +12,11 @@ public class MazeGame extends BaseGame {
 
   private MazeContract.Presenter presenter;
   private MazeContract.View view;
-  private float gridWidth;
-  private float gridHeight;
-  private Coordinate startpoint;
+  private Coordinate startPoint;
   private Inventory inventory;
   private Item[][] myMazeItem = new Item[Constants.GRID_HEIGHT][Constants.GRID_WIDTH];
   private int[][] mazeGrid;
   private MazePlayer mazePlayer;
-  private BaseButton Button;
   private int unbuiltNPC;
   private MazeStopWatch stopWatch;
   private SaveMaze save;
@@ -33,29 +29,51 @@ public class MazeGame extends BaseGame {
     this.save = new SaveMaze();
   }
 
+  /**
+   * Return the presenter of the game.
+   *
+   * @return the presenter of the mazeGame
+   */
   public MazeContract.Presenter getPresenter() {
     return presenter;
   }
 
+  /**
+   * Return the game view
+   *
+   * @return the view of the mazeGame
+   */
   public MazeContract.View getView() {
     return view;
   }
 
+  /**
+   * Getter of the player in the game.
+   *
+   * @return the player of mazeGame
+   */
   public MazePlayer getMazePlayer() {
     return mazePlayer;
   }
 
+  /**
+   * Instantiates everything needed for mazeGame to run smoothly Makes a startPoint, mazePlayer,
+   * mazeGrid, stopWatch
+   */
   public void onStart() {
-    startpoint = Coordinate.create(0, 0);
+    startPoint = Coordinate.create(0, 0);
     mazePlayer = new MazePlayer(this);
     mazeGrid =
         MazeGenerator.generate(
             Constants.GRID_HEIGHT, Constants.GRID_WIDTH, inventory.getNonCollectedItem().size());
     stopWatch = new MazeStopWatch(Constants.MAZETIMER);
-    //    Button = new BaseButton(this)
     getStopWatch().start();
   }
 
+  /**
+   * Pause everything in the mazeGame (including stopWatch, mazePlayer coordinate and mazeGrid and
+   * set them to save
+   */
   @Override
   public void pause() {
     stopWatch.pause();
@@ -65,9 +83,8 @@ public class MazeGame extends BaseGame {
     save.setStopWatch(stopWatch);
   }
 
-  @Override
+  /** Load everything from the save class and resume the game status. */
   public void load() {
-//    stopWatch.resume();
     presenter.getMazeView().resumeView();
     mazeGrid = save.getMazeGrid();
     mazePlayer.setCoordinate(save.getPlayerCoordinate());
@@ -75,22 +92,37 @@ public class MazeGame extends BaseGame {
     stopWatch.resume();
   }
 
-  public Coordinate getStartPoint() {
-    return this.startpoint;
+  /**
+   * Getter of the startPoint
+   *
+   * @return the startPoint of the maze
+   */
+  Coordinate getStartPoint() {
+    return this.startPoint;
   }
 
-  public void setMyMazeItem() {
-    //    MazeHelper.loadMaze(myMazeItem, this);
-  }
-
+  /**
+   * Getter of the stopWatch
+   *
+   * @return the stopWatch of the mazeGame
+   */
   public MazeStopWatch getStopWatch() {
     return stopWatch;
   }
 
-  public Item[][] getMyMazeItem() {
+  /**
+   * Getter of the mazeItem array
+   *
+   * @return the mazeItem of the mazeGame
+   */
+  Item[][] getMyMazeItem() {
     return myMazeItem;
   }
 
+  /**
+   * Update constantly with the mazePlayer and stopWatch and check if the time is up to stop the
+   * game.
+   */
   public void update() {
     mazePlayer.update();
     getStopWatch().update();
@@ -100,53 +132,72 @@ public class MazeGame extends BaseGame {
   }
 
   // TODO show inventory page
-  public void timeReach() {
+
+  /** Instruction to stop the stopWatch and stop mazeView when time is reached. */
+  private void timeReach() {
 
     getStopWatch().stop();
     presenter.getMazeView().stopView();
   }
 
-  //  public void showStatistic() {
-  //    // TODO
-  //    List<String> statistic = new ArrayList<String>();
-  //    statistic.add("Number of NPCs You catch: 1");
-  //    getGameManager().showStatistic(statistic);
-  //  }
-
+  /**
+   * Getter of the mazeGrid
+   *
+   * @return mazeGrid of the mazeGame
+   */
   public int[][] getMazeGrid() {
     return mazeGrid;
   }
 
+  /**
+   * Getter of the inventory
+   *
+   * @return the inventory of the game
+   */
   public Inventory getInventory() {
     return inventory;
   }
 
-  public Coordinate getPlayerDimensions() {
+  /**
+   * Return the dimensions of the mazePlayer
+   *
+   * @return the dimensions of the mazePlayer to measure its width and height
+   */
+  Coordinate getPlayerDimensions() {
     return presenter.getPlayerDimensions();
   }
 
+  /**
+   * instruction to get the player moved
+   *
+   * @param coordinate the direction that the player is going to move to.
+   */
   public void movePlayer(Coordinate coordinate) {
     getMazePlayer().setDirection(coordinate);
   }
 
   /**
-   * @param x
-   * @param y
-   * @return
+   * add the NPC instance to the indicated index in the mazeItem.
+   *
+   * @param x the second index in the mazeItem array, indicating x coordinate of the added item
+   * @param y the first index in the mazeItem array, indicating y coordinate of the added item
+   * @return the NPC instance that is added to the mazeItem
    */
   public NPC addItemToMazeItem(int x, int y) {
     unbuiltNPC -= 1;
     if (unbuiltNPC == -1) unbuiltNPC = inventory.getNonCollectedItem().size() - 1;
-    //      if (inventory.getNonCollectedItem().size() == 1)
-    // System.out.println(this.getInventory().getNonCollectedItem().get(unbuiltNPC).getType());
-    //    System.out.println(unbuiltNPC);
     this.getMyMazeItem()[y][x] = this.getInventory().getNonCollectedItem().get(unbuiltNPC);
-    //    System.out.println(this.getInventory().getNonCollectedItem().get(unbuiltNPC - 1));
     return this.getInventory().getNonCollectedItem().get(unbuiltNPC);
   }
 
-  /** TODO delete from 2d array mazeItem; check the default value of Item */
-  public void deleteItem(int x, int y, NPC npc) {
+  /**
+   * Delete the NPC on its index in the mazeItem array
+   *
+   * @param x the x coordinate of the NPC
+   * @param y the y coordinate of the NPC
+   * @param npc the NPC that is targeted to remove from the mazeItem
+   */
+  void deleteItem(int x, int y, NPC npc) {
     this.getMyMazeItem()[y][x] = null;
     this.inventory.deleteNoneCollectedItem(npc);
   }
