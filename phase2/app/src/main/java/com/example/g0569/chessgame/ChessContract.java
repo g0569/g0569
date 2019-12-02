@@ -13,14 +13,6 @@ public interface ChessContract {
     void initView();
 
     /**
-     * Find touched grid coordinate int.
-     *
-     * @param coordinate the coordinate
-     * @return the index code of touched Grid coordinate.
-     */
-    int findTouchedGridCoordinate(Coordinate coordinate);
-
-    /**
      * Draw chess piece.
      *
      * @param coordinate the coordinate
