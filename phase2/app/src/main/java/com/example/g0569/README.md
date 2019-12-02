@@ -74,6 +74,35 @@ In the boss game, the user is now able to choose which NPC it wants to use to at
 who to bring in. In the inventory, if the user does not choose to battle one of the NPCs, then they
 don't have the ability to use them in the Boss game.
 
+## Addition rules for level two Chess Game.
+ChessGame:
+
+Player attack first. Every Player chess piece that wins a chess-vs-chess fight scores 1 point.
+Then NPC attack. Every NPC chess piece that wins a chess-vs-chess fight deduct 1 point.
+at last if there is more than or equal to 0 points, player wins. Otherwise (negative points) Player loses.
+
+Column 1 is Player's back line
+Column 2 is Player's front line
+Column 3 is NPC's front line
+Column 4 is NPC's back line
+
+There are 6 types of chess piece
+
+Circle(type1): Basic unit. Can only attack enemy front line chess piece in the same row
+
+Diamond(type2): Basic unit (but with higher dmg)
+
+Heart(type3): Can attack enemy front line chess piece in any row.
+(first seek to fight first row, then second row, at last third row)
+
+Square(type4): Can attack enemy back line chess piece in any row.
+(first seek to fight first row, then second row, at last third row)
+
+Star(type5): Can attack enemy front/back line chess piece in the same row
+(if no enemy piece on front line then seek to fight the back line chess piece)
+
+Triangle(type6): Act as basic unit. deals double dmg when attacking
+
 
 
 
