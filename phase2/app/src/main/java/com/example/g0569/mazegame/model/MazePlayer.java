@@ -26,7 +26,7 @@ public class MazePlayer extends Player {
     this.game = game;
     float x = this.getGame().getStartPoint().getX();
     float y = this.getGame().getStartPoint().getY();
-    this.coordinate = new Coordinate(x, y);
+    this.coordinate = Coordinate.create(x, y);
     appearanceSize = game.getPlayerDimensions();
     direction = Coordinate.create(0, 0);
   }
