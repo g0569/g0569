@@ -28,7 +28,8 @@ public abstract class ChessPiece extends Item implements InterchangeableBehavior
    */
   boolean matchCoordinate(Integer[] coordinateArray) {
     boolean isMatch = false;
-    if(this.getCoordinate().getIntX() == coordinateArray[0] && this.getCoordinate().getIntY() == coordinateArray[1]){
+    if (this.getCoordinate().getIntX() == coordinateArray[0]
+        && this.getCoordinate().getIntY() == coordinateArray[1]) {
       isMatch = true;
     }
     return isMatch;

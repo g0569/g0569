@@ -44,9 +44,7 @@ public class ChessGame extends BaseGame {
     placePlayerChess();
   }
 
-  /**
-   * Decode the NPC data from SQLite database which has been read and stored in NPC.
-   */
+  /** Decode the NPC data from SQLite database which has been read and stored in NPC. */
   private void decodeNPCData() {
     String chessString = selectedNPC.getChessLayout(); // get data from NPC from level one.
     String[] chessDataList = chessString.split("\\."); // suppose we are getting string
@@ -65,6 +63,7 @@ public class ChessGame extends BaseGame {
 
   /**
    * Place the NPC chess piece to the board.
+   *
    * @param x the x coordinate
    * @param y the y coordinate
    * @param type the chess piece type.
@@ -155,8 +154,8 @@ public class ChessGame extends BaseGame {
   }
 
   /**
-   * Filter the Chess piece still in the player's inventory.
-   * Only put the Chess Piece on the board to fight list.
+   * Filter the Chess piece still in the player's inventory. Only put the Chess Piece on the board
+   * to fight list.
    */
   private List<NPC> addChessPieceToFightList(List<NPC> NPCList) {
     List<NPC> fightList = new ArrayList<>();
@@ -213,23 +212,23 @@ public class ChessGame extends BaseGame {
   }
 
   /**
-   * Sets game over result.
+   * Shows game over result.
    *
    * @param winGame the win game
    */
-  public void setGameOverResult(boolean winGame) {
+  public void showGameOverResult(boolean winGame) {
     if (winGame && !inventory.getAvailableItem().contains(selectedNPC)) {
       inventory.addAvailableItem(selectedNPC);
     }
   }
 
   /**
-   * Gets position has been taken.
+   * Shows whether the position has been taken.
    *
    * @param coordinate the coordinate
    * @return the position has been taken
    */
-  public boolean getPositionHasBeenTaken(Coordinate coordinate) {
+  public boolean showPositionHasBeenTaken(Coordinate coordinate) {
     boolean findInSamePosition = false;
     for (NPC npc : playerChessPieceData) {
       if (npc.getCoordinate().equals(coordinate)) findInSamePosition = true;

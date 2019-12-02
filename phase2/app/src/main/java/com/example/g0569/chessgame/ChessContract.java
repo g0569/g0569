@@ -52,7 +52,7 @@ void drawChessPiece();
 boolean startAutoFight();
 
     /**
-     * Grid coordinate to view coordinate coordinate.
+     * Translate from Grid coordinate to view coordinate coordinate.
      *
      * @param coordinate the coordinate
      * @return the coordinate
@@ -68,7 +68,7 @@ void placePlayerChess(Coordinate coordinate);
 
 
     /**
-     * View coordinate to inventory coordinate coordinate.
+     * Translate from View coordinate to inventory coordinate coordinate.
      *
      * @param coordinate the coordinate
      * @return the coordinate
@@ -76,7 +76,7 @@ void placePlayerChess(Coordinate coordinate);
 Coordinate viewCoordinateToInventoryCoordinate(Coordinate coordinate);
 
     /**
-     * View coordinate to board coordinate coordinate.
+     * Translate from View coordinate to board coordinate coordinate.
      *
      * @param coordinate the coordinate
      * @return the coordinate
@@ -94,20 +94,20 @@ String setSelectedChessPieceData(Coordinate coordinate);
     /**
      * Sets game over result.
      *
-     * @param winGame the win game
+     * @param winGame whether player win the game.
      */
-void setGameOverResult(boolean winGame);
+void showGameOverResult(boolean winGame);
 
     /**
-     * Gets position has been taken.
+     * Show whether the position has been taken.
      *
      * @param coordinate the coordinate
      * @return the position has been taken
      */
-boolean getPositionHasBeenTaken(Coordinate coordinate);
+boolean showPositionHasBeenTaken(Coordinate coordinate);
 
     /**
-     * Reset chess piece.
+     * Reset chess piece on the board back to inventory.
      */
 void resetChessPiece();
 

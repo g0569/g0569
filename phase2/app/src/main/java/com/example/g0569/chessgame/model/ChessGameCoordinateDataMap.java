@@ -7,7 +7,7 @@ import com.example.g0569.utils.Coordinate;
 import java.util.HashMap;
 
 /** The interface Chess game coordinate data maps. */
-public interface ChessGameCoordinateDataMaps {
+public interface ChessGameCoordinateDataMap {
 
   /** The constant BOARD_ROW_1_COL_1. */
   Coordinate BOARD_ROW_1_COL_1 = new Coordinate(1, 1);
