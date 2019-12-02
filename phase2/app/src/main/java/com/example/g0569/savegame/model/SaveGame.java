@@ -24,9 +24,10 @@ public class SaveGame implements Serializable {
    * @param progress the progress of current save game
    * @param inventoryData the serialized inventory data
    * @param uid the uid of the user who has this save game
+   * @param saveMazeData the save maze data
    * @throws Exception the exception
    */
-  SaveGame(
+SaveGame(
       Date createdTime,
       int saveId,
       int progress,
@@ -52,7 +53,7 @@ public class SaveGame implements Serializable {
    * @param uid the uid of the user who has this save game
    * @param isNewGame indicates if this is a new save game
    */
-  SaveGame(Date createdTime, int saveId, int progress, int uid, boolean isNewGame) {
+SaveGame(Date createdTime, int saveId, int progress, int uid, boolean isNewGame) {
     this.createdTime = createdTime;
     this.saveId = saveId;
     this.progress = progress;
@@ -61,11 +62,21 @@ public class SaveGame implements Serializable {
     this.saveMaze = new SaveMaze();
   }
 
-  public SaveMaze getSaveMaze() {
+  /**
+   * Gets save maze.
+   *
+   * @return the save maze
+   */
+public SaveMaze getSaveMaze() {
     return saveMaze;
   }
 
-  public void setSaveMaze(SaveMaze saveMaze) {
+  /**
+   * Sets save maze.
+   *
+   * @param saveMaze the save maze
+   */
+public void setSaveMaze(SaveMaze saveMaze) {
     this.saveMaze = saveMaze;
   }
 
@@ -74,7 +85,7 @@ public class SaveGame implements Serializable {
    *
    * @return the created time
    */
-  public Date getCreatedTime() {
+public Date getCreatedTime() {
     return createdTime;
   }
 
@@ -83,7 +94,7 @@ public class SaveGame implements Serializable {
    *
    * @param createdTime the created time
    */
-  void setCreatedTime(Date createdTime) {
+void setCreatedTime(Date createdTime) {
     this.createdTime = createdTime;
   }
 
@@ -92,7 +103,7 @@ public class SaveGame implements Serializable {
    *
    * @return the save id
    */
-  int getSaveId() {
+int getSaveId() {
     return saveId;
   }
 
@@ -101,7 +112,7 @@ public class SaveGame implements Serializable {
    *
    * @param saveId the save id
    */
-  void setSaveId(int saveId) {
+void setSaveId(int saveId) {
     this.saveId = saveId;
   }
 
@@ -110,7 +121,7 @@ public class SaveGame implements Serializable {
    *
    * @return the inventory
    */
-  public Inventory getInventory() {
+public Inventory getInventory() {
     return inventory;
   }
 
@@ -119,7 +130,7 @@ public class SaveGame implements Serializable {
    *
    * @param inventory the inventory
    */
-  public void setInventory(Inventory inventory) {
+public void setInventory(Inventory inventory) {
     this.inventory = inventory;
   }
 
@@ -128,7 +139,7 @@ public class SaveGame implements Serializable {
    *
    * @return the string inventory
    */
-  String getStringInventory() {
+String getStringInventory() {
     String serializedInventory = null;
     try {
       serializedInventory = Utils.serializeToString(this.inventory);
@@ -144,7 +155,7 @@ public class SaveGame implements Serializable {
    *
    * @return the string
    */
-  String getStringMazeSave() {
+String getStringMazeSave() {
     String serializedMazeData = null;
     try {
       serializedMazeData = Utils.serializeToString(this.saveMaze);
@@ -160,7 +171,7 @@ public class SaveGame implements Serializable {
    *
    * @return the progress
    */
-  public int getProgress() {
+public int getProgress() {
     return progress;
   }
 
@@ -169,7 +180,7 @@ public class SaveGame implements Serializable {
    *
    * @param progress the progress
    */
-  void setProgress(int progress) {
+void setProgress(int progress) {
     this.progress = progress;
   }
 
@@ -178,7 +189,7 @@ public class SaveGame implements Serializable {
    *
    * @return the uid
    */
-  int getUid() {
+int getUid() {
     return uid;
   }
 
@@ -187,7 +198,7 @@ public class SaveGame implements Serializable {
    *
    * @return the boolean
    */
-  public boolean isNewGame() {
+public boolean isNewGame() {
     return isNewGame;
   }
 
@@ -196,7 +207,7 @@ public class SaveGame implements Serializable {
    *
    * @param newGame the new game
    */
-  void setNewGame(boolean newGame) {
+void setNewGame(boolean newGame) {
     isNewGame = newGame;
   }
 }

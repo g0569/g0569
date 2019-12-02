@@ -12,6 +12,7 @@ import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.SQLiteHelper;
 
+/** The type Score board activity. */
 public class ScoreBoardActivity extends BaseActivity {
 
   private ScoreBoardPresenter presenter;
