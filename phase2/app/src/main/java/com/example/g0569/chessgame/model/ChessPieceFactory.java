@@ -5,14 +5,14 @@ import com.example.g0569.utils.Constants;
 /** A factory for making chessPiece instance. */
 class ChessPieceFactory {
   /**
-   * Gets chess piece.
+   * Create a chess piece for specific type.
    *
    * @param x the x
    * @param y the y
    * @param type the type
    * @return the chess piece
    */
-  ChessPiece getChessPiece(float x, float y, String type) {
+ChessPiece getChessPiece(float x, float y, String type) {
     switch (type) {
       case Constants.STAR_TYPE:
         return new StarChessPiece(x, y);

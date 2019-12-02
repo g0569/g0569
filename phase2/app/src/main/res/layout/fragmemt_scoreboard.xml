@@ -19,107 +19,118 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TableLayout
-        android:id="@+id/score_board_tableLayout"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-        <TableRow
+        <TableLayout
+            android:id="@+id/score_board_tableLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-            <TextView
-                android:id="@+id/sb_rank_title"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Rank"
-                android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/sb_username_title"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Username"
-                android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/sb_score_title"
+            <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Score"
-                android:textAlignment="viewStart"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/sb_time_title"
+                <TextView
+                    android:id="@+id/sb_rank_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Rank"
+                    android:textAlignment="textStart"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sb_username_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Username"
+                    android:textAlignment="textStart"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sb_score_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Score"
+                    android:textAlignment="viewStart"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sb_time_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Time"
+                    android:textAlignment="textEnd"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Time"
-                android:textAlignment="textEnd"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
-        </TableRow>
+                android:layout_height="match_parent"
+                android:layout_margin="2dp">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp">
+                <TextView
+                    android:id="@+id/user_rank"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="user_rank"
+                    android:textAlignment="viewStart"
+                    android:textColor="#FFEB3B"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/user_rank"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="user_rank"
-                android:textAlignment="viewStart"
-                android:textColor="#FFEB3B"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/user_username"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="user_username"
+                    android:textAlignment="viewStart"
+                    android:textColor="#FFEB3B"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/user_username"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="user_username"
-                android:textAlignment="viewStart"
-                android:textColor="#FFEB3B"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/user_score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="user_score"
+                    android:textAlignment="viewStart"
+                    android:textColor="#FFEB3B"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/user_score"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="user_score"
-                android:textAlignment="viewStart"
-                android:textColor="#FFEB3B"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/user_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="user_time"
+                    android:textAlignment="textEnd"
+                    android:textColor="#FFEB3B"
+                    android:textStyle="bold" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/user_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="user_time"
-                android:textAlignment="textEnd"
-                android:textColor="#FFEB3B"
-                android:textStyle="bold" />
-        </TableRow>
+        </TableLayout>
+    </ScrollView>
 
-    </TableLayout>
+
 
     <LinearLayout
         android:id="@+id/linearLayout5"

@@ -16,15 +16,17 @@ public class SquareChessPiece extends ChessPiece {
   public Integer[][] createTargetList() {
     Integer[][] target = new Integer[3][2];
     float column = this.getCoordinate().getX();
-    if (column == (1 | 2)) {
+    if (column == (1 | 2)) { // this means this chess piece is on player's side.
+      // Square piece can only attack enemy chess piece in the "backLine"
       target[0][0] = 4;
       target[1][0] = 4;
       target[2][0] = 4;
-    } else {
+    } else { // this means this chess piece is on the side of NPC.
       target[0][0] = 1;
       target[1][0] = 1;
       target[2][0] = 1;
     }
+    // Square piece can attack enemy chess piece in any row,
     target[0][1] = 1;
     target[1][1] = 2;
     target[2][1] = 3;

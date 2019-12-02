@@ -9,14 +9,29 @@ import java.util.List;
 /** The ScoreBoard contract interface. */
 public interface ScoreBoardContract {
   /** The interface View. */
-  interface View extends BaseView<Presenter> {}
+interface View extends BaseView<Presenter> {}
 
   /** The interface Presenter. */
-  interface Presenter extends BasePresenter {
-    Score getCurrentScore();
+interface Presenter extends BasePresenter {
+    /**
+     * Gets current score.
+     *
+     * @return the current score
+     */
+Score getCurrentScore();
 
-    List<Score> getScoreList();
+    /**
+     * Gets score list.
+     *
+     * @return the score list
+     */
+List<Score> getScoreList();
 
-    void setView(View view);
+    /**
+     * Sets view.
+     *
+     * @param view the view
+     */
+void setView(View view);
   }
 }

@@ -1,14 +1,15 @@
 package com.example.g0569.mazegame.model;
 
 import com.example.g0569.base.model.Item;
+import com.example.g0569.mazegame.MazeContract;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
+import com.example.g0569.utils.Inventory;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-// TODO: 2019-11-27 maze in a dead end; NPC wrong placing
 /** The type Maze generator. */
 public class MazeGenerator {
 
@@ -22,18 +23,21 @@ public class MazeGenerator {
   private Stack<Coordinate> stack = new Stack<>();
 
   private int[][] maze;
-  private Item[][] mazeItem;
   private int gridWidth;
   private int gridHeight;
 
-  MazeGenerator(int x, int y) {
+  private MazeGenerator(int x, int y) {
     maze = new int[y][x];
-    mazeItem = new Item[y][x];
     gridWidth = x;
     gridHeight = y;
   }
 
-  public static int[][] generate(int npcNum) {
+  /**
+   * Randomly generates a mazeGrid array
+   * @param n number of NPC in the maze
+   * @return the generated mazeGrid
+   */
+  static int[][] generate(int n) {
     MazeGenerator newMaze = new MazeGenerator(Constants.GRID_WIDTH, Constants.GRID_HEIGHT);
 
     newMaze.getStack().push(Coordinate.create(0, 0));
@@ -45,30 +49,36 @@ public class MazeGenerator {
         newMaze.randomlyAddNodesToStack(neighbors);
       }
     }
-    newMaze.updateNPCMaze(newMaze.maze, newMaze.mazeItem, npcNum);
-    //      System.out.println(int[][] newMaze.maze);
+    newMaze.updateNPCMaze(newMaze.maze, n);
     return newMaze.getMaze();
   }
 
-  private void updateNPCMaze(int[][] mazeGrid, Item[][] mazeItem, int npcNum) {
-    if (mazeGrid == null) {
-    } else {
+  /**
+   * helper method of generate method
+   * randomly place represented NPC of assigned number into mazeGrid
+   * @param mazeGrid the mazeGrid that is generated without NPC
+   * @param npcNum the number of NPCs that are placed into the mazeGrid
+   */
+  private void updateNPCMaze(int[][] mazeGrid, int npcNum) {
+    if (mazeGrid != null){
       int i = 0;
       while (i < npcNum) {
         int y = (int) (Math.random() * Constants.GRID_HEIGHT);
         int x = (int) (Math.random() * Constants.GRID_WIDTH);
         if (mazeGrid[y][x] == 1) {
-          //          System.out.println(mazeGrid[y][x]);
           i += 1;
           mazeGrid[y][x] = 2;
-
-          //          System.out.println(mazeGrid[y][x]);
         }
       }
-      //      System.out.println(mazeGrid);
     }
   }
 
+  /**
+   * helper method of generate method
+   * Check whether the node is valid to be assigned as a path.
+   * @param coor the coordinate of the node to be checked
+   * @return whether the node is valid to be assigned.
+   */
   private boolean validNextNode(Coordinate coor) {
     int numNeighboringOnes = 0;
     for (int y = coor.getIntY() - 1; y < coor.getIntY() + 2; y++) {
@@ -81,18 +91,43 @@ public class MazeGenerator {
     return (numNeighboringOnes < 3) && maze[coor.getIntY()][coor.getIntX()] != 1;
   }
 
+  /**
+   * Check if the point coordinate is inside the grid
+   * @param x x coordinate of the grid
+   * @param y y coordinate of the grid
+   * @return if the point is in the grid
+   */
   private Boolean pointOnGrid(int x, int y) {
     return x >= 0 && y >= 0 && x < gridWidth && y < gridHeight;
   }
 
+  /**
+   * Check whether the point is at the corner
+   * @param coor the current added coordinate
+   * @param x the x coordinate that is checking
+   * @param y the y coordinate that is checking
+   * @return if the point is  at the corner
+   */
   private Boolean pointNotCorner(Coordinate coor, int x, int y) {
     return (x == coor.getIntX() || y == coor.getIntY());
   }
 
+  /**
+   * Check if the x, y is the same as the current coordinate.
+   * @param coor the current added coordinate
+   * @param x the x coordinate that is checking
+   * @param y the y coordinate that is checking
+   * @return if the point is the current coordinate;
+   */
   private Boolean pointNotCoor(Coordinate coor, int x, int y) {
     return !(x == coor.getIntX() && y == coor.getIntY());
   }
 
+  /**
+   * Find the arraylist of neighbour of the
+   * @param coor the coordinate that is finding for its available neighbours.
+   * @return all the available neighbours of that coordinate.
+   */
   private ArrayList<Coordinate> findNeighbors(Coordinate coor) {
     ArrayList<Coordinate> neighbors = new ArrayList<>();
     for (int y = coor.getIntY() - 1; y < coor.getIntY() + 2; y++) {
@@ -105,6 +140,10 @@ public class MazeGenerator {
     return neighbors;
   }
 
+  /**
+   * randomly add a coordinate to the stack
+   * @param coors the arraylist of coordinates that is chosen from
+   */
   private void randomlyAddNodesToStack(ArrayList<Coordinate> coors) {
     Random rand = new Random();
     int targetIndex;
@@ -114,11 +153,19 @@ public class MazeGenerator {
     }
   }
 
+  /**
+   * Get the current maze
+   * @return the maze
+   */
   public int[][] getMaze() {
     return maze;
   }
 
-  public Stack<Coordinate> getStack() {
+  /**
+   * Get the current stack
+   * @return the current state of the stack
+   */
+  private Stack<Coordinate> getStack() {
     return stack;
   }
 }
