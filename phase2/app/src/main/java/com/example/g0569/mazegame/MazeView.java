@@ -230,7 +230,7 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
   private void drawClock() {
     int unitX = (int) (screenWidth * 0.13 / 3);
     int unitY = (int) (screenHeight * 0.13 / 3);
-    paint.setColor(Color.WHITE);
+    paint.setColor(Color.YELLOW);
     canvas.drawText(
         Integer.toString(presenter.getRemainTime()), screenWidth - 4 * unitX, 4 * unitY, paint);
   }
@@ -395,9 +395,4 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
   @Override
   public void onAccuracyChanged(Sensor sensor, int accuracy) {}
 
-  @Override
-  public void showInventory(){
-//    final FrameLayout inventoryLayout = findViewById(R.id.ContentFrame);
-    ((MazeActivity)activity).showInventory();
-  }
 }

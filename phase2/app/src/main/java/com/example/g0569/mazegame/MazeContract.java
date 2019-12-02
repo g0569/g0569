@@ -57,8 +57,6 @@ public interface MazeContract {
 
     /** Resume view after pausing the game. */
     void resumeView();
-
-    void showInventory();
   }
 
   /** The interface Presenter. */
@@ -163,8 +161,6 @@ public interface MazeContract {
      * @param saveMaze the save maze
      */
     void load(SaveMaze saveMaze);
-
-    void showInventory();
 
   }
 }

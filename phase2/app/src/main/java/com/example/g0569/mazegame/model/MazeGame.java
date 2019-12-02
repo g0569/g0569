@@ -18,7 +18,6 @@ public class MazeGame extends BaseGame {
   private int[][] mazeGrid;
   private MazePlayer mazePlayer;
   private int unbuiltNPC;
-  private int collectedNPC = 0;
   private MazeStopWatch stopWatch;
   private SaveMaze save;
 
@@ -191,7 +190,7 @@ public class MazeGame extends BaseGame {
   }
 
   /**
-   * Return the dimensions of the mazePlayer
+   * Return the size of the mazePlayer
    *
    * @return the dimensions of the mazePlayer to measure its width and height
    */
@@ -233,7 +232,7 @@ public class MazeGame extends BaseGame {
     this.getMyMazeItem()[y][x] = null;
     this.inventory.deleteNoneCollectedItem(npc);
     if (inventory.getNonCollectedItem().size() == 0){
-      presenter.showInventory();
+      timeReach();
     }
   }
 }
