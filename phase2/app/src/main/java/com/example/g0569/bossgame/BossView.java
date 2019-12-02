@@ -271,20 +271,20 @@ public class BossView extends GameView implements BossContract.View {
     int unitX = (int) (screenWidth * 0.13 / 3);
     int unitY = (int) (screenHeight * 0.13 / 3);
     aimCoordinate =
-        new Coordinate(
+        Coordinate.create(
             screenWidth / 2 - (float) aimSize / 2, screenHeight / 2 - (float) aimSize / 2);
-    enemyCoordinate = new Coordinate(0, screenHeight / 2 - (float) enemySize / 2);
-    NPCCoordinate = new Coordinate(screenWidth / 2 - screenWidth * 0.27f, screenHeight - 5 * unitY);
+    enemyCoordinate = Coordinate.create(0, screenHeight / 2 - (float) enemySize / 2);
+    NPCCoordinate = Coordinate.create(screenWidth / 2 - screenWidth * 0.27f, screenHeight - 5 * unitY);
     currentProjectileCoordinate =
-        new Coordinate(
+        Coordinate.create(
             screenWidth / 2 - (float) currentProjectileSize / 2, screenHeight - 6 * unitY);
     initialCurrentProjectileY = screenHeight - 6 * unitY;
-    shootButtonCoordinate = new Coordinate(screenWidth - 4 * unitX, screenHeight - 5 * unitY);
-    switchButtonCoordinates = new Coordinate(screenWidth - 7 * unitX, screenHeight - 5 * unitY);
-    pauseButtonCoordinates = new Coordinate(screenWidth * 0.01f, screenHeight * 0.01f);
-    menuButtonCoordinates = new Coordinate(screenWidth * 0.01f, screenHeight * 0.20f);
+    shootButtonCoordinate = Coordinate.create(screenWidth - 4 * unitX, screenHeight - 5 * unitY);
+    switchButtonCoordinates = Coordinate.create(screenWidth - 7 * unitX, screenHeight - 5 * unitY);
+    pauseButtonCoordinates = Coordinate.create(screenWidth * 0.01f, screenHeight * 0.01f);
+    menuButtonCoordinates = Coordinate.create(screenWidth * 0.01f, screenHeight * 0.20f);
     healthBarHolderCoordinate =
-        new Coordinate(
+        Coordinate.create(
             screenWidth / 2 - (float) healthBarHolderSize / 2, -(float) healthBarHolderSize / 4);
   }
 
