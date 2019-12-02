@@ -47,5 +47,6 @@ public class BossActivity extends BaseActivity {
     intent.putExtras(bundle);
     ActivityManager.getInstance().finishAllActivity();
     startActivity(intent);
+    finish();
   }
 }
