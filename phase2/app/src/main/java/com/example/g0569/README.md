@@ -4,6 +4,9 @@ final boss. Has three stages, the player must first navigate through a maze to r
 battle them in a game of autochess in order for them to join their team. Then must fight the boss in order
 to successfully win the game.
 
+## Installation
+Nothing special required. Should be able to run directly.
+
 ## Level One-- Maze Game
 Upon loading the game, a maze is generated and NPCs placed around the maze. The player can either use the
 direction buttons, or can turn on screen rotation toggle and tilt the screen in order to move. A timer starts
@@ -51,4 +54,22 @@ that dependency flows in the correct direction by having each level and segment 
 
 Every other classes that more than one level has to use is stored in the utils package. Such as the class NPC,
 since each level uses the same NPC.
+
+## Extensions
+After phase 1, we implemented a new Object called Inventory. This stores all the NPCs the user has encountered and
+so acts like a collection. In this game, the limit of NPC's the inventory holds is 6 since we only created
+6 NPCs, but this is easily extendable even further if we create more NPCs. This allows users to go back and
+look at their collection.
+
+We also created a giant scoreboard for users to compare themselves to other users, based on their results. Each
+time a user plays a game, they get a new score and additionally the ability to see how well they did
+compared to other people or how ahead they are of other people.
+
+## Customization
+In the boss game, the user is now able to choose which NPC it wants to use to attack the boss and even
+who to bring in. In the inventory, if the user does not choose to battle one of the NPCs, then they
+don't have the ability to use them in the Boss game.
+
+
+
 

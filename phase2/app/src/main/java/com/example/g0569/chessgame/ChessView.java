@@ -18,8 +18,9 @@ import java.util.Objects;
 
 /** The ChessView for the autoChessGame. */
 public class ChessView extends GameView implements ChessContract.View {
-  // The indicator whether the player choose the chessPiece(false) or place the chessPiece(true).
-  private boolean placeChess;
+  private boolean
+      placeChess; // This is the indicator whether the player choose the chessPiece(false) or place
+  // the chessPiece(true).
   private Bitmap background;
   private Bitmap inventory;
   private Bitmap startButton;
@@ -31,14 +32,13 @@ public class ChessView extends GameView implements ChessContract.View {
   private float inventoryX;
   private float inventoryY;
   private ChessContract.Presenter presenter;
-  //  private HashMap<String, Bitmap> TYPELOOKUPMAP = new HashMap<String, Bitmap>();
 
   /**
    * Instantiates a new Chess view.
    *
    * @param context the context
    */
-public ChessView(Context context) {
+  public ChessView(Context context) {
     super(context);
     paint.setTextSize(40);
     thread = new Thread(this);
@@ -50,7 +50,7 @@ public ChessView(Context context) {
    * @param context the context
    * @param attrs the attrs
    */
-public ChessView(Context context, AttributeSet attrs) {
+  public ChessView(Context context, AttributeSet attrs) {
     super(context, attrs);
     paint.setTextSize(40);
     thread = new Thread(this);
@@ -73,7 +73,7 @@ public ChessView(Context context, AttributeSet attrs) {
    *
    * @return the screen height
    */
-protected float getScreenHeight() {
+  protected float getScreenHeight() {
     return screenHeight;
   }
 
@@ -82,7 +82,7 @@ protected float getScreenHeight() {
    *
    * @return the screen width
    */
-protected float getScreenWidth() {
+  protected float getScreenWidth() {
     return screenWidth;
   }
 
@@ -91,7 +91,7 @@ protected float getScreenWidth() {
    *
    * @return the inventory x
    */
-protected float getInventoryX() {
+  protected float getInventoryX() {
     return inventoryX;
   }
 
@@ -100,7 +100,7 @@ protected float getInventoryX() {
    *
    * @return the inventory y
    */
-protected float getInventoryY() {
+  protected float getInventoryY() {
     return inventoryY;
   }
 
@@ -109,7 +109,7 @@ protected float getInventoryY() {
    *
    * @return the inventory width
    */
-protected float getInventoryWidth() {
+  protected float getInventoryWidth() {
     return inventory.getWidth();
   }
 
@@ -118,7 +118,7 @@ protected float getInventoryWidth() {
    *
    * @return the inventory height
    */
-protected float getInventoryHeight() {
+  protected float getInventoryHeight() {
     return inventory.getHeight();
   }
 
@@ -132,6 +132,7 @@ protected float getInventoryHeight() {
     super.surfaceDestroyed(holder);
   }
 
+  /** Initialize the Bitmaps. */
   private void initBitmaps() {
     background = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_background);
 
@@ -170,10 +171,8 @@ protected float getInventoryHeight() {
     getTypeLookUpTable().put("type6", npc6);
   }
 
-  /**
-   * Draw button.
-   */
-public void drawButton() {
+  /** Draw button. */
+  public void drawButton() {
     startButtonX = screenWidth * 0.9f;
     startButtonY = screenHeight * 0.7f;
     resetButtonX = screenWidth * 0.055f;
@@ -182,24 +181,12 @@ public void drawButton() {
     canvas.drawBitmap(resetButton, resetButtonX, resetButtonY, paint);
   }
 
-  /**
-   * Draw inventory.
-   */
-public void drawInventory() {
+  /** Draw inventory. */
+  public void drawInventory() {
     inventoryX = screenWidth * 0.033f;
     inventoryY = screenHeight * 0.7f;
     canvas.drawBitmap(inventory, inventoryX, inventoryY, paint);
   }
-
-  // TODO Add two images for player and NPC. Maybe...
-
-  //    public void drawPlayer(Coordinate coordinate) {
-  //      canvas.drawBitmap(l2player, coordinate.getX(), coordinate.getY(), paint);
-  //    }
-  //
-  //    public void drawNPC(Coordinate coordinate) {
-  //      canvas.drawBitmap(l2npc, coordinate.getX(), coordinate.getY(), paint);
-  //    }
 
   @Override
   public void initView() {
@@ -210,7 +197,9 @@ public void drawInventory() {
 
   @Override
   public void drawChessPiece(Coordinate coordinate, String type) {
+    // Get the correct coordinate from model.
     Coordinate viewCoordinate = presenter.gridCoordinateToViewCoordinate(coordinate);
+    // Draw.
     canvas.drawBitmap(
         Objects.requireNonNull(getTypeLookUpTable().get(type)),
         viewCoordinate.getX(),
@@ -261,14 +250,12 @@ public void drawInventory() {
     if (event.getAction() == MotionEvent.ACTION_DOWN && event.getPointerCount() == 1) {
       float x = event.getX();
       float y = event.getY();
-      Coordinate viewCoordinate = new Coordinate(x, y);
+      Coordinate viewCoordinate = Coordinate.create(x, y);
       Coordinate inventoryCoordinate =
           presenter.viewCoordinateToInventoryCoordinate(viewCoordinate);
       Coordinate boardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);
-      //      String type = presenter.InventoryCoordinateToChessType(inventoryCoordinate);
-      System.out.println(String.valueOf(x) + " " + String.valueOf(y));
       if (placeChess) {
-        boolean positionHasBeenTaken = presenter.getPositionHasBeenTaken(boardCoordinate);
+        boolean positionHasBeenTaken = presenter.showPositionHasBeenTaken(boardCoordinate);
         if (positionHasBeenTaken) {
           Toast.makeText(
                   activity,
@@ -276,8 +263,8 @@ public void drawInventory() {
                   Toast.LENGTH_SHORT)
               .show();
         } else {
-          // Place Chess Piece now.
-          if (boardCoordinate.getIntX() != 0 | boardCoordinate.getIntY() != 0) {
+          // Place the Chess Piece now.
+          if (boardCoordinate.getIntX() != 0 && boardCoordinate.getIntY() != 0) {
             // Place a chess piece that has been chosen.
             presenter.placePlayerChess(boardCoordinate);
             placeChess = false;
@@ -295,7 +282,7 @@ public void drawInventory() {
               "Chess Game Is Over!",
               "You " + (winGame ? "Win " : "Lose ") + "the Game!",
               "Go Back To Maze");
-          presenter.setGameOverResult(winGame);
+          presenter.showGameOverResult(winGame);
         } else if (x > inventoryX
             && x < inventoryX + inventory.getWidth()
             && y > inventoryY
@@ -303,8 +290,6 @@ public void drawInventory() {
           // Choose a chess piece from inventory.
           String type = presenter.setSelectedChessPieceData(inventoryCoordinate);
           Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
-
-          // TODO To highlight the chess has been chosen.
           placeChess = true;
         } else if (x > resetButtonX
             && x < resetButtonX + resetButton.getWidth()

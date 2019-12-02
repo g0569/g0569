@@ -17,25 +17,27 @@ public abstract class ChessPiece extends Item implements InterchangeableBehavior
    */
   ChessPiece(float x, float y) {
     super();
-    this.coordinate = new Coordinate(x, y);
-    this.coordinateBackUp = new Coordinate(x, y);
+    this.coordinate = Coordinate.create(x, y);
+    this.coordinateBackUp = Coordinate.create(x, y);
   }
   /**
-   * Match coordinate boolean. // TODO Add description here.
+   * Match coordinate with the targetList. Find out whether there is a chess piece on the position
+   * the chess piece would like to attack.
    *
    * @param coordinateArray the coordinateArray
    * @return the boolean
    */
   boolean matchCoordinate(Integer[] coordinateArray) {
     boolean isMatch = false;
-    if(this.getCoordinate().getIntX() == coordinateArray[0] && this.getCoordinate().getIntY() == coordinateArray[1]){
+    if (this.getCoordinate().getIntX() == coordinateArray[0]
+        && this.getCoordinate().getIntY() == coordinateArray[1]) {
       isMatch = true;
     }
     return isMatch;
   }
 
   /**
-   * Create target list integer [ ] [ ]. TODO add description here
+   * Create nested target array.
    *
    * @return the integer [ ] [ ]
    */

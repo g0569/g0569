@@ -5,7 +5,7 @@ import com.example.g0569.utils.Constants;
 /** A factory for making chessPiece instance. */
 class ChessPieceFactory {
   /**
-   * Gets chess piece.
+   * Create a chess piece for specific type.
    *
    * @param x the x
    * @param y the y
