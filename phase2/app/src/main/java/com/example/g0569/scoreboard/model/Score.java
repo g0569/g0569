@@ -35,6 +35,7 @@ public class Score {
    * @param uid the uid
    * @param score the score
    * @param username the username
+   * @param rank the rank
    */
   public Score(int scoreId, int uid, int score, String username, int rank) {
     this.scoreId = scoreId;
@@ -45,15 +46,25 @@ public class Score {
     this.createdTime = new Date();
   }
 
-    public int getRank() {
-        return rank;
-    }
+  /**
+   * Gets rank.
+   *
+   * @return the rank
+   */
+  public int getRank() {
+    return rank;
+  }
 
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
+  /**
+   * Sets rank.
+   *
+   * @param rank the rank
+   */
+  public void setRank(int rank) {
+    this.rank = rank;
+  }
 
-    /**
+  /**
    * Gets username.
    *
    * @return the username
@@ -90,12 +101,12 @@ public class Score {
   public void setCreatedTime(String createdTime) {
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-      try {
-          this.createdTime =  dateFormat.parse(createdTime);
-      } catch (ParseException e) {
-          e.printStackTrace();
-          this.createdTime = new Date();
-      }
+    try {
+      this.createdTime = dateFormat.parse(createdTime);
+    } catch (ParseException e) {
+      e.printStackTrace();
+      this.createdTime = new Date();
+    }
   }
 
   /**

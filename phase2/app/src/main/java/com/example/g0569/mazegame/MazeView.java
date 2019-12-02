@@ -309,7 +309,7 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     int unitX = (int) (screenWidth * 0.13 / 3);
     int unitY = (int) (screenHeight * 0.13 / 3);
     if (ableMove) {
-      Coordinate coor = new Coordinate(0f, 0f);
+      Coordinate coor = Coordinate.create(0f, 0f);
       if (x >= screenWidth - 2 * unitX
           && x <= screenWidth - unitX
           && y >= screenHeight - 3 * unitY

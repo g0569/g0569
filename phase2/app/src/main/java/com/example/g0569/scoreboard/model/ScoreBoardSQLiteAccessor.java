@@ -9,6 +9,7 @@ import com.example.g0569.utils.SQLiteHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+/** The type Score board sq lite accessor. */
 public class ScoreBoardSQLiteAccessor implements ScoreBoardSQLiteAccessInterface {
 
   private SQLiteHelper sqLiteHelper;
@@ -59,6 +60,7 @@ public class ScoreBoardSQLiteAccessor implements ScoreBoardSQLiteAccessInterface
       int score = cursor.getInt(3);
       String username = cursor.getString(4);
       Score score1 = new Score(id, uid, score, username, i);
+      score1.setCreatedTime(createdTime);
       i++;
       scoreList.add(score1);
       cursor.moveToNext();

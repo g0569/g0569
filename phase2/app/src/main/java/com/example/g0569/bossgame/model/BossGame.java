@@ -2,6 +2,8 @@ package com.example.g0569.bossgame.model;
 
 import com.example.g0569.base.model.BaseGame;
 import com.example.g0569.utils.NPC;
+import com.example.g0569.utils.Observer;
+
 import java.util.List;
 
 public class BossGame extends BaseGame {
@@ -12,7 +14,6 @@ public class BossGame extends BaseGame {
   private NPC currentNPC;
   private int score;
   private boolean end;
-
 
   public BossGame() {
     super();
@@ -27,7 +28,8 @@ public class BossGame extends BaseGame {
 
     //    BossPlayer bossPlayer = new BossPlayer();
     enemy = new Enemy();
-    //    HealthBar healthBar = new HealthBar(enemy);
+    enemy.setState(false);
+
   }
 
   /**
@@ -105,7 +107,12 @@ public class BossGame extends BaseGame {
   public void setBossTeam(List team) {
     currentTeam = 0;
     this.bossTeam = team;
-    if (bossTeam != null) currentNPC = (NPC) bossTeam.get(0);
+    if (bossTeam != null) {
+        currentNPC = (NPC) bossTeam.get(0);
+        for (Object npc : bossTeam) {
+            enemy.attach((Observer) npc);
+        }
+    }
   }
 
   /**
@@ -139,6 +146,7 @@ public class BossGame extends BaseGame {
   public boolean determineEnd() {
     //    System.out.println(enemy.getHealth() <= 0.0f);
     if (enemy.getHealth() <= 0.0f) {
+      enemy.setState(true);
       end = true;
     }
     return enemy.getHealth() <= 0.0f;

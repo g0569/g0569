@@ -31,6 +31,17 @@ public class Coordinate implements Serializable {
   public static Coordinate create(float x, float y) {
     return new Coordinate(x, y);
   }
+
+  /**
+   * Create coordinate.
+   *
+   * @param x the x
+   * @param y the y
+   * @return the coordinate
+   */
+  public static Coordinate create(int x, int y) {
+    return new Coordinate(x, y);
+  }
   /**
    * Gets x.
    *
@@ -46,7 +57,8 @@ public class Coordinate implements Serializable {
    * @return the int x
    */
   public int getIntX() {
-    return (int)x;}
+    return (int) x;
+  }
 
   /**
    * Sets x.
@@ -72,7 +84,8 @@ public class Coordinate implements Serializable {
    * @return the int y
    */
   public int getIntY() {
-    return (int)y;}
+    return (int) y;
+  }
 
   /**
    * Sets y.
@@ -94,18 +107,16 @@ public class Coordinate implements Serializable {
     this.y = y;
   }
 
-    /**
+  /**
    * Sets xy.
    *
-   * @param coordinate the coordinate we can set xy together
-  * This method mainly provide a way we can avoid the aliasing in coordinate.
+   * @param coordinate the coordinate we can set xy together This method mainly provide a way we can
+   *     avoid the aliasing in coordinate.
    */
   public void setXY(Coordinate coordinate) {
     this.x = coordinate.getX();
     this.y = coordinate.getY();
   }
-
-
 
   /**
    * Offset x and y.

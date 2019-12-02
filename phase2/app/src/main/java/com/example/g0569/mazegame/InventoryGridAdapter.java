@@ -146,6 +146,7 @@ public class InventoryGridAdapter extends BaseAdapter {
     this.allNPCs = new ArrayList<>();
     this.allNPCs.addAll(availableNPCs);
     this.allNPCs.addAll(nonCollectedNPCs);
+    notifyDataSetChanged();
   }
 
   /** The type View holder. */

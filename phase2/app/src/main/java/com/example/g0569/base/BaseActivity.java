@@ -14,8 +14,12 @@ import com.example.g0569.savegame.SaveGameActivity;
 import com.example.g0569.utils.ActivityManager;
 import com.example.g0569.utils.Constants;
 
+/** The type Base activity. */
 public class BaseActivity extends AppCompatActivity {
+  /** The Bundle. */
   public Bundle bundle;
+
+  /** The Is menu visible. */
   public boolean isMenuVisible = false;
 
   @Override
@@ -45,6 +49,7 @@ public class BaseActivity extends AppCompatActivity {
     finish();
   }
 
+  /** To load page. */
   public void toLoadPage() {
     Intent intent = new Intent(this, SaveGameActivity.class);
     intent.putExtras(bundle);
@@ -52,6 +57,11 @@ public class BaseActivity extends AppCompatActivity {
     startActivity(intent);
   }
 
+  /**
+   * Show menu.
+   *
+   * @param menuLayout the menu layout
+   */
   public void showMenu(LinearLayout menuLayout) {
     if (isMenuVisible) {
       isMenuVisible = false;

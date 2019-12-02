@@ -40,7 +40,7 @@ public class MazeGenerator {
   static int[][] generate(int n) {
     MazeGenerator newMaze = new MazeGenerator(Constants.GRID_WIDTH, Constants.GRID_HEIGHT);
 
-    newMaze.getStack().push(new Coordinate(0, 0));
+    newMaze.getStack().push(Coordinate.create(0, 0));
     while (!newMaze.getStack().empty()) {
       Coordinate next = newMaze.getStack().pop();
       if (newMaze.validNextNode(next)) {
@@ -133,7 +133,7 @@ public class MazeGenerator {
     for (int y = coor.getIntY() - 1; y < coor.getIntY() + 2; y++) {
       for (int x = coor.getIntX() - 1; x < coor.getIntX() + 2; x++) {
         if (pointOnGrid(x, y) && pointNotCorner(coor, x, y) && pointNotCoor(coor, x, y)) {
-          neighbors.add(new Coordinate(x, y));
+          neighbors.add(Coordinate.create(x, y));
         }
       }
     }

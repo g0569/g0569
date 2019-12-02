@@ -30,7 +30,8 @@ public class ChessActivity extends BaseActivity {
     super.onCreate(savedInstanceState);
 
     bundle = getIntent().getExtras();
-    Inventory inventory = (Inventory) Objects.requireNonNull(bundle).getSerializable(Constants.BUNDLE_INVENTORY_KEY);
+    Inventory inventory =
+        (Inventory) Objects.requireNonNull(bundle).getSerializable(Constants.BUNDLE_INVENTORY_KEY);
     int selectedIndex = bundle.getInt(Constants.BUNDLE_SELECTEDNPC_KEY);
     setContentView(R.layout.activity_chessgame);
     chessView = findViewById(R.id.chessview);

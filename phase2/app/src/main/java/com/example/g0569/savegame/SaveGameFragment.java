@@ -21,18 +21,21 @@ import java.util.List;
  */
 public class SaveGameFragment extends Fragment implements SaveGameContract.View {
 
-  List<SaveGame> saveGames;
+  /**
+   * The Save games.
+   */
+List<SaveGame> saveGames;
   private SaveGameListAdapter adapter;
   private SaveGameContract.Presenter presenter;
   /** Instantiates a new Save game fragment. */
-  public SaveGameFragment() {}
+public SaveGameFragment() {}
 
   /**
    * Use this factory method to create a new instance of this fragment
    *
    * @return A new instance of MainFragment.
    */
-  static SaveGameFragment newInstance() {
+static SaveGameFragment newInstance() {
     return new SaveGameFragment();
   }
 

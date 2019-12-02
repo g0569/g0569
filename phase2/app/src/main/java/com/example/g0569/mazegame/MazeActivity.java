@@ -104,6 +104,7 @@ public class MazeActivity extends BaseActivity {
             saveGame.setInventory(inventory);
             saveGame.setSaveMaze(presenter.save());
             saveGameSQLiteAccessor.updateSaveGame(saveGame);
+
             showInventory(inventoryLayout);
           }
         });

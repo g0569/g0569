@@ -1,7 +1,7 @@
 package com.example.g0569.chessgame;
 
 import com.example.g0569.chessgame.model.ChessGame;
-import com.example.g0569.chessgame.model.ChessGameCoordinateDataMap;
+import com.example.g0569.chessgame.model.ChessGameCoordinateDataMaps;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.NPC;
@@ -53,21 +53,23 @@ public class ChessPresenter implements ChessContract.Presenter {
   @Override
   public Coordinate gridCoordinateToViewCoordinate(Coordinate coordinate) {
     Integer key = coordinate.getIntX() * 100 + coordinate.getIntY();
-    Coordinate viewCoordinate = new Coordinate(0, 0);
+    Coordinate viewCoordinate = Coordinate.create(0, 0);
     float width = ((ChessView) chessView).getScreenWidth();
     float height = ((ChessView) chessView).getScreenHeight();
     float inventoryX = ((ChessView) chessView).getInventoryX();
     float inventoryY = ((ChessView) chessView).getInventoryY();
     float inventoryWidth = ((ChessView) chessView).getInventoryWidth();
     float inventoryHeight = ((ChessView) chessView).getInventoryHeight();
-    // Get the firstMultiplier and secondMultiplier from ChessGameCoordinateDataMap
+    // Get the firstMultiplier and secondMultiplier from ChessGameCoordinateDataMaps
     float firstMultiplier =
         (float)
-            Objects.requireNonNull(ChessGameCoordinateDataMap.DRAW_CHESS_GRID_LOOKUP_TABLE.get(key))
+            Objects.requireNonNull(
+                    ChessGameCoordinateDataMaps.DRAW_CHESS_GRID_LOOKUP_TABLE.get(key))
                 .first;
     float secondMultiplier =
         (float)
-            Objects.requireNonNull(ChessGameCoordinateDataMap.DRAW_CHESS_GRID_LOOKUP_TABLE.get(key))
+            Objects.requireNonNull(
+                    ChessGameCoordinateDataMaps.DRAW_CHESS_GRID_LOOKUP_TABLE.get(key))
                 .second;
     // For Board Coordinate to View Coordinate to draw.
     if (coordinate.getIntX() < 10) {
@@ -87,82 +89,14 @@ public class ChessPresenter implements ChessContract.Presenter {
 
   @Override
   public Coordinate viewCoordinateToInventoryCoordinate(Coordinate coordinate) {
-    float x = coordinate.getX();
-    float y = coordinate.getY();
-    float inventoryX = ((ChessView) chessView).getInventoryX();
-    float inventoryY = ((ChessView) chessView).getInventoryY();
-    float inventoryWidth = ((ChessView) chessView).getInventoryWidth();
-    float inventoryHeight = ((ChessView) chessView).getInventoryHeight();
-
-    Coordinate InventoryCoordinate = new Coordinate(0, 0);
-    if (x > inventoryX
-        && x < inventoryX + inventoryWidth * 0.5f
-        && y > inventoryY
-        && y < inventoryY + inventoryHeight * 0.3333f) {
-      // In inventory row1 col1.
-      InventoryCoordinate.setXY(ChessGameCoordinateDataMap.INVENTORY_ROW_1_COL_1);
-    } else if (x > inventoryX
-        && x < inventoryX + inventoryWidth * 0.5f
-        && y > inventoryY + inventoryHeight * 0.3333f
-        && y < inventoryY + inventoryHeight * 0.6666f) {
-      // In inventory row2 col1.
-      InventoryCoordinate.setXY(ChessGameCoordinateDataMap.INVENTORY_ROW_2_COL_1);
-    } else if (x > inventoryX
-        && x < inventoryX + inventoryWidth * 0.5f
-        && y > inventoryY + inventoryHeight * 0.6666f
-        && y < inventoryY + inventoryHeight) {
-      // In inventory row3 col1.
-      InventoryCoordinate.setXY(ChessGameCoordinateDataMap.INVENTORY_ROW_3_COL_1);
-    } else if (x > inventoryX + inventoryWidth * 0.5f
-        && x < inventoryX + inventoryWidth
-        && y > inventoryY
-        && y < inventoryY + inventoryHeight * 0.3333f) {
-      // In inventory row1 col2.
-      InventoryCoordinate.setXY(ChessGameCoordinateDataMap.INVENTORY_ROW_1_COL_2);
-    } else if (x > inventoryX + inventoryWidth * 0.5f
-        && x < inventoryX + inventoryWidth
-        && y > inventoryY + inventoryHeight * 0.3333f
-        && y < inventoryY + inventoryHeight * 0.6666f) {
-      // In inventory row2 col2.
-      InventoryCoordinate.setXY(ChessGameCoordinateDataMap.INVENTORY_ROW_2_COL_2);
-    } else if (x > inventoryX + inventoryWidth * 0.5f
-        && x < inventoryX + inventoryWidth
-        && y > inventoryY + inventoryHeight * 0.6666f
-        && y < inventoryY + inventoryHeight) {
-      // In inventory row3 col2.
-      InventoryCoordinate.setXY(ChessGameCoordinateDataMap.INVENTORY_ROW_3_COL_2);
-    }
-    return InventoryCoordinate;
+    int index = chessView.findTouchedGridCoordinate(coordinate);
+    return ChessGameCoordinateDataMaps.FIND_CHESS_GRID_LOOKUP_TABLE.get(index);
   }
 
   @Override
   public Coordinate viewCoordinateToBoardCoordinate(Coordinate coordinate) {
-    float x = coordinate.getX();
-    float y = coordinate.getY();
-    float width = ((ChessView) chessView).getScreenWidth();
-    float height = ((ChessView) chessView).getScreenHeight();
-    Coordinate BoardCoordinate = new Coordinate(0, 0);
-
-    if (x > width * 0.3f && x < width * 0.39f && y > height * 0.44f && y < height * 0.59f) {
-      // In board row1 col1.
-      BoardCoordinate.setXY(ChessGameCoordinateDataMap.BOARD_ROW_1_COL_1);
-    } else if (x > width * 0.27f && x < width * 0.37f && y > height * 0.59f && y < height * 0.72f) {
-      // In board row2 col1.
-      BoardCoordinate.setXY(ChessGameCoordinateDataMap.BOARD_ROW_2_COL_1);
-    } else if (x > width * 0.23f && x < width * 0.35f && y > height * 0.72f && y < height) {
-      // In board row3 col1.
-      BoardCoordinate.setXY(ChessGameCoordinateDataMap.BOARD_ROW_3_COL_1);
-    } else if (x > width * 0.39f && x < width * 0.5f && y > height * 0.44f && y < height * 0.59f) {
-      // In board row1 col2.
-      BoardCoordinate.setXY(ChessGameCoordinateDataMap.BOARD_ROW_1_COL_2);
-    } else if (x > width * 0.37f && x < width * 0.5f && y > height * 0.59f && y < height * 0.72f) {
-      // In board row2 col2.
-      BoardCoordinate.setXY(ChessGameCoordinateDataMap.BOARD_ROW_2_COL_2);
-    } else if (x > width * 0.35f && x < width * 0.5f && y > height * 0.72f && y < height) {
-      // In board row3 col2.
-      BoardCoordinate.setXY(ChessGameCoordinateDataMap.BOARD_ROW_3_COL_2);
-    }
-    return BoardCoordinate;
+    int index = chessView.findTouchedGridCoordinate(coordinate);
+    return ChessGameCoordinateDataMaps.FIND_CHESS_GRID_LOOKUP_TABLE.get(index);
   }
 
   @Override

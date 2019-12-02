@@ -123,7 +123,7 @@ public class MazeGame extends BaseGame {
     save.setMazeGrid(mazeGrid);
     return save;
   }
-  
+
   /**
    * Getter of the startPoint
    *

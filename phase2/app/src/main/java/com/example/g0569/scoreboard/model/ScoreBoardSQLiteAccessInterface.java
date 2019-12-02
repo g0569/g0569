@@ -1,8 +1,6 @@
 package com.example.g0569.scoreboard.model;
 
 import com.example.g0569.base.SQLiteAccessInterface;
-import com.example.g0569.savegame.model.SaveGame;
-import com.example.g0569.utils.NPC;
 
 import java.util.List;
 
@@ -13,12 +11,12 @@ public interface ScoreBoardSQLiteAccessInterface extends SQLiteAccessInterface {
    *
    * @param score the score of the user
    */
-  void uploadScore(Score score);
+void uploadScore(Score score);
 
   /**
    * get all the scores in the score board.
    *
-   * @return  all the scores
+   * @return all the scores
    */
-  List<Score> getAllScores();
+List<Score> getAllScores();
 }

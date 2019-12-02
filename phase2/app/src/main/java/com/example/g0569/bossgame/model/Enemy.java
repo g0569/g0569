@@ -1,13 +1,15 @@
 package com.example.g0569.bossgame.model;
 
 import com.example.g0569.base.model.Item;
+import com.example.g0569.utils.Observable;
+import com.example.g0569.utils.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Enemy extends Item implements Observable {
 
-  private List<Observer> observers = new ArrayList<Observer>();
+  private List<Observer> observers = new ArrayList<>();
   // The health and initial health of the Enemy
   private float health;
   private float initialHealth;
@@ -17,6 +19,8 @@ public class Enemy extends Item implements Observable {
   // The direction it moves
   private int xDirection;
   private int counterToUpdate;
+
+  private boolean defeated;
 
   Enemy() {
     super();
@@ -59,7 +63,6 @@ public class Enemy extends Item implements Observable {
       health -= damageTaken;
     }
     health = Math.max(0.0f, health);
-    setState((int) health);
   }
 
   String getResist() {
@@ -72,17 +75,10 @@ public class Enemy extends Item implements Observable {
     }
   }
 
-  //  public boolean isAttacked(float coordinateX, float coordinateY) {
-  ////    if ((getCoordinate().getX() < coordinateX && coordinateX < destRect.right)
-  ////        && (getCoordinate().getY() < coordinateY && coordinateY < destRect.bottom)) {
-  ////      //      System.out.println("I'm hit");
-  ////      return true;
-  ////    }
-  //    return false;
-  //  }
-
   /**
-   * Sets the direction x factor of the enemy depending on the screen size of the android device being used.
+   * Sets the direction x factor of the enemy depending on the screen size of the android device
+   * being used.
+   *
    * @param directionMovement the screen size and based on that decides amount of movmement
    */
   void setxDirection(int directionMovement) {
@@ -91,6 +87,7 @@ public class Enemy extends Item implements Observable {
 
   /**
    * Returns the amount it moves in the x direction
+   *
    * @return movement in x direction
    */
   int getXDirection() {
@@ -111,29 +108,23 @@ public class Enemy extends Item implements Observable {
    *
    * @return the initial Health
    */
-  public float getInitialHealth() {
+  float getInitialHealth() {
     return initialHealth;
   }
 
   @Override
-  public int getState() {
-    return (int) getHealth();
+  public boolean getState() {
+    return defeated;
   }
 
-  @Override
-  public void setState(int state) {
-
-    health = state;
-    notifyAllObservers();
+  public void setState(boolean defeated) {
+    this.defeated = defeated;
+    if (defeated) notifyAllObservers();
   }
 
   @Override
   public void attach(Observer observer) {
     this.observers.add(observer);
-  }
-
-  public int getInitialState() {
-    return (int) getInitialHealth();
   }
 
   @Override
@@ -145,8 +136,4 @@ public class Enemy extends Item implements Observable {
 
   @Override
   public void update() {}
-
-  float getRatioOfHealth() {
-    return health / initialHealth;
-  }
 }

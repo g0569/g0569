@@ -28,7 +28,7 @@ public class SaveGameListAdapter extends BaseAdapter {
    * @param context the context
    * @param beans the save games need to be shown
    */
-  SaveGameListAdapter(Context context, List<SaveGame> beans) {
+SaveGameListAdapter(Context context, List<SaveGame> beans) {
     this.context = context;
     this.beans = beans;
   }
@@ -38,11 +38,16 @@ public class SaveGameListAdapter extends BaseAdapter {
    *
    * @return the position
    */
-  int getIsSelected() {
+int getIsSelected() {
     return isSelected;
   }
 
-  public void setSaveGames(List<SaveGame> beans) {
+  /**
+   * Sets save games.
+   *
+   * @param beans the beans
+   */
+public void setSaveGames(List<SaveGame> beans) {
     this.beans = beans;
     notifyDataSetChanged();
   }
@@ -95,17 +100,17 @@ public class SaveGameListAdapter extends BaseAdapter {
   }
 
   /** The View holder. */
-  class ViewHolder {
+class ViewHolder {
     /** The Progress. */
-    TextView progress;
+TextView progress;
 
     /** The Date. */
-    TextView date;
+TextView date;
 
     /** The Check box. */
-    CheckBox checkBox;
+CheckBox checkBox;
 
     /** The Save game item. */
-    LinearLayout saveGameItem;
+LinearLayout saveGameItem;
   }
 }
