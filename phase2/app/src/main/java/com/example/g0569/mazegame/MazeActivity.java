@@ -87,7 +87,7 @@ public class MazeActivity extends BaseActivity {
               @Override
               public void onClick(View v) {
                 saveGame.setSaveMaze(presenter.save());
-                saveGameSQLiteAccessor.updateSaveGame(saveGame);;
+                saveGameSQLiteAccessor.updateSaveGame(saveGame);
               }
             });
     menuBtn.setOnClickListener(
@@ -110,6 +110,11 @@ public class MazeActivity extends BaseActivity {
         });
   }
 
+  /** Show inventory. */
+  public void showInventory() {
+      final FrameLayout inventoryLayout = findViewById(R.id.ContentFrame);
+      showInventory(inventoryLayout);
+  }
   private void showInventory(FrameLayout inventoryLayout) {
     if (isInventoryVisible) {
       isInventoryVisible = false;

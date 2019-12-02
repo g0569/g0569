@@ -11,7 +11,7 @@ public class MazePresenter implements MazeContract.Presenter {
   private MazeGame mazeGame;
   private Inventory inventory;
 
-  public MazePresenter(MazeContract.View mazeView, Inventory inventory, SaveMaze saveMaze) {
+  MazePresenter(MazeContract.View mazeView, Inventory inventory, SaveMaze saveMaze) {
     this.mazeView = mazeView;
     this.mazeView.setPresenter(this);
     this.mazeGame = new MazeGame(this, inventory, saveMaze);
@@ -28,8 +28,6 @@ public class MazePresenter implements MazeContract.Presenter {
   public MazeContract.View getMazeView() {
     return mazeView;
   }
-
-  public void toChessGame(String args) {}
 
   @Override
   public void movePlayer(Coordinate coordinate) {
@@ -116,4 +114,9 @@ public class MazePresenter implements MazeContract.Presenter {
   public void load(SaveMaze saveMaze) {
     mazeGame.load(saveMaze);
   }
+
+  @Override
+  public void showInventory(){
+    mazeView.showInventory();
+  };
 }
