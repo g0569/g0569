@@ -8,7 +8,7 @@ class TriangleChessPiece extends ChessPiece {
    * @param x the x
    * @param y the y
    */
-TriangleChessPiece(float x, float y) {
+  TriangleChessPiece(float x, float y) {
     super(x, y);
   }
   // note: Triangle chess pieces can deal double damage when engaged as an attacking role.

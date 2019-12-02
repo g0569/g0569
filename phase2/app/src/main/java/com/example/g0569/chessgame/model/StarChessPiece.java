@@ -8,7 +8,7 @@ class StarChessPiece extends ChessPiece {
    * @param x the x
    * @param y the y
    */
-StarChessPiece(float x, float y) {
+  StarChessPiece(float x, float y) {
     super(x, y);
   }
 

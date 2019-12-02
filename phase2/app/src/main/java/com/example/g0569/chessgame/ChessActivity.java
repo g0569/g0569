@@ -66,7 +66,7 @@ public class ChessActivity extends BaseActivity {
   }
 
   /** To maze game. */
-public void toMazeGame() {
+  public void toMazeGame() {
     Intent intent = new Intent(this, MazeActivity.class);
     intent.putExtra(Constants.CHESS_GAME_OVER, Constants.CHESS_GAME_OVER);
     intent.putExtras(bundle);
@@ -81,7 +81,7 @@ public void toMazeGame() {
    * @param text the text
    * @param buttonHint the button hint
    */
-public void showEndingDialogue(String title, String text, String buttonHint) {
+  public void showEndingDialogue(String title, String text, String buttonHint) {
     ((TextView) dialogue.findViewById(R.id.dialogue_title)).setText(title);
     ((TextView) dialogue.findViewById(R.id.dialogue_text)).setText(text);
     Button dialogueButton = dialogue.findViewById(R.id.dialogue_btn_1);
