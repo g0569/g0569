@@ -114,9 +114,4 @@ public class MazePresenter implements MazeContract.Presenter {
   public void load(SaveMaze saveMaze) {
     mazeGame.load(saveMaze);
   }
-
-  @Override
-  public void showInventory(){
-    mazeView.showInventory();
-  };
 }
