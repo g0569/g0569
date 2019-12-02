@@ -249,6 +249,14 @@ public class ChessView extends GameView implements ChessContract.View {
       Coordinate inventoryCoordinate =
           presenter.viewCoordinateToInventoryCoordinate(viewCoordinate);
       Coordinate boardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);
+      if (x > resetButtonX
+          && x < resetButtonX + resetButton.getWidth()
+          && y > resetButtonY
+          && y < resetButtonY + resetButton.getHeight()) {
+        Toast.makeText(activity, "Reset the Chess Piece back to inventory!", Toast.LENGTH_SHORT)
+            .show();
+        presenter.resetChessPiece();
+      }
       if (placeChess) {
         boolean positionHasBeenTaken = presenter.showPositionHasBeenTaken(boardCoordinate);
         if (positionHasBeenTaken) {
@@ -257,12 +265,21 @@ public class ChessView extends GameView implements ChessContract.View {
                   "This position already been taken by a chess piece! ",
                   Toast.LENGTH_SHORT)
               .show();
-        } else {
+        } else if (x > screenWidth * 0.3f
+            && x < screenWidth * 0.5f
+            && y > screenHeight * 0.44f
+            && y < screenHeight) {
           // Place the Chess Piece now.
           if (boardCoordinate.getIntX() != 0 && boardCoordinate.getIntY() != 0) {
             // Place a chess piece that has been chosen.
             presenter.placePlayerChess(boardCoordinate);
             placeChess = false;
+          } else {
+            Toast.makeText(
+                    activity,
+                    "This position is not valid for placing Chess Piece!",
+                    Toast.LENGTH_SHORT)
+                .show();
           }
         }
       } else {
@@ -283,16 +300,8 @@ public class ChessView extends GameView implements ChessContract.View {
             && y > inventoryY
             && y < inventoryY + inventory.getHeight()) {
           // Choose a chess piece from inventory.
-          String type = presenter.setSelectedChessPieceData(inventoryCoordinate);
-          Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
+          Toast.makeText(activity, "chess was chosen", Toast.LENGTH_SHORT).show();
           placeChess = true;
-        } else if (x > resetButtonX
-            && x < resetButtonX + resetButton.getWidth()
-            && y > resetButtonY
-            && y < resetButtonY + resetButton.getHeight()) {
-          Toast.makeText(activity, "Reset the Chess Piece back to inventory!", Toast.LENGTH_SHORT)
-              .show();
-          presenter.resetChessPiece();
         }
         return true;
       }
@@ -303,86 +312,5 @@ public class ChessView extends GameView implements ChessContract.View {
   @Override
   public void setPresenter(ChessContract.Presenter presenter) {
     this.presenter = presenter;
-  }
-
-  @Override
-  public int findTouchedGridCoordinate(Coordinate coordinate) {
-    float x = coordinate.getX();
-    float y = coordinate.getY();
-    int gridCoordinateIndex = 0;
-    if (x > screenWidth * 0.3f
-        && x < screenWidth * 0.39f
-        && y > screenHeight * 0.44f
-        && y < screenHeight * 0.59f) {
-      // In board row1 col1.
-      gridCoordinateIndex = 1;
-    } else if (x > screenWidth * 0.27f
-        && x < screenWidth * 0.37f
-        && y > screenHeight * 0.59f
-        && y < screenHeight * 0.72f) {
-      // In board row2 col1.
-      gridCoordinateIndex = 2;
-    } else if (x > screenWidth * 0.23f
-        && x < screenWidth * 0.35f
-        && y > screenHeight * 0.72f
-        && y < screenHeight) {
-      // In board row3 col1.
-      gridCoordinateIndex = 3;
-    } else if (x > screenWidth * 0.39f
-        && x < screenWidth * 0.5f
-        && y > screenHeight * 0.44f
-        && y < screenHeight * 0.59f) {
-      // In board row1 col2.
-      gridCoordinateIndex = 4;
-    } else if (x > screenWidth * 0.37f
-        && x < screenWidth * 0.5f
-        && y > screenHeight * 0.59f
-        && y < screenHeight * 0.72f) {
-      // In board row2 col2.
-      gridCoordinateIndex = 5;
-    } else if (x > screenWidth * 0.35f
-        && x < screenWidth * 0.5f
-        && y > screenHeight * 0.72f
-        && y < screenHeight) {
-      // In board row3 col2.
-      gridCoordinateIndex = 6;
-    } else if (x > inventoryX
-        && x < inventoryX + inventory.getWidth() * 0.5f
-        && y > inventoryY
-        && y < inventoryY + inventory.getHeight() * 0.3333f) {
-      // In inventory row1 col1.
-      gridCoordinateIndex = 7;
-    } else if (x > inventoryX
-        && x < inventoryX + inventory.getWidth() * 0.5f
-        && y > inventoryY + inventory.getHeight() * 0.3333f
-        && y < inventoryY + inventory.getHeight() * 0.6666f) {
-      // In inventory row2 col1.
-      gridCoordinateIndex = 8;
-    } else if (x > inventoryX
-        && x < inventoryX + inventory.getWidth() * 0.5f
-        && y > inventoryY + inventory.getHeight() * 0.6666f
-        && y < inventoryY + inventory.getHeight()) {
-      // In inventory row3 col1.
-      gridCoordinateIndex = 9;
-    } else if (x > inventoryX + inventory.getWidth() * 0.5f
-        && x < inventoryX + inventory.getWidth()
-        && y > inventoryY
-        && y < inventoryY + inventory.getHeight() * 0.3333f) {
-      // In inventory row1 col2.
-      gridCoordinateIndex = 10;
-    } else if (x > inventoryX + inventory.getWidth() * 0.5f
-        && x < inventoryX + inventory.getWidth()
-        && y > inventoryY + inventory.getHeight() * 0.3333f
-        && y < inventoryY + inventory.getHeight() * 0.6666f) {
-      // In inventory row2 col2.
-      gridCoordinateIndex = 11;
-    } else if (x > inventoryX + inventory.getWidth() * 0.5f
-        && x < inventoryX + inventory.getWidth()
-        && y > inventoryY + inventory.getHeight() * 0.6666f
-        && y < inventoryY + inventory.getHeight()) {
-      // In inventory row3 col2.
-      gridCoordinateIndex = 12;
-    }
-    return gridCoordinateIndex;
   }
 }

@@ -18,7 +18,6 @@ public class MazeGame extends BaseGame {
   private int[][] mazeGrid;
   private MazePlayer mazePlayer;
   private int unbuiltNPC;
-  private int collectedNPC = 0;
   private MazeStopWatch stopWatch;
   private SaveMaze save;
 
@@ -163,7 +162,7 @@ public class MazeGame extends BaseGame {
     }
   }
 
-  // TODO show inventory page
+  // show inventory page
 
   /** Instruction to stop the stopWatch and stop mazeView when time is reached. */
   private void timeReach() {
@@ -233,7 +232,7 @@ public class MazeGame extends BaseGame {
     this.getMyMazeItem()[y][x] = null;
     this.inventory.deleteNoneCollectedItem(npc);
     if (inventory.getNonCollectedItem().size() == 0){
-      presenter.showInventory();
+      timeReach();
     }
   }
 }
