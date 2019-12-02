@@ -66,7 +66,6 @@ public class MazeGame extends BaseGame {
     stopWatch = new MazeStopWatch(Constants.MAZETIMER);
     if (save.isEmpty()) {
       mazeGrid = MazeGenerator.generate(inventory.getNonCollectedItem().size());
-      //    Button = new BaseButton(this)
       getStopWatch().start();
       this.save();
     } else {
@@ -112,7 +111,7 @@ public class MazeGame extends BaseGame {
     save.setMazeGrid(mazeGrid);
     return save;
   }
-  
+
   /**
    * Getter of the startPoint
    *

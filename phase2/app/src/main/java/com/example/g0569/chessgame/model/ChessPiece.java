@@ -21,7 +21,8 @@ public abstract class ChessPiece extends Item implements InterchangeableBehavior
     this.coordinateBackUp = Coordinate.create(x, y);
   }
   /**
-   * Match coordinate boolean. // TODO Add description here.
+   * Match coordinate with the targetList. Find out whether there is a chess piece on the position
+   * the chess piece would like to attack.
    *
    * @param coordinateArray the coordinateArray
    * @return the boolean
@@ -36,7 +37,7 @@ public abstract class ChessPiece extends Item implements InterchangeableBehavior
   }
 
   /**
-   * Create target list integer [ ] [ ]. TODO add description here
+   * Create nested target array.
    *
    * @return the integer [ ] [ ]
    */
