@@ -152,7 +152,7 @@ public class ChessPresenter implements ChessContract.Presenter {
     } else if (x > width * 0.27f && x < width * 0.37f && y > height * 0.59f && y < height * 0.72f) {
       // In board row2 col1.
       BoardCoordinate.setXY(ChessGameCoordinateDataMaps.BOARD_ROW_2_COL_1);
-    } else if (x > width * 0.23f && x < width * 0.35f && y > height * 0.72f && y < height) {
+    } else if (x > width * 0.17f && x < width * 0.35f && y > height * 0.72f && y < height) {
       // In board row3 col1.
       BoardCoordinate.setXY(ChessGameCoordinateDataMaps.BOARD_ROW_3_COL_1);
     } else if (x > width * 0.39f && x < width * 0.5f && y > height * 0.44f && y < height * 0.59f) {

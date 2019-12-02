@@ -300,8 +300,7 @@ public class ChessView extends GameView implements ChessContract.View {
             && y > inventoryY
             && y < inventoryY + inventory.getHeight()) {
           // Choose a chess piece from inventory.
-          String type = presenter.setSelectedChessPieceData(inventoryCoordinate);
-          Toast.makeText(activity, type + " chess was chosen", Toast.LENGTH_SHORT).show();
+          Toast.makeText(activity,"chess was chosen", Toast.LENGTH_SHORT).show();
           placeChess = true;
         }
         return true;
