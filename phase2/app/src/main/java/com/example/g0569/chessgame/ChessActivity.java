@@ -99,7 +99,7 @@ public class ChessActivity extends BaseActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              dialogue.setVisibility(View.GONE);
+            dialogue.setVisibility(View.GONE);
             presenter.resetChessPiece();
           }
         });
