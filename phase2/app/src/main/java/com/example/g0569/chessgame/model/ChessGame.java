@@ -42,7 +42,6 @@ public class ChessGame extends BaseGame {
     this.chessPieceFactory = new ChessPieceFactory(); // setup new factory for creating chess piece
     // decode NPC chess piece data from SQL database, and place NPC chess pieces on chess board.
     decodeNPCData();
-    placePlayerChess();
     placePlayerChess(); // place player's chess piece onto the player's inventory section.
   }
 
