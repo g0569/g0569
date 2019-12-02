@@ -2,14 +2,9 @@ package com.example.g0569.bossgame;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.g0569.R;
 import com.example.g0569.base.BaseActivity;
 import com.example.g0569.scoreboard.ScoreBoardActivity;
@@ -31,10 +26,6 @@ public class BossActivity extends BaseActivity {
     this.getWindow()
         .setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-    //    if (bossView == null) {
-    //      bossView = new BossView(this);
-    //    }
     Bundle bundle = getIntent().getExtras();
     Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
     setContentView(R.layout.activity_bossgame);

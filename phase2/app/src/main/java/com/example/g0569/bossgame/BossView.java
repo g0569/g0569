@@ -63,8 +63,6 @@ public class BossView extends GameView implements BossContract.View {
   private int healthBarSize;
   private int healthBarHolderSize;
 
-  // Whether the game has ended.
-  private boolean end;
   // The hashmap containing the powers and their appearance. Initialized here since at times the
   // view
   // has not been created when we call setCurrentProjectileBitmap()
@@ -428,30 +426,19 @@ public class BossView extends GameView implements BossContract.View {
    */
   public void end(boolean end) {
     if (end) {
-      this.end = true;
       paint.setColor(Color.RED);
       paint.setTextSize(600);
       canvas.drawText("YOU WIN!!!", screenWidth / 2, screenHeight / 2, paint);
       pause();
+      toScoreBoard();
     }
-  }
-
-  /**
-   * Returns the score at the end of the game. If this method is called when the game isn't over
-   * then it simply returns a 0.
-   *
-   * @return the score
-   */
-  public int getFinalScore() {
-    if (end) {
-      return bossPresenter.getScore();
-    }
-    return 0;
   }
 
   /**
    * Sets what the current NPC that the game is using looks like
-   *
+   * This originally was supposed to use the Hashmap that Chess and Maze uses, but
+   * because the presenter in this game sets the order of methods differently, we were not
+   * able to implement it here
    * @param name of the npc it is being switched to
    */
   public void setCurrentNPCBitmap(String name) {
@@ -512,7 +499,7 @@ public class BossView extends GameView implements BossContract.View {
   /**
    * Sets thrown once the projectile has been thrown.
    *
-   * @param thrown
+   * @param thrown item is thrown or not
    */
   public void setThrown(boolean thrown) {
     this.thrown = thrown;
@@ -583,7 +570,7 @@ public class BossView extends GameView implements BossContract.View {
   }
 
   @Override
-  public void toScoreBoard(){
+  public void toScoreBoard() {
     ((BossActivity) activity).toScoreBoard();
   }
 }

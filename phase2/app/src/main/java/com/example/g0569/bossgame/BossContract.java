@@ -105,5 +105,7 @@ public interface BossContract {
      * @return the number of times a projectile was thrown
      */
     int getScore();
+
+      int getFinalScore();
   }
 }
