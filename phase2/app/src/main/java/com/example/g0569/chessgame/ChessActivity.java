@@ -99,8 +99,7 @@ public class ChessActivity extends BaseActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-            isMenuVisible = true;
-            menuLayout.setVisibility(View.GONE);
+              dialogue.setVisibility(View.GONE);
             presenter.resetChessPiece();
           }
         });
