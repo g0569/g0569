@@ -22,6 +22,7 @@ import java.util.Objects;
 /** The type Maze activity. */
 public class MazeActivity extends BaseActivity {
 
+  private FrameLayout inventoryLayout;
   /** The Inventory view. */
   private InventoryFragment inventoryView;
 
@@ -68,7 +69,7 @@ public class MazeActivity extends BaseActivity {
 
     final LinearLayout menuLayout = findViewById(R.id.menu_layout);
     menuLayout.setVisibility(View.GONE);
-    final FrameLayout inventoryLayout = findViewById(R.id.ContentFrame);
+    inventoryLayout = findViewById(R.id.ContentFrame);
 
     inventoryLayout.setVisibility(View.GONE);
     Button menuBtn = findViewById(R.id.meny_btn);
@@ -112,9 +113,10 @@ public class MazeActivity extends BaseActivity {
 
   /** Show inventory. */
   public void showInventory() {
-      final FrameLayout inventoryLayout = findViewById(R.id.ContentFrame);
-      showInventory(inventoryLayout);
+    inventoryLayout = findViewById(R.id.ContentFrame);
+    showInventory(inventoryLayout);
   }
+
   private void showInventory(FrameLayout inventoryLayout) {
     if (isInventoryVisible) {
       isInventoryVisible = false;

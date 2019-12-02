@@ -232,8 +232,8 @@ public class MazeGame extends BaseGame {
   void deleteItem(int x, int y, NPC npc) {
     this.getMyMazeItem()[y][x] = null;
     this.inventory.deleteNoneCollectedItem(npc);
-    if (inventory.getNonCollectedItem().size() == 0){
-      presenter.showInventory();
-    }
+//    if (inventory.getNonCollectedItem().size() == 0){
+//      presenter.showInventory();
+//    }
   }
 }
