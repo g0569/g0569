@@ -12,7 +12,7 @@ class ChessPieceFactory {
    * @param type the type
    * @return the chess piece
    */
-  ChessPiece getChessPiece(float x, float y, String type) {
+ChessPiece getChessPiece(float x, float y, String type) {
     switch (type) {
       case Constants.STAR_TYPE:
         return new StarChessPiece(x, y);

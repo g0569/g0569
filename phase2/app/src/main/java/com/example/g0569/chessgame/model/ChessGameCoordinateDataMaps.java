@@ -7,48 +7,12 @@ import com.example.g0569.utils.Coordinate;
 import java.util.HashMap;
 
 /** The interface Chess game coordinate data maps. */
-public interface ChessGameCoordinateDataMap {
-
-  /** The constant BOARD_ROW_1_COL_1. */
-  Coordinate BOARD_ROW_1_COL_1 = Coordinate.create(1, 1);
-
-  /** The constant BOARD_ROW_1_COL_2. */
-  Coordinate BOARD_ROW_1_COL_2 = Coordinate.create(1, 2);
-
-  /** The constant BOARD_ROW_2_COL_1. */
-  Coordinate BOARD_ROW_2_COL_1 = Coordinate.create(2, 1);
-
-  /** The constant BOARD_ROW_2_COL_2. */
-  Coordinate BOARD_ROW_2_COL_2 = Coordinate.create(2, 2);
-
-  /** The constant BOARD_ROW_3_COL_1. */
-  Coordinate BOARD_ROW_3_COL_1 = Coordinate.create(3, 1);
-
-  /** The constant BOARD_ROW_3_COL_2. */
-  Coordinate BOARD_ROW_3_COL_2 = Coordinate.create(3, 2);
-
-  /** The constant INVENTORY_ROW_1_COL_1. */
-  Coordinate INVENTORY_ROW_1_COL_1 = Coordinate.create(10, 10);
-
-  /** The constant INVENTORY_ROW_1_COL_2. */
-  Coordinate INVENTORY_ROW_1_COL_2 = Coordinate.create(10, 20);
-
-  /** The constant INVENTORY_ROW_2_COL_1. */
-  Coordinate INVENTORY_ROW_2_COL_1 = Coordinate.create(20, 10);
-
-  /** The constant INVENTORY_ROW_2_COL_2. */
-  Coordinate INVENTORY_ROW_2_COL_2 = Coordinate.create(20, 20);
-
-  /** The constant INVENTORY_ROW_3_COL_1. */
-  Coordinate INVENTORY_ROW_3_COL_1 = Coordinate.create(30, 10);
-
-  /** The constant INVENTORY_ROW_3_COL_2. */
-  Coordinate INVENTORY_ROW_3_COL_2 = Coordinate.create(30, 20);
+public interface ChessGameCoordinateDataMaps {
 
   /**
    * The constant DRAW_CHESS_GRID_LOOKUP_TABLE. This HashMap stores the offset values for drawing.
    */
-  HashMap<Integer, Pair> DRAW_CHESS_GRID_LOOKUP_TABLE =
+HashMap<Integer, Pair> DRAW_CHESS_GRID_LOOKUP_TABLE =
       new HashMap<Integer, Pair>() {
         {
           Pair pair1 = Pair.create(0.32f, 0.46f);
@@ -87,6 +51,49 @@ public interface ChessGameCoordinateDataMap {
           put(2020, pair16);
           put(3010, pair17);
           put(3020, pair18);
+        }
+      };
+
+  /** The constant FIND_CHESS_GRID_LOOKUP_TABLE. */
+HashMap<Integer, Coordinate> FIND_CHESS_GRID_LOOKUP_TABLE =
+      new HashMap<Integer, Coordinate>() {
+        {
+          Coordinate BOARD_ROW_1_COL_1 = Coordinate.create(1, 1);
+
+          Coordinate BOARD_ROW_2_COL_1 = Coordinate.create(2, 1);
+
+          Coordinate BOARD_ROW_3_COL_1 = Coordinate.create(3, 1);
+
+          Coordinate BOARD_ROW_1_COL_2 = Coordinate.create(1, 2);
+
+          Coordinate BOARD_ROW_2_COL_2 = Coordinate.create(2, 2);
+
+          Coordinate BOARD_ROW_3_COL_2 = Coordinate.create(3, 2);
+
+          Coordinate INVENTORY_ROW_1_COL_1 = Coordinate.create(10, 10);
+
+          Coordinate INVENTORY_ROW_2_COL_1 = Coordinate.create(20, 10);
+
+          Coordinate INVENTORY_ROW_3_COL_1 = Coordinate.create(30, 10);
+
+          Coordinate INVENTORY_ROW_1_COL_2 = Coordinate.create(10, 20);
+
+          Coordinate INVENTORY_ROW_2_COL_2 = Coordinate.create(20, 20);
+
+          Coordinate INVENTORY_ROW_3_COL_2 = Coordinate.create(30, 20);
+
+          put(1, BOARD_ROW_1_COL_1);
+          put(2, BOARD_ROW_2_COL_1);
+          put(3, BOARD_ROW_3_COL_1);
+          put(4, BOARD_ROW_1_COL_2);
+          put(5, BOARD_ROW_2_COL_2);
+          put(6, BOARD_ROW_3_COL_2);
+          put(7, INVENTORY_ROW_1_COL_1);
+          put(8, INVENTORY_ROW_2_COL_1);
+          put(9, INVENTORY_ROW_3_COL_1);
+          put(10, INVENTORY_ROW_1_COL_2);
+          put(11, INVENTORY_ROW_2_COL_2);
+          put(12, INVENTORY_ROW_3_COL_2);
         }
       };
 }

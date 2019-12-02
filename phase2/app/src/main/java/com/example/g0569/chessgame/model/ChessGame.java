@@ -32,6 +32,8 @@ public class ChessGame extends BaseGame {
     this.presenter = presenter;
     this.inventory = inventory;
     List<NPC> allNPCs = new ArrayList<>();
+    // Find the selected NPC. Since if we pass the bundle include the NPC object, after serialize,
+    // the object will be changed to a new one. We want to keep it as aliasing here.
     allNPCs.addAll(inventory.getAvailableItem());
     allNPCs.addAll(inventory.getCollectedItem());
     this.selectedNPC = allNPCs.get(selectedIndex);
@@ -42,7 +44,6 @@ public class ChessGame extends BaseGame {
     this.chessPieceFactory = new ChessPieceFactory(); // setup new factory for creating chess piece
     // decode NPC chess piece data from SQL database, and place NPC chess pieces on chess board.
     decodeNPCData();
-    placePlayerChess();
     placePlayerChess(); // place player's chess piece onto the player's inventory section.
   }
 
