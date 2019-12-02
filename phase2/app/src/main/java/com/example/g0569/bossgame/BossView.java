@@ -18,9 +18,22 @@ import java.util.Map;
 
 /** The Bossview for the bossgame. */
 public class BossView extends GameView implements BossContract.View {
+  // The hashmap containing the powers and their appearance. Initialized here since at times the
+  // view
+  // has not been created when we call setCurrentProjectileBitmap().
+  Map<String, Bitmap> typeTable =
+      new HashMap<String, Bitmap>() {
+        {
+          put("type1", getNpc1());
+          put("type2", getNpc2());
+          put("type3", getNpc3());
+          put("type4", getNpc4());
+          put("type5", getNpc5());
+          put("type6", getNpc6());
+        }
+      };
   private BossContract.Presenter bossPresenter;
   private boolean pause;
-
   // All Bitmaps that are being used in the game
   private Bitmap background;
   private Bitmap aim;
@@ -36,7 +49,16 @@ public class BossView extends GameView implements BossContract.View {
   private Bitmap healthBarHolder;
   private Bitmap ice = BitmapFactory.decodeResource(getResources(), R.drawable.icespell);
   private Bitmap fire = BitmapFactory.decodeResource(getResources(), R.drawable.fire_spell);
-
+  // The hashmap containing the powers and their appearance. Initialized here since at times the
+  // view
+  // has not been created when we call setCurrentProjectileBitmap()
+  Map<String, Bitmap> powerTable =
+      new HashMap<String, Bitmap>() {
+        {
+          put("ice", ice);
+          put("fire", fire);
+        }
+      };
   // All coordinates that are being used in the game
   private Coordinate switchButtonCoordinates;
   private Coordinate menuButtonCoordinates;
@@ -47,10 +69,8 @@ public class BossView extends GameView implements BossContract.View {
   private Coordinate healthBarHolderCoordinate;
   private Coordinate currentProjectileCoordinate;
   private Coordinate NPCCoordinate;
-
   // The initial value of the projectile being thrown
   private float initialCurrentProjectileY;
-
   // The sizes of all the Bitmaps. Used for ease since we repeat the code to get sizes many time
   private int switchButtonSize;
   private int menuButtonSize;
@@ -62,35 +82,9 @@ public class BossView extends GameView implements BossContract.View {
   private int NPCSize;
   private int healthBarSize;
   private int healthBarHolderSize;
-
   // Whether the game has ended.
   private boolean end;
-  // The hashmap containing the powers and their appearance. Initialized here since at times the
-  // view
-  // has not been created when we call setCurrentProjectileBitmap()
-  Map<String, Bitmap> powerTable =
-      new HashMap<String, Bitmap>() {
-        {
-          put("ice", ice);
-          put("fire", fire);
-        }
-      };
-
-  // The hashmap containing the powers and their appearance. Initialized here since at times the
-  // view
-  // has not been created when we call setCurrentProjectileBitmap().
-  Map<String, Bitmap> typeTable =
-      new HashMap<String, Bitmap>() {
-        {
-          put("type1", getNpc1());
-          put("type2", getNpc2());
-          put("type3", getNpc3());
-          put("type4", getNpc4());
-          put("type5", getNpc5());
-          put("type6", getNpc6());
-        }
-      };
-
+  private boolean endFlag = false;
   // Whether a projectile is being thrown
   private boolean thrown;
 
@@ -409,7 +403,10 @@ public class BossView extends GameView implements BossContract.View {
       healthBar =
           Bitmap.createScaledBitmap(
               healthBarHolder, healthBarHolderSize, healthBarHolderSize, false);
-      end(true);
+      if (!endFlag) {
+        end(true);
+        endFlag = true;
+      }
     } else {
       healthBar =
           Bitmap.createScaledBitmap(
@@ -433,24 +430,14 @@ public class BossView extends GameView implements BossContract.View {
       paint.setTextSize(600);
       canvas.drawText("YOU WIN!!!", screenWidth / 2, screenHeight / 2, paint);
       pause();
+      toScoreBoard();
     }
   }
 
   /**
-   * Returns the score at the end of the game. If this method is called when the game isn't over
-   * then it simply returns a 0.
-   *
-   * @return the score
-   */
-  public int getFinalScore() {
-    if (end) {
-      return bossPresenter.getScore();
-    }
-    return 0;
-  }
-
-  /**
-   * Sets what the current NPC that the game is using looks like
+   * Sets what the current NPC that the game is using looks like This originally was supposed to use
+   * the Hashmap that Chess and Maze uses, but because the presenter in this game sets the order of
+   * methods differently, we were not able to implement it here
    *
    * @param name of the npc it is being switched to
    */
@@ -512,7 +499,7 @@ public class BossView extends GameView implements BossContract.View {
   /**
    * Sets thrown once the projectile has been thrown.
    *
-   * @param thrown
+   * @param thrown item is thrown or not
    */
   public void setThrown(boolean thrown) {
     this.thrown = thrown;
@@ -583,7 +570,7 @@ public class BossView extends GameView implements BossContract.View {
   }
 
   @Override
-  public void toScoreBoard(){
+  public void toScoreBoard() {
     ((BossActivity) activity).toScoreBoard();
   }
 }

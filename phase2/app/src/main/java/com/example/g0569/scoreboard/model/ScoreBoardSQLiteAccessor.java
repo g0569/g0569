@@ -30,7 +30,8 @@ public class ScoreBoardSQLiteAccessor implements ScoreBoardSQLiteAccessInterface
         latestIndex = cursor.getInt(0);
       }
       score.setScoreId(latestIndex);
-    } catch (Exception ignored) {
+    } catch (Exception e) {
+      e.printStackTrace();
     } finally {
       db.close();
     }

@@ -7,9 +7,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.g0569.R;
 import com.example.g0569.base.BaseActivity;
 import com.example.g0569.scoreboard.ScoreBoardActivity;
@@ -31,17 +28,11 @@ public class BossActivity extends BaseActivity {
     this.getWindow()
         .setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-    //    if (bossView == null) {
-    //      bossView = new BossView(this);
-    //    }
-    Bundle bundle = getIntent().getExtras();
+    bundle = getIntent().getExtras();
     Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
     setContentView(R.layout.activity_bossgame);
     bossView = findViewById(R.id.bossview);
     presenter = new BossPresenter(bossView, inventory);
-
-    Button menuBtn = findViewById(R.id.meny_btn);
   }
 
   @Override
@@ -51,9 +42,9 @@ public class BossActivity extends BaseActivity {
   }
 
   public void toScoreBoard(){
-    int bossScore = presenter.getScore();
-    bundle.putInt(Constants.BUNDLE_BOSSSCORE_KEY, bossScore);
+    int bossScore = presenter.getFinalScore();
     Intent intent = new Intent(this, ScoreBoardActivity.class);
+    intent.putExtra(Constants.BUNDLE_BOSSSCORE_KEY, bossScore);
     intent.putExtras(bundle);
     ActivityManager.getInstance().finishAllActivity();
     startActivity(intent);
