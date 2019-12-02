@@ -7,7 +7,6 @@ import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.NPC;
 
 /** The type Maze player. */
-
 public class MazePlayer extends Player {
 
   private Coordinate direction;
@@ -32,6 +31,7 @@ public class MazePlayer extends Player {
 
   /**
    * Getter of the mazeGame that is playing on
+   *
    * @return the mazeGmae
    */
   public MazeGame getGame() {
@@ -49,15 +49,14 @@ public class MazePlayer extends Player {
 
   /**
    * Setter of the coordinate attribute
+   *
    * @param coordinate the coordinate that is assigned to the coordinate attribute
    */
   public void setCoordinate(Coordinate coordinate) {
     this.coordinate = coordinate;
   }
 
-  /**
-   * update constantly to move the player and check if there's NPC around the player
-   */
+  /** update constantly to move the player and check if there's NPC around the player */
   public void update() {
     this.move();
     this.getNPCAround();
@@ -88,8 +87,12 @@ public class MazePlayer extends Player {
     float playerHeight = appearanceSize.getY() / Constants.GRID_HEIGHT;
 
     int[][] mazeGrid = game.getMazeGrid();
-    boolean inRangeY = ((int) (targetY + playerHeight * border[1])) <= (Constants.GRID_HEIGHT - 1) && ((int) (targetY + playerHeight * border[1])) >= 0;
-    boolean inRangeX = ((int) (targetX + playerWidth * border[0])) <= (Constants.GRID_WIDTH - 1) && ((int) (targetX + playerWidth * border[0])) >= 0 ;
+    boolean inRangeY =
+        ((int) (targetY + playerHeight * border[1])) <= (Constants.GRID_HEIGHT - 1)
+            && ((int) (targetY + playerHeight * border[1])) >= 0;
+    boolean inRangeX =
+        ((int) (targetX + playerWidth * border[0])) <= (Constants.GRID_WIDTH - 1)
+            && ((int) (targetX + playerWidth * border[0])) >= 0;
     if (inRangeX && inRangeY) {
       if (!(mazeGrid[(int) (targetY + playerHeight * border[1])][
               (int) (targetX + playerWidth * border[0])]
@@ -97,7 +100,7 @@ public class MazePlayer extends Player {
         this.coordinate.setX(targetX);
         this.coordinate.setY(targetY);
       }
-      }
+    }
   }
 
   /** Detect the NPCs around the player. */
@@ -113,6 +116,7 @@ public class MazePlayer extends Player {
 
   /**
    * Collect the NPC player reached to the inventory
+   *
    * @param npc the npc
    * @return boolean
    */

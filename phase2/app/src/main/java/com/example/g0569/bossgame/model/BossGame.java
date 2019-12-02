@@ -29,7 +29,6 @@ public class BossGame extends BaseGame {
     //    BossPlayer bossPlayer = new BossPlayer();
     enemy = new Enemy();
     enemy.setState(false);
-
   }
 
   /**
@@ -79,16 +78,6 @@ public class BossGame extends BaseGame {
   }
 
   /**
-   * Allows the movement of the enemy to be set since it is dependent on the screen size of the
-   * android device
-   *
-   * @param sizeOfScreen that the game is being played on.
-   */
-  public void setEnemyMovement(int sizeOfScreen) {
-    enemy.setxDirection(sizeOfScreen);
-  }
-
-  /**
    * Gets the movement of the enemy to send back to the View so that the view knows how much to
    * change it by each time to enemy moves
    *
@@ -96,6 +85,16 @@ public class BossGame extends BaseGame {
    */
   public int getEnemyMovement() {
     return enemy.getXDirection();
+  }
+
+  /**
+   * Allows the movement of the enemy to be set since it is dependent on the screen size of the
+   * android device
+   *
+   * @param sizeOfScreen that the game is being played on.
+   */
+  public void setEnemyMovement(int sizeOfScreen) {
+    enemy.setxDirection(sizeOfScreen);
   }
 
   /**
@@ -108,10 +107,10 @@ public class BossGame extends BaseGame {
     currentTeam = 0;
     this.bossTeam = team;
     if (bossTeam != null) {
-        currentNPC = (NPC) bossTeam.get(0);
-        for (Object npc : bossTeam) {
-            enemy.attach((Observer) npc);
-        }
+      currentNPC = (NPC) bossTeam.get(0);
+      for (Object npc : bossTeam) {
+        enemy.attach((Observer) npc);
+      }
     }
   }
 

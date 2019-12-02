@@ -2,11 +2,9 @@ package com.example.g0569.bossgame;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.LinearLayout;
+
 import com.example.g0569.R;
 import com.example.g0569.base.BaseActivity;
 import com.example.g0569.scoreboard.ScoreBoardActivity;

@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -31,14 +30,14 @@ public class Utils {
     }
   }
 
-  public static String serializeToString(Object obj) throws Exception{
+  public static String serializeToString(Object obj) throws Exception {
     ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
     ObjectOutputStream objOut = new ObjectOutputStream(byteOut);
     objOut.writeObject(obj);
     return byteOut.toString("ISO-8859-1");
   }
 
-  public static Object deserializeToObject(String str) throws Exception{
+  public static Object deserializeToObject(String str) throws Exception {
     ByteArrayInputStream byteIn = new ByteArrayInputStream(str.getBytes("ISO-8859-1"));
     ObjectInputStream objIn = new ObjectInputStream(byteIn);
     return objIn.readObject();

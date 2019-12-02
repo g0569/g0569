@@ -14,7 +14,6 @@ import android.view.SurfaceHolder;
 
 import com.example.g0569.R;
 import com.example.g0569.base.GameView;
-import com.example.g0569.main.MainActivity;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.NPC;

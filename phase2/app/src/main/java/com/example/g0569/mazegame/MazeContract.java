@@ -161,6 +161,5 @@ public interface MazeContract {
      * @param saveMaze the save maze
      */
     void load(SaveMaze saveMaze);
-
   }
 }

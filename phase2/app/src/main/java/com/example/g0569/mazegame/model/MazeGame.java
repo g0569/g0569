@@ -88,6 +88,7 @@ public class MazeGame extends BaseGame {
 
   /**
    * Reload all the data stored in the saveMaze
+   *
    * @param saveMaze store the state of components when last paused
    */
   public void load(SaveMaze saveMaze) {
@@ -100,11 +101,9 @@ public class MazeGame extends BaseGame {
     stopWatch.resume();
   }
 
-  /**
-   * Resume the state of components
-   */
+  /** Resume the state of components */
   public void load() {
-//    stopWatch.resume();
+    //    stopWatch.resume();
     presenter.getMazeView().resumeView();
     mazeGrid = save.getMazeGrid();
     mazePlayer.setCoordinate(save.getPlayerCoordinate());
@@ -114,6 +113,7 @@ public class MazeGame extends BaseGame {
 
   /**
    * Save the status of all the components
+   *
    * @return the data load
    */
   public SaveMaze save() {
@@ -231,7 +231,7 @@ public class MazeGame extends BaseGame {
   void deleteItem(int x, int y, NPC npc) {
     this.getMyMazeItem()[y][x] = null;
     this.inventory.deleteNoneCollectedItem(npc);
-    if (inventory.getNonCollectedItem().size() == 0){
+    if (inventory.getNonCollectedItem().size() == 0) {
       timeReach();
     }
   }

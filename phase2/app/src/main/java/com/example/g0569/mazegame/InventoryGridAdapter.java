@@ -41,10 +41,10 @@ public class InventoryGridAdapter extends BaseAdapter {
    * @param inventoryFragment the inventory fragment
    */
   InventoryGridAdapter(
-          Context context,
-          List<NPC> nonCollectedNPCs,
-          List<NPC> availableNPCs,
-          InventoryFragment inventoryFragment) {
+      Context context,
+      List<NPC> nonCollectedNPCs,
+      List<NPC> availableNPCs,
+      InventoryFragment inventoryFragment) {
     this.context = context;
     this.nonCollectedNPCs = nonCollectedNPCs;
     this.availableNPCs = availableNPCs;

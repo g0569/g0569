@@ -85,15 +85,6 @@ public class NPC extends Item implements Serializable, Observer {
   }
 
   /**
-   * Sets it's coordinates
-   *
-   * @param coordinate of where it is
-   */
-  public void setCoordinate(Coordinate coordinate) {
-    behavior.setCoordinate(coordinate);
-  }
-
-  /**
    * Returns the coordinates
    *
    * @return the coordinates of where it is
@@ -102,18 +93,18 @@ public class NPC extends Item implements Serializable, Observer {
     return behavior.getCoordinate();
   }
 
+  /**
+   * Sets it's coordinates
+   *
+   * @param coordinate of where it is
+   */
+  public void setCoordinate(Coordinate coordinate) {
+    behavior.setCoordinate(coordinate);
+  }
+
   /** Does its behavior */
   public void action() {
     behavior.action();
-  }
-
-  /**
-   * Sets the behavior of the NPC
-   *
-   * @param behavior of the NPC
-   */
-  public void setBehavior(InterchangeableBehavior behavior) {
-    this.behavior = behavior;
   }
 
   /**
@@ -123,6 +114,15 @@ public class NPC extends Item implements Serializable, Observer {
    */
   public InterchangeableBehavior getBehavior() {
     return behavior;
+  }
+
+  /**
+   * Sets the behavior of the NPC
+   *
+   * @param behavior of the NPC
+   */
+  public void setBehavior(InterchangeableBehavior behavior) {
+    this.behavior = behavior;
   }
 
   /**

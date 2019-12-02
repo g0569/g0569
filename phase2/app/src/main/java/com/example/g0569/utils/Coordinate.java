@@ -52,21 +52,21 @@ public class Coordinate implements Serializable {
   }
 
   /**
-   * Gets int x.
-   *
-   * @return the int x
-   */
-  public int getIntX() {
-    return (int) x;
-  }
-
-  /**
    * Sets x.
    *
    * @param x the x
    */
   public void setX(float x) {
     this.x = x;
+  }
+
+  /**
+   * Gets int x.
+   *
+   * @return the int x
+   */
+  public int getIntX() {
+    return (int) x;
   }
 
   /**
@@ -79,21 +79,21 @@ public class Coordinate implements Serializable {
   }
 
   /**
-   * Gets int y.
-   *
-   * @return the int y
-   */
-  public int getIntY() {
-    return (int) y;
-  }
-
-  /**
    * Sets y.
    *
    * @param y the y
    */
   public void setY(float y) {
     this.y = y;
+  }
+
+  /**
+   * Gets int y.
+   *
+   * @return the int y
+   */
+  public int getIntY() {
+    return (int) y;
   }
 
   /**

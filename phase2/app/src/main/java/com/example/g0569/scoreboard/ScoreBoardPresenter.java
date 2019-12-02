@@ -7,9 +7,7 @@ import com.example.g0569.utils.Inventory;
 
 import java.util.List;
 
-/**
- * The type Score board presenter.
- */
+/** The type Score board presenter. */
 public class ScoreBoardPresenter implements ScoreBoardContract.Presenter {
 
   private ScoreBoardContract.View view;
@@ -23,7 +21,7 @@ public class ScoreBoardPresenter implements ScoreBoardContract.Presenter {
    * @param inventory the inventory
    * @param user the user
    */
-public ScoreBoardPresenter(int bossScore, Inventory inventory, User user) {
+  public ScoreBoardPresenter(int bossScore, Inventory inventory, User user) {
     int currentScore =
         (50 - bossScore) * 100
             + inventory.getAvailableItem().size() * 50
@@ -54,7 +52,7 @@ public ScoreBoardPresenter(int bossScore, Inventory inventory, User user) {
    *
    * @param scoreBoardSQLiteAccessor the score board sq lite accessor
    */
-public void setScoreBoardSQLiteAccessor(
+  public void setScoreBoardSQLiteAccessor(
       ScoreBoardSQLiteAccessInterface scoreBoardSQLiteAccessor) {
     this.scoreBoardSQLiteAccessor = scoreBoardSQLiteAccessor;
     scoreBoardSQLiteAccessor.uploadScore(currentScore);

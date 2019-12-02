@@ -14,10 +14,8 @@ import com.example.g0569.utils.SQLiteHelper;
 /** The Save game activity. */
 public class SaveGameActivity extends BaseActivity {
 
-  /**
-   * The Sq litehelper.
-   */
-SQLiteHelper sqLitehelper = new SQLiteHelper(this, "g0569");
+  /** The Sq litehelper. */
+  SQLiteHelper sqLitehelper = new SQLiteHelper(this, "g0569");
 
   private SaveGamePresenter presenter;
 
@@ -53,7 +51,7 @@ SQLiteHelper sqLitehelper = new SQLiteHelper(this, "g0569");
    *
    * @param bundle the bundle that need to pass to MazeActivity
    */
-public void startMazeGame(Bundle bundle) {
+  public void startMazeGame(Bundle bundle) {
     Intent intent = new Intent(this, MazeActivity.class);
     intent.putExtras(bundle);
     startActivity(intent);
