@@ -14,7 +14,6 @@ public class MazePlayer extends Player {
   private Coordinate appearanceSize;
   private Coordinate coordinate;
   private MazeGame game;
-  //  private ArrayList<NPC> collectedNPC;
 
   /**
    * Instantiates a new Maze player.
@@ -31,6 +30,10 @@ public class MazePlayer extends Player {
     direction = Coordinate.create(0, 0);
   }
 
+  /**
+   * Getter of the mazeGame that is playing on
+   * @return the mazeGmae
+   */
   public MazeGame getGame() {
     return game;
   }
@@ -44,22 +47,20 @@ public class MazePlayer extends Player {
     return coordinate;
   }
 
+  /**
+   * Setter of the coordinate attribute
+   * @param coordinate the coordinate that is assigned to the coordinate attribute
+   */
   public void setCoordinate(Coordinate coordinate) {
     this.coordinate = coordinate;
   }
 
+  /**
+   * update constantly to move the player and check if there's NPC around the player
+   */
   public void update() {
     this.move();
     this.getNPCAround();
-  }
-
-  /**
-   * Gets direction.
-   *
-   * @return the direction
-   */
-  public Coordinate getDirection() {
-    return direction;
   }
 
   /**
@@ -74,7 +75,6 @@ public class MazePlayer extends Player {
   /** Move the player around (left and right) Detect the wall and NPCs. */
   private void move() {
     int[] border = new int[2];
-    /** fix the inconsistent in player size and coordinate. */
     if (direction.getX() > 0f) {
       border[0] = 1;
     }
@@ -98,7 +98,6 @@ public class MazePlayer extends Player {
         this.coordinate.setY(targetY);
       }
       }
-    //    this.collectedNPC();
   }
 
   /** Detect the NPCs around the player. */
@@ -113,14 +112,11 @@ public class MazePlayer extends Player {
   }
 
   /**
-   * Todo 1. add to inventory: access from presenter; get from MazeActivity Bundle and be a
-   * presentor constructor parameter 2. delete from the maze 3. move in inventory collect NPC in the
-   * inventory
-   *
+   * Collect the NPC player reached to the inventory
    * @param npc the npc
    * @return boolean
    */
-  public void collectedNPC(NPC npc) {
+  private void collectedNPC(NPC npc) {
 
     this.game.getPresenter().addCollectedNPC(npc);
   }
@@ -128,9 +124,9 @@ public class MazePlayer extends Player {
   /**
    * delete NPC in mazeGrid and mazeItem respectively.
    *
-   * @param x
-   * @param y
-   * @param maze
+   * @param x the target x coordinate
+   * @param y the target y coordinate
+   * @param maze the maze that the NPC is deleted from
    */
   public void deleteItem(int x, int y, int[][] maze, NPC npc) {
     this.game.getPresenter().getMazeView().deleteGridItem(x, y, maze);

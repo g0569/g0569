@@ -1,5 +1,6 @@
 package com.example.g0569.mazegame;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -39,11 +40,11 @@ public class InventoryGridAdapter extends BaseAdapter {
    * @param availableNPCs the available NPCs
    * @param inventoryFragment the inventory fragment
    */
-  public InventoryGridAdapter(
-      Context context,
-      List<NPC> nonCollectedNPCs,
-      List<NPC> availableNPCs,
-      InventoryFragment inventoryFragment) {
+  InventoryGridAdapter(
+          Context context,
+          List<NPC> nonCollectedNPCs,
+          List<NPC> availableNPCs,
+          InventoryFragment inventoryFragment) {
     this.context = context;
     this.nonCollectedNPCs = nonCollectedNPCs;
     this.availableNPCs = availableNPCs;
@@ -57,8 +58,8 @@ public class InventoryGridAdapter extends BaseAdapter {
    *
    * @return the current npc
    */
-  public NPC getCurrentNPC() {
-    try{
+  NPC getCurrentNPC() {
+    try {
       currentNPC = allNPCs.get(selected);
     } catch (ArrayIndexOutOfBoundsException e) {
       currentNPC = null;
@@ -86,10 +87,11 @@ public class InventoryGridAdapter extends BaseAdapter {
    *
    * @return the selected
    */
-  public int getSelected() {
+  int getSelected() {
     return selected;
   }
 
+  @SuppressLint("InflateParams")
   @Override
   public View getView(final int position, View convertView, ViewGroup parent) {
     ViewHolder viewHolder;
@@ -140,7 +142,7 @@ public class InventoryGridAdapter extends BaseAdapter {
    * @param nonCollectedNPCs the non collected NPCs
    * @param availableNPCs the available NPCs
    */
-  public void updateInventory(List<NPC> nonCollectedNPCs, List<NPC> availableNPCs) {
+  void updateInventory(List<NPC> nonCollectedNPCs, List<NPC> availableNPCs) {
     this.nonCollectedNPCs = nonCollectedNPCs;
     this.availableNPCs = availableNPCs;
     this.allNPCs = new ArrayList<>();
