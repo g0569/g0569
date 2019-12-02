@@ -7,12 +7,12 @@ import com.example.g0569.utils.Coordinate;
 import java.util.HashMap;
 
 /** The interface Chess game coordinate data maps. */
-public interface ChessGameCoordinateDataMap {
+public interface ChessGameCoordinateDataMaps {
 
   /**
    * The constant DRAW_CHESS_GRID_LOOKUP_TABLE. This HashMap stores the offset values for drawing.
    */
-  HashMap<Integer, Pair> DRAW_CHESS_GRID_LOOKUP_TABLE =
+HashMap<Integer, Pair> DRAW_CHESS_GRID_LOOKUP_TABLE =
       new HashMap<Integer, Pair>() {
         {
           Pair pair1 = Pair.create(0.32f, 0.46f);
@@ -54,7 +54,8 @@ public interface ChessGameCoordinateDataMap {
         }
       };
 
-  HashMap<Integer, Coordinate> FIND_CHESS_GRID_LOOKUP_TABLE =
+  /** The constant FIND_CHESS_GRID_LOOKUP_TABLE. */
+HashMap<Integer, Coordinate> FIND_CHESS_GRID_LOOKUP_TABLE =
       new HashMap<Integer, Coordinate>() {
         {
           Coordinate BOARD_ROW_1_COL_1 = Coordinate.create(1, 1);

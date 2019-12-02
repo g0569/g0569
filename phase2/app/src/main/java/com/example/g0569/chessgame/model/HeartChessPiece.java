@@ -16,17 +16,17 @@ public class HeartChessPiece extends ChessPiece {
   public Integer[][] createTargetList() {
     Integer[][] target = new Integer[3][2];
     float column = this.getCoordinate().getX();
-    if (column == (1 | 2)) {// this means this chess piece is on player's side.
-        //Heart piece can only attack enemy chess piece in the "frontline"
+    if (column == (1 | 2)) { // this means this chess piece is on player's side.
+      // Heart piece can only attack enemy chess piece in the "frontLine"
       target[0][0] = 3;
       target[1][0] = 3;
       target[2][0] = 3;
-    } else {// this means this chess piece is on NPC's side.
+    } else { // this means this chess piece is on the side of NPC.
       target[0][0] = 2;
       target[1][0] = 2;
       target[2][0] = 2;
     }
-      //Heart piece can attack enemy chess piece in any row, start searching from the first row
+    // Heart piece can attack enemy chess piece in any row, start searching from the first row
     target[0][1] = 1;
     target[1][1] = 2;
     target[2][1] = 3;

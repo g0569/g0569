@@ -8,6 +8,7 @@ import com.example.g0569.utils.Coordinate;
 public interface ChessContract {
   /** The interface View. */
   interface View extends BaseView<Presenter> {
+
     /** Init view. */
     void initView();
 

@@ -151,15 +151,10 @@ public class ChessView extends GameView implements ChessContract.View {
     inventory = Bitmap.createScaledBitmap(inventory, 200, 300, false);
 
     Bitmap npc1 = Bitmap.createScaledBitmap(getNpc1(), 80, 80, false);
-
     Bitmap npc2 = Bitmap.createScaledBitmap(getNpc2(), 80, 80, false);
-
     Bitmap npc3 = Bitmap.createScaledBitmap(getNpc3(), 80, 80, false);
-
     Bitmap npc4 = Bitmap.createScaledBitmap(getNpc4(), 80, 80, false);
-
     Bitmap npc5 = Bitmap.createScaledBitmap(getNpc5(), 80, 80, false);
-
     Bitmap npc6 = Bitmap.createScaledBitmap(getNpc6(), 80, 80, false);
 
     setTypeLookUpTable(new HashMap<String, Bitmap>());
