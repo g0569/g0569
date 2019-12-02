@@ -1,6 +1,5 @@
 package com.example.g0569.scoreboard;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -8,9 +7,7 @@ import android.view.WindowManager;
 import com.example.g0569.R;
 import com.example.g0569.auth.model.User;
 import com.example.g0569.base.BaseActivity;
-import com.example.g0569.savegame.SaveGameActivity;
 import com.example.g0569.scoreboard.model.ScoreBoardSQLiteAccessor;
-import com.example.g0569.utils.ActivityManager;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
 import com.example.g0569.utils.SQLiteHelper;
@@ -42,15 +39,13 @@ public class ScoreBoardActivity extends BaseActivity {
     if (scoreBoardFragment == null) {
       scoreBoardFragment = ScoreBoardFragment.newInstance();
       getSupportFragmentManager()
-              .beginTransaction()
-              .replace(R.id.ContentFrame, scoreBoardFragment)
-              .commit();
+          .beginTransaction()
+          .replace(R.id.ContentFrame, scoreBoardFragment)
+          .commit();
     }
     setContentView(R.layout.activity_container);
 
     scoreBoardFragment.setPresenter(presenter);
     presenter.setView(scoreBoardFragment);
-
   }
-
 }

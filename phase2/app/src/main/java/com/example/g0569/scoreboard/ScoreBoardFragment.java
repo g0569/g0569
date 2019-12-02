@@ -60,7 +60,9 @@ public class ScoreBoardFragment extends Fragment implements ScoreBoardContract.V
 
     for (Score score : scoreList) {
       TableRow row = new TableRow(getActivity());
-      row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+      row.setLayoutParams(
+          new TableLayout.LayoutParams(
+              TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
       View tr = inflater.inflate(R.layout.adapter_scoreboard, row, true);
       ((TextView) tr.findViewById(R.id.sb_score)).setText(String.valueOf(score.getScore()));
       ((TextView) tr.findViewById(R.id.sb_rank)).setText(String.valueOf(score.getRank()));
