@@ -11,7 +11,6 @@ import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
-import android.widget.FrameLayout;
 
 import com.example.g0569.R;
 import com.example.g0569.base.GameView;
@@ -394,5 +393,4 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
 
   @Override
   public void onAccuracyChanged(Sensor sensor, int accuracy) {}
-
 }
