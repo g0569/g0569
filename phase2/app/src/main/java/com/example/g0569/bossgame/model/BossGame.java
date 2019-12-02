@@ -11,6 +11,8 @@ public class BossGame extends BaseGame {
   private int currentTeam;
   private NPC currentNPC;
   private int score;
+  private boolean end;
+
 
   public BossGame() {
     super();
@@ -135,10 +137,21 @@ public class BossGame extends BaseGame {
    * @return whether or not the enemy is dead
    */
   public boolean determineEnd() {
-//    System.out.println(enemy.getHealth() <= 0.0f);
+    //    System.out.println(enemy.getHealth() <= 0.0f);
+    if (enemy.getHealth() <= 0.0f) {
+      end = true;
+    }
     return enemy.getHealth() <= 0.0f;
   }
 
+  /**
+   * Returns the current conditions of teh game (whether it has ended or not)
+   *
+   * @return if the the game is done
+   */
+  public boolean getEnd() {
+    return end;
+  }
 
   /**
    * Gets the current health of the enemy.
@@ -148,10 +161,9 @@ public class BossGame extends BaseGame {
   public float getHealth() {
 
     return enemy.getHealth();
-
   }
 
-  public float getInitialHealth(){
+  public float getInitialHealth() {
     return enemy.getInitialHealth();
   }
 }

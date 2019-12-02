@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".scoreboard.ScoreBoardActivity"></activity>
+        <activity
+            android:name=".scoreboard.ScoreBoardActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".savegame.SaveGameActivity"
             android:screenOrientation="landscape" />

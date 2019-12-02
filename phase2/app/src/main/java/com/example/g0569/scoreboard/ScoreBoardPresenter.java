@@ -14,8 +14,7 @@ public class ScoreBoardPresenter implements ScoreBoardContract.Presenter {
   private ScoreBoardSQLiteAccessInterface scoreBoardSQLiteAccessor;
 
   public ScoreBoardPresenter(
-      ScoreBoardContract.View view, int bossScore, Inventory inventory, User user) {
-    this.view = view;
+       int bossScore, Inventory inventory, User user) {
     int currentScore =
         (50 - bossScore) * 100
             + inventory.getAvailableItem().size() * 50
@@ -36,7 +35,13 @@ public class ScoreBoardPresenter implements ScoreBoardContract.Presenter {
         return scoreBoardSQLiteAccessor.getAllScores();
     }
 
-    public void setScoreBoardSQLiteAccessor(ScoreBoardSQLiteAccessInterface scoreBoardSQLiteAccessor) {
+  @Override
+  public void setView(ScoreBoardContract.View view) {
+    this.view = view;
+  }
+
+  public void setScoreBoardSQLiteAccessor(ScoreBoardSQLiteAccessInterface scoreBoardSQLiteAccessor) {
         this.scoreBoardSQLiteAccessor = scoreBoardSQLiteAccessor;
+        scoreBoardSQLiteAccessor.uploadScore(currentScore);
     }
 }

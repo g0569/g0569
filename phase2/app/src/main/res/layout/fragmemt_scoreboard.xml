@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TableLayout
-        android:id="@+id/tableLayout"
+        android:id="@+id/score_board_tableLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="10dp"
@@ -36,7 +36,7 @@
                 android:id="@+id/sb_rank_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="1"
                 android:text="Rank"
                 android:textAlignment="textStart"
                 android:textColor="#FFFFFF"
@@ -82,7 +82,7 @@
                 android:id="@+id/user_rank"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="1"
                 android:text="user_rank"
                 android:textAlignment="viewStart"
                 android:textColor="#FFEB3B"

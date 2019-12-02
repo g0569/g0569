@@ -6,15 +6,16 @@
     <TableRow
         android:id="@+id/sb_table_row"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp">
 
         <TextView
             android:id="@+id/sb_rank"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:text="Rank"
-            android:textAlignment="textStart"
+            android:textAlignment="viewStart"
             android:textColor="#FFFFFF" />
 
         <TextView
@@ -23,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Username"
-            android:textAlignment="textStart"
+            android:textAlignment="viewStart"
             android:textColor="#FFFFFF" />
 
         <TextView

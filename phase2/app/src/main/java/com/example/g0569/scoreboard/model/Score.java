@@ -25,6 +25,7 @@ public class Score {
     this.uid = uid;
     this.score = score;
     this.username = username;
+    this.createdTime = new Date();
   }
 
   /**
@@ -41,6 +42,7 @@ public class Score {
     this.score = score;
     this.username = username;
     this.rank = rank;
+    this.createdTime = new Date();
   }
 
     public int getRank() {

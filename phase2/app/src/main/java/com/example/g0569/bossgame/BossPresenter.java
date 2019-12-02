@@ -13,7 +13,8 @@ public class BossPresenter implements BossContract.Presenter {
    * Instantiates a new Boss presenter.
    *
    * @param bossView the boss view
-   * @param inventory from the last levels, inventory is everything collected from mazeGame and chessGame
+   * @param inventory from the last levels, inventory is everything collected from mazeGame and
+   *     chessGame
    */
   BossPresenter(BossView bossView, Inventory inventory) {
     this.bossView = bossView;
@@ -33,9 +34,9 @@ public class BossPresenter implements BossContract.Presenter {
     bossView.setCurrentProjectileBitmap(currentPower);
   }
 
-
   /**
    * Returns how much the enemy should move based on the screen size, decides the speed.
+   *
    * @return the unit amount the enemy moves on the screen.
    */
   public int getEnemyMovement() {
@@ -58,11 +59,12 @@ public class BossPresenter implements BossContract.Presenter {
 
   /**
    * Gives the current resistance of the enemy, which affects how much health it loses
+   *
    * @return the current resistance of the enemy
    */
-  public String getResistance(){
+  public String getResistance() {
     String resist = bossGame.getEnemyResistance();
-    if (resist == null){
+    if (resist == null) {
       return "none";
     }
     return resist;
@@ -71,19 +73,30 @@ public class BossPresenter implements BossContract.Presenter {
   /**
    * Returns the score of the game, which is calculated based on how many moves was taken. The least
    * the better.
+   *
    * @return how many times a projectile was shot out.
    */
-  public int getScore(){
+  public int getScore() {
     return bossGame.getScore();
   }
 
-  @Override
-  public void pause() {
+  /**
+   * Returns the score of the game if the game has come to an end. This will be used to calculate
+   * overall score of the game
+   *
+   * @return the final score
+   */
+  public int getFinalScore() {
+    if (bossGame.getEnd()) {
+      return bossGame.getScore();
+    }
+    return 0;
   }
 
-  /**
-   * Updates the bossGame, which allows components to update.
-   */
+  @Override
+  public void pause() {}
+
+  /** Updates the bossGame, which allows components to update. */
   public void update() {
     bossGame.update();
   }
@@ -98,8 +111,9 @@ public class BossPresenter implements BossContract.Presenter {
   public void showMenu() {}
 
   /**
-   * Decreases the health of the boss based on which projectile and NPC was being used while shooting out
-   * Also updates the healthbar in bossView and checks whether the boss has zero health left.
+   * Decreases the health of the boss based on which projectile and NPC was being used while
+   * shooting out Also updates the healthbar in bossView and checks whether the boss has zero health
+   * left.
    */
   public void attackBoss() {
     bossGame.attackBoss();
