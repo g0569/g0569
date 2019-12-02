@@ -9,6 +9,7 @@ import com.example.g0569.utils.SQLiteHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+/** The type Score board sq lite accessor. */
 public class ScoreBoardSQLiteAccessor implements ScoreBoardSQLiteAccessInterface {
 
   private SQLiteHelper sqLiteHelper;

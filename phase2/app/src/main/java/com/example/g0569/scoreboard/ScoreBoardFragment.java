@@ -17,6 +17,7 @@ import com.example.g0569.scoreboard.model.Score;
 
 import java.util.List;
 
+/** The type Score board fragment. */
 public class ScoreBoardFragment extends Fragment implements ScoreBoardContract.View {
   private TableLayout scoreBoardTable;
   private ScoreBoardContract.Presenter presenter;

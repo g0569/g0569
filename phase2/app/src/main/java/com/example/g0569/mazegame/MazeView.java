@@ -11,9 +11,11 @@ import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+import android.widget.FrameLayout;
 
 import com.example.g0569.R;
 import com.example.g0569.base.GameView;
+import com.example.g0569.main.MainActivity;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Coordinate;
 import com.example.g0569.utils.NPC;
@@ -23,7 +25,6 @@ import java.util.HashMap;
 /** The Maze view. */
 public class MazeView extends GameView implements MazeContract.View, SensorEventListener {
 
-  private Bitmap background;
   private MazeContract.Presenter presenter;
 
   private Bitmap wall;
@@ -38,7 +39,7 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
   private boolean enableSensor;
 
   /**
-   * Instantiates a new Maze view.
+   * // * Instantiates a new Maze view.
    *
    * @param context the context
    */
@@ -49,6 +50,12 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     ableMove = true;
   }
 
+  /**
+   * Instantiates a new Maze view with context and attributeset.
+   *
+   * @param context the context
+   * @param attrs the attrs
+   */
   public MazeView(Context context, AttributeSet attrs) {
     super(context, attrs);
     paint.setTextSize(40);
@@ -56,6 +63,11 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     ableMove = true;
   }
 
+  /**
+   * Sets enable sensor.
+   *
+   * @param enableSensor the enable sensor showing if it is enable to change
+   */
   public void setEnableSensor(boolean enableSensor) {
     this.enableSensor = enableSensor;
   }
@@ -140,6 +152,7 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     this.presenter = presenter;
   }
 
+  /** Init and decode the bitmaps that are used. */
   public void initBitmaps() {
     wall = BitmapFactory.decodeResource(getResources(), R.drawable.mazegame_component_tile);
     wall =
@@ -198,7 +211,6 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     getTypeLookUpTable().put("type6", npc6);
   }
 
-
   @Override
   public void initView() {
     drawMaze(presenter.getMazeGrid());
@@ -214,7 +226,7 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
     canvas.drawBitmap(moveButtons, screenWidth - 4 * unitX, screenHeight - 4 * unitY, paint);
   }
 
-  /** put unitX unitY to be instance variable?? */
+  /** draw the stop watch */
   private void drawClock() {
     int unitX = (int) (screenWidth * 0.13 / 3);
     int unitY = (int) (screenHeight * 0.13 / 3);
@@ -223,14 +235,31 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
         Integer.toString(presenter.getRemainTime()), screenWidth - 4 * unitX, 4 * unitY, paint);
   }
 
+  /**
+   * Gets grid width.
+   *
+   * @return the grid width
+   */
   public float getGridWidth() {
     return gridWidth;
   }
 
+  /**
+   * Gets grid height.
+   *
+   * @return the grid height
+   */
   public float getGridHeight() {
     return gridHeight;
   }
 
+  /**
+   * convert grid size to screen size
+   *
+   * @param x x coordinate to be converted
+   * @param y y coordinate to be converted
+   * @return converted coordinate
+   */
   private Coordinate gridNum2Coor(int x, int y) {
     return Coordinate.create(x * getGridWidth(), y * getGridHeight());
   }
@@ -270,10 +299,10 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
   }
 
   /**
-   * TODO what if it is not limited to 6???
+   * Draw NPC
    *
-   * @param coor
-   * @param npc
+   * @param coor the coordinate that is drawn on
+   * @param npc the selected NPC that is drawn on the coordinate.
    */
   @Override
   public void drawNPC(Coordinate coor, NPC npc) {
@@ -286,7 +315,7 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
   @Override
   public Coordinate getPlayerDimensions() {
     Coordinate coordinate = Coordinate.create(0, 0);
-    if (player != null){
+    if (player != null) {
       coordinate = Coordinate.create(player.getWidth(), player.getHeight());
     }
     return coordinate;
@@ -365,4 +394,10 @@ public class MazeView extends GameView implements MazeContract.View, SensorEvent
 
   @Override
   public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+
+  @Override
+  public void showInventory(){
+//    final FrameLayout inventoryLayout = findViewById(R.id.ContentFrame);
+    ((MazeActivity)activity).showInventory();
+  }
 }

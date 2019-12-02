@@ -35,6 +35,7 @@ public class Score {
    * @param uid the uid
    * @param score the score
    * @param username the username
+   * @param rank the rank
    */
   public Score(int scoreId, int uid, int score, String username, int rank) {
     this.scoreId = scoreId;
@@ -45,10 +46,20 @@ public class Score {
     this.createdTime = new Date();
   }
 
+  /**
+   * Gets rank.
+   *
+   * @return the rank
+   */
   public int getRank() {
     return rank;
   }
 
+  /**
+   * Sets rank.
+   *
+   * @param rank the rank
+   */
   public void setRank(int rank) {
     this.rank = rank;
   }

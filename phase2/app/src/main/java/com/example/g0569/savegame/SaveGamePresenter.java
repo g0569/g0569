@@ -27,7 +27,7 @@ public class SaveGamePresenter implements SaveGameContract.Presenter, BaseView {
    * @param mView the save game view
    * @param bundle the bundle
    */
-  SaveGamePresenter(SaveGameContract.View mView, Bundle bundle) {
+SaveGamePresenter(SaveGameContract.View mView, Bundle bundle) {
     this.mView = mView;
     this.mView.setPresenter(this);
     this.bundle = bundle;
@@ -39,7 +39,7 @@ public class SaveGamePresenter implements SaveGameContract.Presenter, BaseView {
    *
    * @param saveGameSQLiteAccessor the save game SQLite accessor
    */
-  void setSaveGameSQLiteAccessor(SaveGameSQLiteAccessor saveGameSQLiteAccessor) {
+void setSaveGameSQLiteAccessor(SaveGameSQLiteAccessor saveGameSQLiteAccessor) {
     this.saveGameSQLiteAccessor = saveGameSQLiteAccessor;
   }
 

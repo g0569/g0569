@@ -11,12 +11,12 @@ public interface ScoreBoardSQLiteAccessInterface extends SQLiteAccessInterface {
    *
    * @param score the score of the user
    */
-  void uploadScore(Score score);
+void uploadScore(Score score);
 
   /**
    * get all the scores in the score board.
    *
    * @return all the scores
    */
-  List<Score> getAllScores();
+List<Score> getAllScores();
 }
