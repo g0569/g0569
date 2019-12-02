@@ -266,13 +266,13 @@ public class ChessView extends GameView implements ChessContract.View {
             // Place a chess piece that has been chosen.
             presenter.placePlayerChess(boardCoordinate);
             placeChess = false;
-          }
-        } else {
+          }else {
           Toast.makeText(
                   activity,
                   "This position is not valid for placing Chess Piece!",
                   Toast.LENGTH_SHORT)
               .show();
+        }
         }
       } else {
         // Either start the game or reset the game or choose a chess piece from inventory.
