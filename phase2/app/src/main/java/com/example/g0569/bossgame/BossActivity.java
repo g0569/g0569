@@ -41,7 +41,8 @@ public class BossActivity extends BaseActivity {
     presenter.start();
   }
 
-  public void toScoreBoard(){
+  /** Goes to the scoreboard after the game has completed. */
+  public void toScoreBoard() {
     int bossScore = presenter.getFinalScore();
     Intent intent = new Intent(this, ScoreBoardActivity.class);
     intent.putExtra(Constants.BUNDLE_BOSSSCORE_KEY, bossScore);
