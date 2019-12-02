@@ -18,6 +18,7 @@ public class MazeGame extends BaseGame {
   private int[][] mazeGrid;
   private MazePlayer mazePlayer;
   private int unbuiltNPC;
+  private int collectedNPC = 0;
   private MazeStopWatch stopWatch;
   private SaveMaze save;
 
@@ -66,7 +67,6 @@ public class MazeGame extends BaseGame {
     stopWatch = new MazeStopWatch(Constants.MAZETIMER);
     if (save.isEmpty()) {
       mazeGrid = MazeGenerator.generate(inventory.getNonCollectedItem().size());
-      //    Button = new BaseButton(this)
       getStopWatch().start();
       this.save();
     } else {
@@ -87,6 +87,10 @@ public class MazeGame extends BaseGame {
     save.setRemainTime(stopWatch.getRemainTime());
   }
 
+  /**
+   * Reload all the data stored in the saveMaze
+   * @param saveMaze store the state of components when last paused
+   */
   public void load(SaveMaze saveMaze) {
     //    stopWatch.resume();
     this.save = saveMaze;
@@ -97,6 +101,9 @@ public class MazeGame extends BaseGame {
     stopWatch.resume();
   }
 
+  /**
+   * Resume the state of components
+   */
   public void load() {
 //    stopWatch.resume();
     presenter.getMazeView().resumeView();
@@ -106,6 +113,10 @@ public class MazeGame extends BaseGame {
     stopWatch.resume();
   }
 
+  /**
+   * Save the status of all the components
+   * @return the data load
+   */
   public SaveMaze save() {
     save.setPlayerCoordinate(mazePlayer.getCoordinate());
     save.setRemainTime(stopWatch.getRemainTime());
@@ -221,5 +232,8 @@ public class MazeGame extends BaseGame {
   void deleteItem(int x, int y, NPC npc) {
     this.getMyMazeItem()[y][x] = null;
     this.inventory.deleteNoneCollectedItem(npc);
+    if (inventory.getNonCollectedItem().size() == 0){
+      presenter.showInventory();
+    }
   }
 }
