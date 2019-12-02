@@ -162,7 +162,7 @@ public class MazeGame extends BaseGame {
     }
   }
 
-  // TODO show inventory page
+  // show inventory page
 
   /** Instruction to stop the stopWatch and stop mazeView when time is reached. */
   private void timeReach() {

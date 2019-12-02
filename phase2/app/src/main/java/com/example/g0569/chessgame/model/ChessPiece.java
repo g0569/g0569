@@ -15,7 +15,7 @@ public abstract class ChessPiece extends Item implements InterchangeableBehavior
    * @param x The x coordinate for chess piece.
    * @param y The y coordinate for chess piece.
    */
-ChessPiece(float x, float y) {
+  ChessPiece(float x, float y) {
     super();
     this.coordinate = Coordinate.create(x, y);
     this.coordinateBackUp = Coordinate.create(x, y);
@@ -27,7 +27,7 @@ ChessPiece(float x, float y) {
    * @param coordinateArray the coordinateArray
    * @return the boolean
    */
-boolean matchCoordinate(Integer[] coordinateArray) {
+  boolean matchCoordinate(Integer[] coordinateArray) {
     boolean isMatch = false;
     if (this.getCoordinate().getIntX() == coordinateArray[0]
         && this.getCoordinate().getIntY() == coordinateArray[1]) {
@@ -41,7 +41,7 @@ boolean matchCoordinate(Integer[] coordinateArray) {
    *
    * @return the integer [ ] [ ]
    */
-public abstract Integer[][] createTargetList();
+  public abstract Integer[][] createTargetList();
 
   @Override
   public Coordinate getCoordinate() {
@@ -54,7 +54,7 @@ public abstract Integer[][] createTargetList();
   }
 
   /** Reset coordinate. */
-void resetCoordinate() {
+  void resetCoordinate() {
     this.coordinate.setXY(coordinateBackUp.getX(), coordinateBackUp.getY());
   }
 

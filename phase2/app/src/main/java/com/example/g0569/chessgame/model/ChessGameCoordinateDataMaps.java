@@ -48,7 +48,7 @@ public interface ChessGameCoordinateDataMaps {
   /**
    * The constant DRAW_CHESS_GRID_LOOKUP_TABLE. This HashMap stores the offset values for drawing.
    */
-HashMap<Integer, Pair> DRAW_CHESS_GRID_LOOKUP_TABLE =
+  HashMap<Integer, Pair> DRAW_CHESS_GRID_LOOKUP_TABLE =
       new HashMap<Integer, Pair>() {
         {
           Pair pair1 = Pair.create(0.32f, 0.46f);
