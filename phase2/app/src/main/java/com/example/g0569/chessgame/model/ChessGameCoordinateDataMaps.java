@@ -6,24 +6,48 @@ import com.example.g0569.utils.Coordinate;
 
 import java.util.HashMap;
 
+/** The interface Chess game coordinate data maps. */
 public interface ChessGameCoordinateDataMaps {
 
-    Coordinate boardRow1Col1 = new Coordinate(1, 1);
-    Coordinate boardRow1Col2 = new Coordinate(1, 2);
+  /** The constant BOARD_ROW_1_COL_1. */
+  Coordinate BOARD_ROW_1_COL_1 = new Coordinate(1, 1);
 
-    Coordinate boardRow2Col1 = new Coordinate(2, 1);
-    Coordinate boardRow2Col2 = new Coordinate(2, 2);
+  /** The constant BOARD_ROW_1_COL_2. */
+  Coordinate BOARD_ROW_1_COL_2 = new Coordinate(1, 2);
 
-    Coordinate boardRow3Col1 = new Coordinate(3, 1);
-    Coordinate boardRow3Col2 = new Coordinate(3, 2);
+  /** The constant BOARD_ROW_2_COL_1. */
+  Coordinate BOARD_ROW_2_COL_1 = new Coordinate(2, 1);
 
-    Coordinate inventoryRow1Col1 = new Coordinate(10, 10);
-    Coordinate inventoryRow1Col2 = new Coordinate(10, 20);
-    Coordinate inventoryRow2Col1 = new Coordinate(20, 10);
-    Coordinate inventoryRow2Col2 = new Coordinate(20, 20);
-    Coordinate inventoryRow3Col1 = new Coordinate(30, 10);
-    Coordinate inventoryRow3Col2 = new Coordinate(30, 20);
+  /** The constant BOARD_ROW_2_COL_2. */
+  Coordinate BOARD_ROW_2_COL_2 = new Coordinate(2, 2);
 
+  /** The constant BOARD_ROW_3_COL_1. */
+  Coordinate BOARD_ROW_3_COL_1 = new Coordinate(3, 1);
+
+  /** The constant BOARD_ROW_3_COL_2. */
+  Coordinate BOARD_ROW_3_COL_2 = new Coordinate(3, 2);
+
+  /** The constant INVENTORY_ROW_1_COL_1. */
+  Coordinate INVENTORY_ROW_1_COL_1 = new Coordinate(10, 10);
+
+  /** The constant INVENTORY_ROW_1_COL_2. */
+  Coordinate INVENTORY_ROW_1_COL_2 = new Coordinate(10, 20);
+
+  /** The constant INVENTORY_ROW_2_COL_1. */
+  Coordinate INVENTORY_ROW_2_COL_1 = new Coordinate(20, 10);
+
+  /** The constant INVENTORY_ROW_2_COL_2. */
+  Coordinate INVENTORY_ROW_2_COL_2 = new Coordinate(20, 20);
+
+  /** The constant INVENTORY_ROW_3_COL_1. */
+  Coordinate INVENTORY_ROW_3_COL_1 = new Coordinate(30, 10);
+
+  /** The constant INVENTORY_ROW_3_COL_2. */
+  Coordinate INVENTORY_ROW_3_COL_2 = new Coordinate(30, 20);
+
+  /**
+   * The constant DRAW_CHESS_GRID_LOOKUP_TABLE. This HashMap stores the offset values for drawing.
+   */
   HashMap<Integer, Pair> DRAW_CHESS_GRID_LOOKUP_TABLE =
       new HashMap<Integer, Pair>() {
         {
@@ -65,14 +89,4 @@ public interface ChessGameCoordinateDataMaps {
           put(3020, pair18);
         }
       };
-
-//  HashMap<Integer, Pair> DRAW_CHESS_INVENTORY_LOOKUP_TABLE =
-//      new HashMap<Integer, Pair>() {
-//        {
-//
-//
-//        }
-//      };
-
-  // TODO Need to encapsulate the reset value.
 }

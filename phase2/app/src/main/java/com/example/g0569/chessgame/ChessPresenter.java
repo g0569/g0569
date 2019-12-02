@@ -10,10 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/** The type Chess presenter. */
 public class ChessPresenter implements ChessContract.Presenter {
   private ChessContract.View chessView;
   private ChessGame chessGame;
 
+  /**
+   * Instantiates a new Chess presenter.
+   *
+   * @param chessView the chess view
+   * @param inventory the inventory
+   * @param selectedIndex the selected index
+   */
   ChessPresenter(ChessContract.View chessView, Inventory inventory, int selectedIndex) {
     this.chessView = chessView;
     this.chessView.setPresenter(this);
@@ -98,32 +106,32 @@ public class ChessPresenter implements ChessContract.Presenter {
         && x < inventoryX + inventoryWidth * 0.5f
         && y > inventoryY
         && y < inventoryY + inventoryHeight * 0.3333f) {
-      InventoryCoordinate.setXY(ChessGameCoordinateDataMaps.inventoryRow1Col1);
+      InventoryCoordinate.setXY(ChessGameCoordinateDataMaps.INVENTORY_ROW_1_COL_1);
     } else if (x > inventoryX
         && x < inventoryX + inventoryWidth * 0.5f
         && y > inventoryY + inventoryHeight * 0.3333f
         && y < inventoryY + inventoryHeight * 0.6666f) {
-      InventoryCoordinate.setXY(ChessGameCoordinateDataMaps.inventoryRow2Col1);
+      InventoryCoordinate.setXY(ChessGameCoordinateDataMaps.INVENTORY_ROW_2_COL_1);
     } else if (x > inventoryX
         && x < inventoryX + inventoryWidth * 0.5f
         && y > inventoryY + inventoryHeight * 0.6666f
         && y < inventoryY + inventoryHeight) {
-      InventoryCoordinate.setXY(ChessGameCoordinateDataMaps.inventoryRow3Col1);
+      InventoryCoordinate.setXY(ChessGameCoordinateDataMaps.INVENTORY_ROW_3_COL_1);
     } else if (x > inventoryX + inventoryWidth * 0.5f
         && x < inventoryX + inventoryWidth
         && y > inventoryY
         && y < inventoryY + inventoryHeight * 0.3333f) {
-      InventoryCoordinate.setXY(ChessGameCoordinateDataMaps.inventoryRow1Col2);
+      InventoryCoordinate.setXY(ChessGameCoordinateDataMaps.INVENTORY_ROW_1_COL_2);
     } else if (x > inventoryX + inventoryWidth * 0.5f
         && x < inventoryX + inventoryWidth
         && y > inventoryY + inventoryHeight * 0.3333f
         && y < inventoryY + inventoryHeight * 0.6666f) {
-      InventoryCoordinate.setXY(ChessGameCoordinateDataMaps.inventoryRow2Col2);
+      InventoryCoordinate.setXY(ChessGameCoordinateDataMaps.INVENTORY_ROW_2_COL_2);
     } else if (x > inventoryX + inventoryWidth * 0.5f
         && x < inventoryX + inventoryWidth
         && y > inventoryY + inventoryHeight * 0.6666f
         && y < inventoryY + inventoryHeight) {
-      InventoryCoordinate.setXY(ChessGameCoordinateDataMaps.inventoryRow3Col2);
+      InventoryCoordinate.setXY(ChessGameCoordinateDataMaps.INVENTORY_ROW_3_COL_2);
     }
     return InventoryCoordinate;
   }
@@ -136,17 +144,17 @@ public class ChessPresenter implements ChessContract.Presenter {
     float height = ((ChessView) chessView).getScreenHeight();
     Coordinate BoardCoordinate = new Coordinate(0, 0);
     if (x > width * 0.3f && x < width * 0.39f && y > height * 0.44f && y < height * 0.59f) {
-      BoardCoordinate.setXY(ChessGameCoordinateDataMaps.boardRow1Col1);
+      BoardCoordinate.setXY(ChessGameCoordinateDataMaps.BOARD_ROW_1_COL_1);
     } else if (x > width * 0.27f && x < width * 0.37f && y > height * 0.59f && y < height * 0.72f) {
-      BoardCoordinate.setXY(ChessGameCoordinateDataMaps.boardRow2Col1);
+      BoardCoordinate.setXY(ChessGameCoordinateDataMaps.BOARD_ROW_2_COL_1);
     } else if (x > width * 0.23f && x < width * 0.35f && y > height * 0.72f && y < height) {
-      BoardCoordinate.setXY(ChessGameCoordinateDataMaps.boardRow3Col1);
+      BoardCoordinate.setXY(ChessGameCoordinateDataMaps.BOARD_ROW_3_COL_1);
     } else if (x > width * 0.39f && x < width * 0.5f && y > height * 0.44f && y < height * 0.59f) {
-      BoardCoordinate.setXY(ChessGameCoordinateDataMaps.boardRow1Col2);
+      BoardCoordinate.setXY(ChessGameCoordinateDataMaps.BOARD_ROW_1_COL_2);
     } else if (x > width * 0.37f && x < width * 0.5f && y > height * 0.59f && y < height * 0.72f) {
-      BoardCoordinate.setXY(ChessGameCoordinateDataMaps.boardRow2Col2);
+      BoardCoordinate.setXY(ChessGameCoordinateDataMaps.BOARD_ROW_2_COL_2);
     } else if (x > width * 0.35f && x < width * 0.5f && y > height * 0.72f && y < height) {
-      BoardCoordinate.setXY(ChessGameCoordinateDataMaps.boardRow3Col2);
+      BoardCoordinate.setXY(ChessGameCoordinateDataMaps.BOARD_ROW_3_COL_2);
     }
     return BoardCoordinate;
   }

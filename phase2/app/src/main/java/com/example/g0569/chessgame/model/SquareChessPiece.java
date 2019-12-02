@@ -1,11 +1,16 @@
 package com.example.g0569.chessgame.model;
 
+/**
+ * The type Square chess piece.
+ */
 public class SquareChessPiece extends ChessPiece {
     /**
+     * Instantiates a new Square chess piece.
+     *
      * @param x The x coordinate for chess piece.
      * @param y The y coordinate for chess piece.
      */
-    SquareChessPiece(float x, float y) {
+SquareChessPiece(float x, float y) {
         super(x, y);
     }
     @Override

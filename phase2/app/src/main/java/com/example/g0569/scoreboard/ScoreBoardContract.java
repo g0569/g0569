@@ -16,5 +16,7 @@ public interface ScoreBoardContract {
     Score getCurrentScore();
 
     List<Score> getScoreList();
+
+    void setView(View view);
   }
 }
