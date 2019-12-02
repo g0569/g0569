@@ -45,15 +45,15 @@ public class Score {
     this.createdTime = new Date();
   }
 
-    public int getRank() {
-        return rank;
-    }
+  public int getRank() {
+    return rank;
+  }
 
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
+  public void setRank(int rank) {
+    this.rank = rank;
+  }
 
-    /**
+  /**
    * Gets username.
    *
    * @return the username
@@ -90,12 +90,12 @@ public class Score {
   public void setCreatedTime(String createdTime) {
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-      try {
-          this.createdTime =  dateFormat.parse(createdTime);
-      } catch (ParseException e) {
-          e.printStackTrace();
-          this.createdTime = new Date();
-      }
+    try {
+      this.createdTime = dateFormat.parse(createdTime);
+    } catch (ParseException e) {
+      e.printStackTrace();
+      this.createdTime = new Date();
+    }
   }
 
   /**

@@ -47,29 +47,38 @@ public class ScoreBoardFragment extends Fragment implements ScoreBoardContract.V
     View view = inflater.inflate(R.layout.fragmemt_scoreboard, container, false);
     scoreBoardTable = view.findViewById(R.id.score_board_tableLayout);
     Score currentScore = presenter.getCurrentScore();
-    ((TextView) scoreBoardTable.findViewById(R.id.user_score)).setText(String.valueOf(currentScore.getScore()));
-    ((TextView) scoreBoardTable.findViewById(R.id.user_time)).setText(currentScore.getCreatedTime());
-    ((TextView) scoreBoardTable.findViewById(R.id.user_rank)).setText(String.valueOf(currentScore.getRank()));
-    ((TextView) scoreBoardTable.findViewById(R.id.user_username)).setText(currentScore.getUsername());
+    ((TextView) scoreBoardTable.findViewById(R.id.user_score))
+        .setText(String.valueOf(currentScore.getScore()));
+    ((TextView) scoreBoardTable.findViewById(R.id.user_time))
+        .setText(currentScore.getCreatedTime());
+    ((TextView) scoreBoardTable.findViewById(R.id.user_rank))
+        .setText(String.valueOf(currentScore.getRank()));
+    ((TextView) scoreBoardTable.findViewById(R.id.user_username))
+        .setText(currentScore.getUsername());
 
     List<Score> scoreList = presenter.getScoreList();
 
     for (Score score : scoreList) {
-      View tr =
-          inflater.inflate(R.layout.adapter_scoreboard, scoreBoardTable, false);
+      TableRow row = new TableRow(getActivity());
+      row.setLayoutParams(
+          new TableLayout.LayoutParams(
+              TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+      View tr = inflater.inflate(R.layout.adapter_scoreboard, row, true);
       ((TextView) tr.findViewById(R.id.sb_score)).setText(String.valueOf(score.getScore()));
       ((TextView) tr.findViewById(R.id.sb_rank)).setText(String.valueOf(score.getRank()));
       ((TextView) tr.findViewById(R.id.sb_time)).setText(score.getCreatedTime());
       ((TextView) tr.findViewById(R.id.sb_username)).setText(score.getUsername());
-      scoreBoardTable.addView(tr);
+      scoreBoardTable.addView(row);
     }
 
-    view.findViewById(R.id.sb_btn).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            ((ScoreBoardActivity) getActivity()).toLoadPage();
-        }
-    });
+    view.findViewById(R.id.sb_btn)
+        .setOnClickListener(
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                ((ScoreBoardActivity) getActivity()).toLoadPage();
+              }
+            });
 
     return view;
   }

@@ -24,7 +24,7 @@ public class ScoreBoardActivity extends BaseActivity {
         .setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-    Bundle bundle = getIntent().getExtras();
+    bundle = getIntent().getExtras();
     int bossScore = getIntent().getIntExtra(Constants.BUNDLE_BOSSSCORE_KEY, 0);
     ScoreBoardSQLiteAccessor scoreBoardSQLiteAccessor = new ScoreBoardSQLiteAccessor();
     scoreBoardSQLiteAccessor.setSQLiteHelper(new SQLiteHelper(this, "g0569"));
@@ -39,14 +39,13 @@ public class ScoreBoardActivity extends BaseActivity {
     if (scoreBoardFragment == null) {
       scoreBoardFragment = ScoreBoardFragment.newInstance();
       getSupportFragmentManager()
-              .beginTransaction()
-              .replace(R.id.ContentFrame, scoreBoardFragment)
-              .commit();
+          .beginTransaction()
+          .replace(R.id.ContentFrame, scoreBoardFragment)
+          .commit();
     }
     setContentView(R.layout.activity_container);
 
     scoreBoardFragment.setPresenter(presenter);
     presenter.setView(scoreBoardFragment);
-
   }
 }
