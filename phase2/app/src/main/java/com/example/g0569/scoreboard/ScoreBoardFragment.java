@@ -18,7 +18,7 @@ import com.example.g0569.scoreboard.model.Score;
 import java.util.List;
 
 public class ScoreBoardFragment extends Fragment implements ScoreBoardContract.View {
-
+  private TableLayout scoreBoardTable;
   private ScoreBoardContract.Presenter presenter;
   /** Instantiates a new Score board fragment. */
   public ScoreBoardFragment() {}
@@ -45,20 +45,20 @@ public class ScoreBoardFragment extends Fragment implements ScoreBoardContract.V
       @Nullable Bundle savedInstanceState) {
 
     View view = inflater.inflate(R.layout.fragmemt_scoreboard, container, false);
-    TableLayout scoreBoardTable = view.findViewById(R.id.score_board);
+    scoreBoardTable = view.findViewById(R.id.score_board_tableLayout);
     Score currentScore = presenter.getCurrentScore();
-    ((TextView) view.findViewById(R.id.user_score)).setText(currentScore.getScore());
-    ((TextView) view.findViewById(R.id.user_time)).setText(currentScore.getCreatedTime());
-    ((TextView) view.findViewById(R.id.user_rank)).setText(currentScore.getRank());
-    ((TextView) view.findViewById(R.id.user_username)).setText(currentScore.getUsername());
+    ((TextView) scoreBoardTable.findViewById(R.id.user_score)).setText(String.valueOf(currentScore.getScore()));
+    ((TextView) scoreBoardTable.findViewById(R.id.user_time)).setText(currentScore.getCreatedTime());
+    ((TextView) scoreBoardTable.findViewById(R.id.user_rank)).setText(String.valueOf(currentScore.getRank()));
+    ((TextView) scoreBoardTable.findViewById(R.id.user_username)).setText(currentScore.getUsername());
 
     List<Score> scoreList = presenter.getScoreList();
 
     for (Score score : scoreList) {
-      TableRow tr =
-          (TableRow) inflater.inflate(R.layout.adapter_scoreboard, scoreBoardTable, false);
-      ((TextView) tr.findViewById(R.id.sb_score)).setText(score.getScore());
-      ((TextView) tr.findViewById(R.id.sb_rank)).setText(score.getRank());
+      View tr =
+          inflater.inflate(R.layout.adapter_scoreboard, scoreBoardTable, false);
+      ((TextView) tr.findViewById(R.id.sb_score)).setText(String.valueOf(score.getScore()));
+      ((TextView) tr.findViewById(R.id.sb_rank)).setText(String.valueOf(score.getRank()));
       ((TextView) tr.findViewById(R.id.sb_time)).setText(score.getCreatedTime());
       ((TextView) tr.findViewById(R.id.sb_username)).setText(score.getUsername());
       scoreBoardTable.addView(tr);
@@ -72,6 +72,11 @@ public class ScoreBoardFragment extends Fragment implements ScoreBoardContract.V
     });
 
     return view;
+  }
+
+  @Override
+  public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
   }
 
   @Override

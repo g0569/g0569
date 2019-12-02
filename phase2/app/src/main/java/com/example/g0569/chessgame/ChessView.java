@@ -18,8 +18,9 @@ import java.util.Objects;
 
 /** The ChessView for the autoChessGame. */
 public class ChessView extends GameView implements ChessContract.View {
-  // The indicator whether the player choose the chessPiece(false) or place the chessPiece(true).
-  private boolean placeChess;
+  private boolean
+      placeChess; // This is the indicator whether the player choose the chessPiece(false) or place
+  // the chessPiece(true).
   private Bitmap background;
   private Bitmap inventory;
   private Bitmap startButton;
@@ -31,7 +32,6 @@ public class ChessView extends GameView implements ChessContract.View {
   private float inventoryX;
   private float inventoryY;
   private ChessContract.Presenter presenter;
-  //  private HashMap<String, Bitmap> TYPELOOKUPMAP = new HashMap<String, Bitmap>();
 
   /**
    * Instantiates a new Chess view.
@@ -44,6 +44,12 @@ public class ChessView extends GameView implements ChessContract.View {
     thread = new Thread(this);
   }
 
+  /**
+   * Instantiates a new Chess view.
+   *
+   * @param context the context
+   * @param attrs the attrs
+   */
   public ChessView(Context context, AttributeSet attrs) {
     super(context, attrs);
     paint.setTextSize(40);
@@ -62,26 +68,56 @@ public class ChessView extends GameView implements ChessContract.View {
     }
   }
 
+  /**
+   * Gets screen height.
+   *
+   * @return the screen height
+   */
   protected float getScreenHeight() {
     return screenHeight;
   }
 
+  /**
+   * Gets screen width.
+   *
+   * @return the screen width
+   */
   protected float getScreenWidth() {
     return screenWidth;
   }
 
+  /**
+   * Gets inventory x.
+   *
+   * @return the inventory x
+   */
   protected float getInventoryX() {
     return inventoryX;
   }
 
+  /**
+   * Gets inventory y.
+   *
+   * @return the inventory y
+   */
   protected float getInventoryY() {
     return inventoryY;
   }
 
+  /**
+   * Gets inventory width.
+   *
+   * @return the inventory width
+   */
   protected float getInventoryWidth() {
     return inventory.getWidth();
   }
 
+  /**
+   * Gets inventory height.
+   *
+   * @return the inventory height
+   */
   protected float getInventoryHeight() {
     return inventory.getHeight();
   }
@@ -96,6 +132,7 @@ public class ChessView extends GameView implements ChessContract.View {
     super.surfaceDestroyed(holder);
   }
 
+  /** Initialize the Bitmaps. */
   private void initBitmaps() {
     background = BitmapFactory.decodeResource(getResources(), R.drawable.chessgame_background);
 
@@ -134,6 +171,7 @@ public class ChessView extends GameView implements ChessContract.View {
     getTypeLookUpTable().put("type6", npc6);
   }
 
+  /** Draw button. */
   public void drawButton() {
     startButtonX = screenWidth * 0.9f;
     startButtonY = screenHeight * 0.7f;
@@ -143,21 +181,12 @@ public class ChessView extends GameView implements ChessContract.View {
     canvas.drawBitmap(resetButton, resetButtonX, resetButtonY, paint);
   }
 
+  /** Draw inventory. */
   public void drawInventory() {
     inventoryX = screenWidth * 0.033f;
     inventoryY = screenHeight * 0.7f;
     canvas.drawBitmap(inventory, inventoryX, inventoryY, paint);
   }
-
-  // TODO Add two images for player and NPC. Maybe...
-
-  //    public void drawPlayer(Coordinate coordinate) {
-  //      canvas.drawBitmap(l2player, coordinate.getX(), coordinate.getY(), paint);
-  //    }
-  //
-  //    public void drawNPC(Coordinate coordinate) {
-  //      canvas.drawBitmap(l2npc, coordinate.getX(), coordinate.getY(), paint);
-  //    }
 
   @Override
   public void initView() {
@@ -168,7 +197,9 @@ public class ChessView extends GameView implements ChessContract.View {
 
   @Override
   public void drawChessPiece(Coordinate coordinate, String type) {
+    // Get the correct coordinate from model.
     Coordinate viewCoordinate = presenter.gridCoordinateToViewCoordinate(coordinate);
+    // Draw.
     canvas.drawBitmap(
         Objects.requireNonNull(getTypeLookUpTable().get(type)),
         viewCoordinate.getX(),
@@ -219,14 +250,12 @@ public class ChessView extends GameView implements ChessContract.View {
     if (event.getAction() == MotionEvent.ACTION_DOWN && event.getPointerCount() == 1) {
       float x = event.getX();
       float y = event.getY();
-      Coordinate viewCoordinate = new Coordinate(x, y);
+      Coordinate viewCoordinate = Coordinate.create(x, y);
       Coordinate inventoryCoordinate =
           presenter.viewCoordinateToInventoryCoordinate(viewCoordinate);
       Coordinate boardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);
-      //      String type = presenter.InventoryCoordinateToChessType(inventoryCoordinate);
-      System.out.println(String.valueOf(x) + " " + String.valueOf(y));
       if (placeChess) {
-        boolean positionHasBeenTaken = presenter.getPositionHasBeenTaken(boardCoordinate);
+        boolean positionHasBeenTaken = presenter.showPositionHasBeenTaken(boardCoordinate);
         if (positionHasBeenTaken) {
           Toast.makeText(
                   activity,
@@ -234,8 +263,8 @@ public class ChessView extends GameView implements ChessContract.View {
                   Toast.LENGTH_SHORT)
               .show();
         } else {
-          // Place Chess Piece now.
-          if (boardCoordinate.getIntX() != 0 | boardCoordinate.getIntY() != 0) {
+          // Place the Chess Piece now.
+          if (boardCoordinate.getIntX() != 0 && boardCoordinate.getIntY() != 0) {
             // Place a chess piece that has been chosen.
             presenter.placePlayerChess(boardCoordinate);
             placeChess = false;
@@ -253,7 +282,7 @@ public class ChessView extends GameView implements ChessContract.View {
               "Chess Game Is Over!",
               "You " + (winGame ? "Win " : "Lose ") + "the Game!",
               "Go Back To Maze");
-          presenter.setGameOverResult(winGame);
+          presenter.showGameOverResult(winGame);
         } else if (x > inventoryX
             && x < inventoryX + inventory.getWidth()
             && y > inventoryY
@@ -261,8 +290,6 @@ public class ChessView extends GameView implements ChessContract.View {
           // Choose a chess piece from inventory.
           String type = presenter.setSelectedChessPieceData(inventoryCoordinate);
           Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
-
-          // TODO To highlight the chess has been chosen.
           placeChess = true;
         } else if (x > resetButtonX
             && x < resetButtonX + resetButton.getWidth()

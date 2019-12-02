@@ -14,7 +14,8 @@ import com.example.g0569.utils.SQLiteHelper;
 
 public class ScoreBoardActivity extends BaseActivity {
 
-    private ScoreBoardPresenter presenter;
+  private ScoreBoardPresenter presenter;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -22,27 +23,30 @@ public class ScoreBoardActivity extends BaseActivity {
     this.getWindow()
         .setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    ScoreBoardFragment scoreBoardFragment =
-        (ScoreBoardFragment) getSupportFragmentManager().findFragmentById(R.id.ContentFrame);
 
     Bundle bundle = getIntent().getExtras();
-    int bossScore = bundle.getInt(Constants.BUNDLE_BOSSSCORE_KEY);
-    Inventory inventory = (Inventory)  bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
+    int bossScore = getIntent().getIntExtra(Constants.BUNDLE_BOSSSCORE_KEY, 0);
+    ScoreBoardSQLiteAccessor scoreBoardSQLiteAccessor = new ScoreBoardSQLiteAccessor();
+    scoreBoardSQLiteAccessor.setSQLiteHelper(new SQLiteHelper(this, "g0569"));
+    Inventory inventory = (Inventory) bundle.getSerializable(Constants.BUNDLE_INVENTORY_KEY);
     User user = (User) bundle.getSerializable(Constants.BUNDLE_USER_KEY);
+
+    presenter = new ScoreBoardPresenter(bossScore, inventory, user);
+    presenter.setScoreBoardSQLiteAccessor(scoreBoardSQLiteAccessor);
+
+    ScoreBoardFragment scoreBoardFragment =
+        (ScoreBoardFragment) getSupportFragmentManager().findFragmentById(R.id.ContentFrame);
     if (scoreBoardFragment == null) {
       scoreBoardFragment = ScoreBoardFragment.newInstance();
       getSupportFragmentManager()
-          .beginTransaction()
-          .replace(R.id.ContentFrame, scoreBoardFragment)
-          .commit();
+              .beginTransaction()
+              .replace(R.id.ContentFrame, scoreBoardFragment)
+              .commit();
     }
-
-    ScoreBoardSQLiteAccessor scoreBoardSQLiteAccessor = new ScoreBoardSQLiteAccessor();
-    scoreBoardSQLiteAccessor.setSQLiteHelper(new SQLiteHelper(this, "g0569"));
-
-    presenter = new ScoreBoardPresenter(scoreBoardFragment, bossScore, inventory, user);
-    presenter.setScoreBoardSQLiteAccessor(scoreBoardSQLiteAccessor);
-
     setContentView(R.layout.activity_container);
+
+    scoreBoardFragment.setPresenter(presenter);
+    presenter.setView(scoreBoardFragment);
+
   }
 }
