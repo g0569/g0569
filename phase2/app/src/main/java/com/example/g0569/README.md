@@ -69,6 +69,7 @@ compared to other people or how ahead they are of other people.
 In the boss game, the user is now able to choose which NPC it wants to use to attack the boss and even
 who to bring in. In the inventory, if the user does not choose to battle one of the NPCs, then they
 don't have the ability to use them in the Boss game.
+We also added the ability to use gravity to control the player through the maze as well. 
 
 
 
