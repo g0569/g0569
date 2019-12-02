@@ -4,37 +4,112 @@ import com.example.g0569.base.BasePresenter;
 import com.example.g0569.base.BaseView;
 import com.example.g0569.utils.Coordinate;
 
+/**
+ * The interface Chess contract.
+ */
 public interface ChessContract {
-  interface View extends BaseView<Presenter> {
-    void initView();
+  /**
+   * The interface View.
+   */
+interface View extends BaseView<Presenter> {
+    /**
+     * Init view.
+     */
+void initView();
 
-    void drawChessPiece(Coordinate coordinate, String type);
+    /**
+     * Draw chess piece.
+     *
+     * @param coordinate the coordinate
+     * @param type the type
+     */
+void drawChessPiece(Coordinate coordinate, String type);
 
-    void showEndingDialogue(String title, String text, String buttonHint);
+    /**
+     * Show ending dialogue.
+     *
+     * @param title the title
+     * @param text the text
+     * @param buttonHint the button hint
+     */
+void showEndingDialogue(String title, String text, String buttonHint);
   }
 
-  interface Presenter extends BasePresenter {
-    void drawChessPiece();
+  /**
+   * The interface Presenter.
+   */
+interface Presenter extends BasePresenter {
+    /**
+     * Draw chess piece.
+     */
+void drawChessPiece();
 
-    boolean startAutoFight();
+    /**
+     * Start auto fight boolean.
+     *
+     * @return the boolean
+     */
+boolean startAutoFight();
 
-    Coordinate gridCoordinateToViewCoordinate(Coordinate coordinate);
+    /**
+     * Grid coordinate to view coordinate coordinate.
+     *
+     * @param coordinate the coordinate
+     * @return the coordinate
+     */
+Coordinate gridCoordinateToViewCoordinate(Coordinate coordinate);
 
-    void placePlayerChess(Coordinate coordinate);
+    /**
+     * Place player chess.
+     *
+     * @param coordinate the coordinate
+     */
+void placePlayerChess(Coordinate coordinate);
 
-    String InventoryCoordinateToChessType(Coordinate coordinate);
 
-    Coordinate viewCoordinateToInventoryCoordinate(Coordinate coordinate);
+    /**
+     * View coordinate to inventory coordinate coordinate.
+     *
+     * @param coordinate the coordinate
+     * @return the coordinate
+     */
+Coordinate viewCoordinateToInventoryCoordinate(Coordinate coordinate);
 
-    Coordinate viewCoordinateToBoardCoordinate(Coordinate coordinate);
+    /**
+     * View coordinate to board coordinate coordinate.
+     *
+     * @param coordinate the coordinate
+     * @return the coordinate
+     */
+Coordinate viewCoordinateToBoardCoordinate(Coordinate coordinate);
 
-    void setSelectedChessPieceData(Coordinate coordinate);
+    /**
+     * Sets selected chess piece data.
+     *
+     * @param coordinate the coordinate
+     * @return the selected chess piece data
+     */
+String setSelectedChessPieceData(Coordinate coordinate);
 
-    void setGameOverResult(boolean winGame);
+    /**
+     * Sets game over result.
+     *
+     * @param winGame the win game
+     */
+void setGameOverResult(boolean winGame);
 
-    boolean getPositionHasBeenTaken(Coordinate coordinate);
+    /**
+     * Gets position has been taken.
+     *
+     * @param coordinate the coordinate
+     * @return the position has been taken
+     */
+boolean getPositionHasBeenTaken(Coordinate coordinate);
 
-    void resetChessPiece();
+    /**
+     * Reset chess piece.
+     */
+void resetChessPiece();
 
   }
 }

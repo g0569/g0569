@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.g0569.R;
@@ -16,6 +15,7 @@ import com.example.g0569.mazegame.MazeActivity;
 import com.example.g0569.utils.Constants;
 import com.example.g0569.utils.Inventory;
 
+/** The type Chess activity. */
 public class ChessActivity extends BaseActivity {
 
     private ChessView chessView;
@@ -62,7 +62,8 @@ public class ChessActivity extends BaseActivity {
         presenter.start();
     }
 
-    public void toMazeGame() {
+  /** To maze game. */
+  public void toMazeGame() {
     Intent intent = new Intent(this, MazeActivity.class);
     intent.putExtra(Constants.CHESS_GAME_OVER, Constants.CHESS_GAME_OVER);
     intent.putExtras(bundle);
@@ -71,7 +72,14 @@ public class ChessActivity extends BaseActivity {
     // TODO
   }
 
-    public void showEndingDialogue(String title, String text, String buttonHint) {
+  /**
+   * Show ending dialogue.
+   *
+   * @param title the title
+   * @param text the text
+   * @param buttonHint the button hint
+   */
+  public void showEndingDialogue(String title, String text, String buttonHint) {
         ((TextView) dialogue.findViewById(R.id.dialogue_title)).setText(title);
         ((TextView) dialogue.findViewById(R.id.dialogue_text)).setText(text);
         Button dialogueButton = dialogue.findViewById(R.id.dialogue_btn_1);

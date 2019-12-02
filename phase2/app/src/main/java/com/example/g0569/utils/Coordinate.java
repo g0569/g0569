@@ -94,6 +94,19 @@ public class Coordinate implements Serializable {
     this.y = y;
   }
 
+    /**
+   * Sets xy.
+   *
+   * @param coordinate the coordinate we can set xy together
+  * This method mainly provide a way we can avoid the aliasing in coordinate.
+   */
+  public void setXY(Coordinate coordinate) {
+    this.x = coordinate.getX();
+    this.y = coordinate.getY();
+  }
+
+
+
   /**
    * Offset x and y.
    *

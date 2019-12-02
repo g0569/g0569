@@ -1,15 +1,14 @@
 package com.example.g0569.chessgame.model;
 
-import com.example.g0569.utils.Coordinate;
-
-import java.util.ArrayList;
-
+/** The type Circle chess piece. */
 public class CircleChessPiece extends ChessPiece {
-    /**
-     * @param x      The x coordinate for chess piece.
-     * @param y      The y coordinate for chess piece.
-     */
-    CircleChessPiece(float x, float y) {
+  /**
+   * Instantiates a new Circle chess piece.
+   *
+   * @param x The x coordinate for chess piece.
+   * @param y The y coordinate for chess piece.
+   */
+  CircleChessPiece(float x, float y) {
         super(x, y);
     }
 

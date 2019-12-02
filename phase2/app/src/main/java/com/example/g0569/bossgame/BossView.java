@@ -252,7 +252,7 @@ public class BossView extends GameView implements BossContract.View {
 
     // Enemy starts from facing the right.
     enemyAppearance = BitmapFactory.decodeResource(getResources(), R.drawable.bossgame_enemy_r);
-
+    enemyAppearance = Bitmap.createScaledBitmap(enemyAppearance, enemySize, enemySize, false);
     aim = Bitmap.createScaledBitmap(aim, aimSize, aimSize, false);
     shootButton = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_button);
     shootButton = Bitmap.createScaledBitmap(shootButton, shootButtonSize, shootButtonSize, false);

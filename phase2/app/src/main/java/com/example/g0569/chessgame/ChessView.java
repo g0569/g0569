@@ -38,13 +38,19 @@ public class ChessView extends GameView implements ChessContract.View {
    *
    * @param context the context
    */
-  public ChessView(Context context) {
+public ChessView(Context context) {
     super(context);
     paint.setTextSize(40);
     thread = new Thread(this);
   }
 
-  public ChessView(Context context, AttributeSet attrs) {
+  /**
+   * Instantiates a new Chess view.
+   *
+   * @param context the context
+   * @param attrs the attrs
+   */
+public ChessView(Context context, AttributeSet attrs) {
     super(context, attrs);
     paint.setTextSize(40);
     thread = new Thread(this);
@@ -62,27 +68,57 @@ public class ChessView extends GameView implements ChessContract.View {
     }
   }
 
-  protected float getScreenHeight() {
+  /**
+   * Gets screen height.
+   *
+   * @return the screen height
+   */
+protected float getScreenHeight() {
     return screenHeight;
   }
 
-  protected float getScreenWidth() {
+  /**
+   * Gets screen width.
+   *
+   * @return the screen width
+   */
+protected float getScreenWidth() {
     return screenWidth;
   }
 
-  protected float getInventoryX() {
+  /**
+   * Gets inventory x.
+   *
+   * @return the inventory x
+   */
+protected float getInventoryX() {
     return inventoryX;
   }
 
-  protected float getInventoryY() {
+  /**
+   * Gets inventory y.
+   *
+   * @return the inventory y
+   */
+protected float getInventoryY() {
     return inventoryY;
   }
 
-  protected float getInventoryWidth() {
+  /**
+   * Gets inventory width.
+   *
+   * @return the inventory width
+   */
+protected float getInventoryWidth() {
     return inventory.getWidth();
   }
 
-  protected float getInventoryHeight() {
+  /**
+   * Gets inventory height.
+   *
+   * @return the inventory height
+   */
+protected float getInventoryHeight() {
     return inventory.getHeight();
   }
 
@@ -134,7 +170,10 @@ public class ChessView extends GameView implements ChessContract.View {
     getTypeLookUpTable().put("type6", npc6);
   }
 
-  public void drawButton() {
+  /**
+   * Draw button.
+   */
+public void drawButton() {
     startButtonX = screenWidth * 0.9f;
     startButtonY = screenHeight * 0.7f;
     resetButtonX = screenWidth * 0.055f;
@@ -143,7 +182,10 @@ public class ChessView extends GameView implements ChessContract.View {
     canvas.drawBitmap(resetButton, resetButtonX, resetButtonY, paint);
   }
 
-  public void drawInventory() {
+  /**
+   * Draw inventory.
+   */
+public void drawInventory() {
     inventoryX = screenWidth * 0.033f;
     inventoryY = screenHeight * 0.7f;
     canvas.drawBitmap(inventory, inventoryX, inventoryY, paint);
@@ -223,7 +265,7 @@ public class ChessView extends GameView implements ChessContract.View {
       Coordinate inventoryCoordinate =
           presenter.viewCoordinateToInventoryCoordinate(viewCoordinate);
       Coordinate boardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);
-      String type = presenter.InventoryCoordinateToChessType(inventoryCoordinate);
+      //      String type = presenter.InventoryCoordinateToChessType(inventoryCoordinate);
       System.out.println(String.valueOf(x) + " " + String.valueOf(y));
       if (placeChess) {
         boolean positionHasBeenTaken = presenter.getPositionHasBeenTaken(boardCoordinate);
@@ -259,15 +301,17 @@ public class ChessView extends GameView implements ChessContract.View {
             && y > inventoryY
             && y < inventoryY + inventory.getHeight()) {
           // Choose a chess piece from inventory.
+          String type = presenter.setSelectedChessPieceData(inventoryCoordinate);
           Toast.makeText(activity, type + "chess was chosen", Toast.LENGTH_SHORT).show();
-          presenter.setSelectedChessPieceData(inventoryCoordinate);
+
           // TODO To highlight the chess has been chosen.
           placeChess = true;
         } else if (x > resetButtonX
             && x < resetButtonX + resetButton.getWidth()
             && y > resetButtonY
             && y < resetButtonY + resetButton.getHeight()) {
-          Toast.makeText(activity, "Reset the Chess Piece back to inventory!", Toast.LENGTH_SHORT).show();
+          Toast.makeText(activity, "Reset the Chess Piece back to inventory!", Toast.LENGTH_SHORT)
+              .show();
           presenter.resetChessPiece();
         }
         return true;
