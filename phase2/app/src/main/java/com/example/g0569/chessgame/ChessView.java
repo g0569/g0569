@@ -249,6 +249,14 @@ public class ChessView extends GameView implements ChessContract.View {
       Coordinate inventoryCoordinate =
           presenter.viewCoordinateToInventoryCoordinate(viewCoordinate);
       Coordinate boardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);
+      if (x > resetButtonX
+          && x < resetButtonX + resetButton.getWidth()
+          && y > resetButtonY
+          && y < resetButtonY + resetButton.getHeight()) {
+        Toast.makeText(activity, "Reset the Chess Piece back to inventory!", Toast.LENGTH_SHORT)
+            .show();
+        presenter.resetChessPiece();
+      }
       if (placeChess) {
         boolean positionHasBeenTaken = presenter.showPositionHasBeenTaken(boardCoordinate);
         if (positionHasBeenTaken) {
@@ -295,13 +303,6 @@ public class ChessView extends GameView implements ChessContract.View {
           String type = presenter.setSelectedChessPieceData(inventoryCoordinate);
           Toast.makeText(activity, type + " chess was chosen", Toast.LENGTH_SHORT).show();
           placeChess = true;
-        } else if (x > resetButtonX
-            && x < resetButtonX + resetButton.getWidth()
-            && y > resetButtonY
-            && y < resetButtonY + resetButton.getHeight()) {
-          Toast.makeText(activity, "Reset the Chess Piece back to inventory!", Toast.LENGTH_SHORT)
-              .show();
-          presenter.resetChessPiece();
         }
         return true;
       }
