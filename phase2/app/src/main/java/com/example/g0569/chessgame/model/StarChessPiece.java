@@ -15,14 +15,16 @@ StarChessPiece(float x, float y) {
   public Integer[][] createTargetList() {
     Integer[][] target = new Integer[2][2];
     float column = this.getCoordinate().getX();
-    if(column == (1 | 2)){
+    if(column == (1 | 2)){// this means this chess piece is on player's side.
+      // Triangle piece can attack enemy chess piece in both "frontline" and "backline"
       target[0][0] = 3;
       target[1][0] = 4;
     }
-    else {
+    else {// this means this chess piece is on NPC's side.
       target[0][0] = 2;
       target[1][0] = 1;
     }
+    // Star piece can only attack chess piece in the same row
     target[0][1] = this.getCoordinate().getIntY();
     target[1][1] = this.getCoordinate().getIntY();
     return target;
