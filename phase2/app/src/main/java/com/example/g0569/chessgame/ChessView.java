@@ -250,7 +250,7 @@ public class ChessView extends GameView implements ChessContract.View {
     if (event.getAction() == MotionEvent.ACTION_DOWN && event.getPointerCount() == 1) {
       float x = event.getX();
       float y = event.getY();
-      Coordinate viewCoordinate = new Coordinate(x, y);
+      Coordinate viewCoordinate = Coordinate.create(x, y);
       Coordinate inventoryCoordinate =
           presenter.viewCoordinateToInventoryCoordinate(viewCoordinate);
       Coordinate boardCoordinate = presenter.viewCoordinateToBoardCoordinate(viewCoordinate);

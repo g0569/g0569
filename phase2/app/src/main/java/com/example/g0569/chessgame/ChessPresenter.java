@@ -53,7 +53,7 @@ public class ChessPresenter implements ChessContract.Presenter {
   @Override
   public Coordinate gridCoordinateToViewCoordinate(Coordinate coordinate) {
     Integer key = coordinate.getIntX() * 100 + coordinate.getIntY();
-    Coordinate viewCoordinate = new Coordinate(0, 0);
+    Coordinate viewCoordinate = Coordinate.create(0, 0);
     float width = ((ChessView) chessView).getScreenWidth();
     float height = ((ChessView) chessView).getScreenHeight();
     float inventoryX = ((ChessView) chessView).getInventoryX();
@@ -94,7 +94,7 @@ public class ChessPresenter implements ChessContract.Presenter {
     float inventoryWidth = ((ChessView) chessView).getInventoryWidth();
     float inventoryHeight = ((ChessView) chessView).getInventoryHeight();
 
-    Coordinate InventoryCoordinate = new Coordinate(0, 0);
+    Coordinate InventoryCoordinate = Coordinate.create(0, 0);
     if (x > inventoryX
         && x < inventoryX + inventoryWidth * 0.5f
         && y > inventoryY
@@ -141,7 +141,7 @@ public class ChessPresenter implements ChessContract.Presenter {
     float y = coordinate.getY();
     float width = ((ChessView) chessView).getScreenWidth();
     float height = ((ChessView) chessView).getScreenHeight();
-    Coordinate BoardCoordinate = new Coordinate(0, 0);
+    Coordinate BoardCoordinate = Coordinate.create(0, 0);
 
     if (x > width * 0.3f && x < width * 0.39f && y > height * 0.44f && y < height * 0.59f) {
       // In board row1 col1.

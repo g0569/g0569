@@ -74,7 +74,7 @@ public class ChessGame extends BaseGame {
   private void placeNPCChess(float x, float y, String type) {
     ChessPiece chessPiece = chessPieceFactory.getChessPiece(x, y, type);//get required chess piece from factory.
     NPC npc = new NPC(type);
-    npc.setBehavior(chessPiece);//setup the NPC's behavior with the specific chess piece.
+    npc.setBehavior(chessPiece);//setup the behavior of NPC with the specific chess piece.
     NPCChessPieceData.add(npc);
   }
 
@@ -91,12 +91,12 @@ public class ChessGame extends BaseGame {
 
     // setup 6 coordinates to represent the 6 blocks of player's inventory on screen.
     List<Coordinate> inventoryCoordinateList = new ArrayList<>();
-    inventoryCoordinateList.add(new Coordinate(10, 10));
-    inventoryCoordinateList.add(new Coordinate(10, 20));
-    inventoryCoordinateList.add(new Coordinate(20, 10));
-    inventoryCoordinateList.add(new Coordinate(20, 20));
-    inventoryCoordinateList.add(new Coordinate(30, 10));
-    inventoryCoordinateList.add(new Coordinate(30, 20));
+    inventoryCoordinateList.add(Coordinate.create(10, 10));
+    inventoryCoordinateList.add(Coordinate.create(10, 20));
+    inventoryCoordinateList.add(Coordinate.create(20, 10));
+    inventoryCoordinateList.add(Coordinate.create(20, 20));
+    inventoryCoordinateList.add(Coordinate.create(30, 10));
+    inventoryCoordinateList.add(Coordinate.create(30, 20));
 
     int index = 0;
     while (index < playerChessPieceData.size() && index < 6) {
@@ -173,7 +173,6 @@ public class ChessGame extends BaseGame {
     return fightList;
   }
 
-  // TODO Add some comments here.
   private int characterAttack(List<NPC> friendlyInventory, List<NPC> opponentInventory) {
     int characterScore = 0; //initialize the score of this attack turn, starting with 0.
     for (NPC currentChess : friendlyInventory) {

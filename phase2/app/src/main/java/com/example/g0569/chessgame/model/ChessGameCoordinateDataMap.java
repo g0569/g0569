@@ -10,40 +10,40 @@ import java.util.HashMap;
 public interface ChessGameCoordinateDataMap {
 
   /** The constant BOARD_ROW_1_COL_1. */
-  Coordinate BOARD_ROW_1_COL_1 = new Coordinate(1, 1);
+  Coordinate BOARD_ROW_1_COL_1 = Coordinate.create(1, 1);
 
   /** The constant BOARD_ROW_1_COL_2. */
-  Coordinate BOARD_ROW_1_COL_2 = new Coordinate(1, 2);
+  Coordinate BOARD_ROW_1_COL_2 = Coordinate.create(1, 2);
 
   /** The constant BOARD_ROW_2_COL_1. */
-  Coordinate BOARD_ROW_2_COL_1 = new Coordinate(2, 1);
+  Coordinate BOARD_ROW_2_COL_1 = Coordinate.create(2, 1);
 
   /** The constant BOARD_ROW_2_COL_2. */
-  Coordinate BOARD_ROW_2_COL_2 = new Coordinate(2, 2);
+  Coordinate BOARD_ROW_2_COL_2 = Coordinate.create(2, 2);
 
   /** The constant BOARD_ROW_3_COL_1. */
-  Coordinate BOARD_ROW_3_COL_1 = new Coordinate(3, 1);
+  Coordinate BOARD_ROW_3_COL_1 = Coordinate.create(3, 1);
 
   /** The constant BOARD_ROW_3_COL_2. */
-  Coordinate BOARD_ROW_3_COL_2 = new Coordinate(3, 2);
+  Coordinate BOARD_ROW_3_COL_2 = Coordinate.create(3, 2);
 
   /** The constant INVENTORY_ROW_1_COL_1. */
-  Coordinate INVENTORY_ROW_1_COL_1 = new Coordinate(10, 10);
+  Coordinate INVENTORY_ROW_1_COL_1 = Coordinate.create(10, 10);
 
   /** The constant INVENTORY_ROW_1_COL_2. */
-  Coordinate INVENTORY_ROW_1_COL_2 = new Coordinate(10, 20);
+  Coordinate INVENTORY_ROW_1_COL_2 = Coordinate.create(10, 20);
 
   /** The constant INVENTORY_ROW_2_COL_1. */
-  Coordinate INVENTORY_ROW_2_COL_1 = new Coordinate(20, 10);
+  Coordinate INVENTORY_ROW_2_COL_1 = Coordinate.create(20, 10);
 
   /** The constant INVENTORY_ROW_2_COL_2. */
-  Coordinate INVENTORY_ROW_2_COL_2 = new Coordinate(20, 20);
+  Coordinate INVENTORY_ROW_2_COL_2 = Coordinate.create(20, 20);
 
   /** The constant INVENTORY_ROW_3_COL_1. */
-  Coordinate INVENTORY_ROW_3_COL_1 = new Coordinate(30, 10);
+  Coordinate INVENTORY_ROW_3_COL_1 = Coordinate.create(30, 10);
 
   /** The constant INVENTORY_ROW_3_COL_2. */
-  Coordinate INVENTORY_ROW_3_COL_2 = new Coordinate(30, 20);
+  Coordinate INVENTORY_ROW_3_COL_2 = Coordinate.create(30, 20);
 
   /**
    * The constant DRAW_CHESS_GRID_LOOKUP_TABLE. This HashMap stores the offset values for drawing.
