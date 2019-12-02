@@ -190,7 +190,7 @@ public class MazeGame extends BaseGame {
   }
 
   /**
-   * Return the size of the mazePlayer
+   * Return the dimensions of the mazePlayer
    *
    * @return the dimensions of the mazePlayer to measure its width and height
    */

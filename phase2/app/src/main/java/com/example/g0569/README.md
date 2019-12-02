@@ -18,8 +18,10 @@ Once the user has made contact with NPCs, in order fo the NPC to join the user's
 the NPC in a game of autochess. Upon loading the game, the user's inventory already has two preset NPCs for
 the user to use in level two. Each NPC has a different chess placement and therefore each have a different win strategy.
 Each NPC also has a different way of attacking on the board and a certain amount of damage.
-The user simply needs to tap on the NPC in the inventory then tap where they want to place it in order to
-move NPCs around. Once everything is placed, the user clicks on "play", then the results will automatically come out.
+The user simply needs to tap on the NPC in the inventory then tap on the left hand side board(6 position to choose from)
+to place it in order to move NPCs around. Also, above the inventory we have a reset button, for reset all the
+chess piece you have placed back to the inventory. Once everything is placed, the user clicks on "play",
+then the results will automatically come out. Then you can choose to go back to maze or retry the game.
 
 ## Level Three -- Boss Game
 After the user has beat all the NPCs they collected, they enter the final stage of the game. The user must
@@ -51,6 +53,8 @@ This also follows the Dependency Inversion of the SOLID principles, since we inj
 and interface of Presenter in Model, so that dependency still only flows in one direction, so even though
 they all communicate through Presenter, the dependency direction is still correct. This way, we enforce
 that dependency flows in the correct direction by having each level and segment implement for the base interfaces.
+There are also factory design pattern in ChessGame when creating the Chess, also in Coordinate, we implement a static
+create method for dependency injection purpose.
 
 Every other classes that more than one level has to use is stored in the utils package. Such as the class NPC,
 since each level uses the same NPC.
@@ -69,6 +73,35 @@ compared to other people or how ahead they are of other people.
 In the boss game, the user is now able to choose which NPC it wants to use to attack the boss and even
 who to bring in. In the inventory, if the user does not choose to battle one of the NPCs, then they
 don't have the ability to use them in the Boss game.
+
+## Addition rules for level two Chess Game.
+ChessGame:
+
+Player attack first. Every Player chess piece that wins a chess-vs-chess fight scores 1 point.
+Then NPC attack. Every NPC chess piece that wins a chess-vs-chess fight deduct 1 point.
+at last if there is more than or equal to 0 points, player wins. Otherwise (negative points) Player loses.
+
+Column 1 is Player's back line
+Column 2 is Player's front line
+Column 3 is NPC's front line
+Column 4 is NPC's back line
+
+There are 6 types of chess piece
+
+Circle(type1): Basic unit. Can only attack enemy front line chess piece in the same row
+
+Diamond(type2): Basic unit (but with higher dmg)
+
+Heart(type3): Can attack enemy front line chess piece in any row.
+(first seek to fight first row, then second row, at last third row)
+
+Square(type4): Can attack enemy back line chess piece in any row.
+(first seek to fight first row, then second row, at last third row)
+
+Star(type5): Can attack enemy front/back line chess piece in the same row
+(if no enemy piece on front line then seek to fight the back line chess piece)
+
+Triangle(type6): Act as basic unit. deals double dmg when attacking
 
 
 

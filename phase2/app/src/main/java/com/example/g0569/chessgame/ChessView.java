@@ -257,7 +257,10 @@ public class ChessView extends GameView implements ChessContract.View {
                   "This position already been taken by a chess piece! ",
                   Toast.LENGTH_SHORT)
               .show();
-        } else {
+        } else if (x > screenWidth * 0.3f
+            && x < screenWidth * 0.5f
+            && y > screenHeight * 0.44f
+            && y < screenHeight){
           // Place the Chess Piece now.
           if (boardCoordinate.getIntX() != 0 && boardCoordinate.getIntY() != 0) {
             // Place a chess piece that has been chosen.
@@ -265,6 +268,11 @@ public class ChessView extends GameView implements ChessContract.View {
             placeChess = false;
           }
         }
+        else {Toast.makeText(
+                  activity,
+                  "This position is not valid for placing Chess Piece!",
+                  Toast.LENGTH_SHORT)
+              .show();}
       } else {
         // Either start the game or reset the game or choose a chess piece from inventory.
         if (x > startButtonX
